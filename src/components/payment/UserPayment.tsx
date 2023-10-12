@@ -56,7 +56,7 @@ const UserPayment = () => {
       color: "inherit",
     },
     {
-      link: "/dashboard/user/payment",
+      link: "/dashboard/User/payment",
       level: "Payment",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "text.primary",
@@ -153,7 +153,7 @@ const UserPayment = () => {
                       <TableCell align="center">
                         <div>
                           <Link
-                            href={`/dashboard/user/payment/invoice/${payment?.id}`}
+                            href={`/dashboard/User/payment/invoice/${payment?.id}`}
                             className="text-white bg-[#d1001c] px-2 py-1 rounded-full"
                           >
                             {" "}
@@ -164,7 +164,7 @@ const UserPayment = () => {
                       <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
                           <Link
-                            href={`/dashboard/user/payment/${payment?.id}`}
+                            href={`/dashboard/User/payment/${payment?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <RemoveRedEyeIcon />

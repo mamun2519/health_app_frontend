@@ -14,13 +14,13 @@ const PaymentInvoice = ({ invoice }: { invoice: any }) => {
       color: "inherit",
     },
     {
-      link: "/dashboard/user/payment",
+      link: "/dashboard/User/payment",
       level: "Payment",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
-      link: "/dashboard/user/payment",
+      link: "/dashboard/User/payment",
       level: "Invoice",
       icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 

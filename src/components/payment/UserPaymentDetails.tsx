@@ -19,13 +19,13 @@ const UserPaymentDetails = ({ id }: { id: string }) => {
       color: "inherit",
     },
     {
-      link: "/dashboard/user/payment",
+      link: "/dashboard/User/payment",
       level: "Payment",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
-      link: "/dashboard/user/payment",
+      link: "/dashboard/User/payment",
       level: "Details",
       icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
