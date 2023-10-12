@@ -13,8 +13,19 @@ import {
   useUpdateDonorRequestMutation,
 } from "@/redux/api/donorApi";
 import Toast from "@/components/ui/Toast";
+import successMessage from "@/components/shared/SuccessMassage";
+import DonorReviewModel from "@/components/dialog/DonorReviewModel";
 const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
   const [open, setOpen] = useState(true);
+  const [reviewOpen, setReviewOpen] = React.useState(false);
+
+  const handleReviewClickOpen = () => {
+    setReviewOpen(true);
+  };
+
+  const handleReviewClose = () => {
+    setReviewOpen(false);
+  };
 
   const [updateDonorRequest] = useUpdateDonorRequestMutation();
   const handleClose = (
@@ -55,7 +66,14 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
       const res = await updateDonorRequest({
         id: params.id,
         body: { status: "Completed" },
-      });
+      }).unwrap();
+      console.log(res);
+      if (res) {
+        successMessage({
+          header: "Thank Your",
+          message: "Donation Complete Successfully",
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -96,9 +114,9 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
                 </p>
               </div>
             </div>
-            <div className="lg:w-2/6 h-56 border p-5 shadow rounded lg:mt-0 mt-5 bg-[#30029010]">
+            <div className="lg:w-2/6 h-56 border p-5 shadow rounded lg:mt-0 mt-3 bg-[#30029010]">
               <h3 className=" text-xl font-bold">Request Info</h3>
-              <div className=" grid  grid-cols-2 border-b pb-2 mt-3">
+              <div className=" grid  grid-cols-2 border-b pb-2 mt-2">
                 <span>Status</span>
                 <span>{data?.status}</span>
               </div>
@@ -106,17 +124,33 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
                 <span>Date</span>
                 <span>{data?.donnetDate}</span>
               </div>
-              <div className="mt-4 ">
+              <div className="mt-2">
                 <button
                   onClick={() => DonorRequestCompleteStatusChangeHandler()}
-                  className="w-full h-10 bg-[#d1001c] rounded-full text-white shadow-sm "
+                  className="w-full h-8 bg-[#d1001c] rounded-full text-white shadow-sm "
                 >
                   Completed Now
                 </button>
+                {data?.status === "Completed" && (
+                  <div className="mt-2">
+                    <button
+                      onClick={() => handleReviewClickOpen()}
+                      className="w-full h-8 bg-[#d1001c] rounded-full text-white shadow-sm "
+                    >
+                      Review Now
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
-
+          {/*  donor review model */}
+          {reviewOpen && (
+            <DonorReviewModel
+              open={reviewOpen}
+              handleClose={handleReviewClose}
+            />
+          )}
           <div className=" grid grid-cols-2  gap-5 mt-5    ">
             <div className="h-full border  rounded p-5   shadow w-full bg-[#30029010]">
               <div className=" ">
