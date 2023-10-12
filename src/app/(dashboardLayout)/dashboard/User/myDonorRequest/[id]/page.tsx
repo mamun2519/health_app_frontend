@@ -79,6 +79,7 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
     }
   };
 
+  console.log(data);
   return (
     <div className="h-full  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
@@ -147,6 +148,7 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
           {/*  donor review model */}
           {reviewOpen && (
             <DonorReviewModel
+              donorId={data?.donorId}
               open={reviewOpen}
               handleClose={handleReviewClose}
             />

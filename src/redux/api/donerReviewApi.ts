@@ -1,10 +1,10 @@
 import { baseApi } from "./baseApi";
 
-export const authApi = baseApi.injectEndpoints({
+export const donorReviewApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     createDonorReview: build.mutation({
       query: (review) => ({
-        url: "/auth/login",
+        url: "/donor-review",
         method: "POST",
         data: review,
       }),
@@ -13,4 +13,4 @@ export const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateDonorReviewMutation } = authApi;
+export const { useCreateDonorReviewMutation } = donorReviewApi;

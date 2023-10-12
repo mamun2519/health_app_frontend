@@ -10,10 +10,10 @@ import Image from "next/image";
 import { convertDate } from "@/helper/date";
 import { useGetDonorRequestDetailsQuery } from "@/redux/api/donorApi";
 import Toast from "@/components/ui/Toast";
+import DonorReviewModel from "@/components/dialog/DonorReviewModel";
 const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
   const [open, setOpen] = useState(true);
-
-  console.log("opne", open);
+  const [reviewOpen, setReviewOpen] = useState(false);
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -23,6 +23,14 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
     }
 
     setOpen(false);
+  };
+
+  const handleReviewClickOpen = () => {
+    setReviewOpen(true);
+  };
+
+  const handleReviewClose = () => {
+    setReviewOpen(false);
   };
   const boread = [
     {
@@ -96,10 +104,28 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
                 <button className="w-full h-10 bg-[#d1001c] rounded-full text-white shadow-sm ">
                   Completed
                 </button>
+                {data?.status === "Completed" && (
+                  <div className="mt-2">
+                    <button
+                      onClick={() => handleReviewClickOpen()}
+                      className="w-full h-8 bg-[#d1001c] rounded-full text-white shadow-sm "
+                    >
+                      Review Now
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
+          {/*  donor review model */}
+          {reviewOpen && (
+            <DonorReviewModel
+              donorId={data?.donorId}
+              open={reviewOpen}
+              handleClose={handleReviewClose}
+            />
+          )}
           <div className=" grid grid-cols-2  gap-5 mt-5    ">
             <div className="h-full border  rounded p-5   shadow w-full bg-[#30029010]">
               <div className=" ">
@@ -187,11 +213,13 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
             </div>
           </div>
           <div className=" w-96 absolute">
-            <Toast
-              open={open}
-              handleClose={handleClose}
-              message="Donor Accepted Your Request"
-            />
+            {data?.status === "Accepted" && (
+              <Toast
+                open={open}
+                handleClose={handleClose}
+                message="Donor Accepted Your Request"
+              />
+            )}
           </div>
         </div>
       </div>

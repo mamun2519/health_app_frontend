@@ -11,6 +11,9 @@ import { TransitionProps } from "@mui/material/transitions";
 import DeletePic from "../../assets/delete.svg";
 import Image from "next/image";
 import { Rating, Typography } from "@mui/material";
+import { useCreateDonorReviewMutation } from "@/redux/api/donerReviewApi";
+import successMessage from "../shared/SuccessMassage";
+
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -24,17 +27,36 @@ interface OpenModel {
   open: boolean;
   handleClose: (op: any) => any;
   //   deleteHandler: () => void;
+  donorId: string;
 }
 
 export default function DonorReviewModel({
   open,
-  //   deleteHandler,
+  donorId,
   handleClose,
 }: OpenModel) {
   const [value, setValue] = React.useState<number | null>(2);
   const [reviewText, setReviewText] = React.useState("");
-
-  const reviewHandler = () => {};
+  const [createDonorReview] = useCreateDonorReviewMutation();
+  const reviewHandler = async () => {
+    const data = {
+      comment: reviewText,
+      rating: value,
+      donorId,
+    };
+    try {
+      const res = await createDonorReview(data).unwrap();
+      if (res) {
+        handleClose(!open);
+        successMessage({
+          header: "Thank You",
+          message: "Review Add Successfully",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className=" w-[400px]">
@@ -46,15 +68,7 @@ export default function DonorReviewModel({
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogContent>
-          <div>
-            {/* <Image className=" w-80 h-60" src={DeletePic} alt="delete" /> */}
-            {/* <p className=" text-2xl font-bold text-center text-red-600 ">
-              Review
-            </p>
-            <p className="  text-center text-gray-500 mt-2">
-              Are You Sure want To Review Donor?
-            </p> */}
-          </div>
+          <div></div>
           <div className="mt-5 text-center w-96">
             <div>
               <Typography component="legend">Rating</Typography>
@@ -85,6 +99,7 @@ export default function DonorReviewModel({
             <button
               className="px-8 py-2 rounded bg-[#d1001c] font-bold text-white"
               //   onClick={deleteHandler}
+              onClick={reviewHandler}
             >
               Review
             </button>
