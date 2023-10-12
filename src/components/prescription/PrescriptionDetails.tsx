@@ -16,13 +16,13 @@ const PrescriptionDetails = ({ id }: { id: string }) => {
       color: "inherit",
     },
     {
-      link: "/dashboard/user/prescription",
+      link: "/dashboard/User/prescription",
       level: "My Prescription",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
-      link: "/dashboard/user/prescription",
+      link: "/dashboard/User/prescription",
       level: "Prescription Details",
       icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 

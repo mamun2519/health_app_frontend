@@ -15,7 +15,7 @@ const UserPrescriptionPage = () => {
       color: "inherit",
     },
     {
-      link: "/dashboard/user/prescription",
+      link: "/dashboard/User/prescription",
       level: "My Prescription",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "text.primary",
@@ -25,7 +25,7 @@ const UserPrescriptionPage = () => {
   const user: any = getUserInfo();
   return (
     <div>
-      <Prescription bread={bread} role={"user"} />
+      <Prescription bread={bread} role={user?.role} />
     </div>
   );
 };
