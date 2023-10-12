@@ -1,13 +1,12 @@
 "use client";
+
 import PaymentInvoice from "@/components/payment/PaymentInvoice";
 import { usePaymentDetailsQuery } from "@/redux/api/paymentApi";
-import React from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import GrainIcon from "@mui/icons-material/Grain";
-const PaymentInvoicePage = ({ params }: { params: { id: string } }) => {
+const DonorPaymentInvoicePage = ({ params }: { params: { id: string } }) => {
   const { data } = usePaymentDetailsQuery(params.id);
-  // console.log(data);
   const bread = [
     {
       link: "/dashboard",
@@ -17,13 +16,13 @@ const PaymentInvoicePage = ({ params }: { params: { id: string } }) => {
       color: "inherit",
     },
     {
-      link: "/dashboard/User/payment",
+      link: "/dashboard/BloodDonor/payment",
       level: "Payment",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
-      link: "/dashboard/User/payment",
+      link: "/dashboard/BloodDonor/payment",
       level: "Invoice",
       icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
@@ -37,4 +36,4 @@ const PaymentInvoicePage = ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default PaymentInvoicePage;
+export default DonorPaymentInvoicePage;

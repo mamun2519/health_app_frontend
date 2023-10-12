@@ -4,29 +4,16 @@ import GrainIcon from "@mui/icons-material/Grain";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import { convertDate } from "@/helper/date";
 
-const PaymentInvoice = ({ invoice }: { invoice: any }) => {
-  const bread = [
-    {
-      link: "/dashboard",
-      level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-
-      color: "inherit",
-    },
-    {
-      link: "/dashboard/User/payment",
-      level: "Payment",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "inherit",
-    },
-    {
-      link: "/dashboard/User/payment",
-      level: "Invoice",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-
-      color: "text.primary",
-    },
-  ];
+interface PaymentInvoiceProps {
+  bread: {
+    link: string;
+    level: string;
+    icons: React.ReactNode | React.ReactElement;
+    color: string;
+  }[];
+  invoice: any;
+}
+const PaymentInvoice = ({ invoice, bread }: PaymentInvoiceProps) => {
   return (
     <div className="">
       {/* <h3 className=" mt-5 text-2xl">My Payment Details</h3> */}
