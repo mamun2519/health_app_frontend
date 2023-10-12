@@ -9,29 +9,16 @@ import { convertDate } from "@/helper/date";
 import Image from "next/image";
 import { usePaymentDetailsQuery } from "@/redux/api/paymentApi";
 
-const UserPaymentDetails = ({ id }: { id: string }) => {
-  const bread = [
-    {
-      link: "/dashboard",
-      level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-
-      color: "inherit",
-    },
-    {
-      link: "/dashboard/User/payment",
-      level: "Payment",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "inherit",
-    },
-    {
-      link: "/dashboard/User/payment",
-      level: "Details",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-
-      color: "text.primary",
-    },
-  ];
+interface PaymentDetailsProps {
+  bread: {
+    link: string;
+    level: string;
+    icons: React.ReactNode | React.ReactElement;
+    color: string;
+  }[];
+  id: string;
+}
+const UserPaymentDetails = ({ id, bread }: PaymentDetailsProps) => {
   const { data } = usePaymentDetailsQuery(id);
 
   return (

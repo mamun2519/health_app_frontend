@@ -1,3 +1,4 @@
+"use client";
 import UserPayment from "@/components/payment/UserPayment";
 import React from "react";
 import HomeIcon from "@mui/icons-material/Home";
@@ -21,6 +22,7 @@ const DonorPaymentPage = () => {
     },
   ];
   const user: any = getUserInfo();
+  console.log(user);
   return (
     <div>
       <UserPayment bread={bread} role={user?.role} />
