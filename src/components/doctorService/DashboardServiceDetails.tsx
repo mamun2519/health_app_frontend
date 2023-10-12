@@ -64,7 +64,7 @@ const DashboardDoctorServiceDetails = ({ id }: { id: string }) => {
               </div>
               <div className=" grid  grid-cols-2 border-b pb-2 mt-3">
                 <span>About</span>
-                <span>{data?.serviceType} </span>
+                <span>{data?.aboutSerivce} </span>
               </div>
             </div>
           </div>

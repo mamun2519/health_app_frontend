@@ -25,7 +25,10 @@ import {
   useDeleteAppointmentMutation,
   useUserAppointmentQuery,
 } from "@/redux/api/appointmentApi";
-import { useDoctorServiceQuery } from "@/redux/api/doctorServiceApi";
+import {
+  useDeleteServiceMutation,
+  useDoctorServiceQuery,
+} from "@/redux/api/doctorServiceApi";
 const DoctorServicePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -65,15 +68,15 @@ const DoctorServicePage = () => {
   ];
   const { data } = useDoctorServiceQuery({ ...query });
   console.log(data);
-  const [deleteAppointment] = useDeleteAppointmentMutation();
+  const [deleteService] = useDeleteServiceMutation();
   const deleteHandler = async () => {
     try {
-      await deleteAppointment(deletedId);
+      await deleteService(deletedId);
       // console.log(deletedId);
       setOpen(false);
       successMessage({
         header: "Thank You",
-        message: "Appointment Delete Successfully",
+        message: "Service Delete Successfully",
       });
     } catch (error) {
       console.log(error);

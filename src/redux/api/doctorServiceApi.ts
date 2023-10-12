@@ -25,6 +25,21 @@ export const doctorServiceApi = baseApi.injectEndpoints({
       }),
       providesTags: ["doctorService"],
     }),
+    updateDoctorService: build.mutation({
+      query: (data) => ({
+        url: `/doctor-service/${data.id}`,
+        method: "PATCH",
+        data: data.body,
+      }),
+      invalidatesTags: ["doctorService"],
+    }),
+    deleteService: build.mutation({
+      query: (id) => ({
+        url: `/doctor-service/${id}`,
+        method: "Delete",
+      }),
+      invalidatesTags: ["doctorService"],
+    }),
   }),
 });
 
@@ -32,4 +47,6 @@ export const {
   useUserServiceReviewQuery,
   useDoctorServiceQuery,
   useDoctorServiceDetailsQuery,
+  useUpdateDoctorServiceMutation,
+  useDeleteServiceMutation,
 } = doctorServiceApi;
