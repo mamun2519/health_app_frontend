@@ -24,7 +24,16 @@ import WhatshotIcon from "@mui/icons-material/Whatshot";
 import GrainIcon from "@mui/icons-material/Grain";
 import DeleteModal from "@/components/dialog/Delete";
 import successMessage from "@/components/shared/SuccessMassage";
-const UserPayment = () => {
+interface PaymentProps {
+  bread: {
+    link: string;
+    level: string;
+    icons: React.ReactNode | React.ReactElement;
+    color: string;
+  }[];
+  role: string;
+}
+const UserPayment = ({ bread, role }: PaymentProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
@@ -47,21 +56,6 @@ const UserPayment = () => {
     setCurrentPage(page);
   };
 
-  const bread = [
-    {
-      link: "/dashboard",
-      level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-
-      color: "inherit",
-    },
-    {
-      link: "/dashboard/User/payment",
-      level: "Payment",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
-    },
-  ];
   const [deletePayment] = useDeletePaymentMutation();
   const deleteHandler = async () => {
     try {
@@ -153,7 +147,7 @@ const UserPayment = () => {
                       <TableCell align="center">
                         <div>
                           <Link
-                            href={`/dashboard/User/payment/invoice/${payment?.id}`}
+                            href={`/dashboard/${role}/payment/invoice/${payment?.id}`}
                             className="text-white bg-[#d1001c] px-2 py-1 rounded-full"
                           >
                             {" "}
@@ -164,7 +158,7 @@ const UserPayment = () => {
                       <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
                           <Link
-                            href={`/dashboard/User/payment/${payment?.id}`}
+                            href={`/dashboard/${role}/payment/${payment?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <RemoveRedEyeIcon />

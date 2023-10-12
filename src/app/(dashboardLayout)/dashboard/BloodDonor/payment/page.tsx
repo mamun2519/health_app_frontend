@@ -4,7 +4,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import GrainIcon from "@mui/icons-material/Grain";
 import { getUserInfo } from "@/services/auth.Services";
-const UserAppointmentPage = () => {
+const DonorPaymentPage = () => {
   const bread = [
     {
       link: "/dashboard",
@@ -28,4 +28,4 @@ const UserAppointmentPage = () => {
   );
 };
 
-export default UserAppointmentPage;
+export default DonorPaymentPage;
