@@ -34,6 +34,8 @@ export default function DonorReviewModel({
   const [value, setValue] = React.useState<number | null>(2);
   const [reviewText, setReviewText] = React.useState("");
 
+  const reviewHandler = () => {};
+
   return (
     <div className=" w-[400px]">
       <Dialog

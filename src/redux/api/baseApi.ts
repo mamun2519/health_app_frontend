@@ -16,6 +16,7 @@ export const baseApi = createApi({
     "prescription",
     "profile",
     "donorRequest",
+    "donorReview",
   ],
 });
 
