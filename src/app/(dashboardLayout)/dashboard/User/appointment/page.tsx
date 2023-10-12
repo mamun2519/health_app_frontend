@@ -59,7 +59,7 @@ const UserAppointmentPage = () => {
       color: "inherit",
     },
     {
-      link: "/dashboard/user/appointment",
+      link: "/dashboard/User/appointment",
       level: "My Appointment",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "text.primary",
@@ -168,13 +168,13 @@ const UserAppointmentPage = () => {
                       <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
                           <Link
-                            href={`/dashboard/user/appointment/${appointment?.id}`}
+                            href={`/dashboard/User/appointment/${appointment?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <RemoveRedEyeIcon />
                           </Link>
                           <Link
-                            href={`/dashboard/user/appointment/edit/${appointment?.id}`}
+                            href={`/dashboard/User/appointment/edit/${appointment?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <BorderColorIcon />

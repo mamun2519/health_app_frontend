@@ -16,7 +16,7 @@ const History = () => {
       color: "inherit",
     },
     {
-      link: "/dashboard/user/appointment",
+      link: "/dashboard/User/appointment",
       level: "My History",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "text.primary",

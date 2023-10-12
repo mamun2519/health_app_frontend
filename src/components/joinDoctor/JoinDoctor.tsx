@@ -60,7 +60,7 @@ const JoinDoctor = () => {
       color: "inherit",
     },
     {
-      link: "/dashboard/user/joinDoctor",
+      link: "/dashboard/User/joinDoctor",
       level: "Doctor Join",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "text.primary",

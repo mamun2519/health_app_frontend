@@ -22,13 +22,13 @@ const AppointmentUpdatePage = ({ params }: { params: { id: string } }) => {
       color: "inherit",
     },
     {
-      link: "/dashboard/user/appointment",
+      link: "/dashboard/User/appointment",
       level: "My Appointment",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
-      link: "/dashboard/user/appointment",
+      link: "/dashboard/User/appointment",
       level: "Appointment Edit",
       icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
