@@ -44,6 +44,7 @@ const MyDonorRequest = () => {
   query["limit"] = pageLimit;
 
   const { data } = useGetMyUserDonorDataQuery({ ...query });
+  console.log(data);
   const [deleteDonorRequest] = useDeleteDonorRequestMutation();
 
   const handlePageChange = (event: any, page: any) => {
@@ -58,7 +59,7 @@ const MyDonorRequest = () => {
       color: "inherit",
     },
     {
-      link: "/dashboard/User/myDonorRequest",
+      link: "/dashboard/BloodDonor/myRequest",
       level: "Donor Request",
       icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "text.primary",
@@ -153,13 +154,13 @@ const MyDonorRequest = () => {
                       <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
                           <Link
-                            href={`/dashboard/User/myDonorRequest/${donor?.id}`}
+                            href={`/dashboard/BloodDonor/myRequest/${donor?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <RemoveRedEyeIcon />
                           </Link>
                           <Link
-                            href={`/dashboard/User/myDonorRequest/edit/${donor?.id}`}
+                            href={`/dashboard/BloodDonor/myRequest/edit/${donor?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <BorderColorIcon />
