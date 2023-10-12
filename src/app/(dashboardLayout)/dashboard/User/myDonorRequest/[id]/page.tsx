@@ -8,12 +8,15 @@ import GrainIcon from "@mui/icons-material/Grain";
 import dataPic from "../../../../../../assets/blood_donation_02.jpg";
 import Image from "next/image";
 import { convertDate } from "@/helper/date";
-import { useGetDonorRequestDetailsQuery } from "@/redux/api/donorApi";
+import {
+  useGetDonorRequestDetailsQuery,
+  useUpdateDonorRequestMutation,
+} from "@/redux/api/donorApi";
 import Toast from "@/components/ui/Toast";
 const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
   const [open, setOpen] = useState(true);
 
-  console.log("opne", open);
+  const [updateDonorRequest] = useUpdateDonorRequestMutation();
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -46,6 +49,17 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
     },
   ];
   const { data } = useGetDonorRequestDetailsQuery(params.id);
+
+  const DonorRequestCompleteStatusChangeHandler = async () => {
+    try {
+      const res = await updateDonorRequest({
+        id: params.id,
+        body: { status: "Completed" },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="h-full  border  p-5 rounded-3xl shadow-sm ">
@@ -90,11 +104,14 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
               </div>
               <div className=" grid  grid-cols-2 borde pb-2 mt-3">
                 <span>Date</span>
-                <span>{data?.createdAt}</span>
+                <span>{data?.donnetDate}</span>
               </div>
               <div className="mt-4 ">
-                <button className="w-full h-10 bg-[#d1001c] rounded-full text-white shadow-sm ">
-                  Completed
+                <button
+                  onClick={() => DonorRequestCompleteStatusChangeHandler()}
+                  className="w-full h-10 bg-[#d1001c] rounded-full text-white shadow-sm "
+                >
+                  Completed Now
                 </button>
               </div>
             </div>
@@ -186,13 +203,15 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
               </div>
             </div>
           </div>
-          <div className=" w-96 absolute">
-            <Toast
-              open={open}
-              handleClose={handleClose}
-              message="Donor Accepted Your Request"
-            />
-          </div>
+          {data?.status === "Accepted" && (
+            <div className=" w-96 absolute">
+              <Toast
+                open={open}
+                handleClose={handleClose}
+                message="Donor Accepted Your Request"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
