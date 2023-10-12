@@ -162,13 +162,13 @@ const DoctorServicePage = () => {
                       <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
                           <Link
-                            href={`/dashboard/BloodDonor/appointment/${service?.id}`}
+                            href={`/dashboard/Doctor/myService/${service?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <RemoveRedEyeIcon />
                           </Link>
                           <Link
-                            href={`/dashboard/BloodDonor/appointment/edit/${service?.id}`}
+                            href={`/dashboard/Doctor/myService/edit/${service?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <BorderColorIcon />

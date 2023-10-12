@@ -18,8 +18,18 @@ export const doctorServiceApi = baseApi.injectEndpoints({
       }),
       providesTags: ["doctorService"],
     }),
+    doctorServiceDetails: build.query({
+      query: (id: string) => ({
+        url: `/doctor-service/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["doctorService"],
+    }),
   }),
 });
 
-export const { useUserServiceReviewQuery, useDoctorServiceQuery } =
-  doctorServiceApi;
+export const {
+  useUserServiceReviewQuery,
+  useDoctorServiceQuery,
+  useDoctorServiceDetailsQuery,
+} = doctorServiceApi;
