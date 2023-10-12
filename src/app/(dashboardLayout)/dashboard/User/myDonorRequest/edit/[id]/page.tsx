@@ -23,13 +23,13 @@ const DonorRequestEditPage = ({ params }: { params: { id: string } }) => {
       color: "inherit",
     },
     {
-      link: "/dashboard/user/myDonorRequest",
+      link: "/dashboard/User/myDonorRequest",
       level: "Donor Request",
       icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
-      link: "/",
+      link: "/dashboard/User/myDonorRequest",
       level: "Edit",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "text.primary",

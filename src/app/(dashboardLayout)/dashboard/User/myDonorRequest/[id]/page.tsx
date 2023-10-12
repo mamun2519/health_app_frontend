@@ -33,13 +33,13 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
       color: "inherit",
     },
     {
-      link: "/dashboard/user/myDonorRequest",
+      link: "/dashboard/User/myDonorRequest",
       level: "Donor Request",
       icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
-      link: "/Dashboard",
+      link: "/dashboard/User/myDonorRequest",
       level: "Details",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "text.primary",
