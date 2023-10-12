@@ -17,6 +17,7 @@ export const baseApi = createApi({
     "profile",
     "donorRequest",
     "donorReview",
+    "doctorService",
   ],
 });
 

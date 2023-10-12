@@ -9,7 +9,17 @@ export const doctorServiceApi = baseApi.injectEndpoints({
       }),
       providesTags: ["user"],
     }),
+
+    doctorService: build.query({
+      query: (arg: Record<string, any>) => ({
+        url: "/doctor-service/my-service",
+        method: "GET",
+        params: arg,
+      }),
+      providesTags: ["doctorService"],
+    }),
   }),
 });
 
-export const { useUserServiceReviewQuery } = doctorServiceApi;
+export const { useUserServiceReviewQuery, useDoctorServiceQuery } =
+  doctorServiceApi;
