@@ -95,14 +95,18 @@ const bloodDonorSideBar = [
   },
 ];
 const doctorSideBar = [
-  ...defaultSideBar,
   {
-    link: "/",
+    link: "/dashboard/Doctor/profile",
+    level: "Profile",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/dashboard/Doctor/appointment",
     level: "Booked Appointment",
     icon: <InboxIcon></InboxIcon>,
   },
   {
-    link: "/",
+    link: "/dashboard/Doctor/myService",
     level: "My Service",
     icon: <InboxIcon></InboxIcon>,
   },
@@ -151,7 +155,7 @@ const doctorSideBar = [
 const managerSideBar = [
   ...defaultSideBar,
   {
-    link: "/",
+    link: "/dashboard/Boo/appointment",
     level: "Appointment",
     icon: <InboxIcon></InboxIcon>,
   },
