@@ -1,11 +1,12 @@
-import PrescriptionDetails from "@/components/prescription/PrescriptionDetails";
-import Prescription from "@/components/prescription/Prescription";
 import React from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import GrainIcon from "@mui/icons-material/Grain";
 import { getUserInfo } from "@/services/auth.Services";
-const PrescriptionDetailsPage = ({ params }: { params: { id: string } }) => {
+
+import PrescriptionDetails from "@/components/prescription/PrescriptionDetails";
+
+const DonorPrescriptionPage = ({ params }: { params: { id: string } }) => {
   const bread = [
     {
       link: "/dashboard",
@@ -15,7 +16,7 @@ const PrescriptionDetailsPage = ({ params }: { params: { id: string } }) => {
       color: "inherit",
     },
     {
-      link: "/dashboard/User/prescription",
+      link: "/dashboard/BloodDonor/prescription",
       level: "My Prescription",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "text.primary",
@@ -29,4 +30,4 @@ const PrescriptionDetailsPage = ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default PrescriptionDetailsPage;
+export default DonorPrescriptionPage;

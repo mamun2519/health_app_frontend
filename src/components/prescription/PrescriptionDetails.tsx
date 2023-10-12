@@ -6,29 +6,16 @@ import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import { usePrescriptionDetailsQuery } from "@/redux/api/prescriptionApi";
 import { IMedicine, IReport } from "@/types";
 import { convertDate } from "@/helper/date";
-const PrescriptionDetails = ({ id }: { id: string }) => {
-  const bread = [
-    {
-      link: "/dashboard",
-      level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-
-      color: "inherit",
-    },
-    {
-      link: "/dashboard/User/prescription",
-      level: "My Prescription",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "inherit",
-    },
-    {
-      link: "/dashboard/User/prescription",
-      level: "Prescription Details",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-
-      color: "text.primary",
-    },
-  ];
+interface PrescriptionProps {
+  bread: {
+    link: string;
+    level: string;
+    icons: React.ReactNode | React.ReactElement;
+    color: string;
+  }[];
+  id: string;
+}
+const PrescriptionDetails = ({ bread, id }: PrescriptionProps) => {
   const { data } = usePrescriptionDetailsQuery(id);
   console.log(data);
   return (

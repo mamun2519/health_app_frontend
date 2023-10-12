@@ -140,8 +140,8 @@ const MyDonorRequest = () => {
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <TableCell align="center">
-                        {`${donor?.user?.profile?.first_name}
-                    ${donor?.user?.profile?.last_name}`}
+                        {`${donor?.donor?.user?.profile?.first_name}
+                    ${donor?.donor?.user?.profile?.last_name}`}
                       </TableCell>
                       <TableCell align="center">
                         {donor?.donor?.user?.profile?.blood_group}
@@ -153,13 +153,13 @@ const MyDonorRequest = () => {
                       <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
                           <Link
-                            href={`/dashboard/user/myDonorRequest/${donor?.id}`}
+                            href={`/dashboard/User/myDonorRequest/${donor?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <RemoveRedEyeIcon />
                           </Link>
                           <Link
-                            href={`/dashboard/user/myDonorRequest/edit/${donor?.id}`}
+                            href={`/dashboard/User/myDonorRequest/edit/${donor?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <BorderColorIcon />
