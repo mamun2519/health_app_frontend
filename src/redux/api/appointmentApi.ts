@@ -32,6 +32,14 @@ export const appointmentApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["appointment"],
     }),
+    doctorAppointment: build.query({
+      query: (arg: Record<string, any>) => ({
+        url: "/doctor-service/my-booking-appointment",
+        method: "GET",
+        params: arg,
+      }),
+      providesTags: ["appointment"],
+    }),
   }),
 });
 
@@ -40,4 +48,5 @@ export const {
   useAppointmentDetailsQuery,
   useUpdateAppointmentMutation,
   useDeleteAppointmentMutation,
+  useDoctorAppointmentQuery,
 } = appointmentApi;
