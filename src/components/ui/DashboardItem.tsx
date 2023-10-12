@@ -4,7 +4,7 @@ import { USER_ROLE } from "@/enums/user";
 
 const defaultSideBar = [
   {
-    link: "/dashboard/user/profile",
+    link: "/dashboard/User/profile",
     level: "Profile",
     icon: <InboxIcon></InboxIcon>,
   },
@@ -22,32 +22,32 @@ const defaultSideBar = [
 const userSideBar = [
   ...defaultSideBar,
   {
-    link: "/dashboard/user/appointment",
+    link: "/dashboard/User/appointment",
     level: "Appointment",
     icon: <InboxIcon></InboxIcon>,
   },
   {
-    link: "/dashboard/user/myDonorRequest",
+    link: "/dashboard/User/myDonorRequest",
     level: "Donor Request",
     icon: <InboxIcon></InboxIcon>,
   },
   {
-    link: "/dashboard/user/joinDoctor",
+    link: "/dashboard/User/joinDoctor",
     level: "Join Doctor",
     icon: <InboxIcon></InboxIcon>,
   },
   {
-    link: "/dashboard/user/prescription",
+    link: "/dashboard/User/prescription",
     level: "Prescription",
     icon: <InboxIcon></InboxIcon>,
   },
   {
-    link: "/dashboard/user/payment",
+    link: "/dashboard/User/payment",
     level: "Payment Details",
     icon: <InboxIcon></InboxIcon>,
   },
   {
-    link: "/dashboard/user/history",
+    link: "/dashboard/User/history",
     level: "History",
     icon: <InboxIcon></InboxIcon>,
   },
