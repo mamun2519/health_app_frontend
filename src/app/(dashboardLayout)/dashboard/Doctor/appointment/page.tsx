@@ -58,7 +58,7 @@ const DoctorBookAppointment = () => {
     },
     {
       link: "/dashboard/Doctor/appointment",
-      level: "My Book Appointment",
+      level: "My Booking Appointment",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "text.primary",
     },
@@ -173,12 +173,12 @@ const DoctorBookAppointment = () => {
                           >
                             <RemoveRedEyeIcon />
                           </Link>
-                          <Link
+                          {/* <Link
                             href={`/dashboard/Doctor/appointment/edit/${appointment?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <BorderColorIcon />
-                          </Link>
+                          </Link> */}
                           <button
                             onClick={() => handleClickOpen(appointment?.id)}
                             className="text-red-500 text-xl  cursor-pointer"

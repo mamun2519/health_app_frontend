@@ -19,7 +19,7 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
     },
     {
       link: "/dashboard/Doctor/appointment",
-      level: "My Appointment",
+      level: "My Booking Appointment",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
