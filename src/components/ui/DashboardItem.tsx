@@ -1,0 +1,232 @@
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
+import { USER_ROLE } from "@/enums/user";
+
+const defaultSideBar = [
+  {
+    link: "/dashboard/user/profile",
+    level: "Profile",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  // {
+  //   link: "/",
+  //   level: "Change Password",
+  //   icon: <MailIcon></MailIcon>,
+  // },
+  // {
+  //   link: "/",
+  //   level: "My Activities",
+  //   icon: <MailIcon></MailIcon>,
+  // },
+];
+const userSideBar = [
+  ...defaultSideBar,
+  {
+    link: "/dashboard/user/appointment",
+    level: "Appointment",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/dashboard/user/myDonorRequest",
+    level: "Donor Request",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/dashboard/user/joinDoctor",
+    level: "Join Doctor",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/dashboard/user/prescription",
+    level: "Prescription",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/dashboard/user/payment",
+    level: "Payment Details",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/dashboard/user/history",
+    level: "History",
+    icon: <InboxIcon></InboxIcon>,
+  },
+];
+const bloodDonorSideBar = [
+  {
+    link: "/dashboard/BloodDonor/profile",
+    level: "Profile",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/dashboard/BloodDonor/myDonorRequest",
+    level: "User Request",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/dashboard/BloodDonor/myDonorRequest",
+    level: "My Request",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/dashboard/BloodDonor/appointment",
+    level: "Appointment",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/dashboard/BloodDonor/joinDoctor",
+    level: "Join Doctor",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/dashboard/BloodDonor/prescription",
+    level: "Prescription",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/dashboard/BloodDonor/payment",
+    level: "Payment Details",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/dashboard/BloodDonor/history",
+    level: "History",
+    icon: <InboxIcon></InboxIcon>,
+  },
+];
+const doctorSideBar = [
+  ...defaultSideBar,
+  {
+    link: "/",
+    level: "Booked Appointment",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/",
+    level: "My Service",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/",
+    level: "Service Offer",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/",
+    level: "Service Review",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/",
+    level: "Prescription",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/",
+    level: "Google Meet",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/",
+    level: "Donor Request",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/",
+    level: "Payment",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/",
+    level: "Withdraw",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/",
+    level: "History",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  ,
+];
+const managerSideBar = [
+  ...defaultSideBar,
+  {
+    link: "/",
+    level: "Appointment",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/",
+    level: "Doctor Service",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/",
+    level: "Blood Donor Request",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/",
+    level: "Payments",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/",
+    level: "Withdraw",
+    icon: <InboxIcon></InboxIcon>,
+  },
+];
+
+const superAdminSideBar = [
+  {
+    link: "/",
+    level: "Company Balance",
+    icon: <InboxIcon></InboxIcon>,
+    toggle: false,
+    // children: [
+    //   {
+    //     link: "/",
+    //     level: "User",
+    //     icon: <InboxIcon></InboxIcon>,
+    //   },
+    // ],
+  },
+  ...managerSideBar,
+  {
+    link: "/",
+    level: "User",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/",
+    level: "blood Donor",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/",
+    level: "Doctor",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/",
+    level: "Admin",
+    icon: <InboxIcon></InboxIcon>,
+  },
+];
+
+export const DashBoardItem = (role: string) => {
+  if (role == USER_ROLE.USER) return userSideBar;
+  else if (role == USER_ROLE.BLOODDONOR) return bloodDonorSideBar;
+  else if (role === USER_ROLE.DOCTOR) return doctorSideBar;
+  else if (role === USER_ROLE.MANAGER) return managerSideBar;
+  else if (role === USER_ROLE.ADMIN) return superAdminSideBar;
+  else {
+    return [
+      {
+        link: "",
+        level: "",
+        icon: "",
+      },
+    ];
+  }
+};
