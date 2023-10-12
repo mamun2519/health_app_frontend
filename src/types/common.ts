@@ -60,3 +60,12 @@ export type IReport = {
   testName: string;
   description: string;
 };
+
+export type IDonorReview = {
+  id: string;
+  donorId: string;
+  userId: string;
+  comment: string;
+  rating: number;
+  createdAt: string;
+};

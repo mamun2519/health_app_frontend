@@ -8,9 +8,13 @@ import GrainIcon from "@mui/icons-material/Grain";
 import dataPic from "../../../../../../assets/blood_donation_02.jpg";
 import Image from "next/image";
 import { convertDate } from "@/helper/date";
-import { useGetDonorRequestDetailsQuery } from "@/redux/api/donorApi";
+import {
+  useGetDonorRequestDetailsQuery,
+  useUpdateDonorRequestMutation,
+} from "@/redux/api/donorApi";
 import Toast from "@/components/ui/Toast";
 import DonorReviewModel from "@/components/dialog/DonorReviewModel";
+import successMessage from "@/components/shared/SuccessMassage";
 const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
   const [open, setOpen] = useState(true);
   const [reviewOpen, setReviewOpen] = useState(false);
@@ -53,8 +57,25 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
       color: "text.primary",
     },
   ];
+  const [updateDonorRequest] = useUpdateDonorRequestMutation();
   const { data } = useGetDonorRequestDetailsQuery(params.id);
-
+  const DonorRequestCompleteStatusChangeHandler = async () => {
+    try {
+      const res = await updateDonorRequest({
+        id: params.id,
+        body: { status: "Completed" },
+      }).unwrap();
+      console.log(res);
+      if (res) {
+        successMessage({
+          header: "Thank Your",
+          message: "Donation Complete Successfully",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="h-full  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
@@ -101,7 +122,10 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
                 <span>{data?.createdAt}</span>
               </div>
               <div className="mt-4 ">
-                <button className="w-full h-10 bg-[#d1001c] rounded-full text-white shadow-sm ">
+                <button
+                  onClick={DonorRequestCompleteStatusChangeHandler}
+                  className="w-full h-10 bg-[#d1001c] rounded-full text-white shadow-sm "
+                >
                   Completed
                 </button>
                 {data?.status === "Completed" && (
