@@ -19,11 +19,12 @@ import {
   useUpdateDoctorServiceMutation,
 } from "@/redux/api/doctorServiceApi";
 import FormSelectInput from "@/components/Form/FormSelectInput";
-import { Duration, ServiceCategory } from "@/constants/donor";
+import { Days, Duration, ServiceCategory } from "@/constants/donor";
 import SelectInput from "@/components/Form/SelectInput";
 import { DatePicker } from "@mui/x-date-pickers";
 import FromTimePicker from "@/components/Form/FromTimePicker";
 import { convertToAmPm } from "@/utils/timeConvater";
+import FormMultipleSelect from "@/components/Form/FomMultipleSelect";
 
 interface IServiceCrate {
   service: {
@@ -127,13 +128,19 @@ const CreateDoctorServicePage = () => {
             />
           </div>
 
-          <div className=" mt-8">
-            <FormInput
+          <div className=" mt-4">
+            {/* <FormInput
               name="service.serviceDay"
               label="service Day"
               size="lg:w-96 w-72"
               placeholder="Enter serviceDay"
+            /> */}
+            <SelectInput
+              name="service.serviceDay"
+              label="Service Day"
+              options={Days}
             />
+            {/* <FormMultipleSelect /> */}
           </div>
           <div className=" mt-8">
             <FormInput
