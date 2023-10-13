@@ -126,7 +126,7 @@ const doctorSideBar = [
     icon: <InboxIcon></InboxIcon>,
   },
   {
-    link: "/",
+    link: "/dashboard/Doctor/googleMeet",
     level: "Google Meet",
     icon: <InboxIcon></InboxIcon>,
   },

@@ -18,6 +18,7 @@ export const baseApi = createApi({
     "donorRequest",
     "donorReview",
     "doctorService",
+    "googleMeet",
   ],
 });
 
