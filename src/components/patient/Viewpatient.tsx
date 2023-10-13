@@ -30,11 +30,12 @@ import {
 } from "@/redux/api/appointmentApi";
 import {
   useDeleteGoogleMeetMutation,
+  useDitelesGoogleMeetQuery,
   useMyGoogleMeetQuery,
 } from "@/redux/api/googleMeetApi";
 import { convertDate } from "@/helper/date";
 
-const GoogleMeet = () => {
+const ViewPatient = ({ params }: { params: string }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
@@ -70,8 +71,15 @@ const GoogleMeet = () => {
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "text.primary",
     },
+    {
+      link: "/dashboard/Doctor/googleMeet",
+      level: "View Patient",
+      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "text.primary",
+    },
   ];
-  const { data } = useMyGoogleMeetQuery({ ...query });
+  const { data } = useDitelesGoogleMeetQuery(params);
+  console.log(data);
 
   const [deleteGoogleMeet] = useDeleteGoogleMeetMutation();
   const deleteHandler = async () => {
@@ -91,7 +99,7 @@ const GoogleMeet = () => {
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
-      <h3 className=" mt-5 text-2xl">My Google Meet </h3>
+      <h3 className=" mt-5 text-2xl">View Patient </h3>
 
       <div className="mt-5">
         <div className="flex  justify-between items-center">
@@ -118,12 +126,12 @@ const GoogleMeet = () => {
               onChange={(event: any) => setLimit(event?.value)}
               options={Limit}
             />
-            <Link
+            {/* <Link
               href="/dashboard/Doctor/googleMeet/create"
               className="  w-32 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium "
             >
               Create
-            </Link>
+            </Link> */}
           </div>
         </div>
         <div className="mt-5">
@@ -135,46 +143,51 @@ const GoogleMeet = () => {
               >
                 <TableHead sx={{ backgroundColor: "#30029010 " }}>
                   <TableRow>
-                    <TableCell align="center">Service Name</TableCell>
-                    <TableCell align="center">Status</TableCell>
-                    <TableCell align="center">Created Date</TableCell>
-                    <TableCell align="center">View Patient</TableCell>
+                    <TableCell align="center">Patient Name</TableCell>
+                    <TableCell align="center">Serial No</TableCell>
+                    <TableCell align="center">Verify</TableCell>
+                    <TableCell align="center">Phone</TableCell>
+                    <TableCell align="center">Prescription</TableCell>
 
-                    <TableCell align="center">Action</TableCell>
+                    {/* <TableCell align="center">Action</TableCell> */}
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {data?.map((appointment: any) => (
+                  {data?.meetingRequests?.map((appointment: any) => (
                     <TableRow
                       key={appointment?.id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <TableCell align="center">
-                        {appointment?.service.title}
+                        {appointment?.user?.profile?.first_name}{" "}
+                        {appointment?.user?.profile?.last_name}
                       </TableCell>
                       <TableCell align="center">
-                        {appointment?.status}
+                        {appointment?.serialNo}
                       </TableCell>
                       <TableCell align="center">
-                        {convertDate(appointment?.createdAt)}
+                        {appointment?.verifay ? "Valid" : "InValid"}
+                      </TableCell>
+                      <TableCell align="center">
+                        {appointment?.serialNo}
                       </TableCell>
                       <TableCell align="center">
                         <Link
-                          href={`/dashboard/Doctor/googleMeet/viewPatient/${appointment.id}`}
-                          className="px-8 py-1 bg-red-500 text-white rounded-full"
+                          href={`/dashboard/Doctor/googleMeet/viewPatient/prescription?appointment=${appointment.appointmentId}`}
+                          className="px-8 py-2 bg-red-500 text-white rounded-full"
                         >
-                          View Patient
+                          Send Prescription
                         </Link>
                       </TableCell>
 
-                      <TableCell align="center">
+                      {/* <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
-                          {/* <Link
+                          <Link
                             href={`/dashboard/Doctor/googleMeet/${appointment?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <RemoveRedEyeIcon />
-                          </Link> */}
+                          </Link>
                           <Link
                             href={`/dashboard/Doctor/googleMeet/edit/${appointment?.id}`}
                             className="text-blue-500 text-xl"
@@ -188,7 +201,7 @@ const GoogleMeet = () => {
                             <DeleteIcon />
                           </button>
                         </div>
-                      </TableCell>
+                      </TableCell> */}
                     </TableRow>
                   ))}
                 </TableBody>
@@ -218,4 +231,4 @@ const GoogleMeet = () => {
   );
 };
 
-export default GoogleMeet;
+export default ViewPatient;

@@ -32,6 +32,14 @@ export const prescriptionApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["prescription"],
     }),
+    createPrescription: build.mutation({
+      query: (data) => ({
+        url: `/prescription`,
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: ["prescription"],
+    }),
   }),
 });
 
@@ -40,4 +48,5 @@ export const {
   usePrescriptionDetailsQuery,
   useUpdatePrescriptionMutation,
   useUserPrescriptionQuery,
+  useCreatePrescriptionMutation,
 } = prescriptionApi;

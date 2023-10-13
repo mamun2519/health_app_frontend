@@ -69,3 +69,24 @@ export type IDonorReview = {
   rating: number;
   createdAt: string;
 };
+
+export type ICreatePrescription = {
+  prescription: {
+    appointmentId: string;
+    title: string;
+    submitDate: string;
+    advice: string;
+  };
+  medicine: {
+    durgName: string;
+    eatingTime: string;
+    duration: string;
+    advice: string;
+    eat: string;
+  };
+
+  haltReport: {
+    testName: string;
+    description: string;
+  };
+};
