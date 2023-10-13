@@ -1,9 +1,10 @@
 "use client";
-import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import {
-  useDeletePrescriptionMutation,
-  useUserPrescriptionQuery,
-} from "@/redux/api/prescriptionApi";
+  useDeletePaymentMutation,
+  useDoctorPaymentQuery,
+  useUserPaymentQuery,
+} from "@/redux/api/paymentApi";
+import React, { useState } from "react";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -14,23 +15,26 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import React, { useState } from "react";
+
+import { Pagination, TextField, Typography } from "@mui/material";
 import Select from "react-select";
 import { Days, Limit } from "@/constants/donor";
 import Link from "next/link";
-import { Pagination } from "@mui/material";
-import { convertDate } from "@/helper/date";
-import successMessage from "../shared/SuccessMassage";
-interface PrescriptionProps {
+import IconBreadcrumbs from "@/components/ui/Breadcrumb";
+import WhatshotIcon from "@mui/icons-material/Whatshot";
+import GrainIcon from "@mui/icons-material/Grain";
+import DeleteModal from "@/components/dialog/Delete";
+import successMessage from "@/components/shared/SuccessMassage";
+interface PaymentProps {
   bread: {
     link: string;
     level: string;
     icons: React.ReactNode | React.ReactElement;
     color: string;
   }[];
-  role?: string;
+  role: string;
 }
-const Prescription = ({ bread, role }: PrescriptionProps) => {
+const DoctorPayment = ({ bread, role }: PaymentProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
@@ -49,31 +53,34 @@ const Prescription = ({ bread, role }: PrescriptionProps) => {
   query["page"] = currentPage;
   query["limit"] = pageLimit;
 
-  const { data } = useUserPrescriptionQuery({ ...query });
-  console.log(data);
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
   };
-  // const [deleteprescription] = useDeletePrescriptionMutation();
-  // const deleteHandler = async () => {
-  //   try {
-  //     const res = await deleteprescription(deletedId);
-  //     if (res) {
-  //       setOpen(false);
-  //       successMessage({
-  //         header: "Thank You",
-  //         message: "prescription Delete Successfully",
-  //       });
-  //     }
-  //     // console.log(deletedId);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+
+  const [deletePayment] = useDeletePaymentMutation();
+  const deleteHandler = async () => {
+    try {
+      const res = await deletePayment(deletedId);
+      console.log(res);
+      if (res) {
+        setOpen(false);
+        successMessage({
+          header: "Thank You",
+          message: "Payment History Delete Successfully",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const { data } = useDoctorPaymentQuery({ ...query });
+  console.log(data);
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
-      <h3 className=" mt-5 text-2xl">My Prescription Info</h3>
+      <h3 className=" mt-5 text-2xl">My Payment Info</h3>
+
       <div className="mt-5">
         <div className="flex  justify-between items-center">
           <div>
@@ -100,11 +107,11 @@ const Prescription = ({ bread, role }: PrescriptionProps) => {
               options={Limit}
             />
             {/* <Link
-              href="/doctor/find"
-              className="  w-32 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium "
-            >
-              Find Doctor
-            </Link> */}
+          href="/doctor/find"
+          className="  w-32 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium "
+        >
+          Find Doctor
+        </Link> */}
           </div>
         </div>
         <div className="mt-5">
@@ -116,49 +123,62 @@ const Prescription = ({ bread, role }: PrescriptionProps) => {
               >
                 <TableHead sx={{ backgroundColor: "#30029010 " }}>
                   <TableRow>
-                    <TableCell align="center">Doctor Name</TableCell>
                     <TableCell align="center">Appointment Name</TableCell>
-                    <TableCell align="center">Prescription Title</TableCell>
-                    <TableCell align="center">Submit Date</TableCell>
+                    <TableCell align="center">Price</TableCell>
+                    <TableCell align="center">Payment Methods</TableCell>
 
-                    <TableCell align="center">Details</TableCell>
+                    <TableCell align="center">Payment Status</TableCell>
+                    <TableCell align="center">Invoice</TableCell>
+                    <TableCell align="center">Action</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {data?.data?.map((prescription: any) => (
+                  {data?.map((payment: any) => (
                     <TableRow
-                      key={prescription?.id}
+                      key={payment?.id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <TableCell align="center">
-                        Dr, {prescription?.doctor?.user?.profile?.first_name}{" "}
-                        {prescription?.doctor?.user?.profile?.last_name}
+                        {payment?.service?.title}
                       </TableCell>
+                      <TableCell align="center">{payment?.price} BDT</TableCell>
                       <TableCell align="center">
-                        {prescription?.appointment?.service?.title}
-                      </TableCell>
-                      <TableCell align="center">
-                        {prescription?.title}
-                      </TableCell>
-                      <TableCell align="center">
-                        {convertDate(prescription?.submitDate)}
+                        {" "}
+                        {payment?.paymentType}
                       </TableCell>
 
+                      <TableCell align="center">{payment?.status}</TableCell>
                       <TableCell align="center">
-                        <div className=" flex gap-4 justify-center items-center">
-                          {/* <Link
-                            href={`/dashboard/user/prescription/${prescription?.id}`}
-                            className="text-blue-500 text-xl"
-                          >
-                            <RemoveRedEyeIcon />
-                          </Link> */}
+                        <div>
                           <Link
-                            href={`/dashboard/${role}/prescription/${prescription?.id}`}
+                            href={`/dashboard/${role}/payment/invoice/${payment?.id}`}
                             className="text-white bg-[#d1001c] px-2 py-1 rounded-full"
                           >
                             {" "}
-                            Download Prescription
+                            Download Invoice
                           </Link>
+                        </div>
+                      </TableCell>
+                      <TableCell align="center">
+                        <div className=" flex gap-4 justify-center items-center">
+                          <Link
+                            href={`/dashboard/${role}/payment/${payment?.id}`}
+                            className="text-blue-500 text-xl"
+                          >
+                            <RemoveRedEyeIcon />
+                          </Link>
+                          {/* <Link
+                            href={`/dashboard/user/payment/edit/${payment?.id}`}
+                            className="text-blue-500 text-xl"
+                          >
+                            <BorderColorIcon />
+                          </Link> */}
+                          {/* <button
+                            onClick={() => handleClickOpen(payment?.id)}
+                            className="text-[#d1001c] text-xl  cursor-pointer"
+                          >
+                            <DeleteIcon />
+                          </button> */}
                         </div>
                       </TableCell>
                     </TableRow>
@@ -178,16 +198,16 @@ const Prescription = ({ bread, role }: PrescriptionProps) => {
             </div>
           </TableContainer>
         </div>
-        {/* {open && (
+        {open && (
           <DeleteModal
             open={open}
             deleteHandler={deleteHandler}
             handleClose={handleClose}
           />
-        )} */}
+        )}
       </div>
     </div>
   );
 };
 
-export default Prescription;
+export default DoctorPayment;

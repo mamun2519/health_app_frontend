@@ -2,6 +2,7 @@
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import {
   useDeletePrescriptionMutation,
+  useDoctorPrescriptionQuery,
   useUserPrescriptionQuery,
 } from "@/redux/api/prescriptionApi";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
@@ -21,6 +22,7 @@ import Link from "next/link";
 import { Pagination } from "@mui/material";
 import { convertDate } from "@/helper/date";
 import successMessage from "../shared/SuccessMassage";
+import DeleteModal from "../dialog/Delete";
 interface PrescriptionProps {
   bread: {
     link: string;
@@ -30,7 +32,7 @@ interface PrescriptionProps {
   }[];
   role?: string;
 }
-const Prescription = ({ bread, role }: PrescriptionProps) => {
+const DoctorPrescription = ({ bread, role }: PrescriptionProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
@@ -49,27 +51,28 @@ const Prescription = ({ bread, role }: PrescriptionProps) => {
   query["page"] = currentPage;
   query["limit"] = pageLimit;
 
-  const { data } = useUserPrescriptionQuery({ ...query });
+  const { data } = useDoctorPrescriptionQuery({ ...query });
   console.log(data);
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
   };
-  // const [deleteprescription] = useDeletePrescriptionMutation();
-  // const deleteHandler = async () => {
-  //   try {
-  //     const res = await deleteprescription(deletedId);
-  //     if (res) {
-  //       setOpen(false);
-  //       successMessage({
-  //         header: "Thank You",
-  //         message: "prescription Delete Successfully",
-  //       });
-  //     }
-  //     // console.log(deletedId);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const [deletePrescription] = useDeletePrescriptionMutation();
+  const deleteHandler = async () => {
+    try {
+      const res = await deletePrescription(deletedId);
+      console.log(res);
+      if (res) {
+        setOpen(false);
+        successMessage({
+          header: "Thank You",
+          message: "prescription Delete Successfully",
+        });
+      }
+      // console.log(deletedId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
@@ -116,23 +119,23 @@ const Prescription = ({ bread, role }: PrescriptionProps) => {
               >
                 <TableHead sx={{ backgroundColor: "#30029010 " }}>
                   <TableRow>
-                    <TableCell align="center">Doctor Name</TableCell>
+                    <TableCell align="center">Patient Name</TableCell>
                     <TableCell align="center">Appointment Name</TableCell>
                     <TableCell align="center">Prescription Title</TableCell>
-                    <TableCell align="center">Submit Date</TableCell>
+                    <TableCell align="center">Create Date</TableCell>
 
-                    <TableCell align="center">Details</TableCell>
+                    <TableCell align="center">Action</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {data?.data?.map((prescription: any) => (
+                  {data?.map((prescription: any) => (
                     <TableRow
                       key={prescription?.id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <TableCell align="center">
-                        Dr, {prescription?.doctor?.user?.profile?.first_name}{" "}
-                        {prescription?.doctor?.user?.profile?.last_name}
+                        {prescription?.user?.profile?.first_name}{" "}
+                        {prescription?.user?.profile?.last_name}
                       </TableCell>
                       <TableCell align="center">
                         {prescription?.appointment?.service?.title}
@@ -141,17 +144,39 @@ const Prescription = ({ bread, role }: PrescriptionProps) => {
                         {prescription?.title}
                       </TableCell>
                       <TableCell align="center">
-                        {convertDate(prescription?.submitDate)}
+                        {convertDate(prescription?.createdAt)}
                       </TableCell>
-
                       <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
-                          {/* <Link
+                          <Link
+                            href={`/dashboard/Doctor/prescription/${prescription?.id}`}
+                            className="text-blue-500 text-xl"
+                          >
+                            <RemoveRedEyeIcon />
+                          </Link>
+                          <Link
+                            href={`/dashboard/Doctor/prescription/edit/${prescription?.id}`}
+                            className="text-blue-500 text-xl"
+                          >
+                            <BorderColorIcon />
+                          </Link>
+                          <button
+                            onClick={() => handleClickOpen(prescription?.id)}
+                            className="text-red-500 text-xl  cursor-pointer"
+                          >
+                            <DeleteIcon />
+                          </button>
+                        </div>
+                      </TableCell>
+                      {/* 
+                      <TableCell align="center">
+                        <div className=" flex gap-4 justify-center items-center">
+                          <Link
                             href={`/dashboard/user/prescription/${prescription?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <RemoveRedEyeIcon />
-                          </Link> */}
+                          </Link>
                           <Link
                             href={`/dashboard/${role}/prescription/${prescription?.id}`}
                             className="text-white bg-[#d1001c] px-2 py-1 rounded-full"
@@ -160,7 +185,7 @@ const Prescription = ({ bread, role }: PrescriptionProps) => {
                             Download Prescription
                           </Link>
                         </div>
-                      </TableCell>
+                      </TableCell> */}
                     </TableRow>
                   ))}
                 </TableBody>
@@ -178,16 +203,16 @@ const Prescription = ({ bread, role }: PrescriptionProps) => {
             </div>
           </TableContainer>
         </div>
-        {/* {open && (
+        {open && (
           <DeleteModal
             open={open}
             deleteHandler={deleteHandler}
             handleClose={handleClose}
           />
-        )} */}
+        )}
       </div>
     </div>
   );
 };
 
-export default Prescription;
+export default DoctorPrescription;

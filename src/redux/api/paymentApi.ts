@@ -10,6 +10,14 @@ export const paymentApi = baseApi.injectEndpoints({
       }),
       providesTags: ["payment"],
     }),
+    doctorPayment: build.query({
+      query: (arg: Record<string, any>) => ({
+        url: "/doctor-service/my-payment",
+        method: "GET",
+        params: arg,
+      }),
+      providesTags: ["payment"],
+    }),
 
     paymentDetails: build.query({
       query: (id: string) => ({
@@ -32,4 +40,5 @@ export const {
   useUserPaymentQuery,
   usePaymentDetailsQuery,
   useDeletePaymentMutation,
+  useDoctorPaymentQuery,
 } = paymentApi;

@@ -110,18 +110,19 @@ const doctorSideBar = [
     level: "My Service",
     icon: <InboxIcon></InboxIcon>,
   },
+  // todo foture amplimention
+  // {
+  //   link: "/",
+  //   level: "Service Offer",
+  //   icon: <InboxIcon></InboxIcon>,
+  // },
+  // {
+  //   link: "/",
+  //   level: "Service Review",
+  //   icon: <InboxIcon></InboxIcon>,
+  // },
   {
-    link: "/",
-    level: "Service Offer",
-    icon: <InboxIcon></InboxIcon>,
-  },
-  {
-    link: "/",
-    level: "Service Review",
-    icon: <InboxIcon></InboxIcon>,
-  },
-  {
-    link: "/",
+    link: "/dashboard/Doctor/prescription",
     level: "Prescription",
     icon: <InboxIcon></InboxIcon>,
   },
@@ -135,16 +136,17 @@ const doctorSideBar = [
     level: "Donor Request",
     icon: <InboxIcon></InboxIcon>,
   },
+  // feture amplemention
   {
-    link: "/",
+    link: "/dashboard/Doctor/payment",
     level: "Payment",
     icon: <InboxIcon></InboxIcon>,
   },
-  {
-    link: "/",
-    level: "Withdraw",
-    icon: <InboxIcon></InboxIcon>,
-  },
+  // {
+  //   link: "/",
+  //   level: "Withdraw",
+  //   icon: <InboxIcon></InboxIcon>,
+  // },
   {
     link: "/",
     level: "History",
