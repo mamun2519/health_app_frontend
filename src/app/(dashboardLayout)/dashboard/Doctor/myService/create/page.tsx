@@ -14,11 +14,32 @@ import { SubmitHandler } from "react-hook-form";
 import { IDonorRequest } from "@/components/dialog/AddDonorRequest";
 import successMessage from "@/components/shared/SuccessMassage";
 import {
+  useCreateDoctorServiceMutation,
   useDoctorServiceDetailsQuery,
   useUpdateDoctorServiceMutation,
 } from "@/redux/api/doctorServiceApi";
 import FormSelectInput from "@/components/Form/FormSelectInput";
-import { ServiceCategory } from "@/constants/donor";
+import { Duration, ServiceCategory } from "@/constants/donor";
+import SelectInput from "@/components/Form/SelectInput";
+import { DatePicker } from "@mui/x-date-pickers";
+import FromTimePicker from "@/components/Form/FromTimePicker";
+import { convertToAmPm } from "@/utils/timeConvater";
+
+interface IServiceCrate {
+  service: {
+    title: string;
+    price: string;
+    avatar: string;
+    serviceType: string;
+    serviceDay: string[];
+    aboutSerivce: string;
+  };
+  salt: {
+    duration: string;
+    startTime: string;
+    endTime: string;
+  };
+}
 const CreateDoctorServicePage = () => {
   const [updateDoctorService] = useUpdateDoctorServiceMutation();
   const boread = [
@@ -43,16 +64,26 @@ const CreateDoctorServicePage = () => {
     },
   ];
 
-  const editHandler: SubmitHandler<any> = async (value) => {
-    //     try {
-    //       await updateDoctorService({ id: params.id, body: value });
-    //       successMessage({
-    //         message: "Service Update Successfully",
-    //         header: "Thank you",
-    //       });
-    //       console.log(value);
-    //     } catch (error) {}
-    console.log(value);
+  const [createDoctorService] = useCreateDoctorServiceMutation();
+
+  const editHandler: SubmitHandler<IServiceCrate> = async (value) => {
+    // console.log(value.startTime);
+    value.salt.startTime = convertToAmPm(value.salt.startTime);
+    value.salt.endTime = convertToAmPm(value.salt.endTime);
+    value.service.serviceDay = ["Saturday"];
+    try {
+      await createDoctorService({ body: value });
+      successMessage({
+        message: "Service Create Successfully",
+        header: "Thank you",
+      });
+      console.log(value);
+    } catch (error) {
+      console.log(error);
+    }
+    // console.log(value.startTime);
+    // const time = convertToAmPm(value.salt.startTime);
+    // console.log(time);
   };
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
@@ -73,16 +104,16 @@ const CreateDoctorServicePage = () => {
             <FormInput
               name="service.price"
               size="lg:w-96 w-72"
-              label="Category"
-              placeholder="Enter category "
+              label="price"
+              placeholder="Enter price "
             />
           </div>
           <div className=" mt-2">
             <FormInput
               name="service.avatar"
               size="lg:w-96 w-72"
-              label="Price"
-              placeholder="Enter Patient price"
+              label="Avatar"
+              placeholder="Enter Patient avatar"
             />
           </div>
         </div>
@@ -90,30 +121,20 @@ const CreateDoctorServicePage = () => {
           <div className=" mt-8">
             <FormInput
               name="service.serviceType"
-              label="AboutService"
+              label="service Type"
               size="lg:w-96 w-72"
-              placeholder="Enter AboutService"
+              placeholder="Enter service Type"
             />
           </div>
-          <div className=" mt-8">
-            <FormSelectInput
-              name="service.category"
-              label="serviceType"
-              size="lg:w-96 w-72 "
-              options={ServiceCategory}
-              placeholder="Enter serviceType"
-            />
-          </div>
+
           <div className=" mt-8">
             <FormInput
               name="service.serviceDay"
-              label="serviceType"
+              label="service Day"
               size="lg:w-96 w-72"
-              placeholder="Enter serviceType"
+              placeholder="Enter serviceDay"
             />
           </div>
-        </div>
-        <div className="mt-5 grid grid-cols-3 gap-5">
           <div className=" mt-8">
             <FormInput
               name="service.aboutSerivce"
@@ -122,35 +143,58 @@ const CreateDoctorServicePage = () => {
               placeholder="Enter AboutService"
             />
           </div>
-          <div className=" mt-8">
-            <FormInput
-              name="salt.duration"
-              label="serviceType"
-              size="lg:w-96 w-72"
-              placeholder="Enter serviceType"
-            />
-          </div>
-          <div className=" mt-8">
-            <FormInput
-              name="salt.startTime"
-              label="serviceType"
-              size="lg:w-96 w-72"
-              placeholder="Enter serviceType"
-            />
-          </div>
         </div>
         <div className="mt-5 grid grid-cols-3 gap-5">
           <div className=" mt-8">
-            <FormInput
-              name="salt.endTime"
-              label="AboutService"
-              size="lg:w-96 w-72"
-              placeholder="Enter AboutService"
+            {/* <FormSelectInput
+              name="service.category"
+              label="serviceType"
+              size="lg:w-96 w-72 "
+              options={ServiceCategory}
+              placeholder="Enter serviceType"
+            /> */}
+            <SelectInput
+              name="salt.duration"
+              label="duration"
+              options={Duration}
             />
           </div>
         </div>
 
-        <div className="py-2 w-40 mt-5">
+        <div className="mt-5 grid grid-cols-3 gap-5">
+          <div className=" mt-8">
+            <FromTimePicker
+              name="salt.startTime"
+              label="Start Time"
+              size="lg:w-96 w-72"
+              placeholder="Enter endTime"
+            />
+          </div>
+          <div className=" mt-8">
+            <FromTimePicker
+              name="salt.endTime"
+              label="End Time"
+              size="lg:w-96 w-72"
+              placeholder="Enter endTime"
+            />
+          </div>
+          <div className=" mt-8">
+            {/* <FormSelectInput
+              name="service.category"
+              label="serviceType"
+              size="lg:w-96 w-72 "
+              options={ServiceCategory}
+              placeholder="Enter serviceType"
+            /> */}
+            <SelectInput
+              name="service.category"
+              label="Category"
+              options={ServiceCategory}
+            />
+          </div>
+        </div>
+
+        <div className="py-2 w-56 mt-5">
           <button
             type="submit"
             className=" px-10 h-10 w-full rounded bg-[#d1001c] text-white font-medium "

@@ -33,6 +33,14 @@ export const doctorServiceApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["doctorService"],
     }),
+    createDoctorService: build.mutation({
+      query: (data) => ({
+        url: `/doctor-service`,
+        method: "POST",
+        data: data.body,
+      }),
+      invalidatesTags: ["doctorService"],
+    }),
     deleteService: build.mutation({
       query: (id) => ({
         url: `/doctor-service/${id}`,
@@ -49,4 +57,5 @@ export const {
   useDoctorServiceDetailsQuery,
   useUpdateDoctorServiceMutation,
   useDeleteServiceMutation,
+  useCreateDoctorServiceMutation,
 } = doctorServiceApi;
