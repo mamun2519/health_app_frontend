@@ -113,12 +113,12 @@ const DoctorServicePage = () => {
               onChange={(event: any) => setLimit(event?.value)}
               options={Limit}
             />
-            {/* <Link
-              href="/doctor/find"
+            <Link
+              href="/dashboard/Doctor/myService/create"
               className="  w-32 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium "
             >
-              Find Doctor
-            </Link> */}
+              Create
+            </Link>
           </div>
         </div>
         <div className="mt-5">

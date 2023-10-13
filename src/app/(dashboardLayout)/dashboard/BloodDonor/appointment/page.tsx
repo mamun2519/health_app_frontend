@@ -129,7 +129,7 @@ const DonorAppointmentPage = () => {
                     <TableCell align="center">Appointment Date</TableCell>
                     <TableCell align="center">Time</TableCell>
                     <TableCell align="center">Serial No</TableCell>
-                    <TableCell align="center">Status</TableCell>
+                    {/* <TableCell align="center">Status</TableCell> */}
                     {/* <TableCell align="center">Joint Doctor</TableCell> */}
                     <TableCell align="center">Action</TableCell>
                   </TableRow>
@@ -154,9 +154,9 @@ const DonorAppointmentPage = () => {
                         {appointment?.serialNo}
                       </TableCell>
 
-                      <TableCell align="center">
+                      {/* <TableCell align="center">
                         {appointment?.status}
-                      </TableCell>
+                      </TableCell> */}
                       {/* <TableCell align="center">
                         <button className="px-6 py-1 rounded-full bg-red-100">
                           join Now

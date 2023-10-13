@@ -38,7 +38,7 @@ export default function FormSelectInput({
         render={({ field: { value, onChange } }) => (
           <Select
             id={id}
-            className={`${size}`}
+            className={`${size} `}
             defaultValue={value}
             onChange={onChange}
             options={options}
