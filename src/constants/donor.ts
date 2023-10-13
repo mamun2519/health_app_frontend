@@ -340,3 +340,16 @@ export const DonorRequestUpdatedStatus = [
     label: "Cancel",
   },
 ];
+
+export const MeetStatus = [
+  { value: "Active", label: "Active" },
+  {
+    value: "Cancel",
+    label: "Cancel",
+  },
+  { value: "Expired", label: "Expired" },
+  {
+    value: "Complete",
+    label: "Complete",
+  },
+];

@@ -65,7 +65,7 @@ const CreateDoctorServicePage = () => {
     },
   ];
 
-  const [createDoctorService] = useCreateDoctorServiceMutation();
+  const [createGoogleMeet] = useCreateDoctorServiceMutation();
 
   const editHandler: SubmitHandler<IServiceCrate> = async (value) => {
     // console.log(value.startTime);
@@ -73,7 +73,7 @@ const CreateDoctorServicePage = () => {
     value.salt.endTime = convertToAmPm(value.salt.endTime);
     value.service.serviceDay = ["Saturday"];
     try {
-      await createDoctorService({ body: value });
+      await createGoogleMeet({ body: value });
       successMessage({
         message: "Service Create Successfully",
         header: "Thank you",

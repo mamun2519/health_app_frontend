@@ -40,13 +40,14 @@ instance.interceptors.response.use(
     return responseObject;
   },
   function (error) {
+    // console.log(error.response.data.message);
     const responseObject: IGenericErrorResponse = {
       statusCode: error?.response?.data?.statusCode || 500,
       message: error?.response?.data?.message || "Something went wrong",
       errorMessages: error?.response?.data?.message,
     };
-    return responseObject;
-    // return Promise.reject(error);
+    // return responseObject;
+    return Promise.reject(responseObject);
   }
 );
 

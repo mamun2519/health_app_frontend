@@ -28,7 +28,10 @@ import {
   useDeleteAppointmentMutation,
   useUserAppointmentQuery,
 } from "@/redux/api/appointmentApi";
-import { useMyGoogleMeetQuery } from "@/redux/api/googleMeetApi";
+import {
+  useDeleteGoogleMeetMutation,
+  useMyGoogleMeetQuery,
+} from "@/redux/api/googleMeetApi";
 import { convertDate } from "@/helper/date";
 
 const GoogleMeet = () => {
@@ -71,15 +74,15 @@ const GoogleMeet = () => {
   const { data } = useMyGoogleMeetQuery({ ...query });
 
   console.log(data);
-  const [deleteAppointment] = useDeleteAppointmentMutation();
+  const [deleteGoogleMeet] = useDeleteGoogleMeetMutation();
   const deleteHandler = async () => {
     try {
-      await deleteAppointment(deletedId);
+      await deleteGoogleMeet(deletedId);
       // console.log(deletedId);
       setOpen(false);
       successMessage({
         header: "Thank You",
-        message: "Appointment Delete Successfully",
+        message: "GoogleMeet Delete Successfully",
       });
     } catch (error) {
       console.log(error);
@@ -116,12 +119,12 @@ const GoogleMeet = () => {
               onChange={(event: any) => setLimit(event?.value)}
               options={Limit}
             />
-            {/* <Link
-          href="/doctor/find"
-          className="  w-32 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium "
-        >
-          Find Doctor
-        </Link> */}
+            <Link
+              href="/dashboard/Doctor/googleMeet/create"
+              className="  w-32 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium "
+            >
+              Create
+            </Link>
           </div>
         </div>
         <div className="mt-5">
@@ -156,18 +159,22 @@ const GoogleMeet = () => {
                       <TableCell align="center">
                         {convertDate(appointment?.createdAt)}
                       </TableCell>
-                      <TableCell align="center"></TableCell>
+                      <TableCell align="center">
+                        <button className="px-8 py-1 bg-red-500 text-white rounded-full">
+                          View Paitent
+                        </button>
+                      </TableCell>
 
                       <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
-                          <Link
-                            href={`/dashboard/user/appointment/${appointment?.id}`}
+                          {/* <Link
+                            href={`/dashboard/Doctor/googleMeet/${appointment?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <RemoveRedEyeIcon />
-                          </Link>
+                          </Link> */}
                           <Link
-                            href={`/dashboard/user/appointment/edit/${appointment?.id}`}
+                            href={`/dashboard/Doctor/googleMeet/edit/${appointment?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <BorderColorIcon />
