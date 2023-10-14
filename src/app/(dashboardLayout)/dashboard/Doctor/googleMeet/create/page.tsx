@@ -29,6 +29,7 @@ import {
   useCreateGoogleMeetMutation,
   useMyGoogleMeetQuery,
 } from "@/redux/api/googleMeetApi";
+import errorMessage from "@/components/shared/ErrrorMessage";
 
 interface ICreateMeet {
   serviceId: {
@@ -77,10 +78,15 @@ const CreateGoogleMeetPage = () => {
     try {
       const res = await createGoogleMeet(data);
       console.log(res);
-      successMessage({
-        message: "New Meet Link Create Successfully",
-        header: "Thank you",
-      });
+      // @ts-ignore
+      if (res.data) {
+        successMessage({
+          message: "New Meet Link Create Successfully",
+          header: "Thank you",
+        });
+      } else {
+        errorMessage({ message: "Your Meet Link already active." });
+      }
       console.log(value);
     } catch (error) {
       console.log(error);

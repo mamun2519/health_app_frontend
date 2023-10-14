@@ -26,4 +26,5 @@ export const profileApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useAllUserQuery, useAllAdminQuery } = profileApi;
+export const { useAllUserQuery, useAllAdminQuery, useMyProfileQuery } =
+  profileApi;

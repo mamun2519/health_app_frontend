@@ -4,8 +4,44 @@ import React from "react";
 import DonorHelp from "../../assets/Save the Earth-pana.svg";
 import FormInput from "../Form/FormInput";
 import Form from "../Form/FormProvider";
+import SelectInput from "../Form/SelectInput";
+import {
+  SelectedBloodGroup,
+  SelectedDivisions,
+  SelectedGender,
+} from "@/constants/donor";
+import SelectDate from "../Form/SelectDate";
+import { useCreateDonorMutation } from "@/redux/api/authApi";
+import successMessage from "../shared/SuccessMassage";
+import { SubmitHandler } from "react-hook-form";
+import { ICreateDonor } from "@/types";
+import errorMessage from "../shared/ErrrorMessage";
+import { storeUserInfo } from "@/services/auth.Services";
 const DonorRegistrationForm = () => {
-  const submitHandler = () => {};
+  const [createDonor] = useCreateDonorMutation();
+
+  const createDonorSingup: SubmitHandler<ICreateDonor> = async (data) => {
+    data.present_Address.police_station = "No";
+    try {
+      const res: any = await createDonor(data);
+      console.log(res);
+      // @ts-ignore
+      if (res?.data) {
+        storeUserInfo({ accessToken: res?.data.userToken });
+        successMessage({
+          message: "Donor Account Create Successfully",
+          header: "Thank you",
+        });
+      } else {
+        errorMessage({ message: "Something is wrong" });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    // console.log(value.startTime);
+    // const time = convertToAmPm(value.salt.startTime);
+    // console.log(time);
+  };
   return (
     <div className=" mt-10  max-w-7xl mx-auto px-4 lg:px-0 ">
       <div className=" flex gap-5">
@@ -30,40 +66,22 @@ const DonorRegistrationForm = () => {
             <div className="h-1 bg-red-500 w-52"></div>
           </div>
           <div className=" ">
-            <Form submitHandler={submitHandler}>
+            <Form submitHandler={createDonorSingup}>
               <div className=" grid grid-cols-3 gap-5">
                 <div className="mt-3">
                   <FormInput
-                    label="name"
+                    label="First Name"
                     placeholder="First Name"
                     size="full"
-                    name="name"
+                    name="name.first_name"
                   ></FormInput>
                 </div>
                 <div className="mt-3">
                   <FormInput
-                    label="fist Name"
-                    placeholder="First Name"
+                    label="Last Name"
+                    placeholder="Last Name"
                     size="full"
-                    name="name"
-                  ></FormInput>
-                </div>
-                <div className="mt-3">
-                  <FormInput
-                    label="gender"
-                    placeholder="Enter Gender"
-                    size="full"
-                    name="name"
-                  ></FormInput>
-                </div>
-              </div>
-              <div className=" grid grid-cols-3 gap-5">
-                <div className="mt-3">
-                  <FormInput
-                    label="Date Of Birth"
-                    placeholder="First Name"
-                    size="full"
-                    name="name"
+                    name="name.last_name"
                   ></FormInput>
                 </div>
                 <div className="mt-3">
@@ -71,16 +89,32 @@ const DonorRegistrationForm = () => {
                     label="phone"
                     placeholder="Enter Phone"
                     size="full"
-                    name="name"
+                    name="phone"
                   ></FormInput>
                 </div>
+              </div>
+              <div className=" grid grid-cols-3 gap-5">
                 <div className="mt-3">
-                  <FormInput
-                    label="Avatar"
-                    placeholder="Avatar"
-                    size="full"
-                    name="name"
-                  ></FormInput>
+                  <SelectInput
+                    name="blood_group"
+                    label="Blood Group"
+                    options={SelectedBloodGroup}
+                  />
+                </div>
+                <div className="mt-3">
+                  <SelectInput
+                    name="gender"
+                    label="Gender"
+                    options={SelectedGender}
+                  />
+                </div>
+                <div className="mt-3">
+                  <SelectDate
+                    name="date_of_birth"
+                    size="lg:w-96 w-72"
+                    label="Date of Birth"
+                    placeholder="Enter Patient avatar"
+                  />
                 </div>
               </div>
               <div className=" grid grid-cols- gap-5"></div>
@@ -88,37 +122,36 @@ const DonorRegistrationForm = () => {
                 <h3>Present Address</h3>
                 <div className=" grid grid-cols-2  gap-5">
                   <div className="mt-3">
-                    <FormInput
-                      label="gender"
-                      placeholder="Enter Gender"
-                      size="full"
-                      name="name"
-                    ></FormInput>
+                    <SelectInput
+                      name="present_Address.district"
+                      label="Division"
+                      options={SelectedDivisions}
+                    />
                   </div>
                   <div className="mt-3">
                     <FormInput
-                      label="Date Of Birth"
-                      placeholder="First Name"
+                      label="District"
+                      placeholder="Enter District"
                       size="full"
-                      name="name"
+                      name="present_Address.sub_district"
                     ></FormInput>
                   </div>
                 </div>
                 <div className=" grid grid-cols-2 gap-5">
                   <div className="mt-3">
                     <FormInput
-                      label="phone"
-                      placeholder="Enter Phone"
+                      label="Address"
+                      placeholder="Enter address"
                       size="full"
-                      name="name"
+                      name="present_Address.address"
                     ></FormInput>
                   </div>
                   <div className="mt-3">
                     <FormInput
                       label="Avatar"
-                      placeholder="Avatar"
+                      placeholder="Enter Avatar"
                       size="full"
-                      name="name"
+                      name="avatar"
                     ></FormInput>
                   </div>
                 </div>
@@ -168,14 +201,14 @@ const DonorRegistrationForm = () => {
                   label="email"
                   placeholder="Enter Email"
                   size="full"
-                  name="name"
+                  name="email"
                 ></FormInput>
                 <div className="mt-3">
                   <FormInput
-                    label="email"
-                    placeholder="Enter Email"
+                    label="Password"
+                    placeholder="Enter Password"
                     size="full"
-                    name="name"
+                    name="password"
                   ></FormInput>
                 </div>
               </div>

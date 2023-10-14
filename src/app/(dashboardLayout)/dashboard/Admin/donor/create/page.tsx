@@ -42,22 +42,8 @@ import {
   useCreateDonorMutation,
 } from "@/redux/api/authApi";
 import { ICreateDoctor, ICreateDonor } from "@/types";
+import errorMessage from "@/components/shared/ErrrorMessage";
 
-interface IServiceCrate {
-  service: {
-    title: string;
-    price: string;
-    avatar: string;
-    serviceType: string;
-    serviceDay: string[];
-    aboutSerivce: string;
-  };
-  salt: {
-    duration: string;
-    startTime: string;
-    endTime: string;
-  };
-}
 const CreateDoctorPage = () => {
   const [updateDoctorService] = useUpdateDoctorServiceMutation();
   const boread = [
@@ -95,6 +81,8 @@ const CreateDoctorPage = () => {
           message: "Donor Account Create Successfully",
           header: "Thank you",
         });
+      } else {
+        errorMessage({ message: "Something is wrong" });
       }
     } catch (error) {
       console.log(error);
