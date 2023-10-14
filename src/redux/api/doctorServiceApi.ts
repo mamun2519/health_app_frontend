@@ -55,6 +55,14 @@ export const doctorServiceApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["doctorService"],
     }),
+    getAllDoctor: build.query({
+      query: (arg: Record<string, any>) => ({
+        url: `/doctor-service/all-doctor`,
+        method: "GET",
+        params: arg,
+      }),
+      providesTags: ["Doctor"],
+    }),
   }),
 });
 
@@ -66,4 +74,5 @@ export const {
   useDeleteServiceMutation,
   useCreateDoctorServiceMutation,
   useAllServiceQuery,
+  useGetAllDoctorQuery,
 } = doctorServiceApi;

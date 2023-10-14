@@ -25,6 +25,19 @@ export const authApi = baseApi.injectEndpoints({
         data,
       }),
     }),
+    deleteUser: build.mutation({
+      query: (id) => ({
+        url: `/user/delete-user/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Doctor"],
+    }),
+    userDetails: build.query({
+      query: (id: string) => ({
+        url: `/user/${id}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -32,4 +45,6 @@ export const {
   useUserLoginMutation,
   useRegisterUserMutation,
   useResetPasswordMutation,
+  useDeleteUserMutation,
+  useUserDetailsQuery,
 } = authApi;
