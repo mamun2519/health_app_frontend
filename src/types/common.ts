@@ -147,3 +147,15 @@ export type ICreateDonor = {
   phone: string;
   gender: string;
 };
+
+export type IAdminCrate = {
+  name: {
+    first_name: string;
+    last_name: string;
+  };
+  email: string;
+  avatar: string;
+
+  password: string;
+  role: string;
+};

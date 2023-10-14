@@ -195,6 +195,16 @@ const managerSideBar = [
     level: "Manage Donor",
     icon: <InboxIcon></InboxIcon>,
   },
+  {
+    link: "/dashboard/Admin/manageAdmin",
+    level: "Manage Admin",
+    icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/dashboard/Admin/user",
+    level: "Manage User",
+    icon: <InboxIcon></InboxIcon>,
+  },
   // {
   //   link: "/dashboard/Admin/appointment",
   //   level: "Withdraw",

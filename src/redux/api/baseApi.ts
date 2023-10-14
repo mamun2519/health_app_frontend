@@ -21,6 +21,8 @@ export const baseApi = createApi({
     "googleMeet",
     "Doctor",
     "BloodDonor",
+    "User",
+    "Admin",
   ],
 });
 

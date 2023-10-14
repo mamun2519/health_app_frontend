@@ -9,7 +9,21 @@ export const profileApi = baseApi.injectEndpoints({
       }),
       providesTags: ["profile"],
     }),
+    allUser: build.query({
+      query: () => ({
+        url: "/user/all-user",
+        method: "GET",
+      }),
+      providesTags: ["User"],
+    }),
+    AllAdmin: build.query({
+      query: () => ({
+        url: "/user/all-admin",
+        method: "GET",
+      }),
+      providesTags: ["Admin"],
+    }),
   }),
 });
 
-export const { useMyProfileQuery } = profileApi;
+export const { useAllUserQuery, useAllAdminQuery } = profileApi;
