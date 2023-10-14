@@ -9,6 +9,13 @@ export const doctorServiceApi = baseApi.injectEndpoints({
       }),
       providesTags: ["user"],
     }),
+    AllService: build.query({
+      query: () => ({
+        url: "/doctor-service",
+        method: "GET",
+      }),
+      providesTags: ["doctorService"],
+    }),
 
     doctorService: build.query({
       query: (arg: Record<string, any>) => ({
@@ -58,4 +65,5 @@ export const {
   useUpdateDoctorServiceMutation,
   useDeleteServiceMutation,
   useCreateDoctorServiceMutation,
+  useAllServiceQuery,
 } = doctorServiceApi;

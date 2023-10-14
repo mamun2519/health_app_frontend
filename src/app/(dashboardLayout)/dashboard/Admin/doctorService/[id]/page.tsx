@@ -3,7 +3,8 @@ import DashboardDoctorServiceDetails from "@/components/doctorService/DashboardS
 import HomeIcon from "@mui/icons-material/Home";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import GrainIcon from "@mui/icons-material/Grain";
-const DoctorServiceDetailsPage = ({ params }: { params: { id: string } }) => {
+
+const AdminServiceDetailsPage = ({ params }: { params: { id: string } }) => {
   const bread = [
     {
       link: "/dashboard",
@@ -13,13 +14,13 @@ const DoctorServiceDetailsPage = ({ params }: { params: { id: string } }) => {
       color: "inherit",
     },
     {
-      link: "/dashboard/Doctor/myService",
-      level: "My Service",
+      link: "/dashboard/Admin/doctorService",
+      level: "Manage Service",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
-      link: "/dashboard/Doctor/myService",
+      link: "/dashboard/Admin/doctorService",
       level: "Service Details",
       icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
@@ -33,4 +34,4 @@ const DoctorServiceDetailsPage = ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default DoctorServiceDetailsPage;
+export default AdminServiceDetailsPage;

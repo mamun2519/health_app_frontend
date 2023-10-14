@@ -166,7 +166,7 @@ const managerSideBar = [
     icon: <InboxIcon></InboxIcon>,
   },
   {
-    link: "/dashboard/Admin/service",
+    link: "/dashboard/Admin/doctorService",
     level: "Manage Service",
     icon: <InboxIcon></InboxIcon>,
   },

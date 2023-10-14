@@ -2,9 +2,7 @@
 import React from "react";
 import DonorPic from "../../assets/dr-dk-gupta.jpg";
 import Image from "next/image";
-import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
+
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import Calender from "../ui/Calender";
 import { Alert, Badge, IconButton } from "@mui/material";
@@ -12,29 +10,13 @@ import ServiceSalt, { ISalt } from "./SarviceSalt";
 import Link from "next/link";
 import { useDoctorServiceDetailsQuery } from "@/redux/api/doctorServiceApi";
 import { convertDate } from "@/helper/date";
-const DashboardDoctorServiceDetails = ({ id }: { id: string }) => {
-  const bread = [
-    {
-      link: "/dashboard",
-      level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-
-      color: "inherit",
-    },
-    {
-      link: "/dashboard/Doctor/myService",
-      level: "My Service",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "inherit",
-    },
-    {
-      link: "/dashboard/Doctor/myService",
-      level: "Service Details",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-
-      color: "text.primary",
-    },
-  ];
+const DashboardDoctorServiceDetails = ({
+  id,
+  bread,
+}: {
+  id: string;
+  bread: any;
+}) => {
   const { data } = useDoctorServiceDetailsQuery(id);
   return (
     <div className="h-full  border  p-5 rounded-3xl shadow-sm  mt-3">
