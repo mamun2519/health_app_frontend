@@ -38,6 +38,14 @@ export const authApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    createDoctor: build.mutation({
+      query: (data) => ({
+        url: "/auth/create-doctor",
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: ["Doctor"],
+    }),
   }),
 });
 
@@ -47,4 +55,5 @@ export const {
   useResetPasswordMutation,
   useDeleteUserMutation,
   useUserDetailsQuery,
+  useCreateDoctorMutation,
 } = authApi;

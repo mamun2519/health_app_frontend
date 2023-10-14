@@ -90,3 +90,40 @@ export type ICreatePrescription = {
     description: string;
   };
 };
+
+export type ICreateDoctor = {
+  name: {
+    first_name: string;
+    last_name: string;
+  };
+  email: string;
+  password: string;
+  avatar: string;
+  specialist: string;
+  experience: string;
+  degree: string;
+  date_of_birth: string;
+  present_Address: {
+    district: string;
+    sub_district: string;
+    police_station: "No";
+    address: string;
+  };
+  permanent_Address: {
+    district: string;
+    sub_district: string;
+    police_station: "No";
+    address: string;
+  };
+  blood_group: string;
+  phone: string;
+  gender: string;
+  education: [
+    {
+      institute: "No";
+      pass_year: "No";
+      GPA: "No";
+      completionYear: "NO";
+    }
+  ];
+};

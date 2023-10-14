@@ -223,6 +223,21 @@ export const SelectedDivisions = [
   { value: "Borisal", label: "Borisal" },
 ];
 
+export const SelectedBloodGroup = [
+  { value: "A Positive", label: "A+" },
+  { value: "A Negative", label: "A" },
+  { value: "AB Positive", label: "AB+" },
+  { value: "AB Negative", label: "AB-" },
+  { value: "B Positive", label: "B+" },
+  { value: "B Negative", label: "B-" },
+  { value: "0 Positive", label: "0+" },
+  { value: "O Negative", label: "0-" },
+];
+export const SelectedGender = [
+  { value: "Male", label: "Male" },
+  { value: "Female", label: "Female" },
+];
+
 export const SelectedExperience = [
   { value: "1", label: "1 Year" },
   { value: "2", label: "2 Year" },
@@ -302,6 +317,7 @@ export const Days = [
   { value: "Friday", label: "Friday" },
   { value: "Saturday", label: "Saturday" },
 ];
+
 export const Limit = [
   { value: "5", label: "5" },
   {

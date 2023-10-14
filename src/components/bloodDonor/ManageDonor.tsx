@@ -37,7 +37,7 @@ interface PaymentProps {
   }[];
   role: string;
 }
-const ManageDoctor = ({ bread, role }: PaymentProps) => {
+const ManageBloodDonor = ({ bread, role }: PaymentProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
@@ -83,7 +83,7 @@ const ManageDoctor = ({ bread, role }: PaymentProps) => {
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
-      <h3 className=" mt-5 text-2xl">Manage Doctor</h3>
+      <h3 className=" mt-5 text-2xl">Manage Blood Donor</h3>
 
       <div className="mt-5">
         <div className="flex  justify-between items-center">
@@ -111,7 +111,7 @@ const ManageDoctor = ({ bread, role }: PaymentProps) => {
               options={Limit}
             />
             <Link
-              href="/dashboard/Admin/doctor/create"
+              href="/dashboard/Admin/donor/create"
               className="  w-32 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium "
             >
               Create Doctor
@@ -166,7 +166,7 @@ const ManageDoctor = ({ bread, role }: PaymentProps) => {
                       <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
                           <Link
-                            href={`/dashboard/${role}/doctor/${payment?.id}`}
+                            href={`/dashboard/${role}/donor/${payment?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <RemoveRedEyeIcon />
@@ -214,4 +214,4 @@ const ManageDoctor = ({ bread, role }: PaymentProps) => {
   );
 };
 
-export default ManageDoctor;
+export default ManageBloodDonor;
