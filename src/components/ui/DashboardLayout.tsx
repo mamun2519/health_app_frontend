@@ -112,7 +112,7 @@ export default function DashboardLayout({
   // @ts-ignore
   const { role } = getUserInfo();
   // console.log(role);
-  const sideBarItem = DashBoardItem(role);
+  const sideBarItem = DashBoardItem("Admin");
 
   return (
     <Box sx={{ display: "flex" }}>

@@ -155,32 +155,41 @@ const doctorSideBar = [
   ,
 ];
 const managerSideBar = [
-  ...defaultSideBar,
   {
-    link: "/dashboard/Boo/appointment",
-    level: "Appointment",
+    link: "/dashboard/Admin/profile",
+    level: "Profile",
     icon: <InboxIcon></InboxIcon>,
   },
   {
-    link: "/",
-    level: "Doctor Service",
+    link: "/dashboard/Admin/appointment",
+    level: "Manage Appointment",
     icon: <InboxIcon></InboxIcon>,
   },
   {
-    link: "/",
-    level: "Blood Donor Request",
+    link: "/dashboard/Admin/service",
+    level: "Manage Service",
     icon: <InboxIcon></InboxIcon>,
   },
   {
-    link: "/",
-    level: "Payments",
+    link: "/dashboard/Admin/donorRequest",
+    level: "Manage Request",
     icon: <InboxIcon></InboxIcon>,
   },
   {
-    link: "/",
-    level: "Withdraw",
+    link: "/dashboard/Admin/prescription",
+    level: "Manage Prescription",
     icon: <InboxIcon></InboxIcon>,
   },
+  // {
+  //   link: "/dashboard/Admin/appointment",
+  //   level: "Payments",
+  //   icon: <InboxIcon></InboxIcon>,
+  // },
+  // {
+  //   link: "/dashboard/Admin/appointment",
+  //   level: "Withdraw",
+  //   icon: <InboxIcon></InboxIcon>,
+  // },
 ];
 
 const superAdminSideBar = [
@@ -224,8 +233,8 @@ export const DashBoardItem = (role: string) => {
   if (role == USER_ROLE.USER) return userSideBar;
   else if (role == USER_ROLE.BLOODDONOR) return bloodDonorSideBar;
   else if (role === USER_ROLE.DOCTOR) return doctorSideBar;
-  else if (role === USER_ROLE.MANAGER) return managerSideBar;
-  else if (role === USER_ROLE.ADMIN) return superAdminSideBar;
+  else if (role === USER_ROLE.ADMIN) return managerSideBar;
+  else if (role === USER_ROLE.SUPER_ADMIN) return superAdminSideBar;
   else {
     return [
       {
