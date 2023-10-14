@@ -56,6 +56,14 @@ export const DonorApi = baseApi.injectEndpoints({
       }),
       providesTags: ["donorRequest"],
     }),
+    allDonorRequest: build.query({
+      query: (arg: Record<string, any>) => ({
+        url: "/blood-donor/all-request",
+        method: "GET",
+        params: arg,
+      }),
+      providesTags: ["donorRequest"],
+    }),
   }),
 });
 
@@ -67,4 +75,5 @@ export const {
   useDeleteDonorRequestMutation,
   useUserDonorReviewQuery,
   useUserDonorRequestQuery,
+  useAllDonorRequestQuery,
 } = DonorApi;

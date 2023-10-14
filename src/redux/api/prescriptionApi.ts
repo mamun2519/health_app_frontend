@@ -10,6 +10,14 @@ export const prescriptionApi = baseApi.injectEndpoints({
       }),
       providesTags: ["prescription"],
     }),
+    allPrescription: build.query({
+      query: (arg: Record<string, any>) => ({
+        url: "/prescription",
+        method: "GET",
+        params: arg,
+      }),
+      providesTags: ["prescription"],
+    }),
     doctorPrescription: build.query({
       query: (arg: Record<string, any>) => ({
         url: "/doctor-service/my-prescription",
@@ -58,4 +66,5 @@ export const {
   useUserPrescriptionQuery,
   useCreatePrescriptionMutation,
   useDoctorPrescriptionQuery,
+  useAllPrescriptionQuery,
 } = prescriptionApi;

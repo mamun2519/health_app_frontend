@@ -180,11 +180,11 @@ const managerSideBar = [
     level: "Manage Prescription",
     icon: <InboxIcon></InboxIcon>,
   },
-  // {
-  //   link: "/dashboard/Admin/appointment",
-  //   level: "Payments",
-  //   icon: <InboxIcon></InboxIcon>,
-  // },
+  {
+    link: "/dashboard/Admin/payment",
+    level: "Manage Payment",
+    icon: <InboxIcon></InboxIcon>,
+  },
   // {
   //   link: "/dashboard/Admin/appointment",
   //   level: "Withdraw",
