@@ -72,7 +72,7 @@ const GoogleMeet = () => {
     },
   ];
   const { data } = useMyGoogleMeetQuery({ ...query });
-
+  console.log(data);
   const [deleteGoogleMeet] = useDeleteGoogleMeetMutation();
   const deleteHandler = async () => {
     try {
