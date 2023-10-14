@@ -9,7 +9,16 @@ export const bloodDonorApi = baseApi.injectEndpoints({
       }),
       providesTags: ["donor"],
     }),
+    AllBloodDonor: build.query({
+      query: (arg: Record<string, any>) => ({
+        url: `/blood-donor/all-donor`,
+        method: "GET",
+        params: arg,
+      }),
+      providesTags: ["BloodDonor"],
+    }),
   }),
 });
 
-export const { useBloodDonorDetailsQuery } = bloodDonorApi;
+export const { useBloodDonorDetailsQuery, useAllBloodDonorQuery } =
+  bloodDonorApi;

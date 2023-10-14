@@ -127,3 +127,23 @@ export type ICreateDoctor = {
     }
   ];
 };
+
+export type ICreateDonor = {
+  name: {
+    first_name: string;
+    last_name: string;
+  };
+  email: string;
+  avatar: string;
+  date_of_birth: string;
+  present_Address: {
+    district: string;
+    sub_district: string;
+    police_station: string;
+    address: string;
+  };
+
+  blood_group: string;
+  phone: string;
+  gender: string;
+};

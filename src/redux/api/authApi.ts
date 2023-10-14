@@ -46,6 +46,14 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Doctor"],
     }),
+    createDonor: build.mutation({
+      query: (data) => ({
+        url: "/auth/create-donor",
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: ["BloodDonor"],
+    }),
   }),
 });
 
@@ -56,4 +64,5 @@ export const {
   useDeleteUserMutation,
   useUserDetailsQuery,
   useCreateDoctorMutation,
+  useCreateDonorMutation,
 } = authApi;

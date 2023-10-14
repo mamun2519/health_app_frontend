@@ -28,6 +28,7 @@ import successMessage from "@/components/shared/SuccessMassage";
 import { useGetAllDoctorQuery } from "@/redux/api/doctorServiceApi";
 import { convertDate } from "@/helper/date";
 import { useDeleteUserMutation } from "@/redux/api/authApi";
+import { useAllBloodDonorQuery } from "@/redux/api/bloodDonorApi";
 interface PaymentProps {
   bread: {
     link: string;
@@ -78,7 +79,7 @@ const ManageBloodDonor = ({ bread, role }: PaymentProps) => {
     }
   };
 
-  const { data } = useGetAllDoctorQuery({ ...query });
+  const { data } = useAllBloodDonorQuery({ ...query });
   console.log(data);
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
@@ -114,7 +115,7 @@ const ManageBloodDonor = ({ bread, role }: PaymentProps) => {
               href="/dashboard/Admin/donor/create"
               className="  w-32 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium "
             >
-              Create Doctor
+              Create Donor
             </Link>
           </div>
         </div>
@@ -127,7 +128,7 @@ const ManageBloodDonor = ({ bread, role }: PaymentProps) => {
               >
                 <TableHead sx={{ backgroundColor: "#30029010 " }}>
                   <TableRow>
-                    <TableCell align="center">Doctor Name</TableCell>
+                    <TableCell align="center">Donor Name</TableCell>
                     <TableCell align="center">Email</TableCell>
                     <TableCell align="center">Status</TableCell>
 
@@ -143,8 +144,8 @@ const ManageBloodDonor = ({ bread, role }: PaymentProps) => {
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <TableCell align="center">
-                        {payment?.doctor?.user?.profile?.first_name}{" "}
-                        {payment?.doctor?.user?.profile?.last_name}
+                        {payment?.profile?.first_name}{" "}
+                        {payment?.profile?.last_name}
                       </TableCell>
                       <TableCell align="center">{payment?.email}</TableCell>
                       <TableCell align="center"> {payment?.status}</TableCell>

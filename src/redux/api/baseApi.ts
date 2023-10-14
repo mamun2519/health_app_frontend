@@ -20,6 +20,7 @@ export const baseApi = createApi({
     "doctorService",
     "googleMeet",
     "Doctor",
+    "BloodDonor",
   ],
 });
 
