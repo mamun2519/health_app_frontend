@@ -49,6 +49,13 @@ export const googleMeetApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["googleMeet"],
     }),
+    ActiveGoogleMeet: build.query({
+      query: () => ({
+        url: "/doctor-service/active-meet",
+        method: "GET",
+      }),
+      // providesTags: ["googleMeet"],
+    }),
   }),
 });
 
@@ -59,4 +66,5 @@ export const {
   useUpdateGoogleMetMutation,
   useDeleteGoogleMeetMutation,
   useJoinDoctorMutation,
+  useActiveGoogleMeetQuery,
 } = googleMeetApi;

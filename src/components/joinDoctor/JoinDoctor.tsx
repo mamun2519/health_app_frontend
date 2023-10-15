@@ -146,7 +146,7 @@ const JoinDoctor = () => {
                       appointment?.service.GoogleMeet.find(
                         (meet: any) => meet.status === "Active"
                       );
-                    console.log(activeGoogleMeet);
+
                     return (
                       <TableRow
                         key={appointment?.id}

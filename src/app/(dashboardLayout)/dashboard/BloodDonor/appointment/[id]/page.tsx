@@ -8,7 +8,19 @@ import { useAppointmentDetailsQuery } from "@/redux/api/appointmentApi";
 import { convertDate } from "@/helper/date";
 import Image from "next/image";
 import dataPic from "../../../../../../assets/blood_donation_02.jpg";
+import { useActiveGoogleMeetQuery } from "@/redux/api/googleMeetApi";
+import MeetRequestModel from "@/components/dialog/MeetRequestModel";
 const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
+  const [appointmentId, setAppointmentId] = useState("");
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = (id: string) => {
+    setOpen(true);
+    setAppointmentId(id);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   const bread = [
     {
       link: "/dashboard",
@@ -32,7 +44,7 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
     },
   ];
   const { data } = useAppointmentDetailsQuery(params.id);
-  console.log(data);
+  const { data: meet } = useActiveGoogleMeetQuery({ limit: 100, page: 1 });
   return (
     <div>
       <div className="h-full  border  p-5 rounded-3xl shadow-sm  mt-3">
@@ -81,7 +93,10 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
                   <span>{data?.slatTime}</span>
                 </div>
                 <div className="mt-4 ">
-                  <button className="w-full h-10 bg-[#d1001c] rounded-full text-white shadow-sm ">
+                  <button
+                    onClick={() => handleClickOpen(data?.id)}
+                    className="w-full h-10 bg-[#d1001c] rounded-full text-white shadow-sm "
+                  >
                     Joint Doctor
                   </button>
                 </div>
@@ -178,6 +193,15 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
                     <span>Last donation Date</span>
                     <span>2 feb 2023</span>
                   </div> */}
+
+                    {
+                      <MeetRequestModel
+                        handleClose={handleClose}
+                        open={open}
+                        appointment={meet}
+                        appointmentId={appointmentId}
+                      />
+                    }
                   </div>
                 </div>
               </div>
