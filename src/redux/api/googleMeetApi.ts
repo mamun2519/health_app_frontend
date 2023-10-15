@@ -41,6 +41,14 @@ export const googleMeetApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["googleMeet"],
     }),
+    JoinDoctor: build.mutation({
+      query: (data) => ({
+        url: `/meet-request`,
+        method: "POST",
+        data: data,
+      }),
+      invalidatesTags: ["googleMeet"],
+    }),
   }),
 });
 
@@ -50,4 +58,5 @@ export const {
   useCreateGoogleMeetMutation,
   useUpdateGoogleMetMutation,
   useDeleteGoogleMeetMutation,
+  useJoinDoctorMutation,
 } = googleMeetApi;

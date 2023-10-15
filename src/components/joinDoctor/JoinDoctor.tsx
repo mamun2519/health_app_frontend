@@ -28,16 +28,17 @@ import {
   useDeleteAppointmentMutation,
   useUserAppointmentQuery,
 } from "@/redux/api/appointmentApi";
+import MeetRequestModel from "../dialog/MeetRequestModel";
 
 const JoinDoctor = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
-  const [deletedId, setDeleteId] = useState("");
+  const [appointmentId, setAppointmentId] = useState("");
 
   const handleClickOpen = (id: string) => {
     setOpen(true);
-    setDeleteId(id);
+    setAppointmentId(id);
   };
 
   const handleClose = () => {
@@ -68,20 +69,20 @@ const JoinDoctor = () => {
   ];
   const { data } = useUserAppointmentQuery({ ...query });
   console.log(data);
-  const [deleteAppointment] = useDeleteAppointmentMutation();
-  const deleteHandler = async () => {
-    try {
-      await deleteAppointment(deletedId);
-      // console.log(deletedId);
-      setOpen(false);
-      successMessage({
-        header: "Thank You",
-        message: "Appointment Delete Successfully",
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const [deleteAppointment] = useDeleteAppointmentMutation();
+  // const deleteHandler = async () => {
+  //   try {
+  //     await deleteAppointment(deletedId);
+  //     // console.log(deletedId);
+  //     setOpen(false);
+  //     successMessage({
+  //       header: "Thank You",
+  //       message: "Appointment Delete Successfully",
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
@@ -140,58 +141,78 @@ const JoinDoctor = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {data?.data?.map((appointment: any) => (
-                    <TableRow
-                      key={appointment?.id}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell align="center">
-                        Dr {appointment?.doctor?.user?.profile?.first_name}
-                        {appointment?.doctor?.user?.profile?.last_name}
-                      </TableCell>
-                      <TableCell align="center">
-                        {appointment?.service?.title}
-                      </TableCell>
-                      <TableCell align="center">
-                        {" "}
-                        {appointment?.slatTime}
-                      </TableCell>
-                      <TableCell align="center">
-                        {appointment?.serialNo}
-                      </TableCell>
+                  {data?.data?.map((appointment: any) => {
+                    const activeGoogleMeet =
+                      appointment?.service.GoogleMeet.find(
+                        (meet: any) => meet.status === "No"
+                      );
+                    console.log(activeGoogleMeet);
+                    return (
+                      <TableRow
+                        key={appointment?.id}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell align="center">
+                          Dr {appointment?.doctor?.user?.profile?.first_name}
+                          {appointment?.doctor?.user?.profile?.last_name}
+                        </TableCell>
+                        <TableCell align="center">
+                          {appointment?.service?.title}
+                        </TableCell>
+                        <TableCell align="center">
+                          {" "}
+                          {appointment?.slatTime}
+                        </TableCell>
+                        <TableCell align="center">
+                          {appointment?.serialNo}
+                        </TableCell>
 
-                      <TableCell align="center">
-                        {appointment?.status}
-                      </TableCell>
-                      <TableCell align="center">
-                        <button className="px-6 py-1 rounded-full bg-red-500 text-white">
-                          Meet Now
-                        </button>
-                      </TableCell>
-                      {/* <TableCell align="center">
-                        <div className=" flex gap-4 justify-center items-center">
-                          <Link
-                            href={`/dashboard/user/appointment/${appointment?.id}`}
-                            className="text-blue-500 text-xl"
-                          >
-                            <RemoveRedEyeIcon />
-                          </Link>
-                          <Link
-                            href={`/dashboard/user/appointment/edit/${appointment?.id}`}
-                            className="text-blue-500 text-xl"
-                          >
-                            <BorderColorIcon />
-                          </Link>
+                        <TableCell align="center">
+                          {appointment?.status}
+                        </TableCell>
+                        <TableCell align="center">
                           <button
-                            onClick={() => handleClickOpen(appointment?.id)}
-                            className="text-red-500 text-xl  cursor-pointer"
+                            onClick={() => handleClickOpen(appointment.id)}
+                            className="px-6 py-1 rounded-full bg-red-500 text-white"
                           >
-                            <DeleteIcon />
+                            Meet Now
                           </button>
-                        </div>
-                      </TableCell> */}
-                    </TableRow>
-                  ))}
+                        </TableCell>
+                        {
+                          <MeetRequestModel
+                            handleClose={handleClose}
+                            open={open}
+                            appointment={activeGoogleMeet}
+                            appointmentId={appointmentId}
+                          />
+                        }
+                        {/* <TableCell align="center">
+                      <div className=" flex gap-4 justify-center items-center">
+                        <Link
+                          href={`/dashboard/user/appointment/${appointment?.id}`}
+                          className="text-blue-500 text-xl"
+                        >
+                          <RemoveRedEyeIcon />
+                        </Link>
+                        <Link
+                          href={`/dashboard/user/appointment/edit/${appointment?.id}`}
+                          className="text-blue-500 text-xl"
+                        >
+                          <BorderColorIcon />
+                        </Link>
+                        <button
+                          onClick={() => handleClickOpen(appointment?.id)}
+                          className="text-red-500 text-xl  cursor-pointer"
+                        >
+                          <DeleteIcon />
+                        </button>
+                      </div>
+                    </TableCell> */}
+                      </TableRow>
+                    );
+                  })}
                 </TableBody>
               </Table>
               <div className=" flex justify-center items-center h-12  bg-[#30029010] mt-2 ">
@@ -207,13 +228,13 @@ const JoinDoctor = () => {
             </div>
           </TableContainer>
         </div>
-        {open && (
+        {/* {open && (
           <DeleteModal
             open={open}
             deleteHandler={deleteHandler}
             handleClose={handleClose}
           />
-        )}
+        )} */}
       </div>
     </div>
   );

@@ -111,7 +111,7 @@ export default function DashboardLayout({
 
   // @ts-ignore
   const { role } = getUserInfo();
-  // console.log(role);
+  console.log(role);
   const sideBarItem = DashBoardItem(role);
 
   return (
