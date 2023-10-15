@@ -26,9 +26,10 @@ export const doctorServiceApi = baseApi.injectEndpoints({
       providesTags: ["doctorService"],
     }),
     doctorServiceDetails: build.query({
-      query: (id: string) => ({
-        url: `/doctor-service/${id}`,
+      query: (arg: { id: string; date: string }) => ({
+        url: `/doctor-service/${arg.id}?date=${arg.date}`,
         method: "GET",
+        // params: arg.date,
       }),
       providesTags: ["doctorService"],
     }),

@@ -11,12 +11,12 @@ const DoctorServiceDetailsPage = async ({
 }: {
   params: { id: string };
 }) => {
-  const res = await fetch(`${URL}/doctor-service/${params?.id}`);
-  const service = await res.json();
+  // const res = await fetch(`${URL}/doctor-service/${params?.id}`);
+  // const service = await res.json();
 
   return (
     <div>
-      <DoctorServiceDetails service={service?.data} />
+      <DoctorServiceDetails id={params.id} />
     </div>
   );
 };

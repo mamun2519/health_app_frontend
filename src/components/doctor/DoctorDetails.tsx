@@ -108,7 +108,7 @@ const DoctorDetails = ({ doctor }: any) => {
       </div>
       <div className="borde   rounded p-5  relative shdow  h-[540px] mt-5">
         <h3 className=" text-xl font-bold">Doctor Service</h3>
-        <div className=" grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-2  gap-5 mt   ">
           {doctor?.doctor?.doctorServices.map((service: any) => (
             <DoctorService key={service?.id} service={service} />
           ))}

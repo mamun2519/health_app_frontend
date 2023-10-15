@@ -6,7 +6,7 @@ const Doctor = ({ doctor }: any) => {
   return (
     <div
       key={doctor.id}
-      className=" w-full h-[430px] border shadow  rounded bg-[#30029010]"
+      className=" w-full h-[420px] border shadow  rounded bg-[#30029010]"
     >
       <div className=" flex justify-center">
         <div className="w-32 h-32   rounded-full  mt-5 border-[#d1001c] border-2">
@@ -46,6 +46,12 @@ const Doctor = ({ doctor }: any) => {
             <span className=" w-40">Phone</span>
             <span className=" text-gray-700 font-medium w-full ">
               : {doctor?.profile?.phone}
+            </span>
+          </div>
+          <div className=" flex mt-1">
+            <span className=" w-40">Gender</span>
+            <span className=" text-gray-700 font-medium w-full ">
+              : {doctor?.profile?.gender}
             </span>
           </div>
         </div>

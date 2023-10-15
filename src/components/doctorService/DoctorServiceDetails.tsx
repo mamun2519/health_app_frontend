@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DonorPic from "../../assets/dr-dk-gupta.jpg";
 import Image from "next/image";
 
@@ -7,7 +7,81 @@ import Calender from "../ui/Calender";
 import { Alert, Badge, IconButton } from "@mui/material";
 import ServiceSalt, { ISalt } from "./SarviceSalt";
 import Link from "next/link";
-const DoctorServiceDetails = ({ service }: any) => {
+import { useDoctorServiceDetailsQuery } from "@/redux/api/doctorServiceApi";
+import { formatDateToYYYYMMDD } from "@/utils/DateConvater";
+import errorMessage from "../shared/ErrrorMessage";
+import Form from "../Form/FormProvider";
+import FormInput from "../Form/FormInput";
+import { SubmitHandler } from "react-hook-form";
+import { da } from "date-fns/locale";
+import {
+  getAppointmentFromLocalStorage,
+  getFromLocalStorage,
+  setAppointmentIntoLocalStorage,
+  setIntoLocalStorage,
+} from "@/utils/local-storage";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/redux/Slice/cart";
+import successMessage from "../shared/SuccessMassage";
+interface ICreateBookAppointment {
+  bookingDate: string;
+  doctorId: string;
+  gender: string;
+  age: number;
+  weight: number;
+  bloodGroup: string;
+  slatTime: string;
+  patientProblem: string;
+  report: string;
+  address: string;
+  serviceId: string;
+}
+const DoctorServiceDetails = ({ id }: any) => {
+  const [selectedDate, setSelectedDate] = useState("");
+  console.log(selectedDate);
+  const [selectSlat, setSelectSlat] = useState<any>(null);
+  // const [Appointment, setAppointment] = useState([]);
+  const disPatch = useDispatch();
+  // Callback function to handle date selection
+  const handleDateSelect = (date: any) => {
+    const dates = formatDateToYYYYMMDD(date);
+    setSelectedDate(dates);
+  };
+
+  const { data: service } = useDoctorServiceDetailsQuery({
+    id,
+    date: selectedDate,
+  });
+
+  const SlatBookingHandler = (data: ISalt) => {
+    if (data.booking) {
+      errorMessage({ message: `Sorry This ${data.time} Slat Already Booked.` });
+    } else {
+      setSelectSlat(data);
+      console.log(data);
+    }
+  };
+
+  const StoreLocalStorageHandler: SubmitHandler<
+    ICreateBookAppointment
+  > = async (data) => {
+    data.age = Number(data.age);
+    data.weight = Number(data.weight);
+    data.bookingDate = selectedDate;
+    data.slatTime = selectSlat.time;
+    data.doctorId = service.doctorId;
+    data.serviceId = service.id;
+
+    if (selectSlat && selectedDate) {
+      disPatch(addToCart(data));
+      successMessage({
+        header: "Wow",
+        message: "Your Appointment Added To card",
+      });
+    } else {
+      errorMessage({ message: "Please Select Date and Salt" });
+    }
+  };
   return (
     <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-10 pb-40">
       <div className="  lg:flex gap-5">
@@ -37,59 +111,89 @@ const DoctorServiceDetails = ({ service }: any) => {
             </div>
           </div>
         </div>
-        <div className="lg:w-[480px]  border p-5 shadow rounded lg:mt-0 h-[94vh] mt-5 bg-[#30029010]">
+        <div className="lg:w-[480px]  border p-5 shadow rounded lg:mt-0 h-full mt-5 bg-[#30029010]">
           <h3 className=" text-xl font-bold">Appointment Date</h3>
-          <Calender />
+          <Calender handleDateSelect={handleDateSelect} />
 
           <div className="mt-5">
             <h3 className=" text-xl font-bold">Slat Available</h3>
-            <div className="  grid grid-cols-3 gap-3 mt-3">
+            <div className="  grid grid-cols-3 gap-6  mt-2">
               {service?.serviceSalt?.salt?.map((salt: ISalt, index: string) => (
-                <ServiceSalt key={index} salt={salt} />
+                <ServiceSalt
+                  key={index}
+                  salt={salt}
+                  SlatBookingHandler={SlatBookingHandler}
+                  selectSlat={selectSlat}
+                />
               ))}
             </div>
           </div>
-          <div className="mt-2">
+          <div className="mt-5">
             <Alert severity="warning">All Time Format Bangladesh</Alert>
           </div>
+          {selectSlat && (
+            <div className="mt-5">
+              <h3 className=" text-xl font-bold">Additional Info</h3>
 
-          <div className="mt-3">
-            <button className=" px-10 h-10 rounded bg-[#d1001c] text-white w-full font-medium ">
-              book Now
-            </button>
-          </div>
+              <Form submitHandler={StoreLocalStorageHandler}>
+                <div className=" flex gap-5 mt-4">
+                  <div>
+                    <FormInput
+                      name="gender"
+                      label="Gender"
+                      placeholder="Enter Gender"
+                    />
+                  </div>
+                  <div>
+                    <FormInput name="age" label="Age" placeholder="Enter Age" />
+                  </div>
+                </div>
+                <div className=" flex gap-5 mt-4">
+                  <div>
+                    <FormInput
+                      name="weight"
+                      label="Weight"
+                      placeholder="Enter Weight"
+                    />
+                  </div>
+                  <div>
+                    <FormInput
+                      name="bloodGroup"
+                      label="Blood Group"
+                      placeholder="Enter bloodGroup"
+                    />
+                  </div>
+                </div>
+                <div className=" flex gap-5 mt-4">
+                  <div>
+                    <FormInput
+                      name="patientProblem"
+                      label="Patient Problem"
+                      placeholder="Enter patientProblem"
+                    />
+                  </div>
+                  <div>
+                    <FormInput
+                      name="address"
+                      label="Address"
+                      placeholder="Enter Address"
+                    />
+                  </div>
+                </div>
+                <div className="mt-3">
+                  <button className=" px-10 h-10 rounded bg-[#d1001c] text-white w-full font-medium ">
+                    Add To Cord
+                  </button>
+                </div>
+              </Form>
+            </div>
+          )}
         </div>
       </div>
 
       <div className="  gap-5 mt-5  lg:w-[40vw]     lg:absolute top-[335px] ">
         <div className="h-[65v-h] border  w-[40vw] rounded p-5  relative shadow bg-[#30029010]">
           <div className=" ">
-            {/* <h3 className=" text-xl font-bold">About Doctor</h3>
-            <div className=" mt-8">
-              <div className=" grid  grid-cols-2 border-b  pb-2 mt-3">
-                <span>Number</span>
-                <span>{service?.doctor.user?.profile?.phone}</span>
-              </div>
-              <div className=" grid  grid-cols-2 border-b  pb-2 mt-3">
-                <span>Email</span>
-                <span>{service?.doctor.user?.email}</span>
-              </div>
-              <div className=" grid  grid-cols-2 border-b pb-2 mt-3">
-                <span>Gender</span>
-                <span>{service?.doctor.user?.profile?.gender}</span>
-              </div>
-              <div className=" grid  grid-cols-2 border-b pb-2 mt-3">
-                <span>District</span>
-                <span>
-                  {service?.doctor.user?.profile?.present_Address?.district}
-                </span>
-              </div>
-
-              <div className=" grid  grid-cols-2 border-b pb-2 mt-3">
-                <span>Blood Group</span>
-                <span>{service?.doctor.user?.profile?.blood_group}</span>
-              </div>
-            </div> */}
             <div className="mt-2">
               <h3 className=" text-xl font-bold">About Services</h3>
               <div className=" grid  grid-cols-2 border-b pb-2 mt-5">

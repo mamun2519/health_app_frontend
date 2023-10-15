@@ -1,7 +1,8 @@
 import Link from "next/link";
 import React from "react";
 import LogoutBtn from "../ui/LogoutBtn";
-
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
 const Navbar = () => {
   return (
     <div className="  bg-[#30029010]">
@@ -81,6 +82,15 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end ">
+          <div className=" px-8 flex gap-4">
+            <span className="text-red-500  text-2xl">
+              {" "}
+              <ShoppingCartIcon />
+            </span>
+            <span className="text-red-500 text-2xl">
+              <CircleNotificationsIcon />
+            </span>
+          </div>
           <div>
             <LogoutBtn />
           </div>
