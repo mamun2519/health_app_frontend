@@ -40,16 +40,19 @@ export default function MeetRequestModel({
   appointment,
   appointmentId,
 }: OpenModel) {
+  const [url, setUrl] = React.useState(appointment?.meetLink);
   const [JoinDoctor] = useJoinDoctorMutation();
   const submitHundler: SubmitHandler<ICreateMeting> = async (value) => {
+    // window.open(appointment?.meetLink, "_blank");
     value.serialNo = Number(value.serialNo);
     const data = {
       ...value,
       appointmentId,
       meetingId: appointment.id,
     };
+
     try {
-      const res = await JoinDoctor(data);
+      const res: any = await JoinDoctor(data);
       console.log(res);
       if (res.data) {
         toast({
@@ -57,6 +60,10 @@ export default function MeetRequestModel({
           header: "Thank You",
         });
         handleClose(open);
+        const validUrl = url.match(/^(https?:\/\/)/) ? url : `https://${url}`;
+        console.log(validUrl);
+        // Open the URL in a new tab
+        window.open(validUrl, "_blank");
       } else {
         errorMessage({ message: "Something is wrong!" });
       }
@@ -64,7 +71,8 @@ export default function MeetRequestModel({
       console.log(error);
     }
   };
-  console.log(appointmentId);
+
+  console.log(appointment);
   return (
     <div className="bg-[#30029010]">
       <Dialog
@@ -144,7 +152,7 @@ export default function MeetRequestModel({
           <div className="h-96 w-96 flex justify-center items-center">
             <div>
               <div className="w-full">
-                <Image src={Offline} width={250} height={250} />
+                <Image src={Offline} width={250} height={250} alt="image" />
               </div>
               <p>Doctor Not a online , please wait</p>
               <div className=" flex justify-center gap-5 py-2">

@@ -144,7 +144,7 @@ const JoinDoctor = () => {
                   {data?.data?.map((appointment: any) => {
                     const activeGoogleMeet =
                       appointment?.service.GoogleMeet.find(
-                        (meet: any) => meet.status === "No"
+                        (meet: any) => meet.status === "Active"
                       );
                     console.log(activeGoogleMeet);
                     return (
