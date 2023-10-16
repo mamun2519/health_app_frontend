@@ -1,9 +1,15 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LogoutBtn from "../ui/LogoutBtn";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
+
+import { useAppSelector } from "@/redux/hooks";
 const Navbar = () => {
+  const cart = useAppSelector((state) => state.cart.cart);
+
+  console.log(cart.length);
   return (
     <div className="  bg-[#30029010]">
       <div className="navbar     max-w-7xl mx-auto">
@@ -82,12 +88,22 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end ">
-          <div className=" px-8 flex gap-4">
-            <span className="text-red-500  text-2xl">
+          <div className=" px-8 flex gap-4 ">
+            <div className="text-red-500   ">
               {" "}
-              <ShoppingCartIcon />
-            </span>
-            <span className="text-red-500 text-2xl">
+              <div className="h-10 w-10 relative cursor-pointer">
+                <Link href="/cart">
+                  <span className="text-3xl ">
+                    <ShoppingCartIcon />
+                  </span>
+
+                  <span className="bg-white w-6 h-6 rounded-full absolute text-center  right-[1px]   ">
+                    {cart?.length}
+                  </span>
+                </Link>
+              </div>
+            </div>
+            <span className="text-red-500 text-3xl">
               <CircleNotificationsIcon />
             </span>
           </div>

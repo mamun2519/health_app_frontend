@@ -14,4 +14,21 @@
   margin: 0;
   font-family: 'Poppins', sans-serif;
 font-family: 'Roboto', sans-serif;
+ 
+}
+
+/* Change the color of the scrollbar track */
+::-webkit-scrollbar {
+  width: 6px;
+
+}
+
+/* Change the color of the scrollbar thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+  background: #ec2b52; /* Change this to the color you want */
+}
+
+/* Change the color of the scrollbar track when hovered */
+::-webkit-scrollbar-thumb:hover {
+  background: #30029010; /* Change this to the hover color you want */
 }

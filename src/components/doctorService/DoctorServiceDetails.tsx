@@ -23,6 +23,7 @@ import {
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/Slice/cart";
 import successMessage from "../shared/SuccessMassage";
+import uniqid from "uniqid";
 interface ICreateBookAppointment {
   bookingDate: string;
   doctorId: string;
@@ -73,7 +74,7 @@ const DoctorServiceDetails = ({ id }: any) => {
     data.serviceId = service.id;
 
     if (selectSlat && selectedDate) {
-      disPatch(addToCart(data));
+      disPatch(addToCart({ data, service, id: uniqid() }));
       successMessage({
         header: "Wow",
         message: "Your Appointment Added To card",
