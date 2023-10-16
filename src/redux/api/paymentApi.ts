@@ -41,6 +41,14 @@ export const paymentApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["payment"],
     }),
+    createPayment: build.mutation({
+      query: (data) => ({
+        url: `/payment/booking`,
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: ["payment"],
+    }),
   }),
 });
 
@@ -50,4 +58,5 @@ export const {
   useDeletePaymentMutation,
   useDoctorPaymentQuery,
   useAllPaymentQuery,
+  useCreatePaymentMutation,
 } = paymentApi;

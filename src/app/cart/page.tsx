@@ -15,6 +15,7 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { deleteToCart } from "@/redux/Slice/cart";
 import successMessage from "@/components/shared/SuccessMassage";
+import { useCreatePaymentMutation } from "../../redux/api/paymentApi";
 const CartPage = () => {
   const cart = useAppSelector((state) => state.cart.cart);
   const disPatch = useDispatch();
@@ -26,8 +27,42 @@ const CartPage = () => {
       message: "Item Remove Successfully",
     });
   };
+
+  const [createPayment] = useCreatePaymentMutation();
+
+  const bookingHandler = async () => {
+    try {
+      const appointment = cart?.map(
+        (appointment: { data: any }) => appointment.data
+      );
+      // console.log(appointment);
+      // const payment = appointment.reduce((accumulator, currentValue) => {}, []);
+      const payment = appointment.map((payment: any) => {
+        return {
+          serviceId: payment.serviceId,
+          price: payment.price,
+          doctorId: payment.doctorId,
+          transactionId: "No",
+          discountedPrice: 0,
+          paymentType: "NO",
+        };
+      });
+
+      const res = await createPayment({ appointment, payment });
+      console.log(res);
+      if (res?.data) {
+        successMessage({
+          header: "Wow Great",
+          message: "Your Booking Successfully",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // console.log(cart);
   return (
-    <div className="my-20   max-w-7xl mx-auto px-4  flex gap-5">
+    <div className="my-20   max-w-7xl mx-auto px-4  flex gap-10">
       <div className=" w-2/3 ">
         <div className=" border  p-5 rounded-3xl shadow-sm  h-[600px] mt-2 overflow-auto">
           <p className="text-xl">My Cart</p>
@@ -183,7 +218,10 @@ const CartPage = () => {
             </div>
           </div>
           <div className="mt-5">
-            <button className="h-10 bg-red-500 text-white w-full rounded-2xl">
+            <button
+              onClick={() => bookingHandler()}
+              className="h-10 bg-red-500 text-white w-full rounded-2xl "
+            >
               Book Now
             </button>
           </div>

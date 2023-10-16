@@ -34,6 +34,7 @@ interface PaymentProps {
   role: string;
 }
 const UserPayment = ({ bread, role }: PaymentProps) => {
+  console.log(role);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);

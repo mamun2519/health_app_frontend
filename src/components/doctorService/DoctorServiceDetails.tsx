@@ -15,9 +15,7 @@ import FormInput from "../Form/FormInput";
 import { SubmitHandler } from "react-hook-form";
 import { da } from "date-fns/locale";
 import {
-  getAppointmentFromLocalStorage,
   getFromLocalStorage,
-  setAppointmentIntoLocalStorage,
   setIntoLocalStorage,
 } from "@/utils/local-storage";
 import { useDispatch } from "react-redux";
@@ -36,6 +34,7 @@ interface ICreateBookAppointment {
   report: string;
   address: string;
   serviceId: string;
+  price: string;
 }
 const DoctorServiceDetails = ({ id }: any) => {
   const [selectedDate, setSelectedDate] = useState("");
@@ -72,6 +71,7 @@ const DoctorServiceDetails = ({ id }: any) => {
     data.slatTime = selectSlat.time;
     data.doctorId = service.doctorId;
     data.serviceId = service.id;
+    data.price = service?.price;
 
     if (selectSlat && selectedDate) {
       disPatch(addToCart({ data, service, id: uniqid() }));

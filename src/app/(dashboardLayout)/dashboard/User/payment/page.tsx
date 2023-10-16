@@ -4,6 +4,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import GrainIcon from "@mui/icons-material/Grain";
 import { getUserInfo } from "@/services/auth.Services";
+
 const UserAppointmentPage = () => {
   const bread = [
     {
@@ -20,11 +21,12 @@ const UserAppointmentPage = () => {
       color: "text.primary",
     },
   ];
+  // const { role } = getUserInfo();
+  // console.log("user", user);
   const user: any = getUserInfo();
-
   return (
     <div>
-      <UserPayment bread={bread} role={user.role} />
+      <UserPayment bread={bread} role={user?.role} />
     </div>
   );
 };
