@@ -40,7 +40,10 @@ const AdminServiceUpdatePage = ({ params }: { params: { id: string } }) => {
       color: "text.primary",
     },
   ];
-  const { data } = useDoctorServiceDetailsQuery(params.id);
+  const { data } = useDoctorServiceDetailsQuery({
+    id: params.id,
+    date: "",
+  });
   // @ts-ignore
   const defaultValues = {
     title: data?.title || "",

@@ -3,7 +3,6 @@ import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import {
   useDeletePrescriptionMutation,
   useDoctorPrescriptionQuery,
-  useUserPrescriptionQuery,
 } from "@/redux/api/prescriptionApi";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import BorderColorIcon from "@mui/icons-material/BorderColor";

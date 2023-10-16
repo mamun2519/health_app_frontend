@@ -29,16 +29,28 @@ import {
   useUserAppointmentQuery,
 } from "@/redux/api/appointmentApi";
 import MeetRequestModel from "../dialog/MeetRequestModel";
+import OfflineModel from "../dialog/OfflineModel";
 
 const JoinDoctor = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
   const [appointmentId, setAppointmentId] = useState("");
+  const [doctorOnline, setDoctorOnline] = useState(false);
+  const [googleMeet, setGoogleMeet] = useState({});
 
-  const handleClickOpen = (id: string) => {
+  const handleClickOpen = (id: string, appointment: any) => {
     setOpen(true);
     setAppointmentId(id);
+    const activeGoogleMeet = appointment?.service.GoogleMeet.find(
+      (meet: any) => meet.status === "Active"
+    );
+    if (activeGoogleMeet) {
+      setDoctorOnline(true);
+      setGoogleMeet(activeGoogleMeet);
+    } else {
+      setDoctorOnline(false);
+    }
   };
 
   const handleClose = () => {
@@ -146,7 +158,7 @@ const JoinDoctor = () => {
                       appointment?.service.GoogleMeet.find(
                         (meet: any) => meet.status === "Active"
                       );
-
+                    // console.log(appointment?.service.GoogleMeet);
                     return (
                       <TableRow
                         key={appointment?.id}
@@ -170,24 +182,35 @@ const JoinDoctor = () => {
                         </TableCell>
 
                         <TableCell align="center">
-                          {appointment?.status}
+                          {/* {appointment?.status} */}
+                          {activeGoogleMeet ? (
+                            <span className=" text-[#d1001c]  font-bold">
+                              Online
+                            </span>
+                          ) : (
+                            "Offline"
+                          )}
                         </TableCell>
                         <TableCell align="center">
                           <button
-                            onClick={() => handleClickOpen(appointment.id)}
+                            onClick={() =>
+                              handleClickOpen(appointment.id, appointment)
+                            }
                             className="px-6 py-1 rounded-full bg-red-500 text-white"
                           >
                             Meet Now
                           </button>
                         </TableCell>
-                        {
+                        {doctorOnline ? (
                           <MeetRequestModel
                             handleClose={handleClose}
                             open={open}
-                            appointment={activeGoogleMeet}
+                            appointment={googleMeet}
                             appointmentId={appointmentId}
                           />
-                        }
+                        ) : (
+                          <OfflineModel handleClose={handleClose} open={open} />
+                        )}
                         {/* <TableCell align="center">
                       <div className=" flex gap-4 justify-center items-center">
                         <Link

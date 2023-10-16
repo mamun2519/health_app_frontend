@@ -17,7 +17,7 @@ const DashboardDoctorServiceDetails = ({
   id: string;
   bread: any;
 }) => {
-  const { data } = useDoctorServiceDetailsQuery(id);
+  const { data } = useDoctorServiceDetailsQuery({ id, date: "" });
   return (
     <div className="h-full  border  p-5 rounded-3xl shadow-sm  mt-3">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>

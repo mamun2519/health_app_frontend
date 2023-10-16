@@ -10,6 +10,7 @@ import Image from "next/image";
 import dataPic from "../../../../../../assets/blood_donation_02.jpg";
 import { useActiveGoogleMeetQuery } from "@/redux/api/googleMeetApi";
 import MeetRequestModel from "@/components/dialog/MeetRequestModel";
+import OfflineModel from "@/components/dialog/OfflineModel";
 const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
   const [appointmentId, setAppointmentId] = useState("");
   const [open, setOpen] = useState(false);
@@ -44,12 +45,28 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
     },
   ];
   const { data } = useAppointmentDetailsQuery(params.id);
-  const { data: meet } = useActiveGoogleMeetQuery({ limit: 100, page: 1 });
+  const { data: meet } = useActiveGoogleMeetQuery(data?.service?.id);
   return (
     <div>
       <div className="h-full  border  p-5 rounded-3xl shadow-sm  mt-3">
         <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
-        <h3 className=" mt-5 text-2xl">My Appointment Info</h3>
+        <div className=" flex justify-between items-center">
+          <div>
+            <h3 className=" mt-5 text-2xl">My Appointment Info</h3>
+          </div>
+          <div>
+            {(data?.status == "Accepted" ||
+              data?.status == "Complete" ||
+              data?.status == "Expired") && (
+              <button
+                onClick={() => handleClickOpen(data?.id)}
+                className="w-full h-10 bg-[#d1001c] rounded-full text-white shadow-sm px-10"
+              >
+                Review Now
+              </button>
+            )}
+          </div>
+        </div>
         <div>
           <div className="max-w-7xl mx-auto px-4 lg:px-0 py-5  psb-20">
             <div className="  lg:flex gap-5">
@@ -194,14 +211,16 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
                     <span>2 feb 2023</span>
                   </div> */}
 
-                    {
+                    {meet ? (
                       <MeetRequestModel
                         handleClose={handleClose}
                         open={open}
                         appointment={meet}
                         appointmentId={appointmentId}
                       />
-                    }
+                    ) : (
+                      <OfflineModel handleClose={handleClose} open={open} />
+                    )}
                   </div>
                 </div>
               </div>

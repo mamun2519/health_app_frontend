@@ -1,5 +1,5 @@
 "use client";
-import Prescription from "@/components/prescription/Prescription";
+
 import React from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import WhatshotIcon from "@mui/icons-material/Whatshot";

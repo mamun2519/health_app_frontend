@@ -16,6 +16,7 @@ import successMessage from "@/components/shared/SuccessMassage";
 import {
   useCreateDoctorServiceMutation,
   useDoctorServiceDetailsQuery,
+  useDoctorServiceQuery,
   useUpdateDoctorServiceMutation,
 } from "@/redux/api/doctorServiceApi";
 import FormSelectInput from "@/components/Form/FormSelectInput";
@@ -61,12 +62,14 @@ const CreateGoogleMeetPage = () => {
   ];
 
   const [createGoogleMeet] = useCreateGoogleMeetMutation();
-  const { data } = useMyGoogleMeetQuery({ limit: 1000, page: 1 });
+  // const { data } = useMyGoogleMeetQuery({ limit: 1000, page: 1 });
+  const { data } = useDoctorServiceQuery({ limit: 100, page: 1 });
+  console.log(data);
 
   const meetLinkOption = data?.map((meet: any) => {
     return {
-      label: meet?.service.title,
-      value: meet?.service.id,
+      label: meet?.title,
+      value: meet?.id,
     };
   });
 

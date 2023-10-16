@@ -13,13 +13,14 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { deleteToCart } from "@/redux/Slice/cart";
+import { cartClear, deleteToCart } from "@/redux/Slice/cart";
 import successMessage from "@/components/shared/SuccessMassage";
 import { useCreatePaymentMutation } from "../../redux/api/paymentApi";
+import errorMessage from "@/components/shared/ErrrorMessage";
 const CartPage = () => {
   const cart = useAppSelector((state) => state.cart.cart);
   const disPatch = useDispatch();
-  console.log(cart);
+
   const cartItemRemoveHandler = (id: string) => {
     disPatch(deleteToCart(id));
     successMessage({
@@ -50,11 +51,15 @@ const CartPage = () => {
 
       const res = await createPayment({ appointment, payment });
       console.log(res);
+      // @ts-ignore
       if (res?.data) {
         successMessage({
           header: "Wow Great",
           message: "Your Booking Successfully",
         });
+        disPatch(cartClear());
+      } else {
+        errorMessage({ message: "Something is wrong!" });
       }
     } catch (error) {
       console.log(error);
@@ -65,9 +70,18 @@ const CartPage = () => {
     <div className="my-20   max-w-7xl mx-auto px-4  flex gap-10">
       <div className=" w-2/3 ">
         <div className=" border  p-5 rounded-3xl shadow-sm  h-[600px] mt-2 overflow-auto">
-          <p className="text-xl">My Cart</p>
+          <p className="text-2xl">My Cart</p>
+          <div className=" flex justify-between mt-5">
+            <span>Item {cart?.length}</span>
+            <span
+              onClick={() => disPatch(cartClear())}
+              className=" cursor-pointer"
+            >
+              Empty Cart{" "}
+            </span>
+          </div>
 
-          <div className="mt-5">
+          <div className="mt-3">
             <TableContainer component={Paper}>
               <div className="w-56  lg:w-full ">
                 <Table

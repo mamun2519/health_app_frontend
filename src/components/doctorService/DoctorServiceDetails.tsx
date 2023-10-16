@@ -48,10 +48,13 @@ const DoctorServiceDetails = ({ id }: any) => {
     setSelectedDate(dates);
   };
 
-  const { data: service } = useDoctorServiceDetailsQuery({
+  const { data: service, isLoading } = useDoctorServiceDetailsQuery({
     id,
     date: selectedDate,
   });
+  if (isLoading) {
+    return <p>Loading........................</p>;
+  }
 
   const SlatBookingHandler = (data: ISalt) => {
     if (data.booking) {

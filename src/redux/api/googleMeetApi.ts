@@ -50,8 +50,8 @@ export const googleMeetApi = baseApi.injectEndpoints({
       invalidatesTags: ["googleMeet"],
     }),
     ActiveGoogleMeet: build.query({
-      query: () => ({
-        url: "/doctor-service/active-meet",
+      query: (id: any) => ({
+        url: `/doctor-service/active-meet/${id}`,
         method: "GET",
       }),
       // providesTags: ["googleMeet"],

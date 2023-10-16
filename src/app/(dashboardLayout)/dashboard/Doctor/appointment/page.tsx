@@ -26,11 +26,14 @@ import {
   useDoctorAppointmentQuery,
   useUserAppointmentQuery,
 } from "@/redux/api/appointmentApi";
+import AppointmentChangeStatusModel from "@/components/dialog/AppointmentStatusChangeModel";
 const DoctorBookAppointment = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
   const [deletedId, setDeleteId] = useState("");
+  const [OpenStatusChange, setOpenStatusChange] = useState(false);
+  const [updatedId, setUpdateId] = useState("");
 
   const handleClickOpen = (id: string) => {
     setOpen(true);
@@ -39,6 +42,15 @@ const DoctorBookAppointment = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const HandleOpenStatusModel = (id: string) => {
+    setOpenStatusChange(true);
+    setUpdateId(id);
+  };
+
+  const HandleCloseStatusModel = () => {
+    setOpenStatusChange(false);
   };
 
   const query: Record<string, any> = {};
@@ -131,8 +143,8 @@ const DoctorBookAppointment = () => {
                     <TableCell align="center">Appointment Date</TableCell>
                     <TableCell align="center">Time</TableCell>
                     <TableCell align="center">Serial No</TableCell>
-                    {/* <TableCell align="center">Status</TableCell> */}
-                    {/* <TableCell align="center">Joint Doctor</TableCell> */}
+                    <TableCell align="center">Status</TableCell>
+                    <TableCell align="center">Booking Request </TableCell>
                     <TableCell align="center">Action</TableCell>
                   </TableRow>
                 </TableHead>
@@ -155,6 +167,17 @@ const DoctorBookAppointment = () => {
                       </TableCell>
                       <TableCell align="center">
                         {appointment?.serialNo}
+                      </TableCell>
+                      <TableCell align="center">
+                        {appointment?.status}
+                      </TableCell>
+                      <TableCell align="center">
+                        <button
+                          onClick={() => HandleOpenStatusModel(appointment?.id)}
+                          className="px-8 py-1 rounded-full bg-red-500 text-white"
+                        >
+                          Confirm Now
+                        </button>
                       </TableCell>
 
                       {/* <TableCell align="center">
@@ -209,6 +232,14 @@ const DoctorBookAppointment = () => {
             open={open}
             deleteHandler={deleteHandler}
             handleClose={handleClose}
+          />
+        )}
+
+        {OpenStatusChange && (
+          <AppointmentChangeStatusModel
+            open={OpenStatusChange}
+            handleClose={HandleCloseStatusModel}
+            id={updatedId}
           />
         )}
       </div>

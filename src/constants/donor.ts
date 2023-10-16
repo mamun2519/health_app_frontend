@@ -369,3 +369,10 @@ export const MeetStatus = [
     label: "Complete",
   },
 ];
+
+export const AppointmentChangeStatus = [
+  { value: "Accepted", label: "Accepted" },
+  { value: "Complete", label: "Complete" },
+  { value: "Expired", label: "Expired" },
+  { value: "Reject", label: "Reject" },
+];

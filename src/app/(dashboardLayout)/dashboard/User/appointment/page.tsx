@@ -26,8 +26,10 @@ import DeleteModal from "@/components/dialog/Delete";
 import successMessage from "@/components/shared/SuccessMassage";
 import {
   useDeleteAppointmentMutation,
+  useUpdateAppointmentMutation,
   useUserAppointmentQuery,
 } from "@/redux/api/appointmentApi";
+import errorMessage from "@/components/shared/ErrrorMessage";
 const UserAppointmentPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -78,6 +80,20 @@ const UserAppointmentPage = () => {
       });
     } catch (error) {
       console.log(error);
+    }
+  };
+  const [updateAppointment] = useUpdateAppointmentMutation();
+  const changeStatusHandler = async (id: string) => {
+    const data = { id, body: { status: "Cancel" } };
+    const res = await updateAppointment(data);
+    // @ts-ignore
+    if (res.data) {
+      successMessage({
+        header: "Thank You",
+        message: `Appointment Status - Cancel Updated Successfully`,
+      });
+    } else {
+      errorMessage({ message: "Something Is wrong" });
     }
   };
 
@@ -133,7 +149,7 @@ const UserAppointmentPage = () => {
                     <TableCell align="center">Time</TableCell>
                     <TableCell align="center">Serial No</TableCell>
                     <TableCell align="center">Status</TableCell>
-                    {/* <TableCell align="center">Joint Doctor</TableCell> */}
+                    <TableCell align="center">Booking Cancel</TableCell>
                     <TableCell align="center">Action</TableCell>
                   </TableRow>
                 </TableHead>
@@ -160,11 +176,14 @@ const UserAppointmentPage = () => {
                       <TableCell align="center">
                         {appointment?.status}
                       </TableCell>
-                      {/* <TableCell align="center">
-                        <button className="px-6 py-1 rounded-full bg-red-100">
-                          join Now
+                      <TableCell align="center">
+                        <button
+                          onClick={() => changeStatusHandler(appointment?.id)}
+                          className="px-8 py-1 rounded-full bg-red-500 text-white"
+                        >
+                          Cancel Now
                         </button>
-                      </TableCell> */}
+                      </TableCell>
                       <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
                           <Link
