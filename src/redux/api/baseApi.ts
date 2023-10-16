@@ -23,6 +23,7 @@ export const baseApi = createApi({
     "BloodDonor",
     "User",
     "Admin",
+    "serviceReview",
   ],
 });
 

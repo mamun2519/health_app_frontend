@@ -64,6 +64,14 @@ export const doctorServiceApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Doctor"],
     }),
+    serviceReview: build.mutation({
+      query: (data) => ({
+        url: `/service-review`,
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: ["serviceReview"],
+    }),
   }),
 });
 
@@ -76,4 +84,5 @@ export const {
   useCreateDoctorServiceMutation,
   useAllServiceQuery,
   useGetAllDoctorQuery,
+  useServiceReviewMutation,
 } = doctorServiceApi;

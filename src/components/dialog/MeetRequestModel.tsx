@@ -44,6 +44,7 @@ export interface IDonorRequest {
   quantity: string | number;
   appointment: any;
   appointmentId: string;
+  setAppointmentId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function MeetRequestModel({
@@ -51,6 +52,7 @@ export default function MeetRequestModel({
   handleClose,
   appointment,
   appointmentId,
+  setAppointmentId,
 }: OpenModel) {
   const [url, setUrl] = React.useState(appointment?.meetLink);
   const [JoinDoctor] = useJoinDoctorMutation();
@@ -64,19 +66,22 @@ export default function MeetRequestModel({
     };
 
     try {
-      const res: any = await JoinDoctor(data);
+      const res = await JoinDoctor(data);
       console.log(res);
-      if (res.data) {
+      if (res?.data) {
         toast({
           message: "Meet Request Send Successfully",
           header: "Thank You",
         });
         handleClose(open);
+        // setAppointmentId("");
         const validUrl = url.match(/^(https?:\/\/)/) ? url : `https://${url}`;
         console.log(validUrl);
         // Open the URL in a new tab
         window.open(validUrl, "_blank");
       } else {
+        handleClose(open);
+        // setAppointmentId("");
         errorMessage({ message: "Something is wrong!" });
       }
     } catch (error) {

@@ -13,6 +13,8 @@ import Image from "next/image";
 import { Rating, Typography } from "@mui/material";
 import { useCreateDonorReviewMutation } from "@/redux/api/donerReviewApi";
 import successMessage from "../shared/SuccessMassage";
+import { useServiceReviewMutation } from "@/redux/api/doctorServiceApi";
+import errorMessage from "../shared/ErrrorMessage";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -27,34 +29,41 @@ interface OpenModel {
   open: boolean;
   handleClose: (op: any) => any;
   //   deleteHandler: () => void;
-  donorId: string;
+  serviceId: string;
 }
 
 export default function DoctorReviewModel({
   open,
-  donorId,
+  serviceId,
   handleClose,
 }: OpenModel) {
   const [value, setValue] = React.useState<number | null>(2);
   const [reviewText, setReviewText] = React.useState("");
-  const [createDonorReview] = useCreateDonorReviewMutation();
+  const [serviceReview] = useServiceReviewMutation();
   const reviewHandler = async () => {
+    console.log(serviceId);
     const data = {
       comment: reviewText,
       rating: value,
-      donorId,
+      serviceId,
     };
     try {
-      const res = await createDonorReview(data).unwrap();
+      const res = await serviceReview(data).unwrap();
+      console.log(res);
       if (res) {
-        handleClose(!open);
+        handleClose(open);
         successMessage({
           header: "Thank You",
           message: "Review Add Successfully",
         });
+      } else {
+        errorMessage({ message: "Something is wrong" });
+        handleClose(open);
       }
     } catch (error) {
       console.log(error);
+      errorMessage({ message: error?.data });
+      handleClose(!open);
     }
   };
 

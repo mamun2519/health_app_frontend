@@ -11,9 +11,11 @@ import dataPic from "../../../../../../assets/blood_donation_02.jpg";
 import { useActiveGoogleMeetQuery } from "@/redux/api/googleMeetApi";
 import MeetRequestModel from "@/components/dialog/MeetRequestModel";
 import OfflineModel from "@/components/dialog/OfflineModel";
+import DoctorReviewModel from "../../../../../../components/dialog/DoctorReviewMoodel";
 const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
   const [appointmentId, setAppointmentId] = useState("");
   const [doctorReviewOpen, setDoctorReviewOpen] = useState(false);
+  const [serviceId, setServiceId] = useState("");
   const [open, setOpen] = useState(false);
   const handleClickOpen = (id: string) => {
     setOpen(true);
@@ -21,15 +23,15 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
   };
 
   const handleClose = () => {
-    setDoctorReviewOpen(false);
+    setOpen(false);
   };
   const handleDoctorReviewOpenModel = (id: string) => {
     setDoctorReviewOpen(true);
-    setAppointmentId(id);
+    setServiceId(id);
   };
 
   const handleDoctorReviewCloseModel = () => {
-    setOpen(false);
+    setDoctorReviewOpen(false);
   };
   const bread = [
     {
@@ -55,9 +57,9 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
   ];
   const { data } = useAppointmentDetailsQuery(params.id);
 
-  // console.log(data);
+  console.log(data);
   const { data: meet } = useActiveGoogleMeetQuery(data?.service?.id);
-  console.log(data?.status);
+  // console.log(meet);
   return (
     <div>
       <div className="h-full  border  p-5 rounded-3xl shadow-sm  mt-3">
@@ -71,7 +73,7 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
               data?.status == "Complete" ||
               data?.status == "Expired") && (
               <button
-                onClick={() => handleClickOpen(data?.id)}
+                onClick={() => handleDoctorReviewOpenModel(data?.service?.id)}
                 className="w-full h-10 bg-[#d1001c] rounded-full text-white shadow-sm px-10"
               >
                 Review Now
@@ -233,9 +235,14 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
                   ) : (
                     <OfflineModel handleClose={handleClose} open={open} />
                   )}
-                  {
-                    doctorReviewOpen && 
-                  }
+                  {doctorReviewOpen && (
+                    <DoctorReviewModel
+                      open={doctorReviewOpen}
+                      serviceId={serviceId}
+                      // setAppointmentId={setAppointmentId}
+                      handleClose={handleDoctorReviewCloseModel}
+                    />
+                  )}
                 </div>
               </div>
             </div>
