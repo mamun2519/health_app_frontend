@@ -1,7 +1,7 @@
 "use client";
 import FormInput from "@/components/Form/FormInput";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import LoginPic from "../../assets/Privacy policy-rafiki.svg";
 import Form from "@/components/Form/FormProvider";
 import Link from "next/link";
@@ -11,6 +11,9 @@ import { storeUserInfo } from "@/services/auth.Services";
 import { useRouter } from "next/navigation";
 import Toast from "../shared/SuccessMassage";
 import { Alert } from "@mui/material";
+import successMessage from "../shared/SuccessMassage";
+import { loginSchema } from "../schema/login";
+import { yupResolver } from "@hookform/resolvers/yup";
 type formValue = {
   email: string;
   password: string;
@@ -18,6 +21,7 @@ type formValue = {
 
 const Login = () => {
   const [userLogin] = useUserLoginMutation();
+  const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
   const submitHandler: SubmitHandler<formValue> = async (data) => {
     console.log(data);
@@ -31,7 +35,8 @@ const Login = () => {
 
       storeUserInfo({ accessToken: res?.token.accessToken });
       // console.log(res);
-    } catch (err) {
+    } catch (err: any) {
+      setErrorMessage(err?.data);
       console.log(err);
     }
   };
@@ -49,8 +54,16 @@ const Login = () => {
             <div className="h-1 bg-red-500 lg:w-52 w-20 "></div>
           </div>
           <p>Welcome To Halt App</p>
+          {errorMessage && (
+            <div className="bg-red-500 h-12 rounded mt-2 flex  items-center px-4">
+              <p className="text-white">{errorMessage}</p>
+            </div>
+          )}
           <div className=" ">
-            <Form submitHandler={submitHandler}>
+            <Form
+              submitHandler={submitHandler}
+              resolver={yupResolver(loginSchema)}
+            >
               <div className="mt-5">
                 <FormInput
                   label="email"

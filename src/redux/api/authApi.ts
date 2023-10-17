@@ -14,6 +14,7 @@ export const authApi = baseApi.injectEndpoints({
       query: (RegData) => ({
         url: "/auth/create-user",
         method: "POST",
+
         data: RegData,
       }),
       invalidatesTags: ["user", "Admin"],
