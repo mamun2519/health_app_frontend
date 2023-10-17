@@ -27,6 +27,7 @@ import GrainIcon from "@mui/icons-material/Grain";
 import DeleteModal from "@/components/dialog/Delete";
 import successMessage from "@/components/shared/SuccessMassage";
 import ModelSelectInput from "@/components/dialog/ModeSelectInput";
+import errorMessage from "@/components/shared/ErrrorMessage";
 const MyDonorRequest = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -82,14 +83,21 @@ const MyDonorRequest = () => {
 
   const deleteHandler = async () => {
     try {
-      await deleteDonorRequest(deletedId);
+      const res = await deleteDonorRequest(deletedId).unwrap();
       // console.log(deletedId);
+      if (res) {
+        setOpen(false);
+        successMessage({
+          header: "Thank You",
+          message: "Donor Request Delete Successfully",
+        });
+      } else {
+        setOpen(false);
+        errorMessage({ message: "Something is wrong" });
+      }
+    } catch (error: any) {
       setOpen(false);
-      successMessage({
-        header: "Thank You",
-        message: "Donor Request Delete Successfully",
-      });
-    } catch (error) {
+      errorMessage({ message: "Something is wrong" });
       console.log(error);
     }
   };
@@ -111,6 +119,11 @@ const MyDonorRequest = () => {
           header: "Thank You",
           message: `Request ${res.status} successfully`,
         });
+      } else {
+        errorMessage({ message: "Something is wrong" });
+        setSelectId("");
+        setSelectStatus("");
+        handleStatusChangeClose();
       }
       console.log(res);
     } catch (error) {

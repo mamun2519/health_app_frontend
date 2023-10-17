@@ -22,7 +22,7 @@ const DonorPaymentPage = () => {
     },
   ];
   const user: any = getUserInfo();
-  console.log(user);
+
   return (
     <div>
       <UserPayment bread={bread} role={user?.role} />

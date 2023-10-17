@@ -22,6 +22,8 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/Slice/cart";
 import successMessage from "../shared/SuccessMassage";
 import uniqid from "uniqid";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { CreateBookAppointmentSchema } from "../schema/appointment";
 interface ICreateBookAppointment {
   bookingDate: string;
   doctorId: string;
@@ -48,13 +50,10 @@ const DoctorServiceDetails = ({ id }: any) => {
     setSelectedDate(dates);
   };
 
-  const { data: service, isLoading } = useDoctorServiceDetailsQuery({
+  const { data: service } = useDoctorServiceDetailsQuery({
     id,
     date: selectedDate,
   });
-  if (isLoading) {
-    return <p>Loading........................</p>;
-  }
 
   const SlatBookingHandler = (data: ISalt) => {
     if (data.booking) {
@@ -83,7 +82,11 @@ const DoctorServiceDetails = ({ id }: any) => {
         message: "Your Appointment Added To card",
       });
     } else {
-      errorMessage({ message: "Please Select Date and Salt" });
+      errorMessage({
+        message: `Please Select ${
+          (!selectSlat && "Slat") || (!selectedDate && "Booking date")
+        } `,
+      });
     }
   };
   return (
@@ -139,9 +142,12 @@ const DoctorServiceDetails = ({ id }: any) => {
             <div className="mt-5">
               <h3 className=" text-xl font-bold">Additional Info</h3>
 
-              <Form submitHandler={StoreLocalStorageHandler}>
-                <div className=" flex gap-5 mt-4">
-                  <div>
+              <Form
+                submitHandler={StoreLocalStorageHandler}
+                resolver={yupResolver(CreateBookAppointmentSchema)}
+              >
+                <div className=" grid grid-cols-2 gap-5 mt-4">
+                  <div className="">
                     <FormInput
                       name="gender"
                       label="Gender"
@@ -152,7 +158,7 @@ const DoctorServiceDetails = ({ id }: any) => {
                     <FormInput name="age" label="Age" placeholder="Enter Age" />
                   </div>
                 </div>
-                <div className=" flex gap-5 mt-4">
+                <div className=" grid grid-cols-2 gap-5  mt-4">
                   <div>
                     <FormInput
                       name="weight"
@@ -168,7 +174,7 @@ const DoctorServiceDetails = ({ id }: any) => {
                     />
                   </div>
                 </div>
-                <div className=" flex gap-5 mt-4">
+                <div className=" grid grid-cols-2 gap-5  mt-4">
                   <div>
                     <FormInput
                       name="patientProblem"

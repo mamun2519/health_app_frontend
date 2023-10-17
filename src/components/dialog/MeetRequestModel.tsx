@@ -17,6 +17,8 @@ import Offline from "../../assets/Animation - 1697352872560.gif";
 import Image from "next/image";
 import { Slide } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { JoinDoctorSchema } from "../schema/doctor";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -147,8 +149,11 @@ export default function MeetRequestModel({
           <DialogTitle id="alert-dialog-title">{"Join Doctor Now"}</DialogTitle>
           <div className="px-5">
             <DialogContentText id="alert-dialog-description">
-              <Form submitHandler={submitHundler}>
-                <div className=" mt-2 ">
+              <Form
+                submitHandler={submitHundler}
+                resolver={yupResolver(JoinDoctorSchema)}
+              >
+                <div className=" mt-2 w-96">
                   <FormInput
                     name="phoneNumber"
                     label="Phone"
@@ -156,7 +161,7 @@ export default function MeetRequestModel({
                     placeholder="Enter Your Phone Number"
                   />
                 </div>
-                <div className=" mt-4 ">
+                <div className=" mt-4  w-96">
                   <FormInput
                     name="serialNo"
                     size="lg:w-96 w-72"

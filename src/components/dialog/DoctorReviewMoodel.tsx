@@ -40,6 +40,7 @@ export default function DoctorReviewModel({
   const [value, setValue] = React.useState<number | null>(2);
   const [reviewText, setReviewText] = React.useState("");
   const [serviceReview] = useServiceReviewMutation();
+  const [errrorMessage, setErrorMessage] = React.useState("");
   const reviewHandler = async () => {
     console.log(serviceId);
     const data = {
@@ -48,17 +49,22 @@ export default function DoctorReviewModel({
       serviceId,
     };
     try {
-      const res = await serviceReview(data).unwrap();
-      console.log(res);
-      if (res) {
-        handleClose(open);
-        successMessage({
-          header: "Thank You",
-          message: "Review Add Successfully",
-        });
+      if (reviewText) {
+        const res = await serviceReview(data).unwrap();
+        console.log(res);
+        if (res) {
+          setErrorMessage("");
+          handleClose(open);
+          successMessage({
+            header: "Thank You",
+            message: "Review Add Successfully",
+          });
+        } else {
+          errorMessage({ message: "Something is wrong" });
+          handleClose(open);
+        }
       } else {
-        errorMessage({ message: "Something is wrong" });
-        handleClose(open);
+        setErrorMessage(" Comment Is Required filed");
       }
     } catch (error) {
       console.log(error);
@@ -96,6 +102,7 @@ export default function DoctorReviewModel({
                 }}
                 className=" border h-24 w-full  outline-none p-5"
               ></textarea>
+              <small className="text-red-500">{errrorMessage}</small>
             </div>
           </div>
           <div className=" flex justify-center  gap-5 mt-3">

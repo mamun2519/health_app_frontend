@@ -12,6 +12,17 @@ import { SubmitHandler } from "react-hook-form";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import FormInput from "@/components/Form/FormInput";
 import Form from "@/components/Form/FormProvider";
+import errorMessage from "@/components/shared/ErrrorMessage";
+
+interface IUpdateAppointment {
+  gender: string;
+  age: number;
+  weight: number;
+  bloodGroup: string;
+  patientProblem: string;
+  report: string;
+  address: string;
+}
 const AppointmentUpdatePage = ({ params }: { params: { id: string } }) => {
   const bread = [
     {
@@ -47,15 +58,26 @@ const AppointmentUpdatePage = ({ params }: { params: { id: string } }) => {
     address: data?.address || "",
   };
   const [updateAppointment] = useUpdateAppointmentMutation();
-  const editHandler: SubmitHandler<any> = async (value) => {
+  const editHandler: SubmitHandler<IUpdateAppointment> = async (value) => {
+    value.age = Number(value.age);
+    value.weight = Number(value.weight);
     try {
-      await updateAppointment({ id: params.id, body: value });
-      successMessage({
-        message: "Appointment Update Successfully",
-        header: "Thank you",
-      });
-      console.log(value);
-    } catch (error) {}
+      const res = await updateAppointment({
+        id: params.id,
+        body: value,
+      }).unwrap();
+      if (res) {
+        successMessage({
+          message: "Appointment Update Successfully",
+          header: "Thank you",
+        });
+      } else {
+        errorMessage({ message: "Something is wrong" });
+      }
+    } catch (error: any) {
+      errorMessage({ message: error?.data });
+      console.log(error);
+    }
   };
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">

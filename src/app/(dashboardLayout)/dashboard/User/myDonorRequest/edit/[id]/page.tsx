@@ -13,6 +13,7 @@ import {
 import { SubmitHandler } from "react-hook-form";
 import { IDonorRequest } from "@/components/dialog/AddDonorRequest";
 import successMessage from "@/components/shared/SuccessMassage";
+import errorMessage from "@/components/shared/ErrrorMessage";
 const DonorRequestEditPage = ({ params }: { params: { id: string } }) => {
   const boread = [
     {
@@ -46,14 +47,25 @@ const DonorRequestEditPage = ({ params }: { params: { id: string } }) => {
   };
   const [updateDonorRequest] = useUpdateDonorRequestMutation();
   const editHandler: SubmitHandler<IDonorRequest> = async (value) => {
+    value.quantity = Number(value.quantity);
     try {
-      await updateDonorRequest({ id: params.id, body: value });
-      successMessage({
-        message: "Request Update Successfully",
-        header: "Thank you",
-      });
+      const res = await updateDonorRequest({
+        id: params.id,
+        body: value,
+      }).unwrap();
+      console.log(res);
+      if (res) {
+        successMessage({
+          message: "Request Update Successfully",
+          header: "Thank you",
+        });
+      } else {
+        errorMessage({ message: "Something is wrong" });
+      }
       console.log(value);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">

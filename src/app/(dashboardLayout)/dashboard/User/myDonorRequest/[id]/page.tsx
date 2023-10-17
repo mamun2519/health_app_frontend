@@ -15,6 +15,7 @@ import {
 import Toast from "@/components/ui/Toast";
 import successMessage from "@/components/shared/SuccessMassage";
 import DonorReviewModel from "@/components/dialog/DonorReviewModel";
+import errorMessage from "@/components/shared/ErrrorMessage";
 const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
   const [open, setOpen] = useState(true);
   const [reviewOpen, setReviewOpen] = React.useState(false);
@@ -73,6 +74,8 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
           header: "Thank Your",
           message: "Donation Complete Successfully",
         });
+      } else {
+        errorMessage({ message: "Something is wrong" });
       }
     } catch (error) {
       console.log(error);
@@ -126,12 +129,14 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
                 <span>{data?.donnetDate}</span>
               </div>
               <div className="mt-2">
-                <button
-                  onClick={() => DonorRequestCompleteStatusChangeHandler()}
-                  className="w-full h-8 bg-[#d1001c] rounded-full text-white shadow-sm "
-                >
-                  Completed Now
-                </button>
+                {data?.status == "Accepted" && (
+                  <button
+                    onClick={() => DonorRequestCompleteStatusChangeHandler()}
+                    className="w-full h-12 bg-[#d1001c] rounded-full text-white shadow-sm "
+                  >
+                    Completed Now
+                  </button>
+                )}
                 {data?.status === "Completed" && (
                   <div className="mt-2">
                     <button

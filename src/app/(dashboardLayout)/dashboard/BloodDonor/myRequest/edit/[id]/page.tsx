@@ -13,6 +13,7 @@ import {
 import { SubmitHandler } from "react-hook-form";
 import { IDonorRequest } from "@/components/dialog/AddDonorRequest";
 import successMessage from "@/components/shared/SuccessMassage";
+import errorMessage from "@/components/shared/ErrrorMessage";
 const DonorRequestEditPage = ({ params }: { params: { id: string } }) => {
   const boread = [
     {
@@ -46,13 +47,20 @@ const DonorRequestEditPage = ({ params }: { params: { id: string } }) => {
   };
   const [updateDonorRequest] = useUpdateDonorRequestMutation();
   const editHandler: SubmitHandler<IDonorRequest> = async (value) => {
+    value.quantity = Number(value.quantity);
     try {
-      await updateDonorRequest({ id: params.id, body: value });
-      successMessage({
-        message: "Request Update Successfully",
-        header: "Thank you",
-      });
-      console.log(value);
+      const res = await updateDonorRequest({
+        id: params.id,
+        body: value,
+      }).unwrap();
+      if (res) {
+        successMessage({
+          message: "Request Update Successfully",
+          header: "Thank you",
+        });
+      } else {
+        errorMessage({ message: "Something is wrong" });
+      }
     } catch (error) {}
   };
   return (

@@ -71,14 +71,21 @@ const UserAppointmentPage = () => {
   const [deleteAppointment] = useDeleteAppointmentMutation();
   const deleteHandler = async () => {
     try {
-      await deleteAppointment(deletedId);
-      // console.log(deletedId);
+      const res = await deleteAppointment(deletedId).unwrap();
+      console.log(res);
+      if (res) {
+        setOpen(false);
+        successMessage({
+          header: "Thank You",
+          message: "Appointment Delete Successfully",
+        });
+      } else {
+        setOpen(false);
+        errorMessage({ message: "Something Is wrong!" });
+      }
+    } catch (error: any) {
       setOpen(false);
-      successMessage({
-        header: "Thank You",
-        message: "Appointment Delete Successfully",
-      });
-    } catch (error) {
+      errorMessage({ message: error?.data });
       console.log(error);
     }
   };

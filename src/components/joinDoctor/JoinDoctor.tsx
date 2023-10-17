@@ -30,6 +30,7 @@ import {
 } from "@/redux/api/appointmentApi";
 import MeetRequestModel from "../dialog/MeetRequestModel";
 import OfflineModel from "../dialog/OfflineModel";
+import errorMessage from "../shared/ErrrorMessage";
 
 const JoinDoctor = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,7 +39,8 @@ const JoinDoctor = () => {
   const [appointmentId, setAppointmentId] = useState("");
   const [doctorOnline, setDoctorOnline] = useState(false);
   const [googleMeet, setGoogleMeet] = useState({});
-
+  const [deletedId, setDeleteId] = useState("");
+  const [openDelete, setOpenDelete] = useState(false);
   const handleClickOpen = (id: string, appointment: any) => {
     setOpen(true);
     setAppointmentId(id);
@@ -55,6 +57,15 @@ const JoinDoctor = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleDeleteClickOpen = (id: string) => {
+    setOpenDelete(true);
+    setDeleteId(id);
+  };
+
+  const handleDeleteClose = () => {
+    setOpenDelete(false);
   };
 
   const query: Record<string, any> = {};
@@ -81,20 +92,27 @@ const JoinDoctor = () => {
   ];
   const { data } = useUserAppointmentQuery({ ...query });
   console.log(data);
-  // const [deleteAppointment] = useDeleteAppointmentMutation();
-  // const deleteHandler = async () => {
-  //   try {
-  //     await deleteAppointment(deletedId);
-  //     // console.log(deletedId);
-  //     setOpen(false);
-  //     successMessage({
-  //       header: "Thank You",
-  //       message: "Appointment Delete Successfully",
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const [deleteAppointment] = useDeleteAppointmentMutation();
+  const deleteHandler = async () => {
+    try {
+      const res = await deleteAppointment(deletedId).unwrap();
+      console.log(res);
+      if (res) {
+        setOpenDelete(false);
+        successMessage({
+          header: "Thank You",
+          message: "Appointment Delete Successfully",
+        });
+      } else {
+        setOpenDelete(false);
+        errorMessage({ message: "Something Is wrong!" });
+      }
+    } catch (error: any) {
+      setOpenDelete(false);
+      errorMessage({ message: error?.data });
+      console.log(error);
+    }
+  };
 
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
@@ -149,7 +167,7 @@ const JoinDoctor = () => {
                     <TableCell align="center">Serial No</TableCell>
                     <TableCell align="center">Status</TableCell>
                     <TableCell align="center">Joint Doctor</TableCell>
-                    {/* <TableCell align="center">Action</TableCell> */}
+                    <TableCell align="center">Action</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -201,6 +219,17 @@ const JoinDoctor = () => {
                             Meet Now
                           </button>
                         </TableCell>
+                        <TableCell align="center">
+                          {" "}
+                          <button
+                            onClick={() =>
+                              handleDeleteClickOpen(appointment?.id)
+                            }
+                            className="text-red-500 text-xl  cursor-pointer"
+                          >
+                            <DeleteIcon />
+                          </button>
+                        </TableCell>
                         {doctorOnline ? (
                           <MeetRequestModel
                             handleClose={handleClose}
@@ -211,28 +240,6 @@ const JoinDoctor = () => {
                         ) : (
                           <OfflineModel handleClose={handleClose} open={open} />
                         )}
-                        {/* <TableCell align="center">
-                      <div className=" flex gap-4 justify-center items-center">
-                        <Link
-                          href={`/dashboard/user/appointment/${appointment?.id}`}
-                          className="text-blue-500 text-xl"
-                        >
-                          <RemoveRedEyeIcon />
-                        </Link>
-                        <Link
-                          href={`/dashboard/user/appointment/edit/${appointment?.id}`}
-                          className="text-blue-500 text-xl"
-                        >
-                          <BorderColorIcon />
-                        </Link>
-                        <button
-                          onClick={() => handleClickOpen(appointment?.id)}
-                          className="text-red-500 text-xl  cursor-pointer"
-                        >
-                          <DeleteIcon />
-                        </button>
-                      </div>
-                    </TableCell> */}
                       </TableRow>
                     );
                   })}
@@ -251,13 +258,13 @@ const JoinDoctor = () => {
             </div>
           </TableContainer>
         </div>
-        {/* {open && (
+        {openDelete && (
           <DeleteModal
-            open={open}
+            open={openDelete}
             deleteHandler={deleteHandler}
-            handleClose={handleClose}
+            handleClose={handleDeleteClose}
           />
-        )} */}
+        )}
       </div>
     </div>
   );

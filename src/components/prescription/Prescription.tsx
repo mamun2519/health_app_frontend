@@ -21,6 +21,8 @@ import Link from "next/link";
 import { Pagination } from "@mui/material";
 import { convertDate } from "@/helper/date";
 import successMessage from "../shared/SuccessMassage";
+import errorMessage from "../shared/ErrrorMessage";
+import DeleteModal from "../dialog/Delete";
 interface PrescriptionProps {
   bread: {
     link: string;
@@ -54,22 +56,26 @@ const Prescription = ({ bread, role }: PrescriptionProps) => {
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
   };
-  // const [deleteprescription] = useDeletePrescriptionMutation();
-  // const deleteHandler = async () => {
-  //   try {
-  //     const res = await deleteprescription(deletedId);
-  //     if (res) {
-  //       setOpen(false);
-  //       successMessage({
-  //         header: "Thank You",
-  //         message: "prescription Delete Successfully",
-  //       });
-  //     }
-  //     // console.log(deletedId);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const [deleteprescription] = useDeletePrescriptionMutation();
+  const deleteHandler = async () => {
+    try {
+      const res = await deleteprescription(deletedId).unwrap();
+      if (res) {
+        setOpen(false);
+        successMessage({
+          header: "Thank You",
+          message: "prescription Delete Successfully",
+        });
+      } else {
+        errorMessage({ message: "Something is wrong" });
+        setOpen(false);
+      }
+      // console.log(deletedId);
+    } catch (error: any) {
+      setOpen(false);
+      errorMessage({ message: error?.data });
+    }
+  };
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
@@ -122,6 +128,7 @@ const Prescription = ({ bread, role }: PrescriptionProps) => {
                     <TableCell align="center">Submit Date</TableCell>
 
                     <TableCell align="center">Details</TableCell>
+                    <TableCell align="center">Action</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -146,12 +153,6 @@ const Prescription = ({ bread, role }: PrescriptionProps) => {
 
                       <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
-                          {/* <Link
-                            href={`/dashboard/user/prescription/${prescription?.id}`}
-                            className="text-blue-500 text-xl"
-                          >
-                            <RemoveRedEyeIcon />
-                          </Link> */}
                           <Link
                             href={`/dashboard/${role}/prescription/${prescription?.id}`}
                             className="text-white bg-[#d1001c] px-2 py-1 rounded-full"
@@ -160,6 +161,14 @@ const Prescription = ({ bread, role }: PrescriptionProps) => {
                             Download Prescription
                           </Link>
                         </div>
+                      </TableCell>
+                      <TableCell align="center">
+                        <button
+                          onClick={() => handleClickOpen(prescription?.id)}
+                          className="text-red-500 text-xl  cursor-pointer"
+                        >
+                          <DeleteIcon />
+                        </button>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -178,13 +187,13 @@ const Prescription = ({ bread, role }: PrescriptionProps) => {
             </div>
           </TableContainer>
         </div>
-        {/* {open && (
+        {open && (
           <DeleteModal
             open={open}
             deleteHandler={deleteHandler}
             handleClose={handleClose}
           />
-        )} */}
+        )}
       </div>
     </div>
   );

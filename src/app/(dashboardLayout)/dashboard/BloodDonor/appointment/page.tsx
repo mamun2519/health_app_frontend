@@ -25,6 +25,7 @@ import {
   useDeleteAppointmentMutation,
   useUserAppointmentQuery,
 } from "@/redux/api/appointmentApi";
+import errorMessage from "@/components/shared/ErrrorMessage";
 const DonorAppointmentPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -66,15 +67,21 @@ const DonorAppointmentPage = () => {
   const [deleteAppointment] = useDeleteAppointmentMutation();
   const deleteHandler = async () => {
     try {
-      await deleteAppointment(deletedId);
-      // console.log(deletedId);
+      const res = await deleteAppointment(deletedId).unwrap();
+      if (res) {
+        // console.log(deletedId);
+        setOpen(false);
+        successMessage({
+          header: "Thank You",
+          message: "Appointment Delete Successfully",
+        });
+      } else {
+        setOpen(false);
+        errorMessage({ message: "Something Is wrong!" });
+      }
+    } catch (error: any) {
       setOpen(false);
-      successMessage({
-        header: "Thank You",
-        message: "Appointment Delete Successfully",
-      });
-    } catch (error) {
-      console.log(error);
+      errorMessage({ message: error?.data });
     }
   };
 
