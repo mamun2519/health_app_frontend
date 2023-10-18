@@ -95,7 +95,8 @@ const CreateDoctorPage = () => {
       } else {
         setErrorMessage("Image Is Required");
       }
-    } catch (error) {
+    } catch (error: any) {
+      errorMessage({ message: error?.data });
       console.log(error);
     }
     // console.log(value.startTime);

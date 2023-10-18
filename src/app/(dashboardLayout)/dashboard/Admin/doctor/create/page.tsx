@@ -42,6 +42,7 @@ import { ICreateDoctor } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createDoctorSchema } from "@/components/schema/doctor";
 import { ImageUpload } from "@/components/Form/ImageUplaod";
+import errorMessage from "@/components/shared/ErrrorMessage";
 
 interface IServiceCrate {
   service: {
@@ -105,8 +106,9 @@ const CreateDoctorPage = () => {
       } else {
         setErrorMessage("Image Is Required");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      errorMessage({ message: error?.data });
     }
     // console.log(value.startTime);
     // const time = convertToAmPm(value.salt.startTime);

@@ -27,8 +27,8 @@ export default async function Home() {
       <Banner />
       <CountService />
       <DonorReg />
-      <Doctors doctors={doctor.data} />
-      <Donors data={donor?.data} />
+      <Doctors doctors={doctor.data.slice(0, 4)} />
+      <Donors data={donor?.data.slice(0, 4)} />
 
       {/* <YouTube /> */}
       <ContactUs />

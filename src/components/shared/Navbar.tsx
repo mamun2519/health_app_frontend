@@ -55,13 +55,16 @@ const Navbar = () => {
             </ul>
           </div>
           <Link href="/" className="btn btn-ghost normal-case text-xl">
-            Smart Halt Care
+            <p>
+              {" "}
+              He<span className="text-[#d1001c]">alth</span> Care
+            </p>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a>Blood Donor</a>
+              <Link href="/bloodDonor/all">Blood Donor</Link>
             </li>
             <li>
               <a>Doctor</a>
@@ -89,7 +92,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-end ">
           <div className=" px-8 flex gap-4 ">
-            <div className="text-red-500   ">
+            <div className="text-[#d1001c]  ">
               {" "}
               <div className="h-10 w-10 relative cursor-pointer">
                 <Link href="/cart">
@@ -103,9 +106,20 @@ const Navbar = () => {
                 </Link>
               </div>
             </div>
-            <span className="text-red-500 text-3xl">
-              <CircleNotificationsIcon />
-            </span>
+            <div className="text-[#d1001c]  ">
+              {" "}
+              <div className="h-10 w-10 relative cursor-pointer">
+                <Link href="/cart">
+                  <span className="text-3xl ">
+                    <CircleNotificationsIcon />
+                  </span>
+
+                  <span className="bg-white w-6 h-6 rounded-full absolute text-center  right-[1px]   ">
+                    {cart?.length}
+                  </span>
+                </Link>
+              </div>
+            </div>
           </div>
           <div>
             <LogoutBtn />

@@ -23,13 +23,14 @@ import successMessage from "../shared/SuccessMassage";
 import { SubmitHandler } from "react-hook-form";
 import { ICreateDonor } from "@/types";
 import errorMessage from "../shared/ErrrorMessage";
-import { storeUserInfo } from "@/services/auth.Services";
+import { logOut, storeUserInfo } from "@/services/auth.Services";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import { ImageUpload } from "../Form/ImageUplaod";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createDonorSchema } from "../schema/donor";
+import { useRouter } from "next/navigation";
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   "label + &": {
     marginTop: theme.spacing(3),
@@ -68,12 +69,14 @@ const DonorRegistrationForm = () => {
   const [error, setErrorMessage] = useState("");
   const [createDonor] = useCreateDonorMutation();
   const [division, setDivision] = useState("");
-
+  const router = useRouter();
   const createDonorHandler: SubmitHandler<ICreateDonor> = async (value) => {
     value.present_Address.police_station = "No";
     value.avatar = imageUrl as string;
+    value.present_Address.district = division as string;
+    console.log(value);
     try {
-      if (imageUrl) {
+      if (imageUrl && division) {
         const res = await createDonor(value).unwrap();
         console.log(res);
 
@@ -82,13 +85,22 @@ const DonorRegistrationForm = () => {
             message: "Donor Account Create Successfully",
             header: "Thank you",
           });
+          if (res?.userToken) {
+            router.push("/");
+            logOut();
+
+            // TODO USE TOST HERE
+          }
+
+          storeUserInfo({ accessToken: res?.userToken });
         } else {
           errorMessage({ message: "Something is wrong" });
         }
       } else {
         setErrorMessage("Image Is Required");
       }
-    } catch (error) {
+    } catch (error: any) {
+      errorMessage({ message: error?.data });
       console.log(error);
     }
     // console.log(value.startTime);
@@ -210,49 +222,49 @@ const DonorRegistrationForm = () => {
                   <div className="mt-3">
                     {division === "Chittagong" && (
                       <SelectInput
-                        name="present_Address.district"
+                        name="present_Address.sub_district"
                         label="District"
                         options={formattedChittagongDistricts}
                       />
                     )}
                     {division == "Khulna" && (
                       <SelectInput
-                        name="present_Address.district"
+                        name="present_Address.sub_district"
                         label="District"
                         options={formattedKhulnaDistricts}
                       />
                     )}
                     {division == "Rangpur" && (
                       <SelectInput
-                        name="present_Address.district"
+                        name="present_Address.sub_district"
                         label="District"
                         options={formattedRangpurDistricts}
                       />
                     )}
                     {division == "Rajshahi" && (
                       <SelectInput
-                        name="present_Address.district"
+                        name="present_Address.sub_district"
                         label="District"
                         options={formattedRajshahiDistricts}
                       />
                     )}
                     {division == "Sylhet" && (
                       <SelectInput
-                        name="present_Address.district"
+                        name="present_Address.sub_district"
                         label="District"
                         options={formattedSylhetDistricts}
                       />
                     )}
                     {division == "Mymensingh" && (
                       <SelectInput
-                        name="present_Address.district"
+                        name="present_Address.sub_district"
                         label="District"
                         options={formattedMymensinghDistricts}
                       />
                     )}
                     {division == "Borisal" && (
                       <SelectInput
-                        name="present_Address.district"
+                        name="present_Address.sub_district"
                         label="District"
                         options={formattedBarisalDistricts}
                       />
