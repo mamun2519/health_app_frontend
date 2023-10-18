@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import GrainIcon from "@mui/icons-material/Grain";
@@ -44,6 +44,9 @@ import {
   useUserLoginMutation,
 } from "@/redux/api/authApi";
 import { IAdminCrate, ICreateDoctor, ICreateDonor } from "@/types";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { adminCreateSchema } from "@/components/schema/admin";
+import { ImageUpload } from "@/components/Form/ImageUplaod";
 
 interface IServiceCrate {
   service: {
@@ -61,6 +64,9 @@ interface IServiceCrate {
   };
 }
 const ManageAdminPage = () => {
+  const [imageUrl, setImageUrl] = useState<string | undefined>();
+
+  const [error, setErrorMessage] = useState("");
   const [updateDoctorService] = useUpdateDoctorServiceMutation();
   const boread = [
     {
@@ -88,15 +94,20 @@ const ManageAdminPage = () => {
 
   const editHandler: SubmitHandler<IAdminCrate> = async (value) => {
     value.role = "Admin";
+    value.avatar = imageUrl as string;
     try {
-      const res = await registerUser(value);
-      console.log(res);
-      // @ts-ignore
-      if (res?.data) {
-        successMessage({
-          message: "Admin Account Create Successfully",
-          header: "Thank you",
-        });
+      if (imageUrl) {
+        const res = await registerUser(value).unwrap();
+        console.log(res);
+        // @ts-ignore
+        if (res?.data) {
+          successMessage({
+            message: "Admin Account Create Successfully",
+            header: "Thank you",
+          });
+        }
+      } else {
+        setErrorMessage("Image Is Required");
       }
     } catch (error) {
       console.log(error);
@@ -110,7 +121,10 @@ const ManageAdminPage = () => {
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
       <h3 className=" mt-5 text-2xl">Create Admin</h3>
       <div className="mt-5"></div>
-      <Form submitHandler={editHandler}>
+      <Form
+        submitHandler={editHandler}
+        resolver={yupResolver(adminCreateSchema)}
+      >
         <div className=" grid grid-cols-3 gap-5">
           <div className=" mt-2 ">
             <FormInput
@@ -134,12 +148,10 @@ const ManageAdminPage = () => {
           <p>Authentication</p>
           <div className="grid grid-cols-3 gap-5">
             <div className=" mt-2 ">
-              <FormInput
-                name="avatar"
-                label="avatar"
-                size="lg:w-96 w-72"
-                placeholder="Enter Your  avatar"
-              />
+              <div>
+                <ImageUpload setImageUrl={setImageUrl} />
+                {error && <p className="text-red-500">Image is required</p>}
+              </div>
             </div>
             <div className=" mt-2 ">
               <FormInput

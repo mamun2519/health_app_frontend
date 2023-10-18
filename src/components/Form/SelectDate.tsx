@@ -1,3 +1,4 @@
+import { getErrorMessageByPropertyName } from "@/utils/Schema-validaiton";
 import { TextField } from "@mui/material";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
@@ -21,7 +22,11 @@ const SelectDate = ({
   validation,
   label,
 }: IInput) => {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
+  const errorMessage = getErrorMessageByPropertyName(errors, name);
   return (
     <Controller
       name={name}
@@ -36,6 +41,7 @@ const SelectDate = ({
             id={id}
             className=" w-full border-2 h-14 rounded px-4 outline-blue-500"
           />
+          <p className="text-red-500">{errorMessage}</p>
         </>
       )}
     />
