@@ -25,14 +25,17 @@ import { DatePicker } from "@mui/x-date-pickers";
 import FromTimePicker from "@/components/Form/FromTimePicker";
 import { convertToAmPm } from "@/utils/timeConvater";
 import FormMultipleSelect from "@/components/Form/FomMultipleSelect";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ServiceCreateSchema } from "@/components/schema/doctor";
+import errorMessage from "@/components/shared/ErrrorMessage";
 
-interface IServiceCrate {
+export interface IServiceCrate {
   service: {
     title: string;
     price: string;
     avatar: string;
     serviceType: string;
-    serviceDay: string[];
+    serviceDay: any[];
     aboutSerivce: string;
   };
   salt: {
@@ -65,21 +68,26 @@ const CreateDoctorServicePage = () => {
     },
   ];
 
-  const [createGoogleMeet] = useCreateDoctorServiceMutation();
+  const [createDoctorService] = useCreateDoctorServiceMutation();
 
-  const editHandler: SubmitHandler<IServiceCrate> = async (value) => {
+  const serviceCreateHandler: SubmitHandler<IServiceCrate> = async (value) => {
     // console.log(value.startTime);
     value.salt.startTime = convertToAmPm(value.salt.startTime);
     value.salt.endTime = convertToAmPm(value.salt.endTime);
-    value.service.serviceDay = ["Saturday"];
+    value.service.serviceDay = [value.service.serviceDay];
     try {
-      await createGoogleMeet({ body: value });
-      successMessage({
-        message: "Service Create Successfully",
-        header: "Thank you",
-      });
+      const res = await createDoctorService({ body: value }).unwrap();
+      if (res) {
+        successMessage({
+          message: "Service Create Successfully",
+          header: "Thank you",
+        });
+      } else {
+        errorMessage({ message: "something is wrong" });
+      }
       console.log(value);
     } catch (error) {
+      errorMessage({ message: "something is wrong" });
       console.log(error);
     }
     // console.log(value.startTime);
@@ -89,9 +97,12 @@ const CreateDoctorServicePage = () => {
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
-      <h3 className=" mt-5 text-2xl">Edit Service</h3>
+      <h3 className=" mt-5 text-2xl">Create Service</h3>
       <div className="mt-5"></div>
-      <Form submitHandler={editHandler}>
+      <Form
+        submitHandler={serviceCreateHandler}
+        resolver={yupResolver(ServiceCreateSchema)}
+      >
         <div className=" grid grid-cols-3 gap-5">
           <div className=" mt-2 ">
             <FormInput
@@ -127,6 +138,14 @@ const CreateDoctorServicePage = () => {
               placeholder="Enter service Type"
             />
           </div>
+          <div className=" mt-8">
+            <FormInput
+              name="service.aboutSerivce"
+              label="AboutService"
+              size="lg:w-96 w-72"
+              placeholder="Enter AboutService"
+            />
+          </div>
 
           <div className=" mt-4">
             {/* <FormInput
@@ -141,14 +160,6 @@ const CreateDoctorServicePage = () => {
               options={Days}
             />
             {/* <FormMultipleSelect /> */}
-          </div>
-          <div className=" mt-8">
-            <FormInput
-              name="service.aboutSerivce"
-              label="AboutService"
-              size="lg:w-96 w-72"
-              placeholder="Enter AboutService"
-            />
           </div>
         </div>
         <div className="mt-5 grid grid-cols-3 gap-5">

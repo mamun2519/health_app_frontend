@@ -48,9 +48,9 @@ export default function AppointmentChangeStatusModel({
     value
   ) => {
     const data = { id, body: value };
-    const res = await updateAppointment(data);
+    const res = await updateAppointment(data).unwrap();
     // @ts-ignore
-    if (res.data) {
+    if (res) {
       successMessage({
         header: "Thank You",
         message: `Appointment Status - ${value?.status} Updated Successfully`,

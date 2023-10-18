@@ -1,4 +1,5 @@
 "use client";
+import { getErrorMessageByPropertyName } from "@/utils/Schema-validaiton";
 import { useFormContext, Controller } from "react-hook-form";
 import Select from "react-select";
 
@@ -27,7 +28,11 @@ export default function FormSelectInput({
   validation,
   label,
 }: IInput) {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
+  const errorMessage = getErrorMessageByPropertyName(errors, name);
 
   return (
     <>
@@ -45,6 +50,7 @@ export default function FormSelectInput({
           />
         )}
       ></Controller>
+      <p className="text-red-500">{errorMessage}</p>
     </>
   );
 }

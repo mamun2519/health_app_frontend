@@ -42,7 +42,7 @@ const FormInput = ({
               id={id}
               className=" w-full border-2 h-14 rounded px-4 outline-blue-500"
             />
-            <small className="text-red-500">{errorMessage}</small>
+            <p className="text-red-500">{errorMessage}</p>
           </>
         ) : (
           <>
@@ -56,7 +56,7 @@ const FormInput = ({
               autoFocus={true}
               className={`w-full outline-none ${size}`}
             />
-            <small className="text-red-500">{errorMessage}</small>
+            <p className="text-red-500">{errorMessage}</p>
           </>
         )
       }

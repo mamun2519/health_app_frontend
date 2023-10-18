@@ -16,6 +16,7 @@ import {
   usePrescriptionDetailsQuery,
   useUpdatePrescriptionMutation,
 } from "@/redux/api/prescriptionApi";
+import { ICreatePrescription } from "@/types";
 const DoctorPrescriptionEditPage = ({ params }: { params: { id: string } }) => {
   const bread = [
     {
@@ -54,9 +55,12 @@ const DoctorPrescriptionEditPage = ({ params }: { params: { id: string } }) => {
     "haltReport.description": data?.healtReports[0].description,
   };
   const [updatePrescription] = useUpdatePrescriptionMutation();
-  const editHandler: SubmitHandler<any> = async (value) => {
+  const editHandler: SubmitHandler<ICreatePrescription> = async (value) => {
     try {
-      const res = await updatePrescription({ id: params.id, body: value });
+      const res = await updatePrescription({
+        id: params.id,
+        body: value,
+      });
       if (res) {
         successMessage({
           message: "Prescription Update Successfully",

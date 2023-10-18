@@ -7,6 +7,7 @@ import Select from "@mui/material/Select";
 import NativeSelect from "@mui/material/NativeSelect";
 import InputBase from "@mui/material/InputBase";
 import { Controller, useFormContext } from "react-hook-form";
+import { getErrorMessageByPropertyName } from "@/utils/Schema-validaiton";
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   "label + &": {
@@ -69,7 +70,12 @@ export default function SelectInput({
   const handleChange = (event: { target: { value: string } }) => {
     setAge(event.target.value);
   };
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
+
+  const errorMessage = getErrorMessageByPropertyName(errors, name);
   return (
     <div>
       <Controller
@@ -103,6 +109,7 @@ export default function SelectInput({
           </FormControl>
         )}
       ></Controller>
+      <p className="text-red-500">{errorMessage}</p>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { getErrorMessageByPropertyName } from "@/utils/Schema-validaiton";
 import { Controller, useFormContext } from "react-hook-form";
 
 interface IInput {
@@ -21,7 +22,11 @@ const FromTimePicker = ({
   validation,
   label,
 }: IInput) => {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
+  const errorMessage = getErrorMessageByPropertyName(errors, name);
   return (
     <div>
       <Controller
@@ -37,6 +42,7 @@ const FromTimePicker = ({
               id={id}
               className=" w-full border-2 h-14 rounded px-4 outline-blue-500"
             />
+            <p className="text-red-500">{errorMessage}</p>
           </>
         )}
       />

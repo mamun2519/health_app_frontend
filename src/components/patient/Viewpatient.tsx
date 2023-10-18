@@ -34,6 +34,7 @@ import {
   useMyGoogleMeetQuery,
 } from "@/redux/api/googleMeetApi";
 import { convertDate } from "@/helper/date";
+import errorMessage from "../shared/ErrrorMessage";
 
 const ViewPatient = ({ params }: { params: string }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -84,13 +85,17 @@ const ViewPatient = ({ params }: { params: string }) => {
   const [deleteGoogleMeet] = useDeleteGoogleMeetMutation();
   const deleteHandler = async () => {
     try {
-      await deleteGoogleMeet(deletedId);
+       const res =  await deleteGoogleMeet(deletedId).unwrap();
       // console.log(deletedId);
+      if(res){
       setOpen(false);
       successMessage({
         header: "Thank You",
         message: "GoogleMeet Delete Successfully",
-      });
+      });}
+      else{
+        errorMessage({message: "Something is wrong"})
+      }
     } catch (error) {
       console.log(error);
     }
@@ -149,7 +154,7 @@ const ViewPatient = ({ params }: { params: string }) => {
                     <TableCell align="center">Phone</TableCell>
                     <TableCell align="center">Prescription</TableCell>
 
-                    {/* <TableCell align="center">Action</TableCell> */}
+                    <TableCell align="center">Action</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -180,9 +185,9 @@ const ViewPatient = ({ params }: { params: string }) => {
                         </Link>
                       </TableCell>
 
-                      {/* <TableCell align="center">
+                      <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
-                          <Link
+                          {/* <Link
                             href={`/dashboard/Doctor/googleMeet/${appointment?.id}`}
                             className="text-blue-500 text-xl"
                           >
@@ -193,7 +198,7 @@ const ViewPatient = ({ params }: { params: string }) => {
                             className="text-blue-500 text-xl"
                           >
                             <BorderColorIcon />
-                          </Link>
+                          </Link> */}
                           <button
                             onClick={() => handleClickOpen(appointment?.id)}
                             className="text-red-500 text-xl  cursor-pointer"
@@ -201,7 +206,7 @@ const ViewPatient = ({ params }: { params: string }) => {
                             <DeleteIcon />
                           </button>
                         </div>
-                      </TableCell> */}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
