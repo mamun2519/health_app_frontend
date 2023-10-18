@@ -27,6 +27,9 @@ import { convertToAmPm } from "@/utils/timeConvater";
 import FormMultipleSelect from "@/components/Form/FomMultipleSelect";
 import { ICreatePrescription } from "@/types";
 import { useCreatePrescriptionMutation } from "@/redux/api/prescriptionApi";
+import { yupResolver } from "@hookform/resolvers/yup";
+import prescriptionCrateSchema from "../schema/prescription";
+import ICreatePrescriptionSchema from "../schema/prescription";
 
 interface IServiceCrate {
   service: {
@@ -116,7 +119,10 @@ const CreatePrescription = ({ appointmentId }: { appointmentId: string }) => {
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
       <h3 className=" mt-5 text-2xl">Create Prescription</h3>
       <div className="mt-5"></div>
-      <Form submitHandler={editHandler}>
+      <Form
+        submitHandler={editHandler}
+        resolver={yupResolver(ICreatePrescriptionSchema)}
+      >
         <h3 className=" mt-5 text-xl">Prescription Details</h3>
         <div className=" grid grid-cols-3 gap-5">
           <div className=" mt-2 ">

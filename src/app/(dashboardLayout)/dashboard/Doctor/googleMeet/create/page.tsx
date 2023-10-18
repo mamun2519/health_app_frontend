@@ -31,6 +31,8 @@ import {
   useMyGoogleMeetQuery,
 } from "@/redux/api/googleMeetApi";
 import errorMessage from "@/components/shared/ErrrorMessage";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { GoogleMeetCreateSchema } from "@/components/schema/googleMeet";
 
 interface ICreateMeet {
   serviceId: {
@@ -103,7 +105,10 @@ const CreateGoogleMeetPage = () => {
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
       <h3 className=" mt-5 text-2xl">Edit Service</h3>
       <div className="mt-5"></div>
-      <Form submitHandler={editHandler}>
+      <Form
+        submitHandler={editHandler}
+        resolver={yupResolver(GoogleMeetCreateSchema)}
+      >
         <div className=" grid grid-cols-3 gap-5">
           <div className=" mt-2 ">
             <FormInput

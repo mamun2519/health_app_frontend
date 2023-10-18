@@ -9,7 +9,7 @@ export const ServiceCreateSchema = yup.object().shape({
   service: yup.object().shape({
     title: yup.string().required("Service title is required"),
     price: yup.string().required("Service price is required"),
-    avatar: yup.string().required("Service avatar is required"),
+    // avatar: yup.string().required("Service avatar is required"),
     serviceType: yup.string().required("Service type is required"),
     // serviceDay: yup
     //   .array()

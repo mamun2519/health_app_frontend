@@ -45,6 +45,7 @@ const DoctorServiceDetails = ({ id }: any) => {
   // const [Appointment, setAppointment] = useState([]);
   const disPatch = useDispatch();
   // Callback function to handle date selection
+
   const handleDateSelect = (date: any) => {
     const dates = formatDateToYYYYMMDD(date);
     setSelectedDate(dates);

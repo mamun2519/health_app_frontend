@@ -83,23 +83,27 @@ const ViewPatient = ({ params }: { params: string }) => {
   console.log(data);
 
   const [deleteGoogleMeet] = useDeleteGoogleMeetMutation();
-  const deleteHandler = async () => {
-    try {
-       const res =  await deleteGoogleMeet(deletedId).unwrap();
-      // console.log(deletedId);
-      if(res){
-      setOpen(false);
-      successMessage({
-        header: "Thank You",
-        message: "GoogleMeet Delete Successfully",
-      });}
-      else{
-        errorMessage({message: "Something is wrong"})
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const deleteHandler = async () => {
+  //   try {
+  //     const res = await deleteGoogleMeet(deletedId).unwrap();
+  //     // console.log(deletedId);
+  //     console.log(res);
+  //     if (res) {
+  //       setOpen(false);
+  //       successMessage({
+  //         header: "Thank You",
+  //         message: "GoogleMeet Delete Successfully",
+  //       });
+  //     } else {
+  //       setOpen(false);
+  //       errorMessage({ message: "Something is wrong" });
+  //     }
+  //   } catch (error) {
+  //     setOpen(false);
+  //     errorMessage({ message: "Something is wrong" });
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
@@ -154,7 +158,7 @@ const ViewPatient = ({ params }: { params: string }) => {
                     <TableCell align="center">Phone</TableCell>
                     <TableCell align="center">Prescription</TableCell>
 
-                    <TableCell align="center">Action</TableCell>
+                    {/* <TableCell align="center">Action</TableCell> */}
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -185,20 +189,8 @@ const ViewPatient = ({ params }: { params: string }) => {
                         </Link>
                       </TableCell>
 
-                      <TableCell align="center">
+                      {/* <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
-                          {/* <Link
-                            href={`/dashboard/Doctor/googleMeet/${appointment?.id}`}
-                            className="text-blue-500 text-xl"
-                          >
-                            <RemoveRedEyeIcon />
-                          </Link>
-                          <Link
-                            href={`/dashboard/Doctor/googleMeet/edit/${appointment?.id}`}
-                            className="text-blue-500 text-xl"
-                          >
-                            <BorderColorIcon />
-                          </Link> */}
                           <button
                             onClick={() => handleClickOpen(appointment?.id)}
                             className="text-red-500 text-xl  cursor-pointer"
@@ -206,7 +198,7 @@ const ViewPatient = ({ params }: { params: string }) => {
                             <DeleteIcon />
                           </button>
                         </div>
-                      </TableCell>
+                      </TableCell> */}
                     </TableRow>
                   ))}
                 </TableBody>
@@ -224,13 +216,13 @@ const ViewPatient = ({ params }: { params: string }) => {
             </div>
           </TableContainer>
         </div>
-        {open && (
+        {/* {open && (
           <DeleteModal
             open={open}
             deleteHandler={deleteHandler}
             handleClose={handleClose}
           />
-        )}
+        )} */}
       </div>
     </div>
   );

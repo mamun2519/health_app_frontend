@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import GrainIcon from "@mui/icons-material/Grain";
@@ -28,6 +28,24 @@ import FormMultipleSelect from "@/components/Form/FomMultipleSelect";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ServiceCreateSchema } from "@/components/schema/doctor";
 import errorMessage from "@/components/shared/ErrrorMessage";
+import { styled } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { uploadToImgBB } from "@/utils/uploadingImgBB";
+import { Avatar } from "@mui/material";
+import Image from "next/image";
+import { ImageUpload } from "@/components/Form/ImageUplaod";
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
 
 export interface IServiceCrate {
   service: {
@@ -45,6 +63,9 @@ export interface IServiceCrate {
   };
 }
 const CreateDoctorServicePage = () => {
+  const [imageUrl, setImageUrl] = useState<string | undefined>();
+
+  const [error, setErrorMessage] = useState("");
   const [updateDoctorService] = useUpdateDoctorServiceMutation();
   const boread = [
     {
@@ -75,17 +96,26 @@ const CreateDoctorServicePage = () => {
     value.salt.startTime = convertToAmPm(value.salt.startTime);
     value.salt.endTime = convertToAmPm(value.salt.endTime);
     value.service.serviceDay = [value.service.serviceDay];
+    value.service.avatar = imageUrl as string;
+
     try {
-      const res = await createDoctorService({ body: value }).unwrap();
-      if (res) {
-        successMessage({
-          message: "Service Create Successfully",
-          header: "Thank you",
-        });
+      if (imageUrl) {
+        const res = await createDoctorService({ body: value }).unwrap();
+        console.log(res);
+        if (res) {
+          successMessage({
+            message: "Service Create Successfully",
+            header: "Thank you",
+          });
+          setErrorMessage("");
+        } else {
+          errorMessage({ message: "something is wrong" });
+          setErrorMessage("");
+        }
       } else {
-        errorMessage({ message: "something is wrong" });
+        setErrorMessage("Image Is Required");
+        setErrorMessage("");
       }
-      console.log(value);
     } catch (error) {
       errorMessage({ message: "something is wrong" });
       console.log(error);
@@ -94,6 +124,8 @@ const CreateDoctorServicePage = () => {
     // const time = convertToAmPm(value.salt.startTime);
     // console.log(time);
   };
+
+  // console.log(image);
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
@@ -120,17 +152,15 @@ const CreateDoctorServicePage = () => {
               placeholder="Enter price "
             />
           </div>
-          <div className=" mt-2">
+          {/* <div className=" mt-2">
             <FormInput
               name="service.avatar"
               size="lg:w-96 w-72"
               label="Avatar"
               placeholder="Enter Patient avatar"
             />
-          </div>
-        </div>
-        <div className="mt-5 grid grid-cols-3 gap-5">
-          <div className=" mt-8">
+          </div> */}
+          <div className=" mt-2">
             <FormInput
               name="service.serviceType"
               label="service Type"
@@ -138,6 +168,8 @@ const CreateDoctorServicePage = () => {
               placeholder="Enter service Type"
             />
           </div>
+        </div>
+        <div className="mt-5 grid grid-cols-3 gap-5">
           <div className=" mt-8">
             <FormInput
               name="service.aboutSerivce"
@@ -148,12 +180,13 @@ const CreateDoctorServicePage = () => {
           </div>
 
           <div className=" mt-4">
-            {/* <FormInput
-              name="service.serviceDay"
-              label="service Day"
-              size="lg:w-96 w-72"
-              placeholder="Enter serviceDay"
-            /> */}
+            <SelectInput
+              name="salt.duration"
+              label="duration"
+              options={Duration}
+            />
+          </div>
+          <div className=" mt-4">
             <SelectInput
               name="service.serviceDay"
               label="Service Day"
@@ -163,19 +196,24 @@ const CreateDoctorServicePage = () => {
           </div>
         </div>
         <div className="mt-5 grid grid-cols-3 gap-5">
+          <div className=" mt-8 w-full">
+            <div>
+              <ImageUpload setImageUrl={setImageUrl} />
+              {error && <p className="text-red-500">Image is required</p>}
+            </div>
+          </div>
           <div className=" mt-8">
-            {/* <FormSelectInput
-              name="service.category"
-              label="serviceType"
-              size="lg:w-96 w-72 "
-              options={ServiceCategory}
-              placeholder="Enter serviceType"
-            /> */}
-            <SelectInput
-              name="salt.duration"
-              label="duration"
-              options={Duration}
-            />
+            <div>
+              {imageUrl && (
+                <div>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={imageUrl}
+                    sx={{ width: 86, height: 86 }}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
