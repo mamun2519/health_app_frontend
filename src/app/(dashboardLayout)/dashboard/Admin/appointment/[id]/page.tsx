@@ -8,7 +8,20 @@ import { useAppointmentDetailsQuery } from "@/redux/api/appointmentApi";
 import { convertDate } from "@/helper/date";
 import Image from "next/image";
 import dataPic from "../../../../../../assets/blood_donation_02.jpg";
+import MeetRequestModel from "@/components/dialog/MeetRequestModel";
+import OfflineModel from "@/components/dialog/OfflineModel";
+import { useActiveGoogleMeetQuery } from "@/redux/api/googleMeetApi";
 const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
+  const [appointmentId, setAppointmentId] = useState("");
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = (id: string) => {
+    setOpen(true);
+    setAppointmentId(id);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   const bread = [
     {
       link: "/dashboard",
@@ -32,7 +45,8 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
     },
   ];
   const { data } = useAppointmentDetailsQuery(params.id);
-  console.log(data);
+  const { data: meet } = useActiveGoogleMeetQuery(data?.service?.id);
+  console.log(meet);
   return (
     <div>
       <div className="h-full  border  p-5 rounded-3xl shadow-sm  mt-3">
@@ -77,14 +91,23 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
                   <span>{data?.status}</span>
                 </div>
                 <div className=" grid  grid-cols-2 borde pb-2 mt-3">
-                  <span>Time</span>
-                  <span>{data?.slatTime}</span>
+                  <span>Doctor</span>
+                  <span>
+                    {meet?.status === "Active" ? (
+                      <span className="text-[#d1001c]  font-bold"> Online</span>
+                    ) : (
+                      <span> Offline</span>
+                    )}
+                  </span>
                 </div>
-                <div className="mt-4 ">
-                  <button className="w-full h-10 bg-[#d1001c] rounded-full text-white shadow-sm ">
+                {/* <div className="mt-4 ">
+                  <button
+                    onClick={() => handleClickOpen(data?.id)}
+                    className="w-full h-10 bg-[#d1001c] rounded-full text-white shadow-sm "
+                  >
                     Joint Doctor
                   </button>
-                </div>
+                </div> */}
               </div>
             </div>
 
@@ -162,23 +185,18 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
                       <span>Address</span>
                       <span>{data?.address}</span>
                     </div>
-                    {/* <div className=" grid  grid-cols-2 border-b pb-2 mt-3">
-                    <span>Date Of Birth</span>
-                    <span>{data?.profile?.date_of_birth}</span>
                   </div>
-                  <div className=" grid  grid-cols-2 border-b pb-2 mt-3">
-                    <span>Address</span>
-                    <span>{data?.profile?.present_Address?.address}</span>
-                  </div>
-                  <div className=" grid  grid-cols-2 border-b pb-2 mt-3">
-                    <span>Total Donation</span>
-                    <span>{data?.blooddata?.total_donnet} People</span>
-                  </div>
-                  <div className=" grid  grid-cols-2 border-b pb-2 mt-3">
-                    <span>Last donation Date</span>
-                    <span>2 feb 2023</span>
-                  </div> */}
-                  </div>
+
+                  {meet ? (
+                    <MeetRequestModel
+                      handleClose={handleClose}
+                      open={open}
+                      appointment={meet}
+                      appointmentId={appointmentId}
+                    />
+                  ) : (
+                    <OfflineModel handleClose={handleClose} open={open} />
+                  )}
                 </div>
               </div>
             </div>

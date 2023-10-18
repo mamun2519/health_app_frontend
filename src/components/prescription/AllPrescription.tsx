@@ -24,6 +24,7 @@ import { Pagination } from "@mui/material";
 import { convertDate } from "@/helper/date";
 import successMessage from "../shared/SuccessMassage";
 import DeleteModal from "../dialog/Delete";
+import errorMessage from "../shared/ErrrorMessage";
 interface PrescriptionProps {
   bread: {
     link: string;
@@ -57,21 +58,25 @@ const AllPrescription = ({ bread, role }: PrescriptionProps) => {
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
   };
-  const [deletePrescription] = useDeletePrescriptionMutation();
+  const [deleteprescription] = useDeletePrescriptionMutation();
   const deleteHandler = async () => {
     try {
-      const res = await deletePrescription(deletedId);
-      //@ts-ignore
-      if (res?.data) {
+      const res = await deleteprescription(deletedId).unwrap();
+      if (res) {
         setOpen(false);
         successMessage({
           header: "Thank You",
           message: "prescription Delete Successfully",
         });
+      } else {
+        errorMessage({ message: "Something is wrong" });
+        setOpen(false);
       }
       // console.log(deletedId);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      setOpen(false);
+      errorMessage({ message: error?.data });
     }
   };
   return (

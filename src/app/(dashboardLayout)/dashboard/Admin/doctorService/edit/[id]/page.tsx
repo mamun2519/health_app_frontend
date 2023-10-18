@@ -17,6 +17,8 @@ import {
   useDoctorServiceDetailsQuery,
   useUpdateDoctorServiceMutation,
 } from "@/redux/api/doctorServiceApi";
+import { IUpdateService } from "@/app/(dashboardLayout)/dashboard/Doctor/myService/edit/[id]/page";
+import errorMessage from "@/components/shared/ErrrorMessage";
 const AdminServiceUpdatePage = ({ params }: { params: { id: string } }) => {
   const [updateDoctorService] = useUpdateDoctorServiceMutation();
   const boread = [
@@ -53,15 +55,26 @@ const AdminServiceUpdatePage = ({ params }: { params: { id: string } }) => {
     serviceType: data?.serviceType || "",
   };
 
-  const editHandler: SubmitHandler<IDonorRequest> = async (value) => {
+  const editHandler: SubmitHandler<IUpdateService> = async (value) => {
     try {
-      await updateDoctorService({ id: params.id, body: value });
-      successMessage({
-        message: "Service Update Successfully",
-        header: "Thank you",
-      });
+      const res = await updateDoctorService({
+        id: params.id,
+        body: { service: value },
+      }).unwrap();
+      console.log(res);
+      if (res) {
+        successMessage({
+          message: "Service Update Successfully",
+          header: "Thank you",
+        });
+      } else {
+        errorMessage({ message: "Something is wrong" });
+      }
+
       console.log(value);
-    } catch (error) {}
+    } catch (error) {
+      errorMessage({ message: "Something is wrong" });
+    }
   };
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">

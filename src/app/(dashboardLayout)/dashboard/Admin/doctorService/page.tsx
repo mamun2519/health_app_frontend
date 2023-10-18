@@ -30,6 +30,7 @@ import {
   useDeleteServiceMutation,
   useDoctorServiceQuery,
 } from "@/redux/api/doctorServiceApi";
+import errorMessage from "@/components/shared/ErrrorMessage";
 const ManageDoctorServicePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -72,15 +73,22 @@ const ManageDoctorServicePage = () => {
   const [deleteService] = useDeleteServiceMutation();
   const deleteHandler = async () => {
     try {
-      await deleteService(deletedId);
+      const res = await deleteService(deletedId).unwrap();
       // console.log(deletedId);
-      setOpen(false);
-      successMessage({
-        header: "Thank You",
-        message: "Service Delete Successfully",
-      });
+      if (res) {
+        setOpen(false);
+        successMessage({
+          header: "Thank You",
+          message: "Service Delete Successfully",
+        });
+      } else {
+        setOpen(false);
+        errorMessage({ message: "Something is wrong" });
+      }
     } catch (error) {
+      setOpen(false);
       console.log(error);
+      errorMessage({ message: "Something is wrong" });
     }
   };
 

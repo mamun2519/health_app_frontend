@@ -25,6 +25,7 @@ import WhatshotIcon from "@mui/icons-material/Whatshot";
 import GrainIcon from "@mui/icons-material/Grain";
 import DeleteModal from "@/components/dialog/Delete";
 import successMessage from "@/components/shared/SuccessMassage";
+import errorMessage from "@/components/shared/ErrrorMessage";
 const ManageDonorRequestPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -68,19 +69,25 @@ const ManageDonorRequestPage = () => {
 
   const deleteHandler = async () => {
     try {
-      const res = await deleteDonorRequest(deletedId);
-      console.log(res);
+      const res = await deleteDonorRequest(deletedId).unwrap();
+      // console.log(deletedId);
       if (res) {
         setOpen(false);
         successMessage({
           header: "Thank You",
           message: "Donor Request Delete Successfully",
         });
+      } else {
+        setOpen(false);
+        errorMessage({ message: "Something is wrong" });
       }
-    } catch (error) {
+    } catch (error: any) {
+      setOpen(false);
+      errorMessage({ message: "Something is wrong" });
       console.log(error);
     }
   };
+
   console.log(data);
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">

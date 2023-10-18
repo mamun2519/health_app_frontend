@@ -25,6 +25,7 @@ import WhatshotIcon from "@mui/icons-material/Whatshot";
 import GrainIcon from "@mui/icons-material/Grain";
 import DeleteModal from "@/components/dialog/Delete";
 import successMessage from "@/components/shared/SuccessMassage";
+import errorMessage from "../shared/ErrrorMessage";
 interface PaymentProps {
   bread: {
     link: string;
@@ -60,17 +61,18 @@ const ManagePayment = ({ bread, role }: PaymentProps) => {
   const [deletePayment] = useDeletePaymentMutation();
   const deleteHandler = async () => {
     try {
-      const res = await deletePayment(deletedId);
-      console.log(res);
-      // @ts-ignore
-      if (res?.data) {
+      const res = await deletePayment(deletedId).unwrap();
+      if (res) {
         setOpen(false);
         successMessage({
           header: "Thank You",
           message: "Payment History Delete Successfully",
         });
+      } else {
+        errorMessage({ message: "Something is wrong" });
       }
-    } catch (error) {
+    } catch (error: any) {
+      errorMessage(error?.data);
       console.log(error);
     }
   };

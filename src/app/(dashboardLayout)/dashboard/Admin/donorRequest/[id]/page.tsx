@@ -239,7 +239,7 @@ const ManageDonorDetailsPage = ({ params }: { params: { id: string } }) => {
               </div>
             </div>
           </div>
-          {data?.status === "Accepted" && (
+          {/* {data?.status === "Accepted" && (
             <div className=" w-96 absolute">
               <Toast
                 open={open}
@@ -247,7 +247,7 @@ const ManageDonorDetailsPage = ({ params }: { params: { id: string } }) => {
                 message="Donor Accepted Your Request"
               />
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@ import FormInput from "@/components/Form/FormInput";
 import Form from "@/components/Form/FormProvider";
 import errorMessage from "@/components/shared/ErrrorMessage";
 
-interface IUpdateAppointment {
+export interface IUpdateAppointment {
   gender: string;
   age: number;
   weight: number;

@@ -28,6 +28,7 @@ import successMessage from "@/components/shared/SuccessMassage";
 import { useGetAllDoctorQuery } from "@/redux/api/doctorServiceApi";
 import { convertDate } from "@/helper/date";
 import { useDeleteUserMutation } from "@/redux/api/authApi";
+import errorMessage from "../shared/ErrrorMessage";
 interface PaymentProps {
   bread: {
     link: string;
@@ -63,17 +64,21 @@ const ManageDoctor = ({ bread, role }: PaymentProps) => {
   const [deleteUser] = useDeleteUserMutation();
   const deleteHandler = async () => {
     try {
-      const res = await deleteUser(deletedId);
+      const res = await deleteUser(deletedId).unwrap();
       console.log(res);
       // @ts-ignore
-      if (res?.data) {
+      if (res) {
         setOpen(false);
         successMessage({
           header: "Thank You",
           message: "User  Delete Successfully",
         });
+      } else {
+        setOpen(false);
+        errorMessage({ message: "Something is wrong" });
       }
     } catch (error) {
+      setOpen(false);
       console.log(error);
     }
   };
