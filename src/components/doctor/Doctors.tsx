@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Doctor from "./Doctor";
 const Doctors = ({ doctors }: any) => {
   return (
@@ -9,9 +10,12 @@ const Doctors = ({ doctors }: any) => {
         ))}
       </div>
       <div className=" flex justify-end mt-10">
-        <button className=" w-52 h-10 rounded bg-[#d1001c] text-white font-bold ">
+        <Link
+          href="/doctor"
+          className=" w-52 h-10 rounded bg-[#d1001c] text-white font-bold flex justify-center items-center "
+        >
           See More Doctor
-        </button>
+        </Link>
       </div>
     </div>
   );

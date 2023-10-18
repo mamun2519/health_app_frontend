@@ -10,9 +10,10 @@ export const doctorServiceApi = baseApi.injectEndpoints({
       providesTags: ["user"],
     }),
     AllService: build.query({
-      query: () => ({
+      query: (arg: Record<string, any>) => ({
         url: "/doctor-service",
         method: "GET",
+        params: arg,
       }),
       providesTags: ["doctorService"],
     }),

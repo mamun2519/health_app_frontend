@@ -8,6 +8,9 @@ import Donors from "@/components/bloodDonor/Donors";
 import { URL } from "@/constants/common";
 import Doctors from "@/components/doctor/Doctors";
 import YouTube, { Media } from "@/components/ui/Skeleton";
+import { Category } from "@mui/icons-material";
+import ServiceCategory from "@/components/ui/Category";
+import ServiceCategorys from "@/components/ui/Category";
 
 export default async function Home() {
   const res = await fetch(`${URL}/blood-donor/all-donor`, {
@@ -27,6 +30,8 @@ export default async function Home() {
       <Banner />
       <CountService />
       <DonorReg />
+      <ServiceCategorys />
+
       <Doctors doctors={doctor.data.slice(0, 4)} />
       <Donors data={donor?.data.slice(0, 4)} />
 

@@ -6,10 +6,17 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
 
 import { useAppSelector } from "@/redux/hooks";
+import Notification from "../ui/Notificaiton";
 const Navbar = () => {
   const cart = useAppSelector((state) => state.cart.cart);
-
-  console.log(cart.length);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <div className="  bg-[#30029010]">
       <div className="navbar     max-w-7xl mx-auto">
@@ -67,20 +74,10 @@ const Navbar = () => {
               <Link href="/bloodDonor/all">Blood Donor</Link>
             </li>
             <li>
-              <a>Doctor</a>
+              <Link href="/doctor">Doctor</Link>
             </li>
-            <li tabIndex={0}>
-              <details>
-                <summary>Parent</summary>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </details>
+            <li>
+              <Link href="/doctor/service">Service</Link>
             </li>
             <li>
               <Link href="/dashboard">Dashboard</Link>
@@ -106,10 +103,19 @@ const Navbar = () => {
                 </Link>
               </div>
             </div>
-            <div className="text-[#d1001c]  ">
+            <div>
+              <Notification
+                anchorEl={anchorEl}
+                setAnchorEl={setAnchorEl}
+                open={open}
+                handleClick={handleClick}
+                handleClose={handleClose}
+              />
+            </div>
+            {/* <div className="text-[#d1001c]  ">
               {" "}
               <div className="h-10 w-10 relative cursor-pointer">
-                <Link href="/cart">
+                <div>
                   <span className="text-3xl ">
                     <CircleNotificationsIcon />
                   </span>
@@ -117,9 +123,9 @@ const Navbar = () => {
                   <span className="bg-white w-6 h-6 rounded-full absolute text-center  right-[1px]   ">
                     {cart?.length}
                   </span>
-                </Link>
+                </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div>
             <LogoutBtn />
