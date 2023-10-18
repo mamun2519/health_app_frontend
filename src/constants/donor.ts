@@ -223,15 +223,49 @@ export const SelectedDivisions = [
   { value: "Borisal", label: "Borisal" },
 ];
 
+export const formattedChittagongDistricts = ChittagongDistricts.map(
+  (district) => ({
+    value: district.title,
+    label: district.title,
+  })
+);
+export const formattedKhulnaDistricts = KhulnaDistricts.map((district) => ({
+  value: district.title,
+  label: district.title,
+}));
+export const formattedRangpurDistricts = RangpurDistricts.map((district) => ({
+  value: district.title,
+  label: district.title,
+}));
+export const formattedRajshahiDistricts = RajshahiDistricts.map((district) => ({
+  value: district.title,
+  label: district.title,
+}));
+export const formattedMymensinghDistricts = MymensinghDistricts.map(
+  (district) => ({
+    value: district.title,
+    label: district.title,
+  })
+);
+export const formattedBarisalDistricts = BarisalDistricts.map((district) => ({
+  value: district.title,
+  label: district.title,
+}));
+
+export const formattedSylhetDistricts = SylhetDistricts.map((district) => ({
+  value: district.title,
+  label: district.title,
+}));
+
 export const SelectedBloodGroup = [
-  { value: "A Positive", label: "A+" },
-  { value: "A Negative", label: "A" },
-  { value: "AB Positive", label: "AB+" },
-  { value: "AB Negative", label: "AB-" },
-  { value: "B Positive", label: "B+" },
-  { value: "B Negative", label: "B-" },
-  { value: "0 Positive", label: "0+" },
-  { value: "O Negative", label: "0-" },
+  { value: "A+", label: "A+" },
+  { value: "A-", label: "A-" },
+  { value: "AB+", label: "AB+" },
+  { value: "AB-", label: "AB-" },
+  { value: "B+", label: "B+" },
+  { value: "B-", label: "B-" },
+  { value: "0+", label: "0+" },
+  { value: "O-", label: "0-" },
 ];
 export const SelectedGender = [
   { value: "Male", label: "Male" },

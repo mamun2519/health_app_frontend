@@ -125,7 +125,7 @@ const CreateDoctorPage = () => {
               name="name.last_name"
               size="lg:w-96 w-72"
               label="Last Name"
-              placeholder="Enter lastname "
+              placeholder="Enter last name "
             />
           </div>
 

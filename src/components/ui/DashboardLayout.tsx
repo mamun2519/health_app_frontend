@@ -142,7 +142,7 @@ export default function DashboardLayout({
                 <div className="mt-5  sideBarItem-gray-500">
                   {sideBarItem?.icon}
                 </div>
-                <Link href={sideBarItem.link}>{sideBarItem?.level} </Link>
+                <MyLink sideBarItem={sideBarItem}></MyLink>
               </div>
               {/* {sideBarItem?.toggle == true && (
                 <div>

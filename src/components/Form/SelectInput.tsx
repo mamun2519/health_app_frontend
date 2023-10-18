@@ -85,19 +85,12 @@ export default function SelectInput({
           <FormControl className="w-full" variant="standard">
             <InputLabel id="demo-customized-select-label">{label}</InputLabel>
             <Select
-              //    {...field}
-              //   id={id}
-              //    label={label}
-              //     variant="outlined"
-              // color="secondary"
               placeholder={placeholder}
               autoFocus={true}
-              //    className={`w-full outline-none ${size}`}
               labelId="demo-customized-select-label"
               id="demo-customized-select"
               value={value}
               onChange={onChange}
-              //   placeholder="Select CAtegory"
               input={<BootstrapInput />}
             >
               {options?.map((op, i) => (
