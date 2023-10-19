@@ -11,7 +11,7 @@ export const cartApi = baseApi.injectEndpoints({
     }),
     addToCart: build.mutation({
       query: (data: any) => ({
-        url: "/service-offer/addToCart",
+        url: "/service-offer/addToCarts",
         method: "POST",
         data,
       }),

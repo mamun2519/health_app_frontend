@@ -47,7 +47,7 @@ const DoctorServiceDetails = ({ id }: any) => {
   console.log(selectedDate);
   const [selectSlat, setSelectSlat] = useState<any>(null);
   // const [Appointment, setAppointment] = useState([]);
-  const disPatch = useDispatch();
+
   // Callback function to handle date selection
 
   const handleDateSelect = (date: any) => {
@@ -87,7 +87,7 @@ const DoctorServiceDetails = ({ id }: any) => {
     try {
       if (selectSlat && selectedDate) {
         // disPatch(addToCart({ data, service, id: uniqid() }));
-        const res = await addToCart({ ...data }).unwrap();
+        const res = await addToCart(data).unwrap();
         console.log(res);
         if (res) {
           successMessage({
@@ -105,6 +105,7 @@ const DoctorServiceDetails = ({ id }: any) => {
         });
       }
     } catch (error: any) {
+      console.log(error);
       errorMessage({ message: error?.data });
     }
   };
@@ -117,7 +118,13 @@ const DoctorServiceDetails = ({ id }: any) => {
         <div className="w-[40vw] border lg:h-56 h-[420px] rounded  lg:flex gap-5 p-5  relative shadow bg-[#30029010]">
           <div className="lg:h-44 border w-48 rounded border-[#d1001c] p-2">
             <div className=" h-full  lg:block flex w-full justify-center">
-              <Image src={DonorPic} className=" h-full  " alt="Donor Pic" />
+              <Image
+                width={50}
+                height={50}
+                src={service?.doctor?.user?.profile?.avatar}
+                className=" h-full  "
+                alt="Donor Pic"
+              />
             </div>
           </div>
 
