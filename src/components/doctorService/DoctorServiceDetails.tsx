@@ -19,12 +19,14 @@ import {
   setIntoLocalStorage,
 } from "@/utils/local-storage";
 import { useDispatch } from "react-redux";
-import { addToCart } from "@/redux/Slice/cart";
+
 import successMessage from "../shared/SuccessMassage";
 import uniqid from "uniqid";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CreateBookAppointmentSchema } from "../schema/appointment";
 import { useServiceReviewByIdQuery } from "@/redux/api/serviceReview";
+import { useAddToCartMutation } from "@/redux/api/cartApi";
+import LoadingSpinner from "@/utils/Loading";
 interface ICreateBookAppointment {
   bookingDate: string;
   doctorId: string;
@@ -53,11 +55,10 @@ const DoctorServiceDetails = ({ id }: any) => {
     setSelectedDate(dates);
   };
 
-  const { data: service } = useDoctorServiceDetailsQuery({
+  const { data: service, isLoading } = useDoctorServiceDetailsQuery({
     id,
     date: selectedDate,
   });
-  console.log(service);
 
   const { data: review } = useServiceReviewByIdQuery(id);
 
@@ -70,6 +71,7 @@ const DoctorServiceDetails = ({ id }: any) => {
       console.log(data);
     }
   };
+  const [addToCart] = useAddToCartMutation();
 
   const StoreLocalStorageHandler: SubmitHandler<
     ICreateBookAppointment
@@ -82,20 +84,33 @@ const DoctorServiceDetails = ({ id }: any) => {
     data.serviceId = service.id;
     data.price = service?.price;
 
-    if (selectSlat && selectedDate) {
-      disPatch(addToCart({ data, service, id: uniqid() }));
-      successMessage({
-        header: "Wow",
-        message: "Your Appointment Added To card",
-      });
-    } else {
-      errorMessage({
-        message: `Please Select ${
-          (!selectSlat && "Slat") || (!selectedDate && "Booking date")
-        } `,
-      });
+    try {
+      if (selectSlat && selectedDate) {
+        // disPatch(addToCart({ data, service, id: uniqid() }));
+        const res = await addToCart({ ...data }).unwrap();
+        console.log(res);
+        if (res) {
+          successMessage({
+            header: "Wow",
+            message: "Your Appointment Added To card",
+          });
+        } else {
+          errorMessage({ message: "something is wrong" });
+        }
+      } else {
+        errorMessage({
+          message: `Please Select ${
+            (!selectSlat && "Slat") || (!selectedDate && "Booking date")
+          } `,
+        });
+      }
+    } catch (error: any) {
+      errorMessage({ message: error?.data });
     }
   };
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return (
     <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-10 pb-40">
       <div className="  lg:flex gap-5">

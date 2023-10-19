@@ -37,7 +37,7 @@ export default async function Home() {
       <Doctors doctors={doctor.data.slice(0, 4)} />
       <Donors data={donor?.data.slice(0, 4)} />
       <Review />
-      <UpComingService />
+      {/* <UpComingService /> */}
       {/* <YouTube /> */}
       <ContactUs />
       <Footer />

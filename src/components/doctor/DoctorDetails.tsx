@@ -47,7 +47,7 @@ const DoctorDetails = ({ doctor }: any) => {
               </div>
               <div className=" grid  grid-cols-2 border-b  pb-2 mt-3">
                 <span>total Patient</span>
-                <span> {doctor.doctor.total_patient}</span>
+                <span> {doctor?.doctor?.total_patient}</span>
               </div>
               <div className=" grid  grid-cols-2 border-b pb-2 mt-3">
                 <span>Phone Number</span>

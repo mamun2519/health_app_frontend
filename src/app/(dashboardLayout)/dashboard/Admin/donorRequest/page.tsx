@@ -26,6 +26,7 @@ import GrainIcon from "@mui/icons-material/Grain";
 import DeleteModal from "@/components/dialog/Delete";
 import successMessage from "@/components/shared/SuccessMassage";
 import errorMessage from "@/components/shared/ErrrorMessage";
+import LoadingSpinner from "@/utils/Loading";
 const ManageDonorRequestPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -45,7 +46,7 @@ const ManageDonorRequestPage = () => {
   query["page"] = currentPage;
   query["limit"] = pageLimit;
 
-  const { data } = useAllDonorRequestQuery({ ...query });
+  const { data, isLoading } = useAllDonorRequestQuery({ ...query });
   const [deleteDonorRequest] = useDeleteDonorRequestMutation();
 
   const handlePageChange = (event: any, page: any) => {
@@ -88,7 +89,9 @@ const ManageDonorRequestPage = () => {
     }
   };
 
-  console.log(data);
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>

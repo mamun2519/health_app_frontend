@@ -29,6 +29,7 @@ import { useGetAllDoctorQuery } from "@/redux/api/doctorServiceApi";
 import { convertDate } from "@/helper/date";
 import { useDeleteUserMutation } from "@/redux/api/authApi";
 import { useAllAdminQuery, useAllUserQuery } from "@/redux/api/profileApi";
+import LoadingSpinner from "@/utils/Loading";
 interface PaymentProps {
   bread: {
     link: string;
@@ -79,7 +80,10 @@ const ManageAdmin = ({ bread, role }: PaymentProps) => {
     }
   };
 
-  const { data } = useAllAdminQuery({ ...query });
+  const { data, isLoading } = useAllAdminQuery({ ...query });
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   console.log(data);
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">

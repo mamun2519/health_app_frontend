@@ -195,16 +195,7 @@ const managerSideBar = [
     level: "Manage Donor",
     icon: <InboxIcon></InboxIcon>,
   },
-  {
-    link: "/dashboard/Admin/manageAdmin",
-    level: "Manage Admin",
-    icon: <InboxIcon></InboxIcon>,
-  },
-  {
-    link: "/dashboard/Admin/user",
-    level: "Manage User",
-    icon: <InboxIcon></InboxIcon>,
-  },
+
   // {
   //   link: "/dashboard/Admin/appointment",
   //   level: "Withdraw",
@@ -213,38 +204,15 @@ const managerSideBar = [
 ];
 
 const superAdminSideBar = [
-  {
-    link: "/",
-    level: "Company Balance",
-    icon: <InboxIcon></InboxIcon>,
-    toggle: false,
-    // children: [
-    //   {
-    //     link: "/",
-    //     level: "User",
-    //     icon: <InboxIcon></InboxIcon>,
-    //   },
-    // ],
-  },
   ...managerSideBar,
   {
-    link: "/",
-    level: "User",
+    link: "/dashboard/Admin/manageAdmin",
+    level: "Manage Admin",
     icon: <InboxIcon></InboxIcon>,
   },
   {
-    link: "/",
-    level: "blood Donor",
-    icon: <InboxIcon></InboxIcon>,
-  },
-  {
-    link: "/",
-    level: "Doctor",
-    icon: <InboxIcon></InboxIcon>,
-  },
-  {
-    link: "/",
-    level: "Admin",
+    link: "/dashboard/Admin/user",
+    level: "Manage User",
     icon: <InboxIcon></InboxIcon>,
   },
 ];

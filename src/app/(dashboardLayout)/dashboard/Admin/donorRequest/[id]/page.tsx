@@ -15,6 +15,7 @@ import {
 import Toast from "@/components/ui/Toast";
 import successMessage from "@/components/shared/SuccessMassage";
 import DonorReviewModel from "@/components/dialog/DonorReviewModel";
+import LoadingSpinner from "@/utils/Loading";
 const ManageDonorDetailsPage = ({ params }: { params: { id: string } }) => {
   const [open, setOpen] = useState(true);
   const [reviewOpen, setReviewOpen] = React.useState(false);
@@ -59,7 +60,11 @@ const ManageDonorDetailsPage = ({ params }: { params: { id: string } }) => {
       color: "text.primary",
     },
   ];
-  const { data } = useGetDonorRequestDetailsQuery(params.id);
+  const { data, isLoading } = useGetDonorRequestDetailsQuery(params.id);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   const DonorRequestCompleteStatusChangeHandler = async () => {
     try {

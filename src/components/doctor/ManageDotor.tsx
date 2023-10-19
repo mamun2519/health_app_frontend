@@ -29,6 +29,7 @@ import { useGetAllDoctorQuery } from "@/redux/api/doctorServiceApi";
 import { convertDate } from "@/helper/date";
 import { useDeleteUserMutation } from "@/redux/api/authApi";
 import errorMessage from "../shared/ErrrorMessage";
+import LoadingSpinner from "@/utils/Loading";
 interface PaymentProps {
   bread: {
     link: string;
@@ -83,8 +84,10 @@ const ManageDoctor = ({ bread, role }: PaymentProps) => {
     }
   };
 
-  const { data } = useGetAllDoctorQuery({ ...query });
-  console.log(data);
+  const { data, isLoading } = useGetAllDoctorQuery({ ...query });
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>

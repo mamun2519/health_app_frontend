@@ -31,6 +31,7 @@ import {
   useDoctorServiceQuery,
 } from "@/redux/api/doctorServiceApi";
 import errorMessage from "@/components/shared/ErrrorMessage";
+import LoadingSpinner from "@/utils/Loading";
 const ManageDoctorServicePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -68,7 +69,7 @@ const ManageDoctorServicePage = () => {
       color: "text.primary",
     },
   ];
-  const { data } = useAllServiceQuery({ ...query });
+  const { data, isLoading } = useAllServiceQuery({ ...query });
   console.log(data);
   const [deleteService] = useDeleteServiceMutation();
   const deleteHandler = async () => {
@@ -91,6 +92,9 @@ const ManageDoctorServicePage = () => {
       errorMessage({ message: "Something is wrong" });
     }
   };
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">

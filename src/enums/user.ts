@@ -3,5 +3,5 @@ export enum USER_ROLE {
   DOCTOR = "Doctor",
   BLOODDONOR = "BloodDonor",
   ADMIN = "Admin",
-  SUPER_ADMIN = "Super-Admin",
+  SUPER_ADMIN = "SuperAdmin",
 }

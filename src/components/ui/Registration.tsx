@@ -18,6 +18,8 @@ import { URL } from "@/constants/common";
 import { instance } from "@/helper/axios/axiosInstace";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { singUpSchema } from "../schema/singup";
+import { useAppDispatch } from "@/redux/hooks";
+import { setUser } from "@/redux/Slice/user";
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -43,7 +45,7 @@ const Registration = () => {
   const [registerUser] = useRegisterUserMutation();
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
-
+  const dispatch = useAppDispatch();
   const submitHandler: SubmitHandler<UserReg> = async (data) => {
     try {
       const res = await registerUser({
@@ -55,9 +57,16 @@ const Registration = () => {
       if (res.userToken) {
         router.push("/");
         // TODO USE TOST HERE
+        dispatch(
+          setUser({
+            userId: res?.user?.id,
+            email: res?.user?.email,
+            role: res?.user?.role,
+          })
+        );
       }
 
-      storeUserInfo({ accessToken: res.data?.userToken });
+      storeUserInfo({ accessToken: res?.userToken });
     } catch (err: any) {
       setErrorMessage(err?.data);
       console.log(err);

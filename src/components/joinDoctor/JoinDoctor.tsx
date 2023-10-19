@@ -31,6 +31,7 @@ import {
 import MeetRequestModel from "../dialog/MeetRequestModel";
 import OfflineModel from "../dialog/OfflineModel";
 import errorMessage from "../shared/ErrrorMessage";
+import LoadingSpinner from "@/utils/Loading";
 
 const JoinDoctor = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -90,7 +91,7 @@ const JoinDoctor = () => {
       color: "text.primary",
     },
   ];
-  const { data } = useUserAppointmentQuery({ ...query });
+  const { data, isLoading } = useUserAppointmentQuery({ ...query });
   console.log(data);
   const [deleteAppointment] = useDeleteAppointmentMutation();
   const deleteHandler = async () => {
@@ -113,6 +114,10 @@ const JoinDoctor = () => {
       console.log(error);
     }
   };
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">

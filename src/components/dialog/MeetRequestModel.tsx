@@ -54,8 +54,8 @@ export default function MeetRequestModel({
   handleClose,
   appointment,
   appointmentId,
-  setAppointmentId,
-}: OpenModel) {
+}: // setAppointmentId,
+OpenModel) {
   const [url, setUrl] = React.useState(appointment?.meetLink);
   const [JoinDoctor] = useJoinDoctorMutation();
   const submitHundler: SubmitHandler<ICreateMeting> = async (value) => {
@@ -68,8 +68,9 @@ export default function MeetRequestModel({
     };
 
     try {
-      const res = await JoinDoctor(data);
+      const res: any = await JoinDoctor(data);
       console.log(res);
+
       if (res?.data) {
         toast({
           message: "Meet Request Send Successfully",

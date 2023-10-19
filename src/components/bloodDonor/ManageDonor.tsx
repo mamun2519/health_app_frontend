@@ -29,6 +29,7 @@ import { useGetAllDoctorQuery } from "@/redux/api/doctorServiceApi";
 import { convertDate } from "@/helper/date";
 import { useDeleteUserMutation } from "@/redux/api/authApi";
 import { useAllBloodDonorQuery } from "@/redux/api/bloodDonorApi";
+import LoadingSpinner from "@/utils/Loading";
 interface PaymentProps {
   bread: {
     link: string;
@@ -79,8 +80,10 @@ const ManageBloodDonor = ({ bread, role }: PaymentProps) => {
     }
   };
 
-  const { data } = useAllBloodDonorQuery({ ...query });
-  console.log(data);
+  const { data, isLoading } = useAllBloodDonorQuery({ ...query });
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>

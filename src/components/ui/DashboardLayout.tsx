@@ -144,21 +144,6 @@ export default function DashboardLayout({
                 </div>
                 <MyLink sideBarItem={sideBarItem}></MyLink>
               </div>
-              {/* {sideBarItem?.toggle == true && (
-                <div>
-                  {sideBarItem.children.map((item, i) => (
-                    <div className="flex gap-5 px-10" key={i}>
-                      {" "}
-                      <div className="mt-3  sideBarItem-gray-500">
-                        {item?.icon}
-                      </div>
-                      <div className="mt-3">
-                        <Link href={item?.link as string}>{item?.level}</Link>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )} */}
             </div>
           ))}
         </List>

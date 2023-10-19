@@ -11,7 +11,9 @@ const DonorCard = ({ donor }: { donor: any }) => {
       <div className=" flex justify-center  h-32 relative">
         <div className="w-32 h-32   rounded-full  mt-5 border-[#d1001c] border-2  ">
           <Image
-            src={DoctorImage}
+            src={donor.profile?.avatar}
+            width={50}
+            height={50}
             className="w-32 h-32 rounded-full  p-2"
             alt="Doctor Image"
           />

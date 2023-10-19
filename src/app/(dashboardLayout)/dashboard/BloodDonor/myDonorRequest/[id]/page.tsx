@@ -10,6 +10,7 @@ import Image from "next/image";
 import { convertDate } from "@/helper/date";
 import { useGetDonorRequestDetailsQuery } from "@/redux/api/donorApi";
 import Toast from "@/components/ui/Toast";
+import LoadingSpinner from "@/utils/Loading";
 const UserDonorDetailsPage = ({ params }: { params: { id: string } }) => {
   const [open, setOpen] = useState(true);
 
@@ -45,8 +46,12 @@ const UserDonorDetailsPage = ({ params }: { params: { id: string } }) => {
       color: "text.primary",
     },
   ];
-  const { data } = useGetDonorRequestDetailsQuery(params.id);
+  const { data, isLoading } = useGetDonorRequestDetailsQuery(params.id);
   console.log(data);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="h-full  border  p-5 rounded-3xl shadow-sm ">

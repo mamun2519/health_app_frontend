@@ -31,6 +31,8 @@ import { ImageUpload } from "../Form/ImageUplaod";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createDonorSchema } from "../schema/donor";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/redux/hooks";
+import { setUser } from "@/redux/Slice/user";
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   "label + &": {
     marginTop: theme.spacing(3),
@@ -65,7 +67,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 const DonorRegistrationForm = () => {
   const [imageUrl, setImageUrl] = useState<string | undefined>();
-
+  const dispatch = useAppDispatch();
   const [error, setErrorMessage] = useState("");
   const [createDonor] = useCreateDonorMutation();
   const [division, setDivision] = useState("");
@@ -88,6 +90,13 @@ const DonorRegistrationForm = () => {
           if (res?.userToken) {
             router.push("/");
             logOut();
+            dispatch(
+              setUser({
+                userId: res?.user?.id,
+                email: res?.user?.email,
+                role: res?.user?.role,
+              })
+            );
 
             // TODO USE TOST HERE
           }

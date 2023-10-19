@@ -11,6 +11,7 @@ import dataPic from "../../../../../../assets/blood_donation_02.jpg";
 import MeetRequestModel from "@/components/dialog/MeetRequestModel";
 import OfflineModel from "@/components/dialog/OfflineModel";
 import { useActiveGoogleMeetQuery } from "@/redux/api/googleMeetApi";
+import LoadingSpinner from "@/utils/Loading";
 const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
   const [appointmentId, setAppointmentId] = useState("");
   const [open, setOpen] = useState(false);
@@ -44,9 +45,11 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
       color: "text.primary",
     },
   ];
-  const { data } = useAppointmentDetailsQuery(params.id);
+  const { data, isLoading } = useAppointmentDetailsQuery(params.id);
   const { data: meet } = useActiveGoogleMeetQuery(data?.service?.id);
-  console.log(meet);
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return (
     <div>
       <div className="h-full  border  p-5 rounded-3xl shadow-sm  mt-3">

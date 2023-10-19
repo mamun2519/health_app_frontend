@@ -25,6 +25,7 @@ import { convertDate } from "@/helper/date";
 import successMessage from "../shared/SuccessMassage";
 import DeleteModal from "../dialog/Delete";
 import errorMessage from "../shared/ErrrorMessage";
+import LoadingSpinner from "@/utils/Loading";
 interface PrescriptionProps {
   bread: {
     link: string;
@@ -53,7 +54,7 @@ const AllPrescription = ({ bread, role }: PrescriptionProps) => {
   query["page"] = currentPage;
   query["limit"] = pageLimit;
 
-  const { data } = useAllPrescriptionQuery({ ...query });
+  const { data, isLoading } = useAllPrescriptionQuery({ ...query });
   console.log(data);
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
@@ -79,6 +80,9 @@ const AllPrescription = ({ bread, role }: PrescriptionProps) => {
       errorMessage({ message: error?.data });
     }
   };
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>

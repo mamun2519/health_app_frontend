@@ -10,6 +10,7 @@ import ServiceSalt, { ISalt } from "./SarviceSalt";
 import Link from "next/link";
 import { useDoctorServiceDetailsQuery } from "@/redux/api/doctorServiceApi";
 import { convertDate } from "@/helper/date";
+import LoadingSpinner from "@/utils/Loading";
 const DashboardDoctorServiceDetails = ({
   id,
   bread,
@@ -17,7 +18,10 @@ const DashboardDoctorServiceDetails = ({
   id: string;
   bread: any;
 }) => {
-  const { data } = useDoctorServiceDetailsQuery({ id, date: "" });
+  const { data, isLoading } = useDoctorServiceDetailsQuery({ id, date: "" });
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   console.log(data);
   return (
     <div className="h-full  border  p-5 rounded-3xl shadow-sm  mt-3">

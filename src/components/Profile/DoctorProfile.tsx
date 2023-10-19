@@ -12,6 +12,8 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Form from "../Form/FormProvider";
 import FormInput from "../Form/FormInput";
 import Link from "next/link";
+import errorMessage from "../shared/ErrrorMessage";
+import LoadingSpinner from "@/utils/Loading";
 export type IResetPassword = {
   email: string;
   oldPassword: string;
@@ -19,24 +21,31 @@ export type IResetPassword = {
 };
 const DoctorProfiles = () => {
   const [toggleButton, setToggleButton] = useState(false);
-  const { data } = useMyProfileQuery({ limit: 100, page: 1 });
+  const { data, isLoading } = useMyProfileQuery({ limit: 100, page: 1 });
   console.log(data);
   const [resetPassword] = useResetPasswordMutation();
   const changePasswordHandler: SubmitHandler<IResetPassword> = async (
     value
   ) => {
     try {
-      const res = await resetPassword(value);
+      const res = await resetPassword(value).unwrap();
+      console.log(res);
       if (res) {
         successMessage({
           header: "Thank You",
           message: "Password Reset Successfully",
         });
+      } else {
+        errorMessage({ message: "Something is wrong" });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      errorMessage({ message: error?.data });
     }
   };
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return (
     <div className="  pb-40 ">
       <div className="flex gap-5">

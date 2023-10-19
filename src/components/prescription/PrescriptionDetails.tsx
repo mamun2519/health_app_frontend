@@ -6,6 +6,7 @@ import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import { usePrescriptionDetailsQuery } from "@/redux/api/prescriptionApi";
 import { IMedicine, IReport } from "@/types";
 import { convertDate } from "@/helper/date";
+import LoadingSpinner from "@/utils/Loading";
 interface PrescriptionProps {
   bread: {
     link: string;
@@ -16,7 +17,10 @@ interface PrescriptionProps {
   id: string;
 }
 const PrescriptionDetails = ({ bread, id }: PrescriptionProps) => {
-  const { data } = usePrescriptionDetailsQuery(id);
+  const { data, isLoading } = usePrescriptionDetailsQuery(id);
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   console.log(data);
   return (
     <div>

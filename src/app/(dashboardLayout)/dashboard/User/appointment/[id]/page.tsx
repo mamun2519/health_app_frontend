@@ -12,6 +12,7 @@ import { useActiveGoogleMeetQuery } from "@/redux/api/googleMeetApi";
 import MeetRequestModel from "@/components/dialog/MeetRequestModel";
 import OfflineModel from "@/components/dialog/OfflineModel";
 import DoctorReviewModel from "../../../../../../components/dialog/DoctorReviewMoodel";
+import LoadingSpinner from "@/utils/Loading";
 const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
   const [appointmentId, setAppointmentId] = useState("");
   const [doctorReviewOpen, setDoctorReviewOpen] = useState(false);
@@ -55,10 +56,14 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
       color: "text.primary",
     },
   ];
-  const { data } = useAppointmentDetailsQuery(params.id);
+  const { data, isLoading } = useAppointmentDetailsQuery(params.id);
 
   console.log(data);
   const { data: meet } = useActiveGoogleMeetQuery(data?.service?.id);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   // console.log(meet);
   return (
     <div>

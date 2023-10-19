@@ -8,6 +8,7 @@ import { useAppointmentDetailsQuery } from "@/redux/api/appointmentApi";
 import { convertDate } from "@/helper/date";
 import Image from "next/image";
 import { usePaymentDetailsQuery } from "@/redux/api/paymentApi";
+import LoadingSpinner from "@/utils/Loading";
 
 interface PaymentDetailsProps {
   bread: {
@@ -19,7 +20,11 @@ interface PaymentDetailsProps {
   id: string;
 }
 const UserPaymentDetails = ({ id, bread }: PaymentDetailsProps) => {
-  const { data } = usePaymentDetailsQuery(id);
+  const { data, isLoading } = usePaymentDetailsQuery(id);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div>

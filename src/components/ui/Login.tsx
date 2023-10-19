@@ -14,6 +14,8 @@ import { Alert } from "@mui/material";
 import successMessage from "../shared/SuccessMassage";
 import { loginSchema } from "../schema/login";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useAppDispatch } from "@/redux/hooks";
+import { setUser } from "@/redux/Slice/user";
 type formValue = {
   email: string;
   password: string;
@@ -23,6 +25,7 @@ const Login = () => {
   const [userLogin] = useUserLoginMutation();
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const submitHandler: SubmitHandler<formValue> = async (data) => {
     console.log(data);
     try {
@@ -31,6 +34,13 @@ const Login = () => {
       if (res?.token) {
         router.push("/");
         // TODO USE TOST HERE
+        dispatch(
+          setUser({
+            userId: res?.user?.id,
+            email: res?.user?.email,
+            role: res?.user?.role,
+          })
+        );
       }
 
       storeUserInfo({ accessToken: res?.token.accessToken });

@@ -26,6 +26,7 @@ import GrainIcon from "@mui/icons-material/Grain";
 import DeleteModal from "@/components/dialog/Delete";
 import successMessage from "@/components/shared/SuccessMassage";
 import errorMessage from "../shared/ErrrorMessage";
+import LoadingSpinner from "@/utils/Loading";
 interface PaymentProps {
   bread: {
     link: string;
@@ -77,7 +78,10 @@ const ManagePayment = ({ bread, role }: PaymentProps) => {
     }
   };
 
-  const { data } = useAllPaymentQuery({ ...query });
+  const { data, isLoading } = useAllPaymentQuery({ ...query });
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   console.log(data);
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">

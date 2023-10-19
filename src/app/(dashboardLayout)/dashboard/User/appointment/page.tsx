@@ -30,6 +30,7 @@ import {
   useUserAppointmentQuery,
 } from "@/redux/api/appointmentApi";
 import errorMessage from "@/components/shared/ErrrorMessage";
+import LoadingSpinner from "@/utils/Loading";
 const UserAppointmentPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -67,7 +68,7 @@ const UserAppointmentPage = () => {
       color: "text.primary",
     },
   ];
-  const { data } = useUserAppointmentQuery({ ...query });
+  const { data, isLoading } = useUserAppointmentQuery({ ...query });
   const [deleteAppointment] = useDeleteAppointmentMutation();
   const deleteHandler = async () => {
     try {
@@ -103,6 +104,9 @@ const UserAppointmentPage = () => {
       errorMessage({ message: "Something Is wrong" });
     }
   };
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">

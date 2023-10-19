@@ -19,7 +19,7 @@ export type IResetPassword = {
   oldPassword: string;
   newPassword: string;
 };
-const Profile = () => {
+const ManageAdminProfile = () => {
   const [toggleButton, setToggleButton] = useState(false);
   const { data, isLoading } = useMyProfileQuery({ limit: 100, page: 1 });
   const [resetPassword] = useResetPasswordMutation();
@@ -89,7 +89,7 @@ const Profile = () => {
                     <AccountCircleIcon />
                   </span> */}
                   <Link
-                    href="/dashboard/User/profile/edit"
+                    href="/dashboard/Admin/profile/edit"
                     className="px-4 py-2 text-white rounded bg-red-500"
                   >
                     Update Profile
@@ -468,4 +468,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ManageAdminProfile;

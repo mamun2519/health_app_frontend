@@ -20,8 +20,10 @@ import Badge, { BadgeProps } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Link from "next/link";
+import { setToCart } from "@/redux/Slice/cart";
+import { useMyCartQuery } from "@/redux/api/cartApi";
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -38,9 +40,12 @@ export default function Notification({
   handleClick,
   handleClose,
 }: any) {
-  const cart = useAppSelector((state) => state.cart.cart);
-  const { data } = useMyNotificationQuery({ limit: 100, page: 1 });
+  const dispatch = useAppDispatch();
+
+  const { data: cart } = useMyCartQuery({ limit: 100, page: 1 });
   console.log(cart);
+  const { data } = useMyNotificationQuery({ limit: 100, page: 1 });
+
   return (
     <React.Fragment>
       <div className=" flex">
@@ -107,7 +112,7 @@ export default function Notification({
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <div className="w-full h-[400px] overflow-auto ">
+        <div className="w-[400px] h-[400px] overflow-auto ">
           {data?.map(
             (notification: {
               message: string;
