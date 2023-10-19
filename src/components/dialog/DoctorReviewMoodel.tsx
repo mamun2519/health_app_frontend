@@ -66,7 +66,7 @@ export default function DoctorReviewModel({
       } else {
         setErrorMessage(" Comment Is Required filed");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       errorMessage({ message: error?.data });
       handleClose(!open);

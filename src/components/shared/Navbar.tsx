@@ -8,7 +8,6 @@ import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
 import { useAppSelector } from "@/redux/hooks";
 import Notification from "../ui/Notificaiton";
 const Navbar = () => {
-  const cart = useAppSelector((state) => state.cart.cart);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -89,20 +88,6 @@ const Navbar = () => {
         </div>
         <div className="navbar-end ">
           <div className=" px-8 flex gap-4 ">
-            <div className="text-[#d1001c]  ">
-              {" "}
-              <div className="h-10 w-10 relative cursor-pointer">
-                <Link href="/cart">
-                  <span className="text-3xl ">
-                    <ShoppingCartIcon />
-                  </span>
-
-                  <span className="bg-white w-6 h-6 rounded-full absolute text-center  right-[1px]   ">
-                    {cart?.length}
-                  </span>
-                </Link>
-              </div>
-            </div>
             <div>
               <Notification
                 anchorEl={anchorEl}

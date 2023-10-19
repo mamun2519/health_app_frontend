@@ -4,7 +4,7 @@ import DonorPic from "../../assets/dr-dk-gupta.jpg";
 import Image from "next/image";
 
 import Calender from "../ui/Calender";
-import { Alert, Badge, IconButton } from "@mui/material";
+import { Alert, Badge, IconButton, Rating, Typography } from "@mui/material";
 import ServiceSalt, { ISalt } from "./SarviceSalt";
 import Link from "next/link";
 import { useDoctorServiceDetailsQuery } from "@/redux/api/doctorServiceApi";
@@ -24,6 +24,7 @@ import successMessage from "../shared/SuccessMassage";
 import uniqid from "uniqid";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CreateBookAppointmentSchema } from "../schema/appointment";
+import { useServiceReviewByIdQuery } from "@/redux/api/serviceReview";
 interface ICreateBookAppointment {
   bookingDate: string;
   doctorId: string;
@@ -40,6 +41,7 @@ interface ICreateBookAppointment {
 }
 const DoctorServiceDetails = ({ id }: any) => {
   const [selectedDate, setSelectedDate] = useState("");
+  const [viewAll, setVewAll] = useState(false);
   console.log(selectedDate);
   const [selectSlat, setSelectSlat] = useState<any>(null);
   // const [Appointment, setAppointment] = useState([]);
@@ -55,7 +57,11 @@ const DoctorServiceDetails = ({ id }: any) => {
     id,
     date: selectedDate,
   });
+  console.log(service);
 
+  const { data: review } = useServiceReviewByIdQuery(id);
+
+  console.log(review);
   const SlatBookingHandler = (data: ISalt) => {
     if (data.booking) {
       errorMessage({ message: `Sorry This ${data.time} Slat Already Booked.` });
@@ -105,9 +111,20 @@ const DoctorServiceDetails = ({ id }: any) => {
               Dr, {service?.doctor?.user?.profile?.first_name}{" "}
               {service?.doctor?.user?.profile?.last_name}
             </h3>
-            <p className=" mt- text-gray-800">Specialist Of Medicine</p>
-            <p className=" mt-1 text-gray-800">Reating 4</p>
-            <p className=" mt-1 text-gray-800">Education Of MBBS</p>
+            <p className=" mt- text-gray-800">
+              Specialist Of {service?.doctor?.specialist}
+            </p>
+            <p className=" mt-1 text-gray-800">
+              <Rating
+                name="simple-controlled"
+                value={4}
+                readOnly
+                // onChange={(event, newValue) => {
+                //   setValue(newValue);
+                // }}
+              />
+            </p>
+            <p className=" mt-1 text-gray-800">{service?.doctor?.degree}</p>
             <p className=" mt-1 text-gray-800">
               Presicent Services day{" "}
               {service?.serviceDay.map((text: string) => text)}
@@ -235,38 +252,45 @@ const DoctorServiceDetails = ({ id }: any) => {
           </div>
         </div>
 
-        <div className="  py-5">
+        <div className="  py-5 ">
           <h3 className=" text-xl font-bold">Service Review </h3>
           <div className=" mt-2 grid grid-cols-2 gap-10  pl-8">
-            <div className=" w-72 h-32 border bg-white rounded-3xl  relative">
-              <div className=" pl-10 py-4 pr-3">
-                <h3>Juboraj Islam Mmaun</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur</p>
-              </div>
+            {review?.slice(0, `${viewAll ? 10 : 2}`).map((user: any) => (
+              <div
+                key={user?.id}
+                className=" w-72 h-32 border bg-white rounded-3xl  relative"
+              >
+                <div className=" pl-10 py-4 pr-3">
+                  <Typography className="mt-2" component="legend">
+                    {user?.user?.profile?.first_name}{" "}
+                    {user?.user?.profile?.last_name}
+                  </Typography>
+                  <p>{user?.comment}</p>
+                  <div>
+                    <Rating
+                      name="simple-controlled"
+                      value={user?.rating}
+                      readOnly
+                      // onChange={(event, newValue) => {
+                      //   setValue(newValue);
+                      // }}
+                    />
+                  </div>
+                </div>
 
-              <div className=" absolute w-20 h-20 border-2 border-[#d1001c] rounded-full top-5 left-[-50px]">
-                <Image
-                  src={DonorPic}
-                  className=" w-20 h-20 rounded-full p-2"
-                  alt="Donor Pic"
-                />
+                <div className=" absolute w-20 h-20 border-2 border-[#d1001c] rounded-full top-5 left-[-50px]">
+                  <Image
+                    src={user?.user?.profile?.avatar}
+                    className=" w-20 h-20 rounded-full p-2"
+                    alt="Donor Pic"
+                  />
+                </div>
               </div>
-            </div>
-            <div className=" w-72 h-32 border bg-white rounded-3xl  relative">
-              <div className=" pl-10 py-4 pr-3">
-                <h3>Juboraj Islam Mmaun</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur</p>
-              </div>
+            ))}
 
-              <div className=" absolute w-20 h-20 border-2 border-[#d1001c] rounded-full top-5 left-[-50px]">
-                <Image
-                  src={DonorPic}
-                  className=" w-20 h-20 rounded-full p-2"
-                  alt="Donor Pic"
-                />
-              </div>
-            </div>
-            <p>View All Review</p>
+            <p onClick={() => setVewAll(!viewAll)} className=" cursor-pointer">
+              View All Review
+            </p>
           </div>
         </div>
       </div>

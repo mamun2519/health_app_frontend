@@ -20,6 +20,7 @@
     "daisyui": "^3.9.2",
     "date-fns": "^2.30.0",
     "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
     "next": "13.5.4",
     "rc-slider": "^10.3.1",
     "react": "^18",

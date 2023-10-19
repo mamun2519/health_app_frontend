@@ -11,6 +11,7 @@ import YouTube, { Media } from "@/components/ui/Skeleton";
 import { Category } from "@mui/icons-material";
 import ServiceCategory from "@/components/ui/Category";
 import ServiceCategorys from "@/components/ui/Category";
+import Review from "@/components/home/Review";
 
 export default async function Home() {
   const res = await fetch(`${URL}/blood-donor/all-donor`, {
@@ -34,7 +35,7 @@ export default async function Home() {
 
       <Doctors doctors={doctor.data.slice(0, 4)} />
       <Donors data={donor?.data.slice(0, 4)} />
-
+      <Review />
       {/* <YouTube /> */}
       <ContactUs />
       <Footer />

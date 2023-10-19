@@ -24,6 +24,7 @@ export const baseApi = createApi({
     "User",
     "Admin",
     "serviceReview",
+    "notification",
   ],
 });
 

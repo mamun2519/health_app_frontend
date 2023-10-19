@@ -10,10 +10,27 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
-
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
+import { useMyNotificationQuery } from "@/redux/api/notificationApi";
+import { InputLabel } from "@mui/material";
+import moment from "moment";
+import Badge, { BadgeProps } from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
+
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useAppSelector } from "@/redux/hooks";
+import Link from "next/link";
+
+const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: "0 4px",
+  },
+}));
 export default function Notification({
   anchorEl,
   setAnchorEl,
@@ -21,35 +38,40 @@ export default function Notification({
   handleClick,
   handleClose,
 }: any) {
+  const cart = useAppSelector((state) => state.cart.cart);
+  const { data } = useMyNotificationQuery({ limit: 100, page: 1 });
+  console.log(cart);
   return (
     <React.Fragment>
-      <Box>
-        <Tooltip title="Account settings">
-          <IconButton
-            onClick={handleClick}
-            size="small"
-            sx={{ ml: 2 }}
-            aria-controls={open ? "account-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-          >
-            <div className="text-[#d1001c]  ">
-              {" "}
-              <div className="h-10 w-10 relative cursor-pointer">
-                <div>
-                  <span className="text-3xl ">
-                    <CircleNotificationsIcon />
-                  </span>
-
-                  <span className="bg-white w-6 h-6 rounded-full absolute text-center  right-[1px]   ">
-                    10
-                  </span>
-                </div>
-              </div>
-            </div>
-          </IconButton>
-        </Tooltip>
-      </Box>
+      <div className=" flex">
+        <Link href="/cart">
+          <Box sx={{ margin: "4px" }}>
+            <IconButton aria-label="cart">
+              <StyledBadge badgeContent={cart?.length} color="info">
+                <ShoppingCartIcon className="text-[#d1001c]" />
+              </StyledBadge>
+            </IconButton>
+          </Box>
+        </Link>
+        <Box>
+          <Tooltip title="Notification">
+            <IconButton
+              onClick={handleClick}
+              size="small"
+              // sx={{ ml: 2 }}
+              aria-controls={open ? "account-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+            >
+              <IconButton aria-label="cart">
+                <StyledBadge badgeContent={data?.length} color="info">
+                  <CircleNotificationsIcon className="text-[#d1001c]" />
+                </StyledBadge>
+              </IconButton>
+            </IconButton>
+          </Tooltip>
+        </Box>
+      </div>
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
@@ -85,31 +107,29 @@ export default function Notification({
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> My account
-        </MenuItem>
-        <Divider />
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
+        <div className="w-full h-[400px] overflow-auto ">
+          {data?.map(
+            (notification: {
+              message: string;
+              id: string;
+              createdAt: string;
+            }) => (
+              <MenuItem key={notification.id}>
+                {/* <Avatar /> Profile */}
+                <div className="h-16 border-b px-4">
+                  <InputLabel id="demo-customized-select-label">
+                    {notification.message}
+                  </InputLabel>
+                  <div className="mt-2">
+                    <InputLabel id="demo-customized-select-label">
+                      {moment(notification.createdAt).startOf("hour").fromNow()}
+                    </InputLabel>
+                  </div>
+                </div>
+              </MenuItem>
+            )
+          )}
+        </div>
       </Menu>
     </React.Fragment>
   );
