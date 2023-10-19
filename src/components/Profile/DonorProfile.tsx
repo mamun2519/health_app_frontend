@@ -11,6 +11,7 @@ import { convertDate } from "@/helper/date";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Form from "../Form/FormProvider";
 import FormInput from "../Form/FormInput";
+import Link from "next/link";
 export type IResetPassword = {
   email: string;
   oldPassword: string;
@@ -42,7 +43,11 @@ const DonorProfiles = () => {
         <div className="h-full  border  p-5 rounded-3xl shadow-sm  w-full">
           <div className=" w-full h-[260px]  relative ">
             <Image
-              src={Cover}
+              src={
+                data?.user?.profile?.cover ? data?.user?.profile?.cover : Cover
+              }
+              width={50}
+              height={50}
               className=" object-cover   h-[260px]  w-full rounded-b-3xl rounded-t-xl "
               alt="Cover pic"
             />
@@ -50,7 +55,9 @@ const DonorProfiles = () => {
             <div className=" h-36 lg:w-11/12 border border-[#30029010]  p-5 rounded-3xl shadow-sm lg:absolute  top-52   glass lg:left-12  flex gap-6 items-center">
               <div className=" border-2xl h-full w-36 p-1">
                 <Image
-                  src={Cover}
+                  src={data?.user?.profile?.avatar}
+                  width={50}
+                  height={50}
                   className="  h-full  w-full rounded "
                   alt="Cover pic"
                 />
@@ -65,7 +72,7 @@ const DonorProfiles = () => {
                   <p>{data?.user?.email}</p>
                 </div>
                 <div className=" flex gap-3">
-                  <span className="">
+                  {/* <span className="">
                     <AccountCircleIcon />
                   </span>
                   <span>
@@ -73,7 +80,13 @@ const DonorProfiles = () => {
                   </span>
                   <span>
                     <AccountCircleIcon />
-                  </span>
+                  </span> */}
+                  <Link
+                    href="/dashboard/BloodDonor/profile/edit"
+                    className="px-4 py-2 text-white rounded bg-red-500"
+                  >
+                    Update Profile
+                  </Link>
                 </div>
               </div>
             </div>
@@ -117,7 +130,7 @@ const DonorProfiles = () => {
                   <span>: {data?.user?.profile?.present_Address?.address}</span>
                 </div>
               </div>
-              <div className=" mt-5">
+              {/* <div className=" mt-5">
                 <h3 className=" text-xl">Present Address</h3>
                 <div className=" flex     mt-2">
                   <div className="w-36">
@@ -149,7 +162,7 @@ const DonorProfiles = () => {
                     </span>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="">
               <h3 className=" text-xl">Additional Info</h3>

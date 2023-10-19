@@ -10,6 +10,8 @@ import { convertDate } from "@/helper/date";
 import { useResetPasswordMutation } from "@/redux/api/authApi";
 import { SubmitHandler } from "react-hook-form";
 import successMessage from "../shared/SuccessMassage";
+import CoverPic from "../../assets/Default.jpg";
+import Link from "next/link";
 export type IResetPassword = {
   email: string;
   oldPassword: string;
@@ -34,13 +36,16 @@ const Profile = () => {
       console.log(error);
     }
   };
+
   return (
     <div className="  pb-40 ">
       <div className="flex gap-5">
         <div className="h-full  border  p-5 rounded-3xl shadow-sm  w-full">
           <div className=" w-full h-[260px]  relative ">
             <Image
-              src={Cover}
+              width={50}
+              height={50}
+              src={data?.profile?.cover ? data?.profile?.cover : CoverPic}
               className=" object-cover   h-[260px]  w-full rounded-b-3xl rounded-t-xl "
               alt="Cover pic"
             />
@@ -48,8 +53,10 @@ const Profile = () => {
             <div className=" h-36 lg:w-11/12 border border-[#30029010]  p-5 rounded-3xl shadow-sm lg:absolute  top-52   glass lg:left-12  flex gap-6 items-center">
               <div className=" border-2xl h-full w-36 p-1">
                 <Image
-                  src={Cover}
+                  src={data?.profile?.avatar}
                   className="  h-full  w-full rounded "
+                  width={50}
+                  height={50}
                   alt="Cover pic"
                 />
               </div>
@@ -62,7 +69,7 @@ const Profile = () => {
                   <p>{data?.email}</p>
                 </div>
                 <div className=" flex gap-3">
-                  <span className="">
+                  {/* <span className="">
                     <AccountCircleIcon />
                   </span>
                   <span>
@@ -70,7 +77,13 @@ const Profile = () => {
                   </span>
                   <span>
                     <AccountCircleIcon />
-                  </span>
+                  </span> */}
+                  <Link
+                    href="/dashboard/User/profile/edit"
+                    className="px-4 py-2 text-white rounded bg-red-500"
+                  >
+                    Update Profile
+                  </Link>
                 </div>
               </div>
             </div>
@@ -91,7 +104,7 @@ const Profile = () => {
                   <span>Division</span>
                 </div>
                 <div>
-                  <span>: Chittagong</span>
+                  <span>: {data?.profile?.present_Address?.district}</span>
                 </div>
               </div>
               <div className=" flex     mt-2">
@@ -99,7 +112,7 @@ const Profile = () => {
                   <span>City</span>
                 </div>
                 <div>
-                  <span>: Chittagong</span>
+                  <span>: {data?.profile?.present_Address?.sub_district}</span>
                 </div>
               </div>
               <div className=" flex     mt-2">
@@ -107,10 +120,10 @@ const Profile = () => {
                   <span>Police Station</span>
                 </div>
                 <div>
-                  <span>: Wast Madarbari</span>
+                  <span>: {data?.profile?.present_Address?.ad}</span>
                 </div>
               </div>
-              <div className=" mt-5">
+              {/* <div className=" mt-5">
                 <h3 className=" text-xl">Present Address</h3>
                 <div className=" flex     mt-2">
                   <div className="w-36">
@@ -136,7 +149,7 @@ const Profile = () => {
                     <span>: Wast Madarbari</span>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="">
               <h3 className=" text-xl">Additional Info</h3>
@@ -164,7 +177,7 @@ const Profile = () => {
                   <span>: {data?.profile?.blood_group}</span>
                 </div>
               </div>
-              <div className=" flex     mt-2">
+              {/* <div className=" flex     mt-2">
                 <div className="w-36">
                   <span>specialist</span>
                 </div>
@@ -195,7 +208,7 @@ const Profile = () => {
                 <div>
                   <span>: 100 BDT</span>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
