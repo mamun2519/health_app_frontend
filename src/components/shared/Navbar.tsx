@@ -5,11 +5,29 @@ import LogoutBtn from "../ui/LogoutBtn";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
 
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Notification from "../ui/Notificaiton";
+import { getFromLocalStorage } from "@/utils/local-storage";
+import { authKey } from "@/constants/storageKey";
+import { getUserInfo } from "@/services/auth.Services";
+import { setUser } from "@/redux/Slice/user";
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user.user);
+  const userData: any = getFromLocalStorage(authKey);
+
+  if (userData) {
+    const { userId, email, role } = getUserInfo() as {
+      userId: string;
+      email: string;
+      role: string;
+    };
+
+    dispatch(setUser({ userId, email, role }));
+  }
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -78,25 +96,31 @@ const Navbar = () => {
             <li>
               <Link href="/doctor/service">Service</Link>
             </li>
-            <li>
-              <Link href="/dashboard">Dashboard</Link>
-            </li>
-            <li>
+
+            {user?.role && (
+              <li>
+                <Link href="/dashboard">Dashboard</Link>
+              </li>
+            )}
+
+            {/* <li>
               <a>Request Donor</a>
-            </li>
+            </li> */}
           </ul>
         </div>
         <div className="navbar-end ">
           <div className=" px-8 flex gap-4 ">
-            <div>
-              <Notification
-                anchorEl={anchorEl}
-                setAnchorEl={setAnchorEl}
-                open={open}
-                handleClick={handleClick}
-                handleClose={handleClose}
-              />
-            </div>
+            {user?.role && (
+              <div>
+                <Notification
+                  anchorEl={anchorEl}
+                  setAnchorEl={setAnchorEl}
+                  open={open}
+                  handleClick={handleClick}
+                  handleClose={handleClose}
+                />
+              </div>
+            )}
             {/* <div className="text-[#d1001c]  ">
               {" "}
               <div className="h-10 w-10 relative cursor-pointer">

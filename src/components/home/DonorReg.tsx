@@ -14,14 +14,15 @@ const DonorReg = () => {
               Are You Ready To Donor Registration ?
             </h3>
             <p className=" text-gray-600 mt-2">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga
-              mollitia optio placeat cupiditate! Et voluptatum nulla veniam hic
-              iusto incidunt earum perferendis architecto adipisci, tenetur
-              illum repellendus, saepe sint facere. Lorem ipsum, dolor sit amet
-              consectetur adipisicing elit. Maiores, rem? Odio, eius quos esse
-              dolorem repellendus mollitia laboriosam cum. Nihil repudiandae
-              accusamus accusantium autem quisquam maiores nesciunt numquam
-              porro deleniti!
+              Blood donation is a noble act with myriad benefits. Not only does
+              it save lives by providing a lifeline to those in need, but it
+              also has positive effects on the donor. Donating blood can improve
+              the donors cardiovascular health, reducing the risk of heart
+              disease. It stimulates the production of new blood cells, which
+              can enhance overall well-being. Furthermore, it fosters a sense of
+              unity and goodwill in the community, creating a positive ripple
+              effect that benefits both the donor and the recipient, making the
+              act of giving even more rewarding.
             </p>
 
             <div className=" flex gap-5 mt-5 justify-center">

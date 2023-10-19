@@ -128,10 +128,12 @@ const DonorRegistrationForm = () => {
           <div className=" w-full h-full mt-10 ">
             <Image src={DonorHelp} alt="Donor Pic" className=" w-full" />
             <p className="mt-5">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. A
-              asperiores labore quidem eligendi corporis facere similique autem
-              illum mollitia? Dolor facere blanditiis fugiat reprehenderit quod
-              iure, saepe recusandae odit ea.
+              Blood donation is a noble act with myriad benefits. Not only does
+              it save lives by providing a lifeline to those in need, but it
+              also has positive effects on the donor. Donating blood can improve
+              the donors cardiovascular health, reducing the risk of heart
+              disease. It stimulates the production of new blood cells, which
+              can enhance overall well-being.
             </p>
           </div>
         </div>

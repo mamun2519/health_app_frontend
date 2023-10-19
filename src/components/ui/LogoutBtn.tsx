@@ -23,7 +23,6 @@ const LogoutBtn = () => {
     dispatch(setUser({ userId, email, role }));
   }
 
-  console.log(user);
   const handleLogout = () => {
     logOut();
     dispatch(setUser({ userId: null, email: null, role: null }));

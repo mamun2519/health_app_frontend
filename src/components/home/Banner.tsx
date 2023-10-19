@@ -11,11 +11,11 @@ const Banner = () => {
               Your Blood Can Save Life
             </h3>
             <p className=" text-gray-600 mt-2">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga
-              mollitia optio placeat cupiditate! Et voluptatum nulla veniam hic
-              iusto incidunt earum perferendis architecto adipisci, tenetur
-              illum repellendus, saepe sint facere. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Eaque, ipsa.
+              Blood donation is a selfless act that not only saves lives but
+              also benefits the donor. It enhances cardiovascular health,
+              triggers new blood cell production, and fosters a sense of unity
+              and goodwill in the community, making a positive impact on both
+              donor and recipient.
             </p>
 
             <div className=" flex gap-5 mt-5">
