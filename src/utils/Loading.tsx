@@ -1,4 +1,4 @@
-import LoadingImage from "../assets/Spinner-1s-200px.gif";
+import LoadingImage from "../assets/lofing.gif";
 import Image from "next/image";
 const LoadingSpinner = () => {
   return (

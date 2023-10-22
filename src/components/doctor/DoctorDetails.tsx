@@ -5,13 +5,20 @@ import Image from "next/image";
 
 import DoctorService from "../doctorService/DoctorService";
 const DoctorDetails = ({ doctor }: any) => {
+  console.log(doctor);
   return (
     <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-10 pb-40">
       <div className="   gri gap-5">
         <div className="w-full border lg:h-56 h-[420px] rounded  lg:flex gap-5 p-5   shadow bg-[#30029010]">
           <div className="lg:h-44 border w-48 rounded border-[#d1001c] p-2">
-            <div className=" h-full  lg:block flex w-full justify-center">
-              <Image src={DonorPic} className=" h-full  " alt="Donor Pic" />
+            <div className=" h-full lg:block flex w-full justify-center">
+              <Image
+                src={doctor?.profile?.avatar}
+                width={50}
+                height={50}
+                className=" h-full  w-full"
+                alt="Donor Pic"
+              />
             </div>
           </div>
 

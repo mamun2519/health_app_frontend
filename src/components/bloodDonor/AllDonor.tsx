@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import DonorComponents from "@/components/bloodDonor/DonorsComponents";
 import { MenuItem, Pagination, Select } from "@mui/material";
 import { Limit, SelectedBloodGroup } from "@/constants/donor";
+import LoadingSpinner from "@/utils/Loading";
 const AllDonor = () => {
   const [pageLimit, setLimit] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,8 +17,10 @@ const AllDonor = () => {
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
   };
-  const { data } = useAllBloodDonorQuery(query);
-  console.log(data);
+  const { data, isLoading } = useAllBloodDonorQuery(query);
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return (
     <div>
       {data?.length === 0 && <NoData />}

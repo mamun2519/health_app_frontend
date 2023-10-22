@@ -146,7 +146,7 @@ const UserAppointmentPage = () => {
             </Link> */}
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-5 h-[500px]">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">
               <Table
@@ -221,18 +221,18 @@ const UserAppointmentPage = () => {
                   ))}
                 </TableBody>
               </Table>
-              <div className=" flex justify-center items-center h-12  bg-[#30029010] mt-2 ">
-                <Pagination
-                  count={50}
-                  onChange={handlePageChange}
-                  page={currentPage}
-                  variant="outlined"
-                  shape="rounded"
-                />
-                {/* <p>Selected Page: {currentPage}</p> */}
-              </div>
             </div>
           </TableContainer>
+        </div>
+        <div className=" flex justify-center items-center h-12  bg-[#30029010] mt-2 ">
+          <Pagination
+            count={50}
+            onChange={handlePageChange}
+            page={currentPage}
+            variant="outlined"
+            shape="rounded"
+          />
+          {/* <p>Selected Page: {currentPage}</p> */}
         </div>
         {open && (
           <DeleteModal

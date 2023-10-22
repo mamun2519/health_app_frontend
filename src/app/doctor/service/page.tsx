@@ -5,6 +5,7 @@ import { MenuItem, Pagination, Select } from "@mui/material";
 import React, { useState } from "react";
 import PriceRange from "../../../components/ui/PriceRange";
 import { ServiceCategory } from "@/constants/donor";
+import LoadingSpinner from "@/utils/Loading";
 
 const DoctorServicePage = () => {
   const [pageLimit, setLimit] = useState(10);
@@ -21,13 +22,14 @@ const DoctorServicePage = () => {
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
   };
-  const { data } = useAllServiceQuery({ ...query });
-  console.log(data?.data);
+  const { data, isLoading } = useAllServiceQuery({ ...query });
 
   const handlePriceChange = (value: any) => {
     setPriceRange(value);
   };
-  console.log(priceRange[1]);
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-10 ">

@@ -77,6 +77,7 @@ export default function Notification({
           </Tooltip>
         </Box>
       </div>
+
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
@@ -113,25 +114,35 @@ export default function Notification({
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <div className="w-[400px] h-[400px] overflow-auto ">
-          {data?.map(
-            (notification: {
-              message: string;
-              id: string;
-              createdAt: string;
-            }) => (
-              <MenuItem key={notification.id}>
-                {/* <Avatar /> Profile */}
-                <div className="h-16 border-b px-4">
-                  <InputLabel id="demo-customized-select-label">
-                    {notification.message}
-                  </InputLabel>
-                  <div className="mt-2">
+          {data?.length === 0 ? (
+            <div className=" flex justify-center  items-center h-full">
+              <InputLabel id="demo-customized-select-label">
+                No Notification
+              </InputLabel>{" "}
+            </div>
+          ) : (
+            data?.map(
+              (notification: {
+                message: string;
+                id: string;
+                createdAt: string;
+              }) => (
+                <MenuItem key={notification.id}>
+                  {/* <Avatar /> Profile */}
+                  <div className="h-16 border-b px-4">
                     <InputLabel id="demo-customized-select-label">
-                      {moment(notification.createdAt).startOf("hour").fromNow()}
+                      {notification.message}
                     </InputLabel>
+                    <div className="mt-2">
+                      <InputLabel id="demo-customized-select-label">
+                        {moment(notification.createdAt)
+                          .startOf("hour")
+                          .fromNow()}
+                      </InputLabel>
+                    </div>
                   </div>
-                </div>
-              </MenuItem>
+                </MenuItem>
+              )
             )
           )}
         </div>

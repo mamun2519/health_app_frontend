@@ -122,7 +122,7 @@ const DoctorServiceDetails = ({ id }: any) => {
                 width={50}
                 height={50}
                 src={service?.doctor?.user?.profile?.avatar}
-                className=" h-full  "
+                className=" h-full w-full "
                 alt="Donor Pic"
               />
             </div>

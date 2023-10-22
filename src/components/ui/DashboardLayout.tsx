@@ -4,7 +4,7 @@ import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
+
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
@@ -14,13 +14,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-import Link from "next/link";
-import { DashBoardItem } from "@/components/ui/DashboardItem";
-import { USER_ROLE } from "@/enums/user";
-import { ISideBarItem } from "@/types";
-
-import MyLink from "./MyLink";
-import { getUserInfo } from "../../services/auth.Services";
+import MenuItems from "./ManuItems";
 
 const drawerWidth = 240;
 
@@ -109,11 +103,7 @@ export default function DashboardLayout({
     setOpen(false);
   };
 
-  // @ts-ignore
-  const { role } = getUserInfo();
-  console.log(role);
-  const sideBarItem = DashBoardItem(role);
-
+  // const router = useRouter();
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -136,16 +126,7 @@ export default function DashboardLayout({
         </DrawerHeader>
         <Divider />
         <List>
-          {sideBarItem.map((sideBarItem: any, index) => (
-            <div key={index}>
-              <div className="px-5 flex gap-5 cursor-pointer">
-                <div className="mt-5  sideBarItem-gray-500">
-                  {sideBarItem?.icon}
-                </div>
-                <MyLink sideBarItem={sideBarItem}></MyLink>
-              </div>
-            </div>
-          ))}
+          <MenuItems />
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

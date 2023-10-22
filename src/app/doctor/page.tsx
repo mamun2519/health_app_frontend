@@ -3,6 +3,7 @@ import AllDoctor from "@/components/doctor/AllDoctor";
 import Doctors from "@/components/doctor/Doctors";
 import NoData from "@/components/ui/NoData";
 import { useGetAllDoctorQuery } from "@/redux/api/doctorServiceApi";
+import LoadingSpinner from "@/utils/Loading";
 import { Pagination } from "@mui/material";
 import React, { useState } from "react";
 
@@ -17,8 +18,10 @@ const DoctorPage = () => {
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
   };
-  const { data } = useGetAllDoctorQuery(query);
-  console.log(data);
+  const { data, isLoading } = useGetAllDoctorQuery(query);
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return (
     <div>
       <div className="max-w-7xl mx-auto px-4 lg:px-0 ">
