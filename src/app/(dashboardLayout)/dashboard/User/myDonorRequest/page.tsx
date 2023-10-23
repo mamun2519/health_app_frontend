@@ -31,6 +31,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AccordionRow from "@/components/ui/AccordionRow";
 const MyDonorRequest = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -134,7 +135,7 @@ const MyDonorRequest = () => {
             </Link> */}
           </div>
         </div>
-        <div className="mt-5 hidden  lg:block mg:block">
+        <div className="mt-5 hidden  lg:block md:block xl:block">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">
               <Table
@@ -208,60 +209,72 @@ const MyDonorRequest = () => {
           </TableContainer>
         </div>
 
-        <div className="mt-10">
+        <div className="mt-5 block lg:hidden sm:hidden  xl:hidden">
           {data?.map((donor: any) => (
             <Accordion key={data?.id}>
               <AccordionSummary
-                expandIcon={
-                  <>
-                    {" "}
-                    <div className="  flex gap-2">
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <div className=" flex gap-10">
+                  <div className="  w-28">
+                    <Typography>Request</Typography>
+                  </div>
+
+                  <div className="  flex gap-2  justify-between">
+                    <div className="w-2"></div>
+                    <div className="  flex gap-2 justify-end">
                       <Link
                         href={`/dashboard/User/myDonorRequest/${donor?.id}`}
-                        className="text-blue-500 text-xl"
+                        className="text-blue-500 t"
                       >
                         <RemoveRedEyeIcon />
                       </Link>
                       <Link
                         href={`/dashboard/User/myDonorRequest/edit/${donor?.id}`}
-                        className="text-blue-500 text-xl"
+                        className="text-blue-500 t"
                       >
                         <BorderColorIcon />
                       </Link>
                       <button
                         onClick={() => handleClickOpen(donor?.id)}
-                        className="text-red-500 text-xl  cursor-pointer"
+                        className="text-red-500 t=  cursor-pointer"
                       >
                         <DeleteIcon />
                       </button>
                     </div>
-                    <div className=" flex">
-                      <ExpandMoreIcon />
-                    </div>
-                  </>
-                }
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <div className="r">
-                  <div>
-                    <p>Donor Name</p>
                   </div>
                 </div>
               </AccordionSummary>
               <AccordionDetails>
-                <div className=" h-full py-2 border">
-                  <Typography>Donor Name</Typography>
-                  <Typography className="mt-1">
-                    {" "}
-                    {`${donor?.donor?.user?.profile?.first_name}
-                    ${donor?.donor?.user?.profile?.last_name}`}
-                  </Typography>
-                  <Typography>Donor Name</Typography>
-                  <Typography>Blood Group</Typography>
-                  <Typography>Quantity</Typography>
-                  <Typography>Request Date</Typography>
-                  <Typography>Status</Typography>
+                <div className=" h-full py-2  border-t">
+                  <AccordionRow
+                    rowName="Donor Name"
+                    data={`${donor?.donor?.user?.profile?.first_name}
+  ${donor?.donor?.user?.profile?.last_name}`}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Blood Group"
+                    data={donor?.donor?.user?.profile?.blood_group}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Quantity"
+                    data={donor?.quantity}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Request Date"
+                    data={donor?.donnetDate}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Status"
+                    data={donor?.status}
+                    style="w-36"
+                  />
                 </div>
               </AccordionDetails>
             </Accordion>
