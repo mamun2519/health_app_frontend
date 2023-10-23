@@ -62,7 +62,6 @@ const DoctorServiceDetails = ({ id }: any) => {
 
   const { data: review } = useServiceReviewByIdQuery(id);
 
-  console.log(review);
   const SlatBookingHandler = (data: ISalt) => {
     if (data.booking) {
       errorMessage({ message: `Sorry This ${data.time} Slat Already Booked.` });
@@ -115,7 +114,7 @@ const DoctorServiceDetails = ({ id }: any) => {
   return (
     <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-10 pb-40">
       <div className="  lg:flex gap-5">
-        <div className="w-[40vw] border lg:h-56 h-[420px] rounded  lg:flex gap-5 p-5  relative shadow bg-[#30029010]">
+        <div className="lg:w-[40vw] w-full border lg:h-56 h-[420px] rounded  lg:flex gap-5 p-5  relative shadow bg-[#30029010]">
           <div className="lg:h-44 border w-48 rounded border-[#d1001c] p-2">
             <div className=" h-full  lg:block flex w-full justify-center">
               <Image
@@ -148,7 +147,7 @@ const DoctorServiceDetails = ({ id }: any) => {
             </p>
             <p className=" mt-1 text-gray-800">{service?.doctor?.degree}</p>
             <p className=" mt-1 text-gray-800">
-              Presicent Services day{" "}
+              patient Services day{" "}
               {service?.serviceDay.map((text: string) => text)}
             </p>
             <div className=" mt-2 h-8  bg-[#d1001c] w-48 flex justify-center items-center  rounded text-white  font-medium ">
@@ -158,7 +157,7 @@ const DoctorServiceDetails = ({ id }: any) => {
             </div>
           </div>
         </div>
-        <div className="lg:w-[480px]  border p-5 shadow rounded lg:mt-0 h-full mt-5 bg-[#30029010]">
+        <div className="lg:w-[480px] w-full  border  p-2 shadow rounded lg:mt-0 h-full mt-5 bg-[#30029010]">
           <h3 className=" text-xl font-bold">Appointment Date</h3>
           <Calender handleDateSelect={handleDateSelect} />
 
@@ -242,7 +241,7 @@ const DoctorServiceDetails = ({ id }: any) => {
       </div>
 
       <div className="  gap-5 mt-5  lg:w-[40vw]     lg:absolute top-[335px] ">
-        <div className="h-[65v-h] border  w-[40vw] rounded p-5  relative shadow bg-[#30029010]">
+        <div className="h-[65v-h] border  lg:w-[40vw] w-full rounded p-5  relative shadow bg-[#30029010]">
           <div className=" ">
             <div className="mt-2">
               <h3 className=" text-xl font-bold">About Services</h3>
@@ -276,43 +275,51 @@ const DoctorServiceDetails = ({ id }: any) => {
 
         <div className="  py-5 ">
           <h3 className=" text-xl font-bold">Service Review </h3>
-          <div className=" mt-2 grid grid-cols-2 gap-10  pl-8">
-            {review?.slice(0, `${viewAll ? 10 : 2}`).map((user: any) => (
-              <div
-                key={user?.id}
-                className=" w-72 h-32 border bg-white rounded-3xl  relative"
-              >
-                <div className=" pl-10 py-4 pr-3">
-                  <Typography className="mt-2" component="legend">
-                    {user?.user?.profile?.first_name}{" "}
-                    {user?.user?.profile?.last_name}
-                  </Typography>
-                  <p>{user?.comment}</p>
-                  <div>
-                    <Rating
-                      name="simple-controlled"
-                      value={user?.rating}
-                      readOnly
-                      // onChange={(event, newValue) => {
-                      //   setValue(newValue);
-                      // }}
+          <div className=" flex  lg:block">
+            <div className="lg:w-0 w-4"></div>
+            <div className=" mt-2 grid lg:grid-cols-2 grid-cols-1 gap-5 w-full  pl-8">
+              {review?.slice(0, `${viewAll ? 10 : 2}`).map((user: any) => (
+                <div
+                  key={user?.id}
+                  className=" lg:w-72 w-66 h-32 border bg-white rounded-3xl  relative"
+                >
+                  <div className=" pl-10 py-4 pr-3">
+                    <Typography className="mt-2" component="legend">
+                      {user?.user?.profile?.first_name}{" "}
+                      {user?.user?.profile?.last_name}
+                    </Typography>
+                    <p>{user?.comment}</p>
+                    <div>
+                      <Rating
+                        name="simple-controlled"
+                        value={user?.rating}
+                        readOnly
+                        // onChange={(event, newValue) => {
+                        //   setValue(newValue);
+                        // }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className=" absolute w-20 h-20 border-2 border-[#d1001c] rounded-full top-5 left-[-50px]">
+                    <Image
+                      width={50}
+                      height={50}
+                      src={user?.user?.profile?.avatar}
+                      className=" w-20 h-20 rounded-full p-2"
+                      alt="Donor Pic"
                     />
                   </div>
                 </div>
+              ))}
 
-                <div className=" absolute w-20 h-20 border-2 border-[#d1001c] rounded-full top-5 left-[-50px]">
-                  <Image
-                    src={user?.user?.profile?.avatar}
-                    className=" w-20 h-20 rounded-full p-2"
-                    alt="Donor Pic"
-                  />
-                </div>
-              </div>
-            ))}
-
-            <p onClick={() => setVewAll(!viewAll)} className=" cursor-pointer">
-              View All Review
-            </p>
+              <p
+                onClick={() => setVewAll(!viewAll)}
+                className=" cursor-pointer"
+              >
+                View All Review
+              </p>
+            </div>
           </div>
         </div>
       </div>

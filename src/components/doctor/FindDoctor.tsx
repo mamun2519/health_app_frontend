@@ -10,10 +10,12 @@ const FindDoctor = () => {
 
   return (
     <div className=" mt-20 grid lg:grid-cols-2 grid-cols-1 gap-5 ">
-      <div className=" border w-full h-[500px] p-5">
-        <div className=" flex gap-3  items-center  ">
-          <h3 className=" text-2xl uppercase">Select Service Info</h3>
-          <div className="h-1 bg-red-500 w-52"></div>
+      <div className=" border w-full h-full p-5 bg-[#30029010] ">
+        <div className=" flex gap-3  items-center   ">
+          <h3 className=" text-2xl uppercase">
+            Select {select == "service" ? select : "Doctor"} Info
+          </h3>
+          <div className="h-1 bg-red-500 lg:w-52 w-16"></div>
         </div>
         <div className="mt-10 flex gap-5">
           <button

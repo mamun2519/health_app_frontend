@@ -5,7 +5,6 @@ import Image from "next/image";
 
 import DoctorService from "../doctorService/DoctorService";
 const DoctorDetails = ({ doctor }: any) => {
-  console.log(doctor);
   return (
     <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-10 pb-40">
       <div className="   gri gap-5">
@@ -34,12 +33,12 @@ const DoctorDetails = ({ doctor }: any) => {
             <p className=" mt-1 text-gray-800">
               {doctor?.doctor?.experience} Year Experiences
             </p>
-            <p className=" mt-1 text-gray-800">Reating 4</p>
+            <p className=" mt-1 text-gray-800">Rating 4</p>
           </div>
         </div>
       </div>
 
-      <div className=" grid grid-cols-2  gap-5 mt-5    ">
+      <div className=" grid lg:grid-cols-2  grid-cols-1 gap-5 mt-5    ">
         <div className=" border  rounded p-5  relative shadow bg-[#30029010]">
           <div className=" ">
             <h3 className=" text-xl font-bold">About Doctor</h3>
@@ -113,9 +112,9 @@ const DoctorDetails = ({ doctor }: any) => {
           </div>
         </div>
       </div>
-      <div className="borde   rounded p-5  relative shdow  h-[540px] mt-5">
+      <div className="borde w-full   rounded   relative shdow  h-[540px] mt-5">
         <h3 className=" text-xl font-bold">Doctor Service</h3>
-        <div className="grid grid-cols-2  gap-5 mt   ">
+        <div className="grid lg:grid-cols-2  grid-cols-1 gap-5 mt  ">
           {doctor?.doctor?.doctorServices.map((service: any) => (
             <DoctorService key={service?.id} service={service} />
           ))}

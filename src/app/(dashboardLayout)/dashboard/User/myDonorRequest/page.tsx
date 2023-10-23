@@ -14,7 +14,7 @@ import {
   useDeleteDonorRequestMutation,
   useGetMyUserDonorDataQuery,
 } from "@/redux/api/donorApi";
-import { Pagination, TextField, Typography } from "@mui/material";
+import { Pagination, TextField } from "@mui/material";
 import Select from "react-select";
 import { Days, Limit } from "@/constants/donor";
 import Link from "next/link";
@@ -26,6 +26,11 @@ import DeleteModal from "@/components/dialog/Delete";
 import successMessage from "@/components/shared/SuccessMassage";
 import errorMessage from "@/components/shared/ErrrorMessage";
 import LoadingSpinner from "@/utils/Loading";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 const MyDonorRequest = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -93,20 +98,20 @@ const MyDonorRequest = () => {
   }
 
   return (
-    <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
+    <div className="h-[600px  border  p-3 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
-      <h3 className=" mt-5 text-2xl">My Donor Requested Info</h3>
+      <h3 className=" mt-5 lg:text-2xl text-xl">My Donor Requested Info</h3>
       <div className="mt-5">
-        <div className="flex  justify-between items-center">
+        <div className="lg:flex  justify-between items-center">
           <div>
             <input
               placeholder="Search"
-              className=" w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
+              className=" lg:w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
           </div>
 
-          <div className=" flex gap-3">
+          <div className=" flex gap-3 lg:mt-0 mt-5">
             <Select
               className="w-36 "
               placeholder="filter"
@@ -115,7 +120,7 @@ const MyDonorRequest = () => {
               options={Days}
             />
             <Select
-              className="w-20"
+              className="lg:w-20"
               placeholder="limit"
               defaultValue={pageLimit}
               onChange={(event: any) => setLimit(event?.value)}
@@ -129,7 +134,7 @@ const MyDonorRequest = () => {
             </Link> */}
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-5 hidden  lg:block mg:block">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">
               <Table
@@ -201,6 +206,66 @@ const MyDonorRequest = () => {
               </div>
             </div>
           </TableContainer>
+        </div>
+
+        <div className="mt-10">
+          {data?.map((donor: any) => (
+            <Accordion key={data?.id}>
+              <AccordionSummary
+                expandIcon={
+                  <>
+                    {" "}
+                    <div className="  flex gap-2">
+                      <Link
+                        href={`/dashboard/User/myDonorRequest/${donor?.id}`}
+                        className="text-blue-500 text-xl"
+                      >
+                        <RemoveRedEyeIcon />
+                      </Link>
+                      <Link
+                        href={`/dashboard/User/myDonorRequest/edit/${donor?.id}`}
+                        className="text-blue-500 text-xl"
+                      >
+                        <BorderColorIcon />
+                      </Link>
+                      <button
+                        onClick={() => handleClickOpen(donor?.id)}
+                        className="text-red-500 text-xl  cursor-pointer"
+                      >
+                        <DeleteIcon />
+                      </button>
+                    </div>
+                    <div className=" flex">
+                      <ExpandMoreIcon />
+                    </div>
+                  </>
+                }
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <div className="r">
+                  <div>
+                    <p>Donor Name</p>
+                  </div>
+                </div>
+              </AccordionSummary>
+              <AccordionDetails>
+                <div className=" h-full py-2 border">
+                  <Typography>Donor Name</Typography>
+                  <Typography className="mt-1">
+                    {" "}
+                    {`${donor?.donor?.user?.profile?.first_name}
+                    ${donor?.donor?.user?.profile?.last_name}`}
+                  </Typography>
+                  <Typography>Donor Name</Typography>
+                  <Typography>Blood Group</Typography>
+                  <Typography>Quantity</Typography>
+                  <Typography>Request Date</Typography>
+                  <Typography>Status</Typography>
+                </div>
+              </AccordionDetails>
+            </Accordion>
+          ))}
         </div>
       </div>
 

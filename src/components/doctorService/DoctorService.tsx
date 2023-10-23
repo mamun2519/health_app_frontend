@@ -9,7 +9,7 @@ const DoctorService = ({ service }: any) => {
       href={`/doctor/service/${service?.id}`}
       className=" w-full h-52  flex gap-5  border shadow  rounded bg-[#30029010] mt-5"
     >
-      <div className="w-[230px] flex justify-center      border-r-4 border-[#d1001c]">
+      <div className="w-[230px]  flex justify-center      border-r-4 border-[#d1001c]">
         <div className="w-full h-full  ">
           <Image
             src={service?.avatar}

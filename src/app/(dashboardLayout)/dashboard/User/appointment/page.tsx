@@ -108,6 +108,7 @@ const UserAppointmentPage = () => {
     return <LoadingSpinner />;
   }
 
+  console.log(data);
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>

@@ -129,12 +129,12 @@ export default function DashboardLayout({
           <MenuItems />
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
         {/* <DrawerHeader /> */}
         <div
           className={` ${
             open == false ? "mx-auto " : "lg:pl-20"
-          } lg:max-w-7xl  `}
+          } lg:max-w-7xl  my-5 `}
         >
           {children}{" "}
         </div>

@@ -42,12 +42,19 @@ const SelectDoctor = () => {
       </div>
 
       <div className=" flex items-end h-28 justify-start">
-        <Link
-          href={`/doctor/find/doctor?specialist=${specialist}&experience=${experience}&division=${division}`}
-          className=" w-36 h-10 border rounded bg-[#d1001c] text-white flex justify-center items-center"
-        >
-          Search Doctor
-        </Link>
+        {experience && division && specialist ? (
+          <Link
+            href={`/doctor/find/doctor?specialist=${specialist}&experience=${experience}&division=${division}`}
+            className=" w-36 h-10 border rounded bg-[#d1001c] text-white flex justify-center items-center"
+          >
+            Search Doctor
+          </Link>
+        ) : (
+          <button className=" w-36 h-10 border rounded bg-red-400 text-white flex justify-center items-center">
+            {" "}
+            Search Service
+          </button>
+        )}
       </div>
     </div>
   );

@@ -11,7 +11,6 @@ import { IDonorReview } from "@/types";
 const DonorDetails = ({ id }: { id: string }) => {
   const { data } = useBloodDonorDetailsQuery(id);
 
-  console.log(data?.bloodDonor?.donorReviews);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -76,7 +75,7 @@ const DonorDetails = ({ id }: { id: string }) => {
             <p className=" mt-1 text-gray-800">Status {data?.status}</p>
           </div>
           <div className=" flex gap-2    text-end items-end  lg:mt-0 mt-2">
-            <button className=" px-10 h-10 rounded bg-[#d1001c] text-white font-medium ">
+            <button className=" px-8 lg:px-10 h-10 rounded bg-[#d1001c] text-white font-medium ">
               Message{" "}
             </button>
 
@@ -113,7 +112,7 @@ const DonorDetails = ({ id }: { id: string }) => {
           <div className=" ">
             <h3 className=" text-xl font-bold">About Donor</h3>
             <div className=" mt-8">
-              <div className=" grid  grid-cols-2 border-b  pb-2 mt-3">
+              <div className=" grid  grid-cols-2 border-b  pb-2 mt-3 w-full">
                 <span>Full Name</span>
                 <span>{`${data?.profile?.first_name} ${data?.profile?.last_name}`}</span>
               </div>

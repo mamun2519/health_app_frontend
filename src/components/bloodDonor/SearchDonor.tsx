@@ -20,12 +20,12 @@ const SearchDonor = () => {
   const [selectDistrict, setDistrict] = useState("");
 
   return (
-    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-10">
-      <div className=" grid grid-cols-2  gap-5 ">
+    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-10  mb-20">
+      <div className=" grid lg:grid-cols-2  grid-cols-1 gap-5 ">
         <div className="w-full border h-full p-5 bg-[#30029010] rounded">
           <div className=" flex gap-3  items-center  ">
-            <h3 className=" text-2xl uppercase">Search Blood Donor</h3>
-            <div className="h-1 bg-red-500 w-52"></div>
+            <h3 className=" text-2xl uppercase w-full">Search Blood Donor</h3>
+            <div className="h-1 bg-red-500 lg:w-52 w-20"></div>
           </div>
           <h2 className="text-xl mt-5">Blood Group</h2>
           <div className=" grid lg:grid-cols-4  grid-cols-3 gap-3  mt-2">
@@ -46,7 +46,7 @@ const SearchDonor = () => {
 
           <div className="mt-5">
             <h2 className="text-xl ">Division</h2>
-            <div className=" grid lg:grid-cols-4  grid-cols-3 gap-3  mt-2">
+            <div className=" grid lg:grid-cols-4  grid-cols-2 gap-3  mt-2">
               {divisions.map((division: { title: string }) => (
                 <button
                   onClick={() => setDivision(division.title)}
@@ -168,13 +168,19 @@ const SearchDonor = () => {
           </div>
 
           <div className=" flex gap-5 mt-5 justify-center">
-            <Link
-              href={`/bloodDonor/findDonor?bloodGroup=${bloodDonor}&division=${selectDivision}&district=${selectDistrict}`}
-            >
-              <button className=" w-52 h-10 rounded bg-[#d1001c] text-white font-medium ">
+            {bloodDonor && selectDistrict && divisions ? (
+              <Link
+                href={`/bloodDonor/findDonor?bloodGroup=${bloodDonor}&division=${selectDivision}&district=${selectDistrict}`}
+              >
+                <button className=" w-52 h-10 rounded bg-[#d1001c] text-white font-medium ">
+                  Search Now
+                </button>
+              </Link>
+            ) : (
+              <button className=" w-52 h-10 rounded bg-red-300 text-white font-medium ">
                 Search Now
               </button>
-            </Link>
+            )}
           </div>
         </div>
         <div className="  border  flex justify-center">

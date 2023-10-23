@@ -9,8 +9,8 @@ const DonorReg = () => {
           <Image src={Banners} alt="Banner" className="lg:w-[28vw] w-full" />
         </div>
         <div className=" flex items-center ">
-          <div className=" ">
-            <h3 className=" text-3xl font-medium text-gray-900">
+          <div className="mt-5 lg:mt-0">
+            <h3 className=" text-3xl font-medium text text-gray-900">
               Are You Ready To Donor Registration ?
             </h3>
             <p className=" text-gray-600 mt-2">

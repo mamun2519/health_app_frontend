@@ -7,7 +7,7 @@ import { formatDateToYYYYMMDD } from "@/utils/DateConvater";
 
 export default function BasicDateCalendar({ handleDateSelect }: any) {
   return (
-    <div className=" border bg-white  shadow-sm mt-2">
+    <div className=" border bg-white rounded-xl  shadow-sm mt-2 ">
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DateCalendar onChange={handleDateSelect} />
       </LocalizationProvider>
