@@ -275,7 +275,17 @@ const UserPayment = ({ bread, role }: PaymentProps) => {
                   />
                   <AccordionRow
                     rowName="Invoice"
-                    data={payment?.status}
+                    data={
+                      <div className="w-full">
+                        <Link
+                          href={`/dashboard/${role}/payment/invoice/${payment?.id}`}
+                          className="text-white bg-[#d1001c] px-2 py-1 rounded-full "
+                        >
+                          {" "}
+                          Download Invoice
+                        </Link>
+                      </div>
+                    }
                     style="w-36"
                   />
                 </div>

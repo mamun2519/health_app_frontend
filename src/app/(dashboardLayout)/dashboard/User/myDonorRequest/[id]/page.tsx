@@ -84,7 +84,7 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
 
   console.log(data);
   return (
-    <div className="h-full  border  p-5 rounded-3xl shadow-sm ">
+    <div className="h-full  border  lg:p-5 p-2 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
 
       <div>
@@ -158,7 +158,7 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
               handleClose={handleReviewClose}
             />
           )}
-          <div className=" grid grid-cols-2  gap-5 mt-5    ">
+          <div className=" grid lg:grid-cols-2  grid-cols-1 gap-5 mt-5    ">
             <div className="h-full border  rounded p-5   shadow w-full bg-[#30029010]">
               <div className=" ">
                 <h3 className=" text-xl font-bold">Donor Details</h3>

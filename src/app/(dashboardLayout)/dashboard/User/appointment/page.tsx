@@ -14,7 +14,13 @@ import {
   useDeleteDonorRequestMutation,
   useGetMyUserDonorDataQuery,
 } from "@/redux/api/donorApi";
-import { Pagination, TextField, Typography } from "@mui/material";
+import {
+  Accordion,
+  AccordionSummary,
+  Pagination,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Select from "react-select";
 import { Days, Limit } from "@/constants/donor";
 import Link from "next/link";
@@ -31,6 +37,11 @@ import {
 } from "@/redux/api/appointmentApi";
 import errorMessage from "@/components/shared/ErrrorMessage";
 import LoadingSpinner from "@/utils/Loading";
+
+import AccordionDetails from "@mui/material/AccordionDetails";
+
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AccordionRow from "@/components/ui/AccordionRow";
 const UserAppointmentPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -147,7 +158,7 @@ const UserAppointmentPage = () => {
             </Link> */}
           </div>
         </div>
-        <div className="mt-5 h-[500px]">
+        <div className="mt-5 h-[500px]  block lg:hidden sm:hidden  xl:hidden">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">
               <Table
@@ -225,7 +236,8 @@ const UserAppointmentPage = () => {
             </div>
           </TableContainer>
         </div>
-        <div className=" flex justify-center items-center h-12  bg-[#30029010] mt-2 ">
+
+        <div className="  justify-center items-center h-12  bg-[#30029010] mt-2  block lg:flex sm:flex  xl:flex ">
           <Pagination
             count={50}
             onChange={handlePageChange}
@@ -234,6 +246,89 @@ const UserAppointmentPage = () => {
             shape="rounded"
           />
           {/* <p>Selected Page: {currentPage}</p> */}
+        </div>
+
+        <div className="mt-5 block lg:hidden sm:hidden  xl:hidden">
+          {data?.data?.map((appointment: any) => (
+            <Accordion key={appointment?.id}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <div className=" flex gap-10">
+                  <div className="  w-28">
+                    <Typography>Appointment</Typography>
+                  </div>
+
+                  <div className="  flex gap-2  justify-between">
+                    <div className="w-2"></div>
+                    <div className=" flex gap-4 justify-center items-center">
+                      <Link
+                        href={`/dashboard/User/appointment/${appointment?.id}`}
+                        className="text-blue-500 text-xl"
+                      >
+                        <RemoveRedEyeIcon />
+                      </Link>
+                      <Link
+                        href={`/dashboard/User/appointment/edit/${appointment?.id}`}
+                        className="text-blue-500 text-xl"
+                      >
+                        <BorderColorIcon />
+                      </Link>
+                      <button
+                        onClick={() => handleClickOpen(appointment?.id)}
+                        className="text-red-500 text-xl  cursor-pointer"
+                      >
+                        <DeleteIcon />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </AccordionSummary>
+              <AccordionDetails>
+                <div className=" h-full py-2  border-t">
+                  <AccordionRow
+                    rowName="Service Name"
+                    data={appointment?.service?.title}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Appointment Date"
+                    data={appointment?.bookingDate}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Time"
+                    data={appointment?.slatTime}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Serial No"
+                    data={appointment?.serialNo}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Status"
+                    data={appointment?.status}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Booking Cancel"
+                    data={
+                      <button
+                        onClick={() => changeStatusHandler(appointment?.id)}
+                        className="px-8 py-1 rounded-full bg-red-500 text-white"
+                      >
+                        Cancel Now
+                      </button>
+                    }
+                    style="w-36"
+                  />
+                </div>
+              </AccordionDetails>
+            </Accordion>
+          ))}
         </div>
         {open && (
           <DeleteModal

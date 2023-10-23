@@ -54,11 +54,11 @@ const UserDonorDetailsPage = ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <div className="h-full  border  p-5 rounded-3xl shadow-sm ">
+    <div className="h-full  border  lg:p-5 p-3 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
 
       <div>
-        <div className="max-w-7xl mx-auto px-4 lg:px-0 py-10  psb-20">
+        <div className="max-w-7xl mx-auto lg:px-4 px-0 py-10  psb-20">
           {/* <div className="  lg:flex gap-5">
             <div className="w-full border lg:h-56  rounded  lg:flex gap-5 p-5  relative shadow bg-[#30029010] ">
               <div className="lg:h-44 border w-48 rounded border-[#d1001c] p-2">
@@ -107,7 +107,7 @@ const UserDonorDetailsPage = ({ params }: { params: { id: string } }) => {
           </div> */}
 
           <div className=" grid grid-cols-2  gap-5 mt-5    ">
-            <div className="h-full border  rounded p-5   shadow w-full bg-[#30029010]">
+            <div className="h-full border  rounded lg:p-5 p-2  shadow w-full bg-[#30029010]">
               <div className=" ">
                 <h3 className=" text-xl font-bold">User Information</h3>
                 <div className=" mt-8">

@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import { DashBoardItem } from "./DashboardItem";
 import MyLink from "./MyLink";
 import { getUserInfo, logOut } from "@/services/auth.Services";
-import { useRouter } from "next/navigation";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export interface SidebarItem {
   icon: JSX.Element;
@@ -14,9 +15,10 @@ export interface SidebarItem {
 
 const MenuItems = () => {
   const [sideBarItem, setSideBarItem] = useState<SidebarItem[]>([]);
-  const router = useRouter();
-  const user: any = getUserInfo();
 
+  const user: any = getUserInfo();
+  const pathName = usePathname();
+  console.log(pathName);
   useEffect(() => {
     const fetchSideBarItem = async () => {
       const items = DashBoardItem(user?.role);
@@ -25,20 +27,21 @@ const MenuItems = () => {
 
     fetchSideBarItem();
   }, []);
-  console.log(router);
 
   return (
-    <div>
+    <div className=" ">
       {sideBarItem?.map((sideBarItem: any, index: number) => (
-        <div key={sideBarItem.level}>
-          <div className="px-5 flex gap-5 cursor-pointer">
-            <div className="mt-5  sideBarItem-gray-500">
+        <div key={sideBarItem.level} className="py-1">
+          <div
+            className={`${
+              pathName == sideBarItem.link ? "bg-[#d1001c] text-white" : ""
+            } px-5 flex gap-5 cursor-pointer    h-12 rounded-r-3xl`}
+          >
+            <div className="mt-3 sideBarItem-gray-500 ">
               {sideBarItem?.icon}
             </div>
-            <div className="mt-5">
-              <Link href={sideBarItem?.link} passHref>
-                {sideBarItem?.level}
-              </Link>
+            <div className="mt-3">
+              <Link href={sideBarItem?.link}>{sideBarItem?.level}</Link>
             </div>
           </div>
         </div>
