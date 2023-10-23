@@ -126,16 +126,16 @@ const UserAppointmentPage = () => {
       <h3 className=" mt-5 text-2xl">My Appointment Info</h3>
 
       <div className="mt-5">
-        <div className="flex  justify-between items-center">
+        <div className="lg:flex  justify-between items-center">
           <div>
             <input
               placeholder="Search"
-              className=" w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
+              className=" lg:w-80 w-full h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
           </div>
 
-          <div className=" flex gap-3">
+          <div className="lg:mt-0 mt-5 flex gap-3">
             <Select
               className="w-36 "
               placeholder="filter"
@@ -158,7 +158,7 @@ const UserAppointmentPage = () => {
             </Link> */}
           </div>
         </div>
-        <div className="mt-5 h-[500px]  block lg:hidden sm:hidden  xl:hidden">
+        <div className="mt-5 h-[500px]  hidden  lg:block md:block xl:block">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">
               <Table
@@ -237,7 +237,7 @@ const UserAppointmentPage = () => {
           </TableContainer>
         </div>
 
-        <div className="  justify-center items-center h-12  bg-[#30029010] mt-2  block lg:flex sm:flex  xl:flex ">
+        <div className="  justify-center items-center h-12  bg-[#30029010] mt-2  hidden  lg:block md:block xl:block ">
           <Pagination
             count={50}
             onChange={handlePageChange}
@@ -248,7 +248,7 @@ const UserAppointmentPage = () => {
           {/* <p>Selected Page: {currentPage}</p> */}
         </div>
 
-        <div className="mt-5 block lg:hidden sm:hidden  xl:hidden">
+        <div className="mt-5  block lg:hidden sm:hidden  xl:hidden">
           {data?.data?.map((appointment: any) => (
             <Accordion key={appointment?.id}>
               <AccordionSummary

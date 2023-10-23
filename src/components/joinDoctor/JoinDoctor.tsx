@@ -32,7 +32,12 @@ import MeetRequestModel from "../dialog/MeetRequestModel";
 import OfflineModel from "../dialog/OfflineModel";
 import errorMessage from "../shared/ErrrorMessage";
 import LoadingSpinner from "@/utils/Loading";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
 
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AccordionRow from "@/components/ui/AccordionRow";
 const JoinDoctor = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -125,16 +130,16 @@ const JoinDoctor = () => {
       <h3 className=" mt-5 text-2xl">Doctor Join</h3>
 
       <div className="mt-5">
-        <div className="flex  justify-between items-center">
+        <div className="lg:flex  justify-between items-center">
           <div>
             <input
               placeholder="Search"
-              className=" w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
+              className=" lg:w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
           </div>
 
-          <div className=" flex gap-3">
+          <div className="lg:mt-0 mt-5 flex gap-3">
             <Select
               className="w-36 "
               placeholder="filter"
@@ -157,7 +162,7 @@ const JoinDoctor = () => {
         </Link> */}
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-5 hidden  lg:block md:block xl:block">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">
               <Table
@@ -262,6 +267,90 @@ const JoinDoctor = () => {
               </div>
             </div>
           </TableContainer>
+        </div>
+        <div className="mt-5 block lg:hidden sm:hidden  xl:hidden">
+          {data?.data?.map((appointment: any) => {
+            const activeGoogleMeet = appointment?.service.GoogleMeet.find(
+              (meet: any) => meet.status === "Active"
+            );
+            return (
+              <Accordion key={appointment?.id}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <div className=" flex gap-10">
+                    <div className="  w-28">
+                      <Typography>Request</Typography>
+                    </div>
+
+                    <div className="  flex gap-2  justify-between">
+                      <div className="w-2"></div>
+                      <button
+                        onClick={() => handleDeleteClickOpen(appointment?.id)}
+                        className="text-red-500 text-xl  cursor-pointer"
+                      >
+                        <DeleteIcon />
+                      </button>
+                    </div>
+                  </div>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <div className=" h-full py-2  border-t">
+                    <AccordionRow
+                      rowName="Doctor Name"
+                      data={` Dr ${appointment?.doctor?.user?.profile?.first_name}
+                    ${appointment?.doctor?.user?.profile?.last_name}`}
+                      style="w-36"
+                    />
+                    <AccordionRow
+                      rowName="Appointment Name"
+                      data={appointment?.service?.title}
+                      style="w-36"
+                    />
+                    <AccordionRow
+                      rowName="Meting Time"
+                      data={appointment?.slatTime}
+                      style="w-36"
+                    />
+                    <AccordionRow
+                      rowName="Serial No"
+                      data={appointment?.serialNo}
+                      style="w-36"
+                    />
+                    <AccordionRow
+                      rowName="Status"
+                      data={
+                        activeGoogleMeet ? (
+                          <span className=" text-[#d1001c]  font-bold">
+                            Online
+                          </span>
+                        ) : (
+                          "Offline"
+                        )
+                      }
+                      style="w-36"
+                    />
+                    <AccordionRow
+                      rowName="Join Doctor"
+                      data={
+                        <button
+                          onClick={() =>
+                            handleClickOpen(appointment.id, appointment)
+                          }
+                          className="px-6 py-1 rounded-full bg-red-500 text-white"
+                        >
+                          Meet Now
+                        </button>
+                      }
+                      style="w-36"
+                    />
+                  </div>
+                </AccordionDetails>
+              </Accordion>
+            );
+          })}
         </div>
         {openDelete && (
           <DeleteModal

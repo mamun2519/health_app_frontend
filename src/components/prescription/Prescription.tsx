@@ -24,6 +24,12 @@ import successMessage from "../shared/SuccessMassage";
 import errorMessage from "../shared/ErrrorMessage";
 import DeleteModal from "../dialog/Delete";
 import LoadingSpinner from "@/utils/Loading";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AccordionRow from "@/components/ui/AccordionRow";
 interface PrescriptionProps {
   bread: {
     link: string;
@@ -86,16 +92,16 @@ const Prescription = ({ bread, role }: PrescriptionProps) => {
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
       <h3 className=" mt-5 text-2xl">My Prescription Info</h3>
       <div className="mt-5">
-        <div className="flex  justify-between items-center">
+        <div className="lg:flex  justify-between items-center">
           <div>
             <input
               placeholder="Search"
-              className=" w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
+              className=" lg:w-80 w-full h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
           </div>
 
-          <div className=" flex gap-3">
+          <div className="lg:mt-0 mt-5 flex gap-3">
             <Select
               className="w-36 "
               placeholder="filter"
@@ -118,7 +124,7 @@ const Prescription = ({ bread, role }: PrescriptionProps) => {
             </Link> */}
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-5 hidden  lg:block md:block xl:block">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">
               <Table
@@ -191,6 +197,73 @@ const Prescription = ({ bread, role }: PrescriptionProps) => {
               </div>
             </div>
           </TableContainer>
+        </div>
+        <div className="mt-5 block lg:hidden sm:hidden  xl:hidden">
+          {data?.data?.map((prescription: any) => (
+            <Accordion key={prescription?.id}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <div className=" flex gap-10">
+                  <div className="  w-28">
+                    <Typography>Request</Typography>
+                  </div>
+
+                  <div className="  flex gap-2  justify-between">
+                    <div className="w-2"></div>
+                    <button
+                      onClick={() => handleClickOpen(prescription?.id)}
+                      className="text-red-500 text-xl  cursor-pointer"
+                    >
+                      <DeleteIcon />
+                    </button>
+                  </div>
+                </div>
+              </AccordionSummary>
+              <AccordionDetails>
+                <div className=" h-full py-2  border-t">
+                  <AccordionRow
+                    rowName="Doctor Name"
+                    data={` Dr, ${prescription?.doctor?.user?.profile?.first_name}{" "}
+                    ${prescription?.doctor?.user?.profile?.last_name}`}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Appointment Name"
+                    data={prescription?.appointment?.service?.title}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Prescription Title"
+                    data={prescription?.title}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Submit Date	"
+                    data={convertDate(prescription?.submitDate)}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Download"
+                    data={
+                      <div className=" flex gap-4 justify-center items-center">
+                        <Link
+                          href={`/dashboard/${role}/prescription/${prescription?.id}`}
+                          className="text-white bg-[#d1001c] px-2 py-1 rounded-full"
+                        >
+                          {" "}
+                          Prescription
+                        </Link>
+                      </div>
+                    }
+                    style="w-36"
+                  />
+                </div>
+              </AccordionDetails>
+            </Accordion>
+          ))}
         </div>
         {open && (
           <DeleteModal
