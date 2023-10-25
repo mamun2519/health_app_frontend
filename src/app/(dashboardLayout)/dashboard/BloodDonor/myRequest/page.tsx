@@ -14,7 +14,7 @@ import {
   useDeleteDonorRequestMutation,
   useGetMyUserDonorDataQuery,
 } from "@/redux/api/donorApi";
-import { Pagination, TextField, Typography } from "@mui/material";
+import { Pagination, TextField } from "@mui/material";
 import Select from "react-select";
 import { Days, Limit } from "@/constants/donor";
 import Link from "next/link";
@@ -25,6 +25,12 @@ import GrainIcon from "@mui/icons-material/Grain";
 import DeleteModal from "@/components/dialog/Delete";
 import successMessage from "@/components/shared/SuccessMassage";
 import LoadingSpinner from "@/utils/Loading";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AccordionRow from "@/components/ui/AccordionRow";
 const MyDonorRequest = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -88,16 +94,16 @@ const MyDonorRequest = () => {
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
       <h3 className=" mt-5 text-2xl">My Donor Requested Info</h3>
       <div className="mt-5">
-        <div className="flex  justify-between items-center">
+        <div className="lg:flex  justify-between items-center">
           <div>
             <input
               placeholder="Search"
-              className=" w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
+              className=" lg:w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
           </div>
 
-          <div className=" flex gap-3">
+          <div className="lg:mt-0 mt-5 flex gap-3">
             <Select
               className="w-36 "
               placeholder="filter"
@@ -120,7 +126,7 @@ const MyDonorRequest = () => {
             </Link> */}
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-5 hidden  lg:block md:block xl:block">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">
               <Table
@@ -170,7 +176,7 @@ const MyDonorRequest = () => {
                           </Link>
                           <button
                             onClick={() => handleClickOpen(donor?.id)}
-                            className="text-red-500 text-xl  cursor-pointer"
+                            className="text-[#d1001c] text-xl  cursor-pointer"
                           >
                             <DeleteIcon />
                           </button>
@@ -192,6 +198,77 @@ const MyDonorRequest = () => {
               </div>
             </div>
           </TableContainer>
+        </div>
+        <div className="mt-5 block lg:hidden sm:hidden  xl:hidden">
+          {data?.map((donor: any) => (
+            <Accordion key={data?.id}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <div className=" flex gap-10">
+                  <div className="  w-28">
+                    <Typography>Request</Typography>
+                  </div>
+
+                  <div className="  flex gap-2  justify-between">
+                    <div className="lg:w-2"></div>
+                    <div className=" flex gap-1 justify-center items-center">
+                      <Link
+                        href={`/dashboard/BloodDonor/myRequest/${donor?.id}`}
+                        className="text-blue-500 text-xl"
+                      >
+                        <RemoveRedEyeIcon />
+                      </Link>
+                      <Link
+                        href={`/dashboard/BloodDonor/myRequest/edit/${donor?.id}`}
+                        className="text-blue-500 text-xl"
+                      >
+                        <BorderColorIcon />
+                      </Link>
+                      <button
+                        onClick={() => handleClickOpen(donor?.id)}
+                        className="text-[#d1001c] text-xl  cursor-pointer"
+                      >
+                        <DeleteIcon />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </AccordionSummary>
+              <AccordionDetails>
+                <div className=" h-full py-2  border-t">
+                  <AccordionRow
+                    rowName="Donor Name"
+                    data={`${donor?.donor?.user?.profile?.first_name}
+  ${donor?.donor?.user?.profile?.last_name}`}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Blood Group"
+                    data={donor?.donor?.user?.profile?.blood_group}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Quantity"
+                    data={donor?.quantity}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Request Date"
+                    data={donor?.donnetDate}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Status"
+                    data={donor?.status}
+                    style="w-36"
+                  />
+                </div>
+              </AccordionDetails>
+            </Accordion>
+          ))}
         </div>
       </div>
 

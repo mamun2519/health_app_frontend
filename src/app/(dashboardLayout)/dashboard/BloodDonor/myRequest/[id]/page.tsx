@@ -16,6 +16,7 @@ import Toast from "@/components/ui/Toast";
 import DonorReviewModel from "@/components/dialog/DonorReviewModel";
 import successMessage from "@/components/shared/SuccessMassage";
 import errorMessage from "@/components/shared/ErrrorMessage";
+import LoadingSpinner from "@/utils/Loading";
 const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
   const [open, setOpen] = useState(true);
   const [reviewOpen, setReviewOpen] = useState(false);
@@ -59,7 +60,7 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
     },
   ];
   const [updateDonorRequest] = useUpdateDonorRequestMutation();
-  const { data } = useGetDonorRequestDetailsQuery(params.id);
+  const { data, isLoading } = useGetDonorRequestDetailsQuery(params.id);
   const DonorRequestCompleteStatusChangeHandler = async () => {
     try {
       const res = await updateDonorRequest({
@@ -79,12 +80,18 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
       console.log(error);
     }
   };
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
   return (
-    <div className="h-full  border  p-5 rounded-3xl shadow-sm ">
-      <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
+    <div className="h-full  border  lg:p-5 rounded-3xl shadow-sm ">
+      <div className="px-5 py-3 lg:px-0 lg:py-0">
+        <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
+      </div>
 
       <div>
-        <div className="max-w-7xl mx-auto px-4 lg:px-0 py-10  psb-20">
+        <div className="max-w-7xl mx-auto px-4 lg:px-0 lg:py-10  psb-20">
           <div className="  lg:flex gap-5">
             <div className="w-full border lg:h-56  rounded  lg:flex gap-5 p-5  relative shadow bg-[#30029010] ">
               <div className="lg:h-44 border w-48 rounded border-[#d1001c] p-2">
@@ -155,7 +162,7 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
               handleClose={handleReviewClose}
             />
           )}
-          <div className=" grid grid-cols-2  gap-5 mt-5    ">
+          <div className=" grid lg:grid-cols-2  gap-5 mt-5    ">
             <div className="h-full border  rounded p-5   shadow w-full bg-[#30029010]">
               <div className=" ">
                 <h3 className=" text-xl font-bold">Donor Details</h3>

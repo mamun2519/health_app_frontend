@@ -31,3 +31,14 @@ export const createDonorSchema = yup.object().shape({
     .oneOf(["Male", "Female", "Other"], "Invalid gender")
     .required("Gender is required"),
 });
+
+export const DonorRequestSchema = yup.object().shape({
+  phone: yup
+    .string()
+    .required("Phone is required")
+    .matches(/^\d{11}$/, "Phone must be a 11-digit number"),
+  location: yup.string().required("Location is required"),
+  pratienCondition: yup.string().required("Patient condition is required"),
+  quantity: yup.mixed().required("Quantity is required"),
+  donnetDate: yup.string().required("Donation date is required"),
+});

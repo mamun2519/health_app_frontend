@@ -10,6 +10,8 @@ import Form from "../Form/FormProvider";
 import FormInput from "../Form/FormInput";
 import { useDonorRequestMutation } from "@/redux/api/donorApi";
 import toast from "../shared/SuccessMassage";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { DonorRequestSchema } from "../schema/donor";
 interface OpenModel {
   open: boolean;
   handleClose: (op: any) => any;
@@ -52,9 +54,12 @@ export default function AddDonorRequestForm({
         <DialogTitle id="alert-dialog-title">
           {"Please Fil up this form"}
         </DialogTitle>
-        <div className="px-5">
+        <div className="px-5 lg:w-[400px]">
           <DialogContentText id="alert-dialog-description">
-            <Form submitHandler={submitHundler}>
+            <Form
+              submitHandler={submitHundler}
+              resolver={yupResolver(DonorRequestSchema)}
+            >
               <div className=" mt-2 ">
                 <FormInput
                   name="phone"
