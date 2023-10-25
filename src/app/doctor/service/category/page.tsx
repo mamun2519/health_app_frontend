@@ -24,14 +24,14 @@ const ServiceCategoryPage = ({
   };
   const { data } = useAllServiceQuery({ ...query });
   return (
-    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-10 ">
+    <div className="max-w-7xl mx-auto lg:px-4  mt-10 ">
       {data?.data?.length === 0 ? (
         <NoData />
       ) : (
         <div className="borde   rounded p-5  relative shdow  h-[540px] mt-5">
           <h3 className=" text-3xl font-bold">Doctor Service</h3>
           <div className=" flex gap-5">
-            <div className="grid grid-cols-2  gap-5 mt   ">
+            <div className="grid lg:grid-cols-2  grid-cols-1 gap-5 mt   ">
               {data?.data?.map((service: any) => (
                 <DoctorService key={service?.id} service={service} />
               ))}

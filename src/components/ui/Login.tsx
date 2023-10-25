@@ -51,19 +51,19 @@ const Login = () => {
     }
   };
   return (
-    <div className="  grid  lg:grid-cols-2 grid-cols-1 gap-5">
+    <div className="  grid  lg:grid-cols-2 grid-cols-1 gap-5 pb-20">
       <div className="border bg-[#30029010] rounded shadow">
         <div className=" w-full h-full mt-10">
           <Image src={LoginPic} alt="Donor Pic" className=" w-full" />
         </div>
       </div>
-      <div className="  flex items-center  justify-center  h-full border-l border ">
+      <div className="  flex items-center  justify-center  h-full border-l border pb-3  w-full">
         <div>
-          <div className=" flex gap-3  items-center pb-1 lg:mt-0 mt-10">
+          <div className=" flex gap-3  items-center pb-1 lg:mt-0 mt-10 ">
             <h3 className=" lg:text-3xl text-2xl uppercase">Login Account</h3>
             <div className="h-1 bg-red-500 lg:w-52 w-20 "></div>
           </div>
-          <p>Welcome To Halt App</p>
+          <p>Welcome To Health App</p>
           {errorMessage && (
             <div className="bg-red-500 h-12 rounded mt-2 flex  items-center px-4">
               <p className="text-white">{errorMessage}</p>
@@ -85,7 +85,7 @@ const Login = () => {
                   <FormInput
                     label="password"
                     placeholder="Enter password"
-                    size="full"
+                    size="w-full"
                     name="password"
                   ></FormInput>
                 </div>

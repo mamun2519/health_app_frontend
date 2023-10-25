@@ -14,7 +14,6 @@ import LoadingSpinner from "@/utils/Loading";
 const UserDonorDetailsPage = ({ params }: { params: { id: string } }) => {
   const [open, setOpen] = useState(true);
 
-  console.log("opne", open);
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -106,7 +105,7 @@ const UserDonorDetailsPage = ({ params }: { params: { id: string } }) => {
             </div>
           </div> */}
 
-          <div className=" grid grid-cols-2  gap-5 mt-5    ">
+          <div className=" grid lg:grid-cols-2  grid-cols-1 gap-5 mt-5    ">
             <div className="h-full border  rounded lg:p-5 p-2  shadow w-full bg-[#30029010]">
               <div className=" ">
                 <h3 className=" text-xl font-bold">User Information</h3>

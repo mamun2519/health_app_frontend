@@ -116,14 +116,14 @@ const DonorRegistrationForm = () => {
     // const time = convertToAmPm(value.salt.startTime);
     // console.log(time);
   };
-  console.log(division);
+
   return (
     <div className=" mt-10  max-w-7xl mx-auto px-4 lg:px-0 ">
-      <div className=" flex gap-5">
-        <div className=" w-[48vw]  bg-[#30029010] p-5">
+      <div className=" lg:flex gap-5">
+        <div className=" lg:w-[48vw] w-full  bg-[#30029010] p-5">
           <div className=" flex gap-3  items-center ">
             <h3 className=" text-3xl uppercase">Join Us To day</h3>
-            <div className="h-1 bg-red-500 w-52"></div>
+            <div className="h-1 bg-red-500 lg:w-52 w-20"></div>
           </div>
           <div className=" w-full h-full mt-10 ">
             <Image src={DonorHelp} alt="Donor Pic" className=" w-full" />
@@ -137,17 +137,17 @@ const DonorRegistrationForm = () => {
             </p>
           </div>
         </div>
-        <div className=" w-full  h-full border-l  pl-10 pt-5 ">
+        <div className=" w-full  h-full border-l  lg:pl-10 pt-5 p-3">
           <div className=" flex gap-3  items-center">
             <h3 className=" text-3xl uppercase">To Be Donor</h3>
-            <div className="h-1 bg-red-500 w-52"></div>
+            <div className="h-1 bg-red-500 lg:w-52 w-28"></div>
           </div>
           <div className=" ">
             <Form
               submitHandler={createDonorHandler}
               resolver={yupResolver(createDonorSchema)}
             >
-              <div className=" grid grid-cols-3 gap-5">
+              <div className=" grid lg:grid-cols-3 gap-5">
                 <div className="mt-3">
                   <FormInput
                     label="First Name"
@@ -173,7 +173,7 @@ const DonorRegistrationForm = () => {
                   ></FormInput>
                 </div>
               </div>
-              <div className=" grid grid-cols-3 gap-5">
+              <div className=" grid lg:grid-cols-3 gap-5">
                 <div className="mt-3">
                   <SelectInput
                     name="blood_group"
@@ -200,7 +200,7 @@ const DonorRegistrationForm = () => {
               <div className=" grid grid-cols- gap-5"></div>
               <div className="mt-5">
                 <h3>Present Address</h3>
-                <div className=" grid grid-cols-2  gap-5">
+                <div className=" grid lg:grid-cols-2  gap-5">
                   <div className="mt-3">
                     {/* <FormInput
                       label="District"
@@ -282,7 +282,7 @@ const DonorRegistrationForm = () => {
                     )}
                   </div>
                 </div>
-                <div className=" grid grid-cols-2 gap-5">
+                <div className=" grid lg:grid-cols-2 gap-5">
                   <div className="mt-3">
                     <FormInput
                       label="Address"

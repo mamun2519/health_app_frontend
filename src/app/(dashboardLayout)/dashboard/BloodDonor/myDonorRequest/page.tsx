@@ -29,6 +29,12 @@ import successMessage from "@/components/shared/SuccessMassage";
 import ModelSelectInput from "@/components/dialog/ModeSelectInput";
 import errorMessage from "@/components/shared/ErrrorMessage";
 import LoadingSpinner from "@/utils/Loading";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AccordionRow from "@/components/ui/AccordionRow";
 const MyDonorRequest = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -140,16 +146,16 @@ const MyDonorRequest = () => {
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
       <h3 className=" mt-5 text-2xl">User Request</h3>
       <div className="mt-5">
-        <div className="flex  justify-between items-center">
+        <div className="lg:flex  justify-between items-center">
           <div>
             <input
               placeholder="Search"
-              className=" w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
+              className=" lg:w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
           </div>
 
-          <div className=" flex gap-3">
+          <div className=" flex gap-3  lg:mt-0 mt-5">
             <Select
               className="w-36 "
               placeholder="filter"
@@ -172,7 +178,7 @@ const MyDonorRequest = () => {
             </Link> */}
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-5  hidden  lg:block md:block xl:block">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">
               <Table
@@ -206,7 +212,7 @@ const MyDonorRequest = () => {
                       <TableCell align="center">
                         <button
                           onClick={() => handleStatusChange(donor?.id)}
-                          className="px-4 py-1 rounded-lg text-white bg-red-500"
+                          className="px-4 py-1 rounded-lg text-white bg-[#d1001c]"
                         >
                           Accepted Now
                         </button>
@@ -227,7 +233,7 @@ const MyDonorRequest = () => {
                           </Link> */}
                           <button
                             onClick={() => handleClickOpen(donor?.id)}
-                            className="text-red-500 text-xl  cursor-pointer"
+                            className="text-[#d1001c] text-xl  cursor-pointer"
                           >
                             <DeleteIcon />
                           </button>
@@ -252,6 +258,84 @@ const MyDonorRequest = () => {
         </div>
       </div>
 
+      <div className="mt-5 block lg:hidden sm:hidden  xl:hidden">
+        {data?.map((donor: any) => (
+          <Accordion key={data?.id}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <div className=" flex gap-10">
+                <div className="  w-28">
+                  <Typography>Request</Typography>
+                </div>
+
+                <div className="  flex gap-2  justify-between">
+                  <div className="w-2"></div>
+                  <div className=" flex gap-4 justify-center items-center">
+                    <Link
+                      href={`/dashboard/BloodDonor/myDonorRequest/${donor?.id}`}
+                      className="text-blue-500 text-xl"
+                    >
+                      <RemoveRedEyeIcon />
+                    </Link>
+                    {/* <Link
+                            href={`/dashboard/user/myDonorRequest/edit/${donor?.id}`}
+                            className="text-blue-500 text-xl"
+                          >
+                            <BorderColorIcon />
+                          </Link> */}
+                    <button
+                      onClick={() => handleClickOpen(donor?.id)}
+                      className="text-[#d1001c] text-xl  cursor-pointer"
+                    >
+                      <DeleteIcon />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </AccordionSummary>
+            <AccordionDetails>
+              <div className=" h-full py-2  border-t">
+                <AccordionRow
+                  rowName="Name"
+                  data={`${donor?.user?.profile?.first_name}
+                  ${donor?.user?.profile?.last_name}`}
+                  style="w-36"
+                />
+                <AccordionRow
+                  rowName="Quantity"
+                  data={donor?.quantity}
+                  style="w-36"
+                />
+                <AccordionRow
+                  rowName="Status"
+                  data={donor?.status}
+                  style="w-36"
+                />
+                <AccordionRow
+                  rowName="Donation Date	"
+                  data={donor?.donnetDate}
+                  style="w-36"
+                />
+                <AccordionRow
+                  rowName="Accepted Request"
+                  data={
+                    <button
+                      onClick={() => handleStatusChange(donor?.id)}
+                      className="px-2 py- rounded-lg text-white bg-[#d1001c]"
+                    >
+                      Accepted Now
+                    </button>
+                  }
+                  style="w-36"
+                />
+              </div>
+            </AccordionDetails>
+          </Accordion>
+        ))}
+      </div>
       {open && (
         <DeleteModal
           open={open}
@@ -267,10 +351,10 @@ const MyDonorRequest = () => {
           handleClose={handleStatusChangeClose}
           text="Update Status Now"
         >
-          <div className="  my-10">
+          <div className="  my-10 w-full">
             <div>
               <Select
-                className="w-96"
+                className="lg:w-96 w-72"
                 onChange={(event: any) => setSelectStatus(event?.value)}
                 options={DonorRequestUpdatedStatus}
               />
@@ -278,7 +362,7 @@ const MyDonorRequest = () => {
               <div className=" h-8 mt-3">
                 <button
                   onClick={() => updateStatusHandler()}
-                  className="bg-red-500 w-full h-full text-white rounded-full"
+                  className="bg-[#d1001c] w-full h-full text-white rounded-full"
                 >
                   Update Now
                 </button>

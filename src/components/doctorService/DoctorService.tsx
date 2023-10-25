@@ -13,9 +13,9 @@ const DoctorService = ({ service }: any) => {
         <div className="w-full h-full  ">
           <Image
             src={service?.avatar}
-            width={50}
+            width={250}
             height={50}
-            className="h-full w-full  p-2"
+            className="h-full lg:w-full   p-2"
             alt="Doctor Image"
           />
         </div>

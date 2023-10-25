@@ -16,7 +16,7 @@ const SelectDoctor = () => {
       <div className="mt-8">
         <label>Doctor Specialist</label>
         <Select
-          className="w-96"
+          className="lg:w-96 w-full"
           defaultValue={specialist}
           onChange={(event: any) => setSpecialist(event?.value)}
           options={DoctorSpecialists}
@@ -25,7 +25,7 @@ const SelectDoctor = () => {
       <div className="mt-3">
         <label>Doctor Experience</label>
         <Select
-          className="w-96"
+          className="lg:w-96 w-full"
           defaultValue={experience}
           onChange={(event: any) => setExperience(event?.value)}
           options={SelectedExperience}
@@ -34,7 +34,7 @@ const SelectDoctor = () => {
       <div className="mt-3">
         <label>Doctor Division</label>
         <Select
-          className="w-96"
+          className="lg:w-96 w-full"
           defaultValue={division}
           onChange={(event: any) => setDivision(event?.value)}
           options={SelectedDivisions}

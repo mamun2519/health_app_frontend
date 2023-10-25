@@ -8,8 +8,9 @@ import { getFromLocalStorage } from "@/utils/local-storage";
 import { authKey } from "@/constants/storageKey";
 import { useBloodDonorDetailsQuery } from "@/redux/api/bloodDonorApi";
 import { IDonorReview } from "@/types";
+import LoadingSpinner from "@/utils/Loading";
 const DonorDetails = ({ id }: { id: string }) => {
-  const { data } = useBloodDonorDetailsQuery(id);
+  const { data, isLoading } = useBloodDonorDetailsQuery(id);
 
   const [open, setOpen] = React.useState(false);
 
@@ -44,6 +45,9 @@ const DonorDetails = ({ id }: { id: string }) => {
     },
   ]; ////
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return (
     <div className="max-w-7xl mx-auto px-4 lg:px-0 py-10  psb-20">
       <div className="  lg:flex gap-5">
