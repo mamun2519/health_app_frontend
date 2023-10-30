@@ -32,6 +32,7 @@ const DoctorDetails = ({ doctor }: any) => {
             </p>
             <p className=" mt-1 text-gray-800">
               {doctor?.doctor?.experience} Year Experiences
+              {/* {doctor?.email} */}
             </p>
             <p className=" mt-1 text-gray-800">Rating 4</p>
           </div>

@@ -35,9 +35,12 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
   console.log(data);
   return (
     <div>
-      <div className="h-full  border  p-5 rounded-3xl shadow-sm  mt-3">
-        <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
-        <h3 className=" mt-5 text-2xl">Book Appointment Details</h3>
+      <div className="h-full  border  lg:p-5 rounded-3xl shadow-sm  mt-3">
+        <div className="p-2">
+          <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
+          <h3 className=" mt-5 text-2xl">Book Appointment Details</h3>
+        </div>
+
         <div>
           <div className="max-w-7xl mx-auto px-4 lg:px-0 py-5  psb-20">
             {/* <div className="  lg:flex gap-5">
@@ -88,7 +91,7 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
               </div>
             </div> */}
 
-            <div className=" grid grid-cols-2  gap-5 mt-5    ">
+            <div className=" grid lg:grid-cols-2 grid-cols-1  gap-5 mt-5    ">
               <div className="h-full border  rounded p-5   shadow w-full bg-[#30029010]">
                 <div className=" ">
                   <h3 className=" text-xl font-bold">Service Details</h3>

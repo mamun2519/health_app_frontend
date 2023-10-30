@@ -11,7 +11,13 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import React, { useState } from "react";
 
-import { Pagination, TextField, Typography } from "@mui/material";
+import {
+  Accordion,
+  AccordionSummary,
+  Pagination,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Select from "react-select";
 import { Days, Limit } from "@/constants/donor";
 import Link from "next/link";
@@ -27,6 +33,12 @@ import {
   useUserAppointmentQuery,
 } from "@/redux/api/appointmentApi";
 import AppointmentChangeStatusModel from "@/components/dialog/AppointmentStatusChangeModel";
+import LoadingSpinner from "@/utils/Loading";
+
+import AccordionDetails from "@mui/material/AccordionDetails";
+
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AccordionRow from "@/components/ui/AccordionRow";
 const DoctorBookAppointment = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -75,7 +87,7 @@ const DoctorBookAppointment = () => {
       color: "text.primary",
     },
   ];
-  const { data } = useDoctorAppointmentQuery({ ...query });
+  const { data, isLoading } = useDoctorAppointmentQuery({ ...query });
   console.log(data);
   const [deleteAppointment] = useDeleteAppointmentMutation();
   const deleteHandler = async () => {
@@ -92,22 +104,26 @@ const DoctorBookAppointment = () => {
     }
   };
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
       <h3 className=" mt-5 text-2xl">My Appointment Info</h3>
 
       <div className="mt-5">
-        <div className="flex  justify-between items-center">
+        <div className="lg:flex  justify-between items-center">
           <div>
             <input
               placeholder="Search"
-              className=" w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
+              className=" lg:w-80 w-full h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
           </div>
 
-          <div className=" flex gap-3">
+          <div className=" flex gap-3 lg:mt-0 mt-5">
             <Select
               className="w-36 "
               placeholder="filter"
@@ -130,7 +146,7 @@ const DoctorBookAppointment = () => {
             </Link> */}
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-5  hidden  lg:block md:block xl:block">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">
               <Table
@@ -226,6 +242,90 @@ const DoctorBookAppointment = () => {
               </div>
             </div>
           </TableContainer>
+        </div>
+
+        <div className="mt-5  block lg:hidden sm:hidden  xl:hidden">
+          {data?.map((appointment: any) => (
+            <Accordion key={appointment?.id}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <div className=" flex gap-10">
+                  <div className="  w-28">
+                    <Typography>Appointment</Typography>
+                  </div>
+
+                  <div className="  flex gap-2  justify-between">
+                    <div className="w-2"></div>
+                    <div className=" flex gap-4 justify-center items-center">
+                      <Link
+                        href={`/dashboard/Doctor/appointment/${appointment?.id}`}
+                        className="text-blue-500 text-xl"
+                      >
+                        <RemoveRedEyeIcon />
+                      </Link>
+                      {/* <Link
+                            href={`/dashboard/Doctor/appointment/edit/${appointment?.id}`}
+                            className="text-blue-500 text-xl"
+                          >
+                            <BorderColorIcon />
+                          </Link> */}
+                      <button
+                        onClick={() => handleClickOpen(appointment?.id)}
+                        className="text-red-500 text-xl  cursor-pointer"
+                      >
+                        <DeleteIcon />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </AccordionSummary>
+              <AccordionDetails>
+                <div className=" h-full py-2  border-t">
+                  <AccordionRow
+                    rowName="Patient Name"
+                    data={`${appointment?.user?.profile?.first_name}
+                        ${appointment?.user?.profile?.last_name}`}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Appointment Date"
+                    data={appointment?.bookingDate}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Schedule"
+                    data={appointment?.slatTime}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Serial No"
+                    data={appointment?.serialNo}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Status"
+                    data={appointment?.status}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Booking Status"
+                    data={
+                      <button
+                        onClick={() => HandleOpenStatusModel(appointment?.id)}
+                        className="px-3 py- rounded-full bg-red-500 text-white"
+                      >
+                        Confirm Now
+                      </button>
+                    }
+                    style="w-36"
+                  />
+                </div>
+              </AccordionDetails>
+            </Accordion>
+          ))}
         </div>
         {open && (
           <DeleteModal

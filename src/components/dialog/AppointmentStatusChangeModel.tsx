@@ -75,7 +75,7 @@ export default function AppointmentChangeStatusModel({
             <p className="  text-xl text-gray-500 mt-2 ">Status</p>
           </div>
 
-          <div className="m w-96">
+          <div className="m lg:w-96 w-72">
             <Form submitHandler={changeStatusHandler}>
               <SelectInput name="status" options={AppointmentChangeStatus} />
 
