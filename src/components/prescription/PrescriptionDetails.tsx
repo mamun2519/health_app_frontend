@@ -32,7 +32,7 @@ const PrescriptionDetails = ({ bread, id }: PrescriptionProps) => {
       </div>
 
       <div className=" h-full lg:w-full w-80 m-auto border mt-5 mb-20 shadow rounded">
-        <div className="h-40 bg-red-400 text-white ">
+        <div className="lg:h-40 h-48 bg-red-400 text-white ">
           <div className=" lg:flex  justify-end items-center lg:mt-0 p-10">
             <div>
               <h3 className=" text-3xl font-bold uppercase">health Care app</h3>
@@ -46,7 +46,7 @@ const PrescriptionDetails = ({ bread, id }: PrescriptionProps) => {
         <div className="lg:p-10 p-4">
           <div className=" lg:flex justify-between items-center">
             <div>
-              <h3 className=" uppercase text-3xl font-bold">
+              <h3 className=" uppercase lg:text-3xl text-2xl font-bold">
                 Doctor Prescription
               </h3>
               <div className="bg-[#30029010] h-1  mt-2  w-64 "></div>
@@ -63,7 +63,7 @@ const PrescriptionDetails = ({ bread, id }: PrescriptionProps) => {
               <div className="bg-[#30029010] h-1  mt-2  w-64 "></div>
             </div>
           </div>
-          <div className=" grid grid-cols-2 gap-20">
+          <div className=" grid lg:grid-cols-2 grid-cols-1  lg:gap-20">
             <div className="mt-10">
               <h3 className="text-2xl text-red-500">Doctor Information</h3>
               <div className=" grid  grid-cols-2  mt-2">

@@ -135,7 +135,7 @@ const CreateDoctorServicePage = () => {
         submitHandler={serviceCreateHandler}
         resolver={yupResolver(ServiceCreateSchema)}
       >
-        <div className=" grid grid-cols-3 gap-5">
+        <div className=" grid lg:grid-cols-3 grid-cols-1 gap-5">
           <div className=" mt-2 ">
             <FormInput
               name="service.title"
@@ -169,7 +169,7 @@ const CreateDoctorServicePage = () => {
             />
           </div>
         </div>
-        <div className="mt-5 grid grid-cols-3 gap-5">
+        <div className="mt-5 grid lg:grid-cols-3 grid-cols-1 gap-5">
           <div className=" mt-8">
             <FormInput
               name="service.aboutSerivce"
@@ -195,8 +195,8 @@ const CreateDoctorServicePage = () => {
             {/* <FormMultipleSelect /> */}
           </div>
         </div>
-        <div className="mt-5 grid grid-cols-3 gap-5">
-          <div className=" mt-8 w-full">
+        <div className="mt-5 grid lg:grid-cols-3 gap-5">
+          <div className=" mt-8 w-full ">
             <div>
               <ImageUpload setImageUrl={setImageUrl} />
               {error && <p className="text-red-500">Image is required</p>}
@@ -217,7 +217,7 @@ const CreateDoctorServicePage = () => {
           </div>
         </div>
 
-        <div className="mt-5 grid grid-cols-3 gap-5">
+        <div className="mt-5 grid lg:grid-cols-3 grid-cols-1 gap-5">
           <div className=" mt-8">
             <FromTimePicker
               name="salt.startTime"

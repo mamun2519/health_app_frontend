@@ -5,12 +5,13 @@ import Image from "next/image";
 
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import Calender from "../ui/Calender";
-import { Alert, Badge, IconButton } from "@mui/material";
+import { Alert, Badge, IconButton, Rating, Typography } from "@mui/material";
 import ServiceSalt, { ISalt } from "./SarviceSalt";
 import Link from "next/link";
 import { useDoctorServiceDetailsQuery } from "@/redux/api/doctorServiceApi";
 import { convertDate } from "@/helper/date";
 import LoadingSpinner from "@/utils/Loading";
+import { useServiceReviewByIdQuery } from "@/redux/api/serviceReview";
 const DashboardDoctorServiceDetails = ({
   id,
   bread,
@@ -18,16 +19,17 @@ const DashboardDoctorServiceDetails = ({
   id: string;
   bread: any;
 }) => {
+  const { data: review } = useServiceReviewByIdQuery(id);
   const { data, isLoading } = useDoctorServiceDetailsQuery({ id, date: "" });
   if (isLoading) {
     return <LoadingSpinner />;
   }
-  console.log(data);
+  console.log(review);
   return (
     <div className="h-full  border  p-5 rounded-3xl shadow-sm  mt-3">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
-      {/* <h3 className=" mt-5 text-2xl">My Service Details</h3> */}
-      <div className=" grid grid-cols-2  gap-5 mt-5    ">
+      {/* <h3 className=" mt-5 text-2xl">My  Service Details</h3> */}
+      <div className=" grid lg:grid-cols-2  grid-cols-1 gap-5 mt-5    ">
         <div className="h-full border  rounded p-5   shadow w-full bg-[#30029010]">
           <div className=" ">
             <h3 className=" text-xl font-bold">Service Details</h3>
@@ -110,49 +112,43 @@ const DashboardDoctorServiceDetails = ({
       </div>
       <div className="  p-5">
         <h3 className=" text-xl font-bold">Service Review </h3>
-        <div className=" mt-2 grid grid-cols-3 gap-10  pl-8">
-          <div className=" w-72 h-32 border bg-white rounded-3xl  relative">
-            <div className=" pl-10 py-4 pr-3">
-              <h3>Juboraj Islam Mmaun</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur</p>
-            </div>
 
-            <div className=" absolute w-20 h-20 border-2 border-[#d1001c] rounded-full top-5 left-[-50px]">
-              <Image
-                src={DonorPic}
-                className=" w-20 h-20 rounded-full p-2"
-                alt="Donor Pic"
-              />
-            </div>
-          </div>
-          <div className=" w-72 h-32 border bg-white rounded-3xl  relative">
-            <div className=" pl-10 py-4 pr-3">
-              <h3>Juboraj Islam Mmaun</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur</p>
-            </div>
+        <div className=" mt-2 grid lg:grid-cols-3 grid-cols-1 gap-10  pl-8">
+          {review?.map((user: any) => (
+            <div
+              key={data?.id}
+              className=" lg:w-72  w-60 h-32 border bg-white rounded-3xl  relative"
+            >
+              <div className=" pl-10 py-4 pr-3">
+                <Typography className="mt-2" component="legend">
+                  {user?.user?.profile?.first_name}{" "}
+                  {user?.user?.profile?.last_name}
+                </Typography>
+                <p>{user?.comment}</p>
+                <div>
+                  <Rating
+                    name="simple-controlled"
+                    value={user?.rating}
+                    readOnly
+                    // onChange={(event, newValue) => {
+                    //   setValue(newValue);
+                    // }}
+                  />
+                </div>
+              </div>
 
-            <div className=" absolute w-20 h-20 border-2 border-[#d1001c] rounded-full top-5 left-[-50px]">
-              <Image
-                src={DonorPic}
-                className=" w-20 h-20 rounded-full p-2"
-                alt="Donor Pic"
-              />
+              <div className=" absolute w-20 h-20 border-2 border-[#d1001c] rounded-full top-5 left-[-50px]">
+                <Image
+                  width={50}
+                  height={50}
+                  src={user?.user?.profile?.avatar}
+                  className=" w-20 h-20 rounded-full p-2"
+                  alt="Donor Pic"
+                />
+              </div>
             </div>
-          </div>
-          <div className=" w-72 h-32 border bg-white rounded-3xl  relative">
-            <div className=" pl-10 py-4 pr-3">
-              <h3>Juboraj Islam Mmaun</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur</p>
-            </div>
+          ))}
 
-            <div className=" absolute w-20 h-20 border-2 border-[#d1001c] rounded-full top-5 left-[-50px]">
-              <Image
-                src={DonorPic}
-                className=" w-20 h-20 rounded-full p-2"
-                alt="Donor Pic"
-              />
-            </div>
-          </div>
           <p>View All Review</p>
         </div>
       </div>

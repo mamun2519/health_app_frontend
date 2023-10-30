@@ -78,7 +78,7 @@ const DoctorPrescriptionEditPage = ({ params }: { params: { id: string } }) => {
       <div className="mt-5"></div>
       <Form submitHandler={editHandler} defaultValues={defaultValues}>
         <h3 className=" mt-5 text-xl">Prescription Details</h3>
-        <div className=" grid grid-cols-3 gap-5">
+        <div className=" grid lg:grid-cols-3 grid-cols-1 gap-5">
           <div className=" mt-2 ">
             <FormInput
               name="prescription.title"
@@ -106,7 +106,7 @@ const DoctorPrescriptionEditPage = ({ params }: { params: { id: string } }) => {
         </div>
         <div className="mt-5">
           <h3 className=" mt-5 text-xl">Medicine Details</h3>
-          <div className=" grid grid-cols-3 gap-5">
+          <div className=" grid lg:grid-cols-3 grid-cols-1 gap-5">
             <div className=" mt-2 ">
               <FormInput
                 name="medicine.durgName"
@@ -132,7 +132,7 @@ const DoctorPrescriptionEditPage = ({ params }: { params: { id: string } }) => {
               />
             </div>
           </div>
-          <div className=" grid grid-cols-3 gap-5 mt-5">
+          <div className=" grid lg:grid-cols-3 grid-cols-1 gap-5 mt-5">
             <div className=" mt-2 ">
               <FormInput
                 name="medicine.eat"
@@ -146,7 +146,7 @@ const DoctorPrescriptionEditPage = ({ params }: { params: { id: string } }) => {
 
         <div className="mt-5">
           <h3 className=" mt-5 text-xl">Health Report</h3>
-          <div className=" grid grid-cols-3 gap-5">
+          <div className=" grid lg:grid-cols-3 gap-5">
             <div className=" mt-2 ">
               <FormInput
                 name="haltReport.testName"
