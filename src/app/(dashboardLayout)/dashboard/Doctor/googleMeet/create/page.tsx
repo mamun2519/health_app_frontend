@@ -109,7 +109,7 @@ const CreateGoogleMeetPage = () => {
         submitHandler={editHandler}
         resolver={yupResolver(GoogleMeetCreateSchema)}
       >
-        <div className=" grid grid-cols-3 gap-5">
+        <div className=" grid lg:grid-cols-3 grid-cols-1 gap-5">
           <div className=" mt-2 ">
             <FormInput
               name="meetLink"

@@ -35,6 +35,13 @@ import {
 } from "@/redux/api/googleMeetApi";
 import { convertDate } from "@/helper/date";
 import errorMessage from "../shared/ErrrorMessage";
+import LoadingSpinner from "@/utils/Loading";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AccordionRow from "@/components/ui/AccordionRow";
 
 const ViewPatient = ({ params }: { params: string }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -79,7 +86,7 @@ const ViewPatient = ({ params }: { params: string }) => {
       color: "text.primary",
     },
   ];
-  const { data } = useDitelesGoogleMeetQuery(params);
+  const { data, isLoading } = useDitelesGoogleMeetQuery(params);
   console.log(data);
 
   const [deleteGoogleMeet] = useDeleteGoogleMeetMutation();
@@ -105,22 +112,26 @@ const ViewPatient = ({ params }: { params: string }) => {
   //   }
   // };
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
       <h3 className=" mt-5 text-2xl">View Patient </h3>
 
       <div className="mt-5">
-        <div className="flex  justify-between items-center">
+        <div className="lg:flex  justify-between items-center">
           <div>
             <input
               placeholder="Search"
-              className=" w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
+              className=" lg:w-80 w-full h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
           </div>
 
-          <div className=" flex gap-3">
+          <div className=" flex gap-3 lg:mt-0 mt-5">
             <Select
               className="w-36 "
               placeholder="filter"
@@ -143,7 +154,7 @@ const ViewPatient = ({ params }: { params: string }) => {
             </Link> */}
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-5 hidden  lg:block md:block xl:block">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">
               <Table
@@ -178,7 +189,7 @@ const ViewPatient = ({ params }: { params: string }) => {
                         {appointment?.verifay ? "Valid" : "InValid"}
                       </TableCell>
                       <TableCell align="center">
-                        {appointment?.serialNo}
+                        {appointment?.phoneNumber}
                       </TableCell>
                       <TableCell align="center">
                         <Link
@@ -215,6 +226,65 @@ const ViewPatient = ({ params }: { params: string }) => {
               </div>
             </div>
           </TableContainer>
+        </div>
+        <div className="mt-5 block lg:hidden sm:hidden  xl:hidden">
+          {data &&
+            data?.meetingRequests?.map((appointment: any) => (
+              <Accordion key={appointment?.id}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <div className=" flex gap-10">
+                    <div className="  w-28">
+                      <Typography>Request</Typography>
+                    </div>
+
+                    <div className="  flex gap-2  justify-between">
+                      <div className="w-2"></div>
+                    </div>
+                  </div>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <div className=" h-full py-2  border-t">
+                    <AccordionRow
+                      rowName="Patient Name"
+                      data={` ${appointment?.user?.profile?.first_name}
+                      ${appointment?.user?.profile?.last_name}`}
+                      style="w-36"
+                    />
+                    <AccordionRow
+                      rowName="Serial No"
+                      data={appointment?.serialNo}
+                      style="w-36"
+                    />
+                    <AccordionRow
+                      rowName="Verify"
+                      data={appointment?.verifay ? "Valid" : "InValid"}
+                      style="w-36"
+                    />
+                    <AccordionRow
+                      rowName="Phone"
+                      data={appointment?.phoneNumber}
+                      style="w-36"
+                    />
+                    <AccordionRow
+                      rowName="Prescription"
+                      data={
+                        <Link
+                          href={`/dashboard/Doctor/googleMeet/viewPatient/prescription?appointment=${appointment.appointmentId}`}
+                          className="px-4 py-2 bg-red-500 text-white rounded-full"
+                        >
+                          Send
+                        </Link>
+                      }
+                      style="w-36"
+                    />
+                  </div>
+                </AccordionDetails>
+              </Accordion>
+            ))}
         </div>
         {/* {open && (
           <DeleteModal
