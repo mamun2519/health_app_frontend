@@ -329,6 +329,7 @@ const UserAppointmentPage = () => {
             </Accordion>
           ))}
         </div>
+
         {open && (
           <DeleteModal
             open={open}

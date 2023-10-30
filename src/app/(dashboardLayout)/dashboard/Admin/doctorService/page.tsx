@@ -11,7 +11,13 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import React, { useState } from "react";
 
-import { Pagination, TextField, Typography } from "@mui/material";
+import {
+  Accordion,
+  AccordionSummary,
+  Pagination,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Select from "react-select";
 import { Days, Limit } from "@/constants/donor";
 import Link from "next/link";
@@ -32,6 +38,11 @@ import {
 } from "@/redux/api/doctorServiceApi";
 import errorMessage from "@/components/shared/ErrrorMessage";
 import LoadingSpinner from "@/utils/Loading";
+
+import AccordionDetails from "@mui/material/AccordionDetails";
+
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AccordionRow from "@/components/ui/AccordionRow";
 const ManageDoctorServicePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -102,16 +113,16 @@ const ManageDoctorServicePage = () => {
       <h3 className=" mt-5 text-2xl">Manage Service Info</h3>
 
       <div className="mt-5">
-        <div className="flex  justify-between items-center">
+        <div className="lg:flex  justify-between items-center">
           <div>
             <input
               placeholder="Search"
-              className=" w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
+              className=" lg:w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
           </div>
 
-          <div className=" flex gap-3">
+          <div className=" flex gap-3 mt-5 lg:mt-0">
             <Select
               className="w-36 "
               placeholder="filter"
@@ -134,7 +145,7 @@ const ManageDoctorServicePage = () => {
             </Link> */}
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-5 hidden  lg:block md:block xl:block">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">
               <Table
@@ -213,6 +224,73 @@ const ManageDoctorServicePage = () => {
               </div>
             </div>
           </TableContainer>
+        </div>
+
+        <div className="mt-5  block lg:hidden sm:hidden  xl:hidden">
+          {data?.data?.map((service: any) => (
+            <Accordion key={service?.id}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <div className=" flex gap-10">
+                  <div className="  w-22">
+                    <Typography>Service</Typography>
+                  </div>
+
+                  <div className="  flex gap-2  justify-between">
+                    <div className="w-2"></div>
+                    <div className=" flex gap-4 justify-center items-center">
+                      <Link
+                        href={`/dashboard/Admin/doctorService/${service?.id}`}
+                        className="text-blue-500 text-xl"
+                      >
+                        <RemoveRedEyeIcon />
+                      </Link>
+                      <Link
+                        href={`/dashboard/Admin/doctorService/edit/${service?.id}`}
+                        className="text-blue-500 text-xl"
+                      >
+                        <BorderColorIcon />
+                      </Link>
+                      <button
+                        onClick={() => handleClickOpen(service?.id)}
+                        className="text-red-500 text-xl  cursor-pointer"
+                      >
+                        <DeleteIcon />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </AccordionSummary>
+              <AccordionDetails>
+                <div className=" h-full py-2  border-t">
+                  <AccordionRow
+                    rowName="Service Name"
+                    data={service?.title}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Price"
+                    data={`${service?.price} BDT`}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Start And End Time"
+                    data={`${service?.serviceSalt.startTime} TO
+                    ${service?.serviceSalt.endTime}`}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Duration"
+                    data={`${service?.serviceSalt.duration} Minutes`}
+                    style="w-36"
+                  />
+                </div>
+              </AccordionDetails>
+            </Accordion>
+          ))}
         </div>
         {open && (
           <DeleteModal

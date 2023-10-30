@@ -56,7 +56,7 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
         <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
         <h3 className=" mt-5 text-2xl">My Appointment Info</h3>
         <div>
-          <div className="max-w-7xl mx-auto px-4 lg:px-0 py-5  psb-20">
+          <div className="max-w-7xl mx-auto  lg:px-0 py-5  psb-20">
             <div className="  lg:flex gap-5">
               <div className="w-full border lg:h-56 h-[420px] rounded  lg:flex gap-5 p-5   shadow bg-[#30029010]">
                 <div className="lg:h-44 border w-48 rounded border-[#d1001c] p-2">
@@ -114,7 +114,7 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
               </div>
             </div>
 
-            <div className=" grid grid-cols-2  gap-5 mt-5    ">
+            <div className=" grid lg:grid-cols-2  grid-cols-1 gap-5 mt-5    ">
               <div className="h-full border  rounded p-5   shadow w-full bg-[#30029010]">
                 <div className=" ">
                   <h3 className=" text-xl font-bold">Service Details</h3>

@@ -17,7 +17,7 @@ const ManageDoctorDetailsPage = async ({
     cache: "no-cache",
   });
   const doctor = await res.json();
-  console.log(doctor);
+
   //   const { data } = useUserDetailsQuery(params.id);
   //   console.log(params);
   const bread = [
@@ -36,9 +36,11 @@ const ManageDoctorDetailsPage = async ({
     },
   ];
   return (
-    <div className="h-[600px  border  p-5 rounded-3xl shadow-sm">
-      <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
-      <h3 className=" mt-5 text-2xl"> Doctor Details</h3>
+    <div className="h-[600px  border  lg:p-5 rounded-3xl shadow-sm">
+      <div className="p-3">
+        <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
+        <h3 className=" mt-5 text-2xl"> Doctor Details</h3>
+      </div>
       <div className="mt-5">
         <DoctorDetails doctor={doctor?.data}></DoctorDetails>
       </div>

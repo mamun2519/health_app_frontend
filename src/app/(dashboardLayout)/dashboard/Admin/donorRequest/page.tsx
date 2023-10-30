@@ -15,7 +15,13 @@ import {
   useDeleteDonorRequestMutation,
   useGetMyUserDonorDataQuery,
 } from "@/redux/api/donorApi";
-import { Pagination, TextField, Typography } from "@mui/material";
+import {
+  Accordion,
+  AccordionSummary,
+  Pagination,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Select from "react-select";
 import { Days, Limit } from "@/constants/donor";
 import Link from "next/link";
@@ -27,6 +33,10 @@ import DeleteModal from "@/components/dialog/Delete";
 import successMessage from "@/components/shared/SuccessMassage";
 import errorMessage from "@/components/shared/ErrrorMessage";
 import LoadingSpinner from "@/utils/Loading";
+import AccordionDetails from "@mui/material/AccordionDetails";
+
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AccordionRow from "@/components/ui/AccordionRow";
 const ManageDonorRequestPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -97,16 +107,16 @@ const ManageDonorRequestPage = () => {
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
       <h3 className=" mt-5 text-2xl">Manage Donor Requested </h3>
       <div className="mt-5">
-        <div className="flex  justify-between items-center">
+        <div className="lg:flex  justify-between items-center">
           <div>
             <input
               placeholder="Search"
-              className=" w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
+              className=" lg:w-80 w-full h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
           </div>
 
-          <div className=" flex gap-3">
+          <div className=" flex gap-3 mt-5 lg:mt-0">
             <Select
               className="w-36 "
               placeholder="filter"
@@ -129,7 +139,7 @@ const ManageDonorRequestPage = () => {
             </Link> */}
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-5 hidden  lg:block md:block xl:block">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">
               <Table
@@ -201,6 +211,77 @@ const ManageDonorRequestPage = () => {
               </div>
             </div>
           </TableContainer>
+        </div>
+        <div className="mt-5  block lg:hidden sm:hidden  xl:hidden">
+          {data?.map((donor: any) => (
+            <Accordion key={donor?.id}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <div className=" flex gap-10">
+                  <div className="  w-22">
+                    <Typography>Request</Typography>
+                  </div>
+
+                  <div className="  flex gap-2  justify-between">
+                    <div className="w-2"></div>
+                    <div className=" flex gap-4 justify-center items-center">
+                      <Link
+                        href={`/dashboard/Admin/donorRequest/${donor?.id}`}
+                        className="text-blue-500 text-xl"
+                      >
+                        <RemoveRedEyeIcon />
+                      </Link>
+                      <Link
+                        href={`/dashboard/Admin/donorRequest/edit/${donor?.id}`}
+                        className="text-blue-500 text-xl"
+                      >
+                        <BorderColorIcon />
+                      </Link>
+                      <button
+                        onClick={() => handleClickOpen(donor?.id)}
+                        className="text-red-500 text-xl  cursor-pointer"
+                      >
+                        <DeleteIcon />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </AccordionSummary>
+              <AccordionDetails>
+                <div className=" h-full py-2  border-t">
+                  <AccordionRow
+                    rowName="Donor Name"
+                    data={`${donor?.user?.profile?.first_name}
+                    ${donor?.user?.profile?.last_name}`}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Blood Group"
+                    data={donor?.user?.profile?.blood_group}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Quantity"
+                    data={donor?.quantity}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Request Date"
+                    data={donor?.donnetDate}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Status"
+                    data={donor?.status}
+                    style="w-36"
+                  />
+                </div>
+              </AccordionDetails>
+            </Accordion>
+          ))}
         </div>
       </div>
 

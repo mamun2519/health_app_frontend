@@ -3,8 +3,6 @@ import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import {
   useAllPrescriptionQuery,
   useDeletePrescriptionMutation,
-  useDoctorPrescriptionQuery,
-  useUserPrescriptionQuery,
 } from "@/redux/api/prescriptionApi";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -20,12 +18,17 @@ import React, { useState } from "react";
 import Select from "react-select";
 import { Days, Limit } from "@/constants/donor";
 import Link from "next/link";
-import { Pagination } from "@mui/material";
+import { Accordion, Pagination } from "@mui/material";
 import { convertDate } from "@/helper/date";
 import successMessage from "../shared/SuccessMassage";
 import DeleteModal from "../dialog/Delete";
 import errorMessage from "../shared/ErrrorMessage";
 import LoadingSpinner from "@/utils/Loading";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AccordionRow from "@/components/ui/AccordionRow";
 interface PrescriptionProps {
   bread: {
     link: string;
@@ -55,7 +58,7 @@ const AllPrescription = ({ bread, role }: PrescriptionProps) => {
   query["limit"] = pageLimit;
 
   const { data, isLoading } = useAllPrescriptionQuery({ ...query });
-  console.log(data);
+
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
   };
@@ -87,17 +90,17 @@ const AllPrescription = ({ bread, role }: PrescriptionProps) => {
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
       <h3 className=" mt-5 text-2xl">Manage Prescription Info</h3>
-      <div className="mt-5">
-        <div className="flex  justify-between items-center">
+      <div className="mt-5 hidden  lg:block md:block xl:block">
+        <div className="lg:flex  justify-between items-center">
           <div>
             <input
               placeholder="Search"
-              className=" w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
+              className=" lg:w-80 w-full h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
           </div>
 
-          <div className=" flex gap-3">
+          <div className=" flex gap-3 mt-5 lg:mt-0">
             <Select
               className="w-36 "
               placeholder="filter"
@@ -220,6 +223,87 @@ const AllPrescription = ({ bread, role }: PrescriptionProps) => {
             handleClose={handleClose}
           />
         )}
+      </div>
+      <div className="mt-5 block lg:hidden sm:hidden  xl:hidden">
+        {data?.data?.map((prescription: any) => (
+          <Accordion key={prescription?.id}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <div className=" flex gap-10">
+                <div className="  w-28">
+                  <Typography>Request</Typography>
+                </div>
+
+                <div className="  flex gap-2  justify-between">
+                  <div className="w-2"></div>
+                  <div className=" flex gap-4 justify-center items-center">
+                    <Link
+                      href={`/dashboard/Admin/prescription/${prescription?.id}`}
+                      className="text-blue-500 text-xl"
+                    >
+                      <RemoveRedEyeIcon />
+                    </Link>
+                    {/* <Link
+                            href={`/dashboard/Doctor/prescription/edit/${prescription?.id}`}
+                            className="text-blue-500 text-xl"
+                          >
+                            <BorderColorIcon />
+                          </Link> */}
+                    <button
+                      onClick={() => handleClickOpen(prescription?.id)}
+                      className="text-red-500 text-xl  cursor-pointer"
+                    >
+                      <DeleteIcon />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </AccordionSummary>
+            <AccordionDetails>
+              <div className=" h-full py-2  border-t">
+                <AccordionRow
+                  rowName="Patient Name"
+                  data={`  ${prescription?.user?.profile?.first_name}
+                    ${prescription?.user?.profile?.last_name}`}
+                  style="w-36"
+                />
+                <AccordionRow
+                  rowName="Appointment Name"
+                  data={prescription?.appointment?.service?.title}
+                  style="w-36"
+                />
+                <AccordionRow
+                  rowName="Prescription Title"
+                  data={prescription?.title}
+                  style="w-36"
+                />
+                <AccordionRow
+                  rowName="Create Date"
+                  data={convertDate(prescription?.createdAt)}
+                  style="w-36"
+                />
+                {/* <AccordionRow
+                  rowName="Download"
+                  data={
+                    <div className=" flex gap-4 justify-center items-center">
+                      <Link
+                        href={`/dashboard/${role}/prescription/${prescription?.id}`}
+                        className="text-white bg-[#d1001c] px-4 py- rounded-full"
+                      >
+                        {" "}
+                        Prescription
+                      </Link>
+                    </div>
+                  }
+                  style="w-36"
+                /> */}
+              </div>
+            </AccordionDetails>
+          </Accordion>
+        ))}
       </div>
     </div>
   );
