@@ -132,7 +132,7 @@ const doctorSideBar = [
     icon: <InboxIcon></InboxIcon>,
   },
   {
-    link: "/",
+    link: "/dashboard/Doctor/myDonorRequest",
     level: "Donor Request",
     icon: <InboxIcon></InboxIcon>,
   },

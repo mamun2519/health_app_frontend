@@ -24,13 +24,13 @@ const DonorRequestEditPage = ({ params }: { params: { id: string } }) => {
       color: "inherit",
     },
     {
-      link: "/dashboard/User/myDonorRequest",
+      link: "/dashboard/Doctor/myDonorRequest",
       level: "Donor Request",
       icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
-      link: "/dashboard/User/myDonorRequest",
+      link: "/dashboard/Doctor/myDonorRequest",
       level: "Edit",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "text.primary",
@@ -99,7 +99,7 @@ const DonorRequestEditPage = ({ params }: { params: { id: string } }) => {
             />
           </div>
         </div>
-        <div className="mt-5 grid lg:grid-cols-3  grid-cols-1 gap-5">
+        <div className="mt-5 grid lg:grid-cols-3 grid-cols-1 gap-5">
           <div className=" mt-8">
             <FormInput
               name="quantity"

@@ -49,13 +49,13 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
       color: "inherit",
     },
     {
-      link: "/dashboard/User/myDonorRequest",
+      link: "/dashboard/Doctor/myDonorRequest",
       level: "Donor Request",
       icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
-      link: "/dashboard/User/myDonorRequest",
+      link: "/dashboard/Doctor/myDonorRequest",
       level: "Details",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "text.primary",
@@ -82,7 +82,6 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
       console.log(error);
     }
   };
-
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -146,7 +145,7 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
                   <div className="mt-2">
                     <button
                       onClick={() => handleReviewClickOpen()}
-                      className="w-full h-8 bg-[#d1001c] rounded-full text-white shadow-sm "
+                      className="w-full h-12 bg-[#d1001c] rounded-full text-white shadow-sm "
                     >
                       Review Now
                     </button>

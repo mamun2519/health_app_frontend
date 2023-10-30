@@ -60,6 +60,8 @@ const DoctorServiceDetails = ({ id }: any) => {
     date: selectedDate,
   });
 
+  // console.log(service);
+
   const { data: review } = useServiceReviewByIdQuery(id);
 
   const SlatBookingHandler = (data: ISalt) => {
@@ -134,6 +136,7 @@ const DoctorServiceDetails = ({ id }: any) => {
             </h3>
             <p className=" mt- text-gray-800">
               Specialist Of {service?.doctor?.specialist}
+              {/* {service?.user?.email} */}
             </p>
             <p className=" mt-1 text-gray-800">
               <Rating

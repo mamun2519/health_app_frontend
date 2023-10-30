@@ -12,6 +12,7 @@ import { useDonorRequestMutation } from "@/redux/api/donorApi";
 import toast from "../shared/SuccessMassage";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DonorRequestSchema } from "../schema/donor";
+import errorMessage from "../shared/ErrrorMessage";
 interface OpenModel {
   open: boolean;
   handleClose: (op: any) => any;
@@ -34,13 +35,21 @@ export default function AddDonorRequestForm({
   const [donorRequest] = useDonorRequestMutation();
   const submitHundler: SubmitHandler<IDonorRequest> = async (data) => {
     data.quantity = Number(data.quantity);
-    const res = await donorRequest({ ...data, donorId });
-    if (res) {
-      toast({
-        message: "Donor Request Send Successfully",
-        header: "Thank You",
-      });
+    try {
+      const res = await donorRequest({ ...data, donorId }).unwrap();
+      if (res) {
+        toast({
+          message: "Donor Request Send Successfully",
+          header: "Thank You",
+        });
+        handleClose(open);
+      } else {
+        errorMessage({ message: "Something Is wrong" });
+        handleClose(open);
+      }
+    } catch (error: any) {
       handleClose(open);
+      errorMessage({ message: error?.data });
     }
   };
   return (

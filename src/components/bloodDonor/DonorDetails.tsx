@@ -9,8 +9,12 @@ import { authKey } from "@/constants/storageKey";
 import { useBloodDonorDetailsQuery } from "@/redux/api/bloodDonorApi";
 import { IDonorReview } from "@/types";
 import LoadingSpinner from "@/utils/Loading";
+import { useSpecificReviewQuery } from "@/redux/api/donerReviewApi";
 const DonorDetails = ({ id }: { id: string }) => {
   const { data, isLoading } = useBloodDonorDetailsQuery(id);
+
+  const { data: review } = useSpecificReviewQuery(data?.bloodDonor?.id);
+  console.log(review);
 
   const [open, setOpen] = React.useState(false);
 
@@ -54,7 +58,13 @@ const DonorDetails = ({ id }: { id: string }) => {
         <div className="w-full border lg:h-56  rounded  lg:flex gap-5 p-5  relative shadow bg-[#30029010] ">
           <div className="lg:h-44 border w-48 rounded border-[#d1001c] p-2">
             <div className=" h-full  lg:block flex w-full justify-center">
-              <Image src={DonorPic} className=" h-full  " alt="Donor Pic" />
+              <Image
+                src={data?.profile?.avatar}
+                width={300}
+                height={300}
+                className=" h-full w-full  "
+                alt="Donor Pic"
+              />
             </div>
             <div className="w-16 h-16   rounded-full  mt-5 bg-[#d1001c] border-2 absolute     lg:left-2 lg:top-[120px] top-[-15px] md:top-[-15px] left-2 sm:right-[5px] lg:right-[90px] md:left-[180px] text-xl   font-bold flex justify-center items-center text-white">
               <p>{data?.profile?.blood_group}</p>
@@ -161,20 +171,23 @@ const DonorDetails = ({ id }: { id: string }) => {
         <div className="lg:w-80  border p-5 rounded    lg:absolute  right-[313px] mt-5  h-[360px]  shadow  bg-[#30029010] ">
           <h3 className=" tex text-xl font-bold">Donor Reviews</h3>
           <div className=" pl-10">
-            {data?.bloodDonor?.donorReviews?.map((review: IDonorReview) => {
+            {review?.map((review: any) => {
+              console.log("donor-", review);
               return (
                 <div
                   key={review?.id}
                   className=" w-60 h-28 border bg-white rounded-3xl  relative mt-2  "
                 >
                   <div className=" pl-10 py-4 pr-3">
-                    <h3>Juboraj Islam Mmaun</h3>
+                    <h3>{`${review?.user?.profile.first_name} ${review?.use?.profile?.last_name}`}</h3>
                     <p>{review?.comment}</p>
                   </div>
 
                   <div className=" absolute w-20 h-20 border-2 border-[#d1001c] rounded-full top-3 left-[-50px]">
                     <Image
-                      src={DonorPic}
+                      width={300}
+                      height={300}
+                      src={review?.user?.profile.avatar}
                       className=" w-20 h-20 rounded-full p-2"
                       alt="Donor Pic"
                     />

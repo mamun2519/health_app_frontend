@@ -1,10 +1,4 @@
 "use client";
-import {
-  useDeletePaymentMutation,
-  useDoctorPaymentQuery,
-  useUserPaymentQuery,
-} from "@/redux/api/paymentApi";
-import React, { useState } from "react";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -15,38 +9,30 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
+import React, { useState } from "react";
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Pagination,
-  TextField,
-  Typography,
-} from "@mui/material";
+  useDeleteDonorRequestMutation,
+  useGetMyUserDonorDataQuery,
+} from "@/redux/api/donorApi";
+import { Pagination, TextField } from "@mui/material";
 import Select from "react-select";
 import { Days, Limit } from "@/constants/donor";
 import Link from "next/link";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
+import HomeIcon from "@mui/icons-material/Home";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import GrainIcon from "@mui/icons-material/Grain";
 import DeleteModal from "@/components/dialog/Delete";
 import successMessage from "@/components/shared/SuccessMassage";
+import errorMessage from "@/components/shared/ErrrorMessage";
 import LoadingSpinner from "@/utils/Loading";
-import errorMessage from "../shared/ErrrorMessage";
-
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import AccordionRow from "../ui/AccordionRow";
-interface PaymentProps {
-  bread: {
-    link: string;
-    level: string;
-    icons: React.ReactNode | React.ReactElement;
-    color: string;
-  }[];
-  role: string;
-}
-const DoctorPayment = ({ bread, role }: PaymentProps) => {
+import AccordionRow from "@/components/ui/AccordionRow";
+const MyDonorRequest = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
@@ -65,43 +51,63 @@ const DoctorPayment = ({ bread, role }: PaymentProps) => {
   query["page"] = currentPage;
   query["limit"] = pageLimit;
 
+  const { data, isLoading } = useGetMyUserDonorDataQuery({ ...query });
+  const [deleteDonorRequest] = useDeleteDonorRequestMutation();
+
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
   };
+  const boread = [
+    {
+      link: "/",
+      level: "Dashboard",
+      icons: <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
-  const [deletePayment] = useDeletePaymentMutation();
+      color: "inherit",
+    },
+    {
+      link: "/dashboard/User/myDonorRequest",
+      level: "Donor Request",
+      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "text.primary",
+    },
+  ];
+
   const deleteHandler = async () => {
     try {
-      const res = await deletePayment(deletedId);
-      console.log(res);
+      const res = await deleteDonorRequest(deletedId).unwrap();
+      // console.log(deletedId);
       if (res) {
         setOpen(false);
         successMessage({
           header: "Thank You",
-          message: "Payment History Delete Successfully",
+          message: "Donor Request Delete Successfully",
         });
+      } else {
+        setOpen(false);
+        errorMessage({ message: "Something is wrong" });
       }
-    } catch (error) {
+    } catch (error: any) {
+      setOpen(false);
+      errorMessage({ message: "Something is wrong" });
       console.log(error);
     }
   };
 
-  const { data, isLoading } = useDoctorPaymentQuery({ ...query });
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
   return (
-    <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
-      <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
-      <h3 className=" mt-5 text-2xl">My Payment Info</h3>
-
+    <div className="h-[600px  border  p-3 rounded-3xl shadow-sm ">
+      <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
+      <h3 className=" mt-5 lg:text-2xl text-xl">My Donor Requested Info</h3>
       <div className="mt-5">
         <div className="lg:flex  justify-between items-center">
           <div>
             <input
               placeholder="Search"
-              className=" lg:w-80 w-full h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
+              className=" lg:w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
           </div>
@@ -115,18 +121,18 @@ const DoctorPayment = ({ bread, role }: PaymentProps) => {
               options={Days}
             />
             <Select
-              className="w-20"
+              className="lg:w-20"
               placeholder="limit"
               defaultValue={pageLimit}
               onChange={(event: any) => setLimit(event?.value)}
               options={Limit}
             />
             {/* <Link
-          href="/doctor/find"
-          className="  w-32 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium "
-        >
-          Find Doctor
-        </Link> */}
+              href="/doctor/find"
+              className="  w-32 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium "
+            >
+              Find Doctor
+            </Link> */}
           </div>
         </div>
         <div className="mt-5 hidden  lg:block md:block xl:block">
@@ -138,62 +144,51 @@ const DoctorPayment = ({ bread, role }: PaymentProps) => {
               >
                 <TableHead sx={{ backgroundColor: "#30029010 " }}>
                   <TableRow>
-                    <TableCell align="center">Appointment Name</TableCell>
-                    <TableCell align="center">Price</TableCell>
-                    <TableCell align="center">Payment Methods</TableCell>
-
-                    <TableCell align="center">Payment Status</TableCell>
-                    <TableCell align="center">Invoice</TableCell>
+                    <TableCell align="center">Donor Name</TableCell>
+                    <TableCell align="center">Blood Group</TableCell>
+                    <TableCell align="center">Quantity</TableCell>
+                    <TableCell align="center">Request Date</TableCell>
+                    <TableCell align="center">Status</TableCell>
                     <TableCell align="center">Action</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {data?.map((payment: any) => (
+                  {data?.map((donor: any) => (
                     <TableRow
-                      key={payment?.id}
+                      key={donor.id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <TableCell align="center">
-                        {payment?.service?.title}
+                        {`${donor?.donor?.user?.profile?.first_name}
+                    ${donor?.donor?.user?.profile?.last_name}`}
                       </TableCell>
-                      <TableCell align="center">{payment?.price} BDT</TableCell>
                       <TableCell align="center">
-                        {" "}
-                        {payment?.paymentType}
+                        {donor?.donor?.user?.profile?.blood_group}
                       </TableCell>
+                      <TableCell align="center">{donor?.quantity}</TableCell>
 
-                      <TableCell align="center">{payment?.status}</TableCell>
-                      <TableCell align="center">
-                        <div>
-                          <Link
-                            href={`/dashboard/${role}/payment/invoice/${payment?.id}`}
-                            className="text-white bg-[#d1001c] px-2 py-1 rounded-full"
-                          >
-                            {" "}
-                            Download Invoice
-                          </Link>
-                        </div>
-                      </TableCell>
+                      <TableCell align="center">{donor?.donnetDate}</TableCell>
+                      <TableCell align="center">{donor?.status}</TableCell>
                       <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
                           <Link
-                            href={`/dashboard/${role}/payment/${payment?.id}`}
+                            href={`/dashboard/Doctor/myDonorRequest/${donor?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <RemoveRedEyeIcon />
                           </Link>
-                          {/* <Link
-                            href={`/dashboard/user/payment/edit/${payment?.id}`}
+                          <Link
+                            href={`/dashboard/Doctor/myDonorRequest/edit/${donor?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <BorderColorIcon />
-                          </Link> */}
-                          {/* <button
-                            onClick={() => handleClickOpen(payment?.id)}
-                            className="text-[#d1001c] text-xl  cursor-pointer"
+                          </Link>
+                          <button
+                            onClick={() => handleClickOpen(donor?.id)}
+                            className="text-red-500 text-xl  cursor-pointer"
                           >
                             <DeleteIcon />
-                          </button> */}
+                          </button>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -213,9 +208,10 @@ const DoctorPayment = ({ bread, role }: PaymentProps) => {
             </div>
           </TableContainer>
         </div>
+
         <div className="mt-5 block lg:hidden sm:hidden  xl:hidden">
-          {data?.map((payment: any) => (
-            <Accordion key={payment?.id}>
+          {data?.map((donor: any) => (
+            <Accordion key={data?.id}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
@@ -223,18 +219,30 @@ const DoctorPayment = ({ bread, role }: PaymentProps) => {
               >
                 <div className=" flex gap-10">
                   <div className="  w-28">
-                    <Typography>Payment Info</Typography>
+                    <Typography>Request</Typography>
                   </div>
 
                   <div className="  flex gap-2  justify-between">
                     <div className="w-2"></div>
                     <div className="  flex gap-2 justify-end">
                       <Link
-                        href={`/dashboard/${role}/payment/${payment?.id}`}
-                        className="text-blue-500 text-xl"
+                        href={`/dashboard/Doctor/myDonorRequest/${donor?.id}`}
+                        className="text-blue-500 t"
                       >
                         <RemoveRedEyeIcon />
                       </Link>
+                      <Link
+                        href={`/dashboard/Doctor/myDonorRequest/edit/${donor?.id}`}
+                        className="text-blue-500 t"
+                      >
+                        <BorderColorIcon />
+                      </Link>
+                      <button
+                        onClick={() => handleClickOpen(donor?.id)}
+                        className="text-red-500 t=  cursor-pointer"
+                      >
+                        <DeleteIcon />
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -242,38 +250,29 @@ const DoctorPayment = ({ bread, role }: PaymentProps) => {
               <AccordionDetails>
                 <div className=" h-full py-2  border-t">
                   <AccordionRow
-                    rowName="Appointment Name"
-                    data={payment?.service?.title}
+                    rowName="Donor Name"
+                    data={`${donor?.donor?.user?.profile?.first_name}
+  ${donor?.donor?.user?.profile?.last_name}`}
                     style="w-36"
                   />
                   <AccordionRow
-                    rowName="Price"
-                    data={`${payment?.price} BDT`}
+                    rowName="Blood Group"
+                    data={donor?.donor?.user?.profile?.blood_group}
                     style="w-36"
                   />
                   <AccordionRow
-                    rowName="Payment Methods"
-                    data={payment?.paymentType}
+                    rowName="Quantity"
+                    data={donor?.quantity}
                     style="w-36"
                   />
                   <AccordionRow
-                    rowName="Payment Status	"
-                    data={payment?.status}
+                    rowName="Request Date"
+                    data={donor?.donnetDate}
                     style="w-36"
                   />
                   <AccordionRow
-                    rowName="Invoice"
-                    data={
-                      <div className="w-full">
-                        <Link
-                          href={`/dashboard/${role}/payment/invoice/${payment?.id}`}
-                          className="text-white bg-[#d1001c] px-2 py-1 rounded-full "
-                        >
-                          {" "}
-                          Download
-                        </Link>
-                      </div>
-                    }
+                    rowName="Status"
+                    data={donor?.status}
                     style="w-36"
                   />
                 </div>
@@ -281,16 +280,17 @@ const DoctorPayment = ({ bread, role }: PaymentProps) => {
             </Accordion>
           ))}
         </div>
-        {open && (
-          <DeleteModal
-            open={open}
-            deleteHandler={deleteHandler}
-            handleClose={handleClose}
-          />
-        )}
       </div>
+
+      {open && (
+        <DeleteModal
+          open={open}
+          deleteHandler={deleteHandler}
+          handleClose={handleClose}
+        />
+      )}
     </div>
   );
 };
 
-export default DoctorPayment;
+export default MyDonorRequest;

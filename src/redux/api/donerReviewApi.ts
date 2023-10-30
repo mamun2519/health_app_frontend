@@ -10,7 +10,14 @@ export const donorReviewApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["donorReview"],
     }),
+    specificReview: build.query({
+      query: (id: string) => ({
+        url: `/donor-review/specific/${id}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useCreateDonorReviewMutation } = donorReviewApi;
+export const { useCreateDonorReviewMutation, useSpecificReviewQuery } =
+  donorReviewApi;

@@ -13,6 +13,7 @@ import Image from "next/image";
 import { Rating, Typography } from "@mui/material";
 import { useCreateDonorReviewMutation } from "@/redux/api/donerReviewApi";
 import successMessage from "../shared/SuccessMassage";
+import errorMessage from "../shared/ErrrorMessage";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -52,9 +53,14 @@ export default function DonorReviewModel({
           header: "Thank You",
           message: "Review Add Successfully",
         });
+      } else {
+        handleClose(!open);
+        errorMessage({ message: "Something is wrong" });
       }
-    } catch (error) {
+    } catch (error: any) {
+      handleClose(!open);
       console.log(error);
+      errorMessage({ message: error?.data });
     }
   };
 
