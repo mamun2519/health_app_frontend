@@ -29,6 +29,12 @@ import { useGetAllDoctorQuery } from "@/redux/api/doctorServiceApi";
 import { convertDate } from "@/helper/date";
 import { useDeleteUserMutation } from "@/redux/api/authApi";
 import { useAllUserQuery } from "@/redux/api/profileApi";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AccordionRow from "@/components/ui/AccordionRow";
+import LoadingSpinner from "@/utils/Loading";
 interface PaymentProps {
   bread: {
     link: string;
@@ -79,24 +85,26 @@ const ManageUser = ({ bread, role }: PaymentProps) => {
     }
   };
 
-  const { data } = useAllUserQuery({ ...query });
-  console.log(data);
+  const { data, isLoading } = useAllUserQuery({ ...query });
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return (
-    <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
+    <div className="h-[600px  border  p-5 rounded-3xl shadow-sm  w-80 lg:w-full ">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
       <h3 className=" mt-5 text-2xl">Manage User</h3>
 
       <div className="mt-5">
-        <div className="flex  justify-between items-center">
+        <div className="lg:flex  justify-between items-center">
           <div>
             <input
               placeholder="Search"
-              className=" w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
+              className=" lg:w-80 w-full h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
           </div>
 
-          <div className=" flex gap-3">
+          <div className=" flex gap-3 mt-5 lg:mt-0">
             <Select
               className="w-36 "
               placeholder="filter"
@@ -119,7 +127,7 @@ const ManageUser = ({ bread, role }: PaymentProps) => {
             </Link> */}
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-5 hidden  lg:block md:block xl:block">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">
               <Table
@@ -202,6 +210,73 @@ const ManageUser = ({ bread, role }: PaymentProps) => {
               </div>
             </div>
           </TableContainer>
+        </div>
+
+        <div className="mt-5 block lg:hidden sm:hidden  xl:hidden ">
+          {data?.map((payment: any) => (
+            <Accordion key={payment?.id}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <div className=" flex gap-10 ">
+                  <div className="  w-28">
+                    <Typography>Request</Typography>
+                  </div>
+
+                  <div className="  flex gap-2  justify-between">
+                    <div className="w-2"></div>
+                    <div className=" flex gap-4 justify-center items-center">
+                      {/* <Link
+                            href={`/dashboard/${role}/doctor/${payment?.id}`}
+                            className="text-blue-500 text-xl"
+                          >
+                            <RemoveRedEyeIcon />
+                          </Link> */}
+                      {/* <Link
+                            href={`/dashboard/user/payment/edit/${payment?.id}`}
+                            className="text-blue-500 text-xl"
+                          >
+                            <BorderColorIcon />
+                          </Link> */}
+                      <button
+                        onClick={() => handleClickOpen(payment?.id)}
+                        className="text-[#d1001c] text-xl  cursor-pointer"
+                      >
+                        <DeleteIcon />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </AccordionSummary>
+              <AccordionDetails>
+                <div className=" h-full py-2  border-t">
+                  <AccordionRow
+                    rowName="Donor Name"
+                    data={`   ${payment?.profile?.first_name}
+                    ${payment?.profile?.last_name}`}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Email"
+                    data={payment?.email}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Status"
+                    data={payment?.status}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Create Date"
+                    data={convertDate(payment?.createdAt)}
+                    style="w-36"
+                  />
+                </div>
+              </AccordionDetails>
+            </Accordion>
+          ))}
         </div>
         {open && (
           <DeleteModal

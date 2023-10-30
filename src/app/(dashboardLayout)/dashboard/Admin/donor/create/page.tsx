@@ -112,7 +112,7 @@ const CreateDoctorPage = () => {
         submitHandler={editHandler}
         resolver={yupResolver(createDonorSchema)}
       >
-        <div className=" grid grid-cols-3 gap-5">
+        <div className=" grid lg:grid-cols-3 grid-cols-1 gap-5">
           <div className=" mt-2 ">
             <FormInput
               name="name.first_name"
@@ -145,7 +145,7 @@ const CreateDoctorPage = () => {
             />
           </div>
         </div>
-        <div className="mt-3 grid grid-cols-3 gap-5">
+        <div className="mt-3 grid lg:grid-cols-3 grid-cols-1 gap-5">
           {/* <div className=" mt-8">
             <FormInput
               name="avatar"
@@ -180,7 +180,7 @@ const CreateDoctorPage = () => {
         {/* <div className=" grid grid-cols-3 gap-5 mt-5"></div> */}
         <div className="mt-5 ">
           <p>Address</p>
-          <div className="grid grid-cols-3 gap-5 mt-2">
+          <div className="grid lg:grid-cols-3 grid-cols-1  gap-5 mt-2">
             <div className="  ">
               {/* <FormSelectInput
                 name="service.category"
@@ -216,7 +216,7 @@ const CreateDoctorPage = () => {
 
         <div className="mt-5 ">
           <p>Authentication</p>
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid lg:grid-cols-3 grid-cols-1  gap-5">
             <div className=" mt-2 ">
               <div>
                 <ImageUpload setImageUrl={setImageUrl} />

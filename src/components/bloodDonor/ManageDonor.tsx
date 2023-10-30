@@ -91,7 +91,7 @@ const ManageBloodDonor = ({ bread, role }: PaymentProps) => {
     return <LoadingSpinner />;
   }
   return (
-    <div className="h-[600px  border  lg:p-5 rounded-3xl shadow-sm ">
+    <div className="h-[600px  border  lg:p-5 rounded-3xl shadow-sm w-80 lg:w-full ">
       <div className="p-2">
         <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
         <h3 className=" mt-5 text-2xl">Manage Blood Donor</h3>

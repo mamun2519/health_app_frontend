@@ -95,7 +95,7 @@ const ManageDoctor = ({ bread, role }: PaymentProps) => {
     return <LoadingSpinner />;
   }
   return (
-    <div className="h-[600px  border  lg:p-5 p-1 rounded-3xl shadow-sm ">
+    <div className="h-[600px  border  lg:p-5 p-1 rounded-3xl shadow-sm  w-80 lg:w-full">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
       <h3 className=" mt-5 text-2xl">Manage Doctor</h3>
 
