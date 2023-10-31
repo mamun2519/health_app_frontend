@@ -54,7 +54,7 @@ const FormInput = ({
               // color="secondary"
               placeholder={placeholder}
               autoFocus={true}
-              className={`lg:w-full outline-none ${size}`}
+              className={`lg:w-full w-full outline-none ${size}`}
             />
             <p className="text-red-500">{errorMessage}</p>
           </>

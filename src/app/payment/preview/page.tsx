@@ -3,6 +3,9 @@ import MyStepper from "@/components/ui/MyStepper";
 import { useDoctorServiceDetailsQuery } from "@/redux/api/doctorServiceApi";
 import React, { useEffect, useState } from "react";
 import { ICreateBookAppointment } from "../appointmentForm/page";
+import Form from "@/components/Form/FormProvider";
+import FormInput from "@/components/Form/FormInput";
+import Link from "next/link";
 
 interface IBookingInfo {
   bookingDate: string;
@@ -48,7 +51,7 @@ const PreviewPage = () => {
       <MyStepper stepper={1} />
 
       <div className=" lg:flex  mt-10 gap-5">
-        <div className="border h-full  lg:w-2/3 w-full rounded-xl p-5">
+        <div className="border h-[550px]  lg:w-2/3 w-full rounded-2xl p-7">
           <h3 className=" text-xl font-bold">Appointment Information</h3>
           <div className=" grid grid-cols-2  mt-4">
             <p className="">Doctor Name</p>
@@ -97,7 +100,92 @@ const PreviewPage = () => {
             </div>
           </div>
         </div>
-        <div className="w-1/3 border h-96"></div>
+        <div className="  lg:w-1/3 w-full border  p-7 rounded-3xl shadow-sm  h-[550px]  bg-[#30029010] ">
+          <div className=" h-[370px]">
+            <p className="text-xl "> Order Summary</p>
+            <div className="mt-5 ">
+              <div className="mt-1  flex gap-4 justify-between">
+                <div className="">
+                  <span>{service?.title}</span>
+                </div>
+                <div>
+                  <span>{service?.price} BDT</span>
+                </div>
+              </div>
+
+              <div className=" border  w-full mt-5"></div>
+              <div className="mt-4  flex gap-4 justify-between">
+                <div className="">
+                  <span>Amount</span>
+                </div>
+                <div>
+                  <span>{service?.price} BDT</span>
+                </div>
+              </div>
+              <div className="mt-1  flex gap-4 justify-between">
+                <div className="">
+                  <span>Discount</span>
+                </div>
+                <div>
+                  <span>00 BDT</span>
+                </div>
+              </div>
+              <div className="mt-1  flex gap-4 justify-between">
+                <div className="">
+                  <span>Tax</span>
+                </div>
+                <div>
+                  <span>Free</span>
+                </div>
+              </div>
+              <div className="mt-1  flex gap-4 justify-between">
+                <div className="">
+                  <span>Service Charge</span>
+                </div>
+                <div>
+                  <span>Free</span>
+                </div>
+              </div>
+
+              <div className="h- border w-full mt-5"></div>
+
+              <div className="mt-5">
+                <Form submitHandler={() => {}}>
+                  <div className="h-12 relative w-full">
+                    <FormInput
+                      name="promoCode"
+                      label="Promo Code "
+                      placeholder="Enter Promo code"
+                    />{" "}
+                    <div className=" absolute  top-2  right-2">
+                      <button className="bg-[#d1001c] px-8 py-2 rounded text-white">
+                        Send
+                      </button>
+                    </div>
+                  </div>
+                </Form>
+              </div>
+            </div>
+          </div>
+          <div className="mt-5 w-full px-4">
+            <div className="  flex gap-4 justify-between">
+              <div className="">
+                <span className="text-2xl">Total </span>
+              </div>
+              <div>
+                <span className="text-2xl"> BDT</span>
+              </div>
+            </div>
+            <div className="mt-5 w-full bg-[#d1001c] h-10 text-white rounded-2xl flex justify-center items-center  ">
+              <Link
+                href="/payment/conform"
+                // onClick={() => bookingHandler()}
+              >
+                Payment
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

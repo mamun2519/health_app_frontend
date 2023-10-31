@@ -49,6 +49,13 @@ export const paymentApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["payment"],
     }),
+    paymentStripe: build.query({
+      query: () => ({
+        url: `/payment/stripe`,
+        method: "GET",
+      }),
+      // invalidatesTags: ["payment"],
+    }),
   }),
 });
 
@@ -59,4 +66,5 @@ export const {
   useDoctorPaymentQuery,
   useAllPaymentQuery,
   useCreatePaymentMutation,
+  usePaymentStripeQuery,
 } = paymentApi;
