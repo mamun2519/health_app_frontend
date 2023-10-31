@@ -27,20 +27,8 @@ import { CreateBookAppointmentSchema } from "../schema/appointment";
 import { useServiceReviewByIdQuery } from "@/redux/api/serviceReview";
 import { useAddToCartMutation } from "@/redux/api/cartApi";
 import LoadingSpinner from "@/utils/Loading";
-interface ICreateBookAppointment {
-  bookingDate: string;
-  doctorId: string;
-  gender: string;
-  age: number;
-  weight: number;
-  bloodGroup: string;
-  slatTime: string;
-  patientProblem: string;
-  report: string;
-  address: string;
-  serviceId: string;
-  price: string;
-}
+import { useRouter } from "next/navigation";
+
 const DoctorServiceDetails = ({ id }: any) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [viewAll, setVewAll] = useState(false);
@@ -61,9 +49,28 @@ const DoctorServiceDetails = ({ id }: any) => {
   });
 
   // console.log(service);
-
+  const router = useRouter();
   const { data: review } = useServiceReviewByIdQuery(id);
 
+  const addToLocalStorage = () => {
+    if (selectSlat && selectedDate) {
+      const info = {
+        bookingDate: selectedDate,
+        slatTime: selectSlat.time,
+        doctorId: service.doctorId,
+        serviceId: service.id,
+        price: service.price,
+      };
+      localStorage.setItem("BookingInfo", JSON.stringify(info));
+      router.push("/payment/appointmentForm");
+    } else {
+      errorMessage({
+        message: `Please Select ${
+          (!selectSlat && "Slat") || (!selectedDate && "Booking date")
+        } `,
+      });
+    }
+  };
   const SlatBookingHandler = (data: ISalt) => {
     if (data.booking) {
       errorMessage({ message: `Sorry This ${data.time} Slat Already Booked.` });
@@ -74,42 +81,6 @@ const DoctorServiceDetails = ({ id }: any) => {
   };
   const [addToCart] = useAddToCartMutation();
 
-  const StoreLocalStorageHandler: SubmitHandler<
-    ICreateBookAppointment
-  > = async (data) => {
-    data.age = Number(data.age);
-    data.weight = Number(data.weight);
-    data.bookingDate = selectedDate;
-    data.slatTime = selectSlat.time;
-    data.doctorId = service.doctorId;
-    data.serviceId = service.id;
-    data.price = service?.price;
-
-    try {
-      if (selectSlat && selectedDate) {
-        // disPatch(addToCart({ data, service, id: uniqid() }));
-        const res = await addToCart(data).unwrap();
-        console.log(res);
-        if (res) {
-          successMessage({
-            header: "Wow",
-            message: "Your Appointment Added To card",
-          });
-        } else {
-          errorMessage({ message: "something is wrong" });
-        }
-      } else {
-        errorMessage({
-          message: `Please Select ${
-            (!selectSlat && "Slat") || (!selectedDate && "Booking date")
-          } `,
-        });
-      }
-    } catch (error: any) {
-      console.log(error);
-      errorMessage({ message: error?.data });
-    }
-  };
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -180,66 +151,14 @@ const DoctorServiceDetails = ({ id }: any) => {
           <div className="mt-5">
             <Alert severity="warning">All Time Format Bangladesh</Alert>
           </div>
-          {selectSlat && (
-            <div className="mt-5">
-              <h3 className=" text-xl font-bold">Additional Info</h3>
-
-              <Form
-                submitHandler={StoreLocalStorageHandler}
-                resolver={yupResolver(CreateBookAppointmentSchema)}
-              >
-                <div className=" grid grid-cols-2 gap-5 mt-4">
-                  <div className="">
-                    <FormInput
-                      name="gender"
-                      label="Gender"
-                      placeholder="Enter Gender"
-                    />
-                  </div>
-                  <div>
-                    <FormInput name="age" label="Age" placeholder="Enter Age" />
-                  </div>
-                </div>
-                <div className=" grid grid-cols-2 gap-5  mt-4">
-                  <div>
-                    <FormInput
-                      name="weight"
-                      label="Weight"
-                      placeholder="Enter Weight"
-                    />
-                  </div>
-                  <div>
-                    <FormInput
-                      name="bloodGroup"
-                      label="Blood Group"
-                      placeholder="Enter bloodGroup"
-                    />
-                  </div>
-                </div>
-                <div className=" grid grid-cols-2 gap-5  mt-4">
-                  <div>
-                    <FormInput
-                      name="patientProblem"
-                      label="Patient Problem"
-                      placeholder="Enter patientProblem"
-                    />
-                  </div>
-                  <div>
-                    <FormInput
-                      name="address"
-                      label="Address"
-                      placeholder="Enter Address"
-                    />
-                  </div>
-                </div>
-                <div className="mt-3">
-                  <button className=" px-10 h-10 rounded bg-[#d1001c] text-white w-full font-medium ">
-                    Add To Cord
-                  </button>
-                </div>
-              </Form>
-            </div>
-          )}
+          <div className="mt-3">
+            <button
+              onClick={() => addToLocalStorage()}
+              className=" px-10 h-10 rounded bg-[#d1001c] text-white w-full font-medium "
+            >
+              Booking Now
+            </button>
+          </div>
         </div>
       </div>
 
