@@ -85,7 +85,7 @@ function ColorlibStepIcon(props: StepIconProps) {
   );
 }
 
-const steps = ["Booking Appointment", "Preview", "Payment", "Success"];
+const steps = ["Patient Info", "Preview", "Payment", "Success"];
 
 export default function MyStepper({ stepper = 0 }: { stepper: number }) {
   return (

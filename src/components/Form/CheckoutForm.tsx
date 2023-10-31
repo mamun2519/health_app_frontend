@@ -1,13 +1,21 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   PaymentElement,
   LinkAuthenticationElement,
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import Link from "next/link";
 
 export default function CheckoutForm() {
+  const [price, SetPrice] = useState({
+    bookingDate: "",
+    slatTime: "",
+    doctorId: "",
+    serviceId: "",
+    price: "",
+  });
   const stripe = useStripe();
   const elements = useElements();
 
@@ -15,6 +23,9 @@ export default function CheckoutForm() {
   const [message, setMessage] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
 
+  useEffect(() => {
+    SetPrice(JSON.parse(localStorage.getItem("BookingInfo") as string));
+  }, []);
   React.useEffect(() => {
     if (!stripe) {
       return;
@@ -61,7 +72,7 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000",
+        return_url: "http://localhost:3000/payment/success",
       },
     });
 
@@ -89,7 +100,10 @@ export default function CheckoutForm() {
         id="link-authentication-element"
         onChange={(e: any) => setEmail(e?.target?.value)}
       />
-      <PaymentElement id="payment-element" options={paymentElementOptions} />
+      <div className="mt-4">
+        {" "}
+        <PaymentElement id="payment-element" options={paymentElementOptions} />
+      </div>
       <button
         className="w-full"
         disabled={isLoading || !stripe || !elements}
@@ -101,7 +115,7 @@ export default function CheckoutForm() {
           ) : (
             <div className="mt-5 w-full bg-[#d1001c] h-10  text-white rounded-2xl flex justify-center items-center  ">
               {" "}
-              Pay now
+              Pay now {price?.price} BDT
             </div>
           )}
         </span>

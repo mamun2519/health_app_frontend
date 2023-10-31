@@ -6,6 +6,7 @@ import { ICreateBookAppointment } from "../appointmentForm/page";
 import Form from "@/components/Form/FormProvider";
 import FormInput from "@/components/Form/FormInput";
 import Link from "next/link";
+import LoadingSpinner from "@/utils/Loading";
 
 interface IBookingInfo {
   bookingDate: string;
@@ -46,31 +47,37 @@ const PreviewPage = () => {
     date: "",
   });
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-10 pb-40">
       <MyStepper stepper={1} />
 
       <div className=" lg:flex  mt-10 gap-5">
         <div className="border h-[550px]  lg:w-2/3 w-full rounded-2xl p-7">
-          <h3 className=" text-xl font-bold">Appointment Information</h3>
-          <div className=" grid grid-cols-2  mt-4">
-            <p className="">Doctor Name</p>
-            <p>
-              Dr, {service?.doctor?.user?.profile?.first_name}{" "}
-              {service?.doctor?.user?.profile?.last_name}
-            </p>
-          </div>
-          <div className=" grid grid-cols-2 mt-1 ">
-            <p>Appointment</p>
-            <p>{service?.title}</p>
-          </div>
-          <div className=" grid grid-cols-2 mt-1 ">
-            <p>Appointment Date</p>
-            <p>{BookingInfo.bookingDate}</p>
-          </div>
-          <div className=" grid grid-cols-2 mt-1 ">
-            <p>Schedule</p>
-            <p>{BookingInfo.slatTime}</p>
+          <div className="mt-5">
+            <h3 className=" text-xl font-bold">Appointment Information</h3>
+            <div className=" grid grid-cols-2  mt-4">
+              <p className="">Doctor Name</p>
+              <p>
+                Dr, {service?.doctor?.user?.profile?.first_name}{" "}
+                {service?.doctor?.user?.profile?.last_name}
+              </p>
+            </div>
+            <div className=" grid grid-cols-2 mt-1 ">
+              <p>Appointment</p>
+              <p>{service?.title}</p>
+            </div>
+            <div className=" grid grid-cols-2 mt-1 ">
+              <p>Appointment Date</p>
+              <p>{BookingInfo.bookingDate}</p>
+            </div>
+            <div className=" grid grid-cols-2 mt-1 ">
+              <p>Schedule</p>
+              <p>{BookingInfo.slatTime}</p>
+            </div>
           </div>
           <div className="mt-5">
             <h3 className=" text-xl font-bold">Patient Information</h3>
@@ -98,6 +105,10 @@ const PreviewPage = () => {
               <p>Address</p>
               <p>{patientInfo.address}</p>
             </div>
+          </div>
+
+          <div className="mt-10 w-48 h-10 rounded bg-[#d1001c] text-white  font-medium  flex justify-center items-center">
+            <Link href="/payment/appointmentForm">Back</Link>
           </div>
         </div>
         <div className="  lg:w-1/3 w-full border  p-7 rounded-3xl shadow-sm  h-[550px]  bg-[#30029010] ">
