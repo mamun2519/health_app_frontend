@@ -50,9 +50,10 @@ export const paymentApi = baseApi.injectEndpoints({
       invalidatesTags: ["payment"],
     }),
     paymentStripe: build.query({
-      query: () => ({
-        url: `/payment/stripe`,
+      query: (price) => ({
+        url: `/payment/stripe/${price}`,
         method: "GET",
+        // params: arg,
       }),
       // invalidatesTags: ["payment"],
     }),

@@ -8,7 +8,7 @@ import FormInput from "@/components/Form/FormInput";
 import Link from "next/link";
 import LoadingSpinner from "@/utils/Loading";
 
-interface IBookingInfo {
+export interface IBookingInfo {
   bookingDate: string;
   slatTime: string;
   doctorId: string;
@@ -29,9 +29,7 @@ const PreviewPage = () => {
     age: 0,
     weight: 0,
     bloodGroup: "",
-
     patientProblem: "",
-
     address: "",
   });
   useEffect(() => {

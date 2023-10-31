@@ -7,24 +7,38 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import Link from "next/link";
+import { ICreateBookAppointment } from "@/app/payment/appointmentForm/page";
+import { IBookingInfo } from "@/app/payment/preview/page";
+import { useCreatePaymentMutation } from "@/redux/api/paymentApi";
 
 export default function CheckoutForm() {
-  const [price, SetPrice] = useState({
+  const [price, SetPrice] = useState<IBookingInfo>({
     bookingDate: "",
     slatTime: "",
     doctorId: "",
     serviceId: "",
     price: "",
   });
+  const [patientInfo, SetPatientInfo] = useState<ICreateBookAppointment>({
+    gender: "",
+    age: 0,
+    weight: 0,
+    bloodGroup: "",
+    patientProblem: "",
+    address: "",
+  });
+
   const stripe = useStripe();
   const elements = useElements();
 
   const [email, setEmail] = React.useState("");
   const [message, setMessage] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
+  const [createPayment] = useCreatePaymentMutation();
 
   useEffect(() => {
     SetPrice(JSON.parse(localStorage.getItem("BookingInfo") as string));
+    SetPatientInfo(JSON.parse(localStorage.getItem("PatientInfo") as string));
   }, []);
   React.useEffect(() => {
     if (!stripe) {
@@ -76,14 +90,45 @@ export default function CheckoutForm() {
       },
     });
 
+    console.log(error.type);
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
     // your `return_url`. For some payment methods like iDEAL, your customer will
     // be redirected to an intermediate site first to authorize the payment, then
+
     // redirected to the `return_url`.
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message as string);
     } else {
+      // const appointment = {
+      //   bookingDate: price?.bookingDate,
+      //   doctorId: price?.doctorId,
+      //   gender: patientInfo?.gender,
+      //   age: Number(patientInfo?.age),
+      //   weight: Number(patientInfo?.weight),
+      //   bloodGroup: patientInfo?.bloodGroup,
+      //   slatTime: price?.slatTime,
+      //   patientProblem: patientInfo?.patientProblem,
+      //   report: "no",
+      //   address: patientInfo?.address,
+      //   serviceId: price?.serviceId,
+      //   price: price.price,
+      // };
+
+      // const payment = {
+      //   serviceId: price.serviceId,
+      //   price: Number(price.price),
+      //   doctorId: price.doctorId,
+      //   transactionId: "No",
+      //   discountedPrice: 0,
+      //   paymentType: "Stripe",
+      // };
+      // try {
+      //   const res = await createPayment({ appointment, payment }).unwrap();
+      //   console.log(res);
+      // } catch (error) {
+      //   console.log(error);
+      // }
       setMessage("An unexpected error occurred.");
     }
 

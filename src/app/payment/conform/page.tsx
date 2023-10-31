@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "@/components/Form/CheckoutForm";
@@ -9,6 +9,7 @@ import LoadingSpinner from "@/utils/Loading";
 import PaymentPic from "@/assets/payment2.gif";
 import Image from "next/image";
 import Link from "next/link";
+import { IBookingInfo } from "../preview/page";
 // const stripePromise = loadStripe(
 //   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 // );
@@ -16,7 +17,12 @@ const stripePromise = loadStripe(
   "pk_test_51L1nmNCGpaTt0RU8npNSNITrjLTAUDjwjX275RD6RDk5SGoYi1H1zLKxAis8OFp4C0PxQBT2L5c0L0VsTI9ewqGl00dT2UHEXy"
 );
 const ConformPage = () => {
-  const { data, isLoading } = usePaymentStripeQuery({});
+  const [price, setPrice] = useState<string | number>(0);
+  useEffect(() => {
+    setPrice(JSON.parse(localStorage.getItem("BookingInfo") as string).price);
+  }, []);
+  console.log(price);
+  const { data, isLoading } = usePaymentStripeQuery(price);
   console.log(data);
 
   const appearance = {
