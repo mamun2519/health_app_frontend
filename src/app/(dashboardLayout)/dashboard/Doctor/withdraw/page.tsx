@@ -46,7 +46,10 @@ import {
   useDoctorServiceOfferQuery,
 } from "@/redux/api/serviceOfferApi";
 import { convertDate } from "@/helper/date";
-import { useDoctorWithdrawQuery } from "@/redux/api/withdrawApi";
+import {
+  useDeleteWithdrawMutation,
+  useDoctorWithdrawQuery,
+} from "@/redux/api/withdrawApi";
 import { useMyProfileQuery } from "@/redux/api/profileApi";
 const DoctorWithdrawPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -89,17 +92,18 @@ const DoctorWithdrawPage = () => {
     },
   ];
   const { data, isLoading } = useDoctorWithdrawQuery({ ...query });
-  console.log(data);
-  const [deleteServiceOffer] = useDeleteServiceOfferMutation();
+
+  const [deleteWithdraw] = useDeleteWithdrawMutation();
   const deleteHandler = async () => {
     try {
-      const res = await deleteServiceOffer(deletedId).unwrap();
+      const res = await deleteWithdraw(deletedId).unwrap();
       // console.log(deletedId);
+      console.log(res);
       if (res) {
         setOpen(false);
         successMessage({
           header: "Thank You",
-          message: "Service Offer Delete Successfully",
+          message: "Withdraw Request Delete Successfully",
         });
       } else {
         setOpen(false);
@@ -108,7 +112,7 @@ const DoctorWithdrawPage = () => {
     } catch (error) {
       setOpen(false);
       console.log(error);
-      errorMessage({ message: "Something is wrong" });
+      errorMessage({ message: data?.error });
     }
   };
 
@@ -131,30 +135,32 @@ const DoctorWithdrawPage = () => {
       </div>
 
       <div className=" grid lg:grid-cols-4 gap-5 grid-cols-2 mt-5">
-        <div className="h-28 w-full border rounded-lg shadow-sm flex justify-center  items-center bg-[#30029010]">
+        <div className="h-28 w-full border rounded-lg shadow-sm flex justify-center  items-center bg-[#30029010] px-2">
           <div className="text-center">
-            <h3 className=" m text-xl ">Available Balance</h3>
-            <p className="text-2xl text-gray-800 font-bold  mt-1">
+            <h3 className=" m lg:text-xl ">Available Balance</h3>
+            <p className="text-2xl text-gray-800 font-bold  mt-1 ">
               {" "}
               {profile?.balance} BDT
             </p>
           </div>
         </div>
-        <div className="h-28 w-full border rounded-lg shadow-sm flex justify-center  items-center bg-[#30029010]">
+        <div className="h-28 w-full border rounded-lg shadow-sm flex justify-center  items-center bg-[#30029010] px-2">
           <div className="text-center">
-            <h3 className=" m text-xl">Last Withdraw</h3>
-            <p className="text-2xl text-gray-800 font-bold  mt-1">00 BDT</p>
+            <h3 className=" m lg:text-xl">Last Withdraw</h3>
+            <p className="text-2xl text-gray-800 font-bold  mt-1">
+              {data?.[0]?.amount} BDT
+            </p>
           </div>
         </div>
-        <div className="h-28 w-full border rounded-lg shadow-sm bg-[#30029010] flex justify-center  items-center">
+        <div className="h-28 w-full border rounded-lg shadow-sm bg-[#30029010] flex justify-center  items-center px-2">
           <div className="text-center">
-            <h3 className=" m text-xl">Complete Withdraw</h3>
+            <h3 className=" m lg:text-xl">Complete Withdraw</h3>
             <p className="text-2xl text-gray-800 font-bold  mt-1">10</p>
           </div>
         </div>
-        <div className="h-28 w-full border rounded-lg shadow-sm bg-[#30029010] flex justify-center  items-center">
+        <div className="h-28 w-full border rounded-lg shadow-sm bg-[#30029010] flex justify-center  items-center px-2">
           <div className="text-center">
-            <h3 className=" m text-xl">Pending Withdraw</h3>
+            <h3 className=" m lg:text-xl">Pending Withdraw</h3>
             <p className="text-2xl text-gray-800 font-bold mt-1">2</p>
           </div>
         </div>
@@ -215,15 +221,17 @@ const DoctorWithdrawPage = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {data?.data?.map((service: any) => (
+                  {data?.map((service: any) => (
                     <TableRow
                       key={service?.id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <TableCell align="center">{service?.number}</TableCell>
-                      <TableCell align="center">{service?.amount}</TableCell>
                       <TableCell align="center">
-                        {service?.companyEarn}
+                        {service?.amount} BDT
+                      </TableCell>
+                      <TableCell align="center">
+                        {service?.companyEarn} BDT
                       </TableCell>
                       <TableCell align="center">
                         {" "}
@@ -233,12 +241,12 @@ const DoctorWithdrawPage = () => {
                       <TableCell align="center"> {service?.status}</TableCell>
                       <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
-                          <Link
+                          {/* <Link
                             href={`/dashboard/Doctor/withdraw/edit/${service?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <BorderColorIcon />
-                          </Link>
+                          </Link> */}
                           <button
                             onClick={() => handleClickOpen(service?.id)}
                             className="text-red-500 text-xl  cursor-pointer"
@@ -266,7 +274,7 @@ const DoctorWithdrawPage = () => {
         </div>
 
         <div className="mt-5  block lg:hidden sm:hidden  xl:hidden">
-          {data?.data?.map((service: any) => (
+          {data?.map((service: any) => (
             <Accordion key={service?.id}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -281,12 +289,12 @@ const DoctorWithdrawPage = () => {
                   <div className="  flex gap-2  justify-between">
                     <div className="w-2"></div>
                     <div className=" flex gap-4 justify-center items-center">
-                      <Link
+                      {/* <Link
                         href={`/dashboard/Doctor/withdraw/edit/${service?.id}`}
                         className="text-blue-500 text-xl"
                       >
                         <BorderColorIcon />
-                      </Link>
+                      </Link> */}
                       <button
                         onClick={() => handleClickOpen(service?.id)}
                         className="text-red-500 text-xl  cursor-pointer"
@@ -300,23 +308,33 @@ const DoctorWithdrawPage = () => {
               <AccordionDetails>
                 <div className=" h-full py-2  border-t">
                   <AccordionRow
-                    rowName="Service Name"
-                    data={service?.service?.title}
+                    rowName="Account No"
+                    data={service?.number}
                     style="w-36"
                   />
                   <AccordionRow
-                    rowName="Title"
-                    data={`${service?.offerTitle}`}
+                    rowName="Balance"
+                    data={`${service?.amount} BDT`}
                     style="w-36"
                   />
                   <AccordionRow
-                    rowName="Discount"
-                    data={service?.discount}
+                    rowName="Company Earn"
+                    data={`${service?.companyEarn} BDT`}
                     style="w-36"
                   />
                   <AccordionRow
-                    rowName="Promo Code"
-                    data={`${service?.promoCode}`}
+                    rowName="Receive Type"
+                    data={service?.paymentReciveType}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Status"
+                    data={`${service?.status}`}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Manager Name"
+                    data={`${service?.status}`}
                     style="w-36"
                   />
                 </div>

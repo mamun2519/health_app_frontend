@@ -7,7 +7,7 @@ export const profileApi = baseApi.injectEndpoints({
         url: "/user/my-profile",
         method: "GET",
       }),
-      providesTags: ["profile"],
+      providesTags: ["profile", "withdraw"],
     }),
     allUser: build.query({
       query: () => ({

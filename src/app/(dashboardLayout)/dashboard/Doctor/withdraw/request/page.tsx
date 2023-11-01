@@ -45,6 +45,8 @@ import { ImageUpload } from "@/components/Form/ImageUplaod";
 import { useCreateOfferMutation } from "@/redux/api/serviceOfferApi";
 import SelectDate from "@/components/Form/SelectDate";
 import { serviceOfferSchema } from "@/components/schema/serviceOffer";
+import { useWithdrawRequestMutation } from "@/redux/api/withdrawApi";
+import { withdrawSchema } from "@/components/schema/withdraw";
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -60,7 +62,6 @@ const VisuallyHiddenInput = styled("input")({
 export interface IWithdrawCrate {
   amount: number;
   number: string;
-  paymentReciveType: string;
 }
 const WithdrawRequestPage = () => {
   const [paymentReceiveType, setPaymentReceiveType] = useState("Bikash");
@@ -80,22 +81,32 @@ const WithdrawRequestPage = () => {
     },
     {
       link: "/dashboard/Doctor/withdraw",
-      level: "withdraw Request",
+      level: "Request",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "text.primary",
     },
   ];
 
-  const [createOffer] = useCreateOfferMutation();
+  const [withdrawRequest] = useWithdrawRequestMutation();
 
-  const serviceCreateHandler: SubmitHandler<IWithdrawCrate> = async (value) => {
+  const withdrawRequestHandler: SubmitHandler<IWithdrawCrate> = async (
+    value
+  ) => {
+    const data = {
+      paymentReciveType: paymentReceiveType,
+      amount: Number(value.amount),
+      number: value.number,
+    };
+
+    console.log(data);
+    console.log(value);
     try {
-      const res = await createOffer({ body: value }).unwrap();
+      const res = await withdrawRequest({ body: data }).unwrap();
       console.log(res);
       if (res) {
         successMessage({
-          message: "Service Create Successfully",
-          header: "Thank you",
+          message: "Withdraw Request Successfully",
+          header: "Thank you Doctor",
         });
       } else {
         errorMessage({ message: "something is wrong" });
@@ -105,8 +116,6 @@ const WithdrawRequestPage = () => {
       console.log(error);
     }
   };
-
-  const { data } = useDoctorServiceQuery({ limit: 100, page: 1 });
 
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
@@ -131,8 +140,8 @@ const WithdrawRequestPage = () => {
         </div>
       </div>
       <Form
-        submitHandler={serviceCreateHandler}
-        resolver={yupResolver(serviceOfferSchema)}
+        submitHandler={withdrawRequestHandler}
+        resolver={yupResolver(withdrawSchema)}
       >
         <div className=" grid lg:grid-cols-3 grid-cols-1 gap-5 mt-5">
           <div className=" mt-2 ">
@@ -145,7 +154,7 @@ const WithdrawRequestPage = () => {
           </div>
           <div className=" mt-2">
             <FormInput
-              name=" number"
+              name="number"
               size="lg:w-96 w-72"
               label="Account No"
               placeholder="Enter Account No"
