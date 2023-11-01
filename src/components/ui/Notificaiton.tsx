@@ -49,7 +49,7 @@ export default function Notification({
   return (
     <React.Fragment>
       <div className=" flex">
-        <Link href="/cart">
+        {/* <Link href="/cart">
           <Box sx={{ margin: "4px" }}>
             <IconButton aria-label="cart">
               <StyledBadge badgeContent={cart?.length} color="info">
@@ -57,7 +57,7 @@ export default function Notification({
               </StyledBadge>
             </IconButton>
           </Box>
-        </Link>
+        </Link> */}
         <Box>
           <Tooltip title="Notification">
             <IconButton

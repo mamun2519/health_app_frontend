@@ -14,6 +14,7 @@ import CoverPic from "../../assets/Default.jpg";
 import Link from "next/link";
 import errorMessage from "../shared/ErrrorMessage";
 import LoadingSpinner from "@/utils/Loading";
+
 export type IResetPassword = {
   email: string;
   oldPassword: string;
@@ -22,6 +23,7 @@ export type IResetPassword = {
 const ManageAdminProfile = () => {
   const [toggleButton, setToggleButton] = useState(false);
   const { data, isLoading } = useMyProfileQuery({ limit: 100, page: 1 });
+  console.log(data);
   const [resetPassword] = useResetPasswordMutation();
   const changePasswordHandler: SubmitHandler<IResetPassword> = async (
     value
@@ -53,8 +55,8 @@ const ManageAdminProfile = () => {
         <div className="h-full  border  p-5 rounded-3xl shadow-sm  w-full">
           <div className=" w-full h-[260px]  relative ">
             <Image
-              width={50}
-              height={50}
+              width={550}
+              height={550}
               src={data?.profile?.cover ? data?.profile?.cover : CoverPic}
               className=" object-cover   h-[260px]  w-full rounded-b-3xl rounded-t-xl "
               alt="Cover pic"
