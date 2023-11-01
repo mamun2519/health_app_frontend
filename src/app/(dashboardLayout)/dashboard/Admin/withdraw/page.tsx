@@ -66,10 +66,7 @@ const ManageWithdrawPage = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  const { data: profile } = useMyProfileQuery({
-    limit: 100,
-    page: 1,
-  });
+
   const query: Record<string, any> = {};
   query["page"] = currentPage;
   query["limit"] = pageLimit;
@@ -132,7 +129,14 @@ const ManageWithdrawPage = () => {
             <h3 className=" m lg:text-xl ">Pending Balance</h3>
             <p className="text-2xl text-gray-800 mt-1 ">
               {" "}
-              {profile?.balance} BDT
+              {data?.data
+                ?.filter((obj: { status: string }) => obj.status === "Pending")
+                .reduce(
+                  (total: any, obj: { amount: number }) =>
+                    Number(total) + Number(obj.amount),
+                  0
+                )}{" "}
+              BDT
             </p>
           </div>
         </div>
