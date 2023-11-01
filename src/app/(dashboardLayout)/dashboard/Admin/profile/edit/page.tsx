@@ -6,41 +6,21 @@ import GrainIcon from "@mui/icons-material/Grain";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import Form from "@/components/Form/FormProvider";
 import FormInput from "@/components/Form/FormInput";
-import {
-  useGetDonorRequestDetailsQuery,
-  useUpdateDonorRequestMutation,
-} from "@/redux/api/donorApi";
+
 import { SubmitHandler } from "react-hook-form";
-import { IDonorRequest } from "@/components/dialog/AddDonorRequest";
+
 import successMessage from "@/components/shared/SuccessMassage";
+import { useUpdateDoctorServiceMutation } from "@/redux/api/doctorServiceApi";
+
 import {
-  useCreateDoctorServiceMutation,
-  useDoctorServiceDetailsQuery,
-  useUpdateDoctorServiceMutation,
-} from "@/redux/api/doctorServiceApi";
-import FormSelectInput from "@/components/Form/FormSelectInput";
-import {
-  Days,
-  DoctorDegrees,
-  DoctorSpecialists,
-  Duration,
   SelectedBloodGroup,
   SelectedDivisions,
-  SelectedExperience,
   SelectedGender,
-  ServiceCategory,
-  bloodGroups,
 } from "@/constants/donor";
 import SelectInput from "@/components/Form/SelectInput";
-import { DatePicker } from "@mui/x-date-pickers";
-import FromTimePicker from "@/components/Form/FromTimePicker";
-import { convertToAmPm } from "@/utils/timeConvater";
-import FormMultipleSelect from "@/components/Form/FomMultipleSelect";
+
 import SelectDate from "@/components/Form/SelectDate";
-import { useCreateDoctorMutation } from "@/redux/api/authApi";
-import { ICreateDoctor } from "@/types";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { createDoctorSchema } from "@/components/schema/doctor";
+
 import { ImageUpload } from "@/components/Form/ImageUplaod";
 import errorMessage from "@/components/shared/ErrrorMessage";
 import {
@@ -50,8 +30,7 @@ import {
 const EditProfile = () => {
   const [imageUrl, setImageUrl] = useState<string | undefined>();
   const [cover, setCover] = useState<string | undefined>();
-  const [error, setErrorMessage] = useState("");
-  const [updateDoctorService] = useUpdateDoctorServiceMutation();
+
   const boread = [
     {
       link: "/",
@@ -75,19 +54,20 @@ const EditProfile = () => {
   ];
 
   const { data } = useMyProfileQuery({ limit: 100, page: 1 });
+  console.log(data);
   const [updateUserProfile] = useUpdateUserProfileMutation();
 
-  const defaultValues = {
-    gender: data?.profile?.gender || "",
-    first_name: data?.profile?.first_name || "",
-    last_name: data?.profile?.last_name || "",
-    phone: data?.profile?.phone || "",
-    date_of_birth: data?.profile?.date_of_birth || "",
-    district: data?.profile?.present_Address?.district || "",
-    sub_district: data?.profile?.present_Address?.district || "",
-    address: data?.profile?.present_Address?.address || "",
-    blood_group: data?.profile?.blood_group,
-  };
+  // const defaultValues = {
+  //   gender: data?.profile?.gender || "",
+  //   first_name: data?.profile?.first_name || "",
+  //   last_name: data?.profile?.last_name || "",
+  //   phone: data?.profile?.phone || "",
+  //   date_of_birth: data?.profile?.date_of_birth || "",
+  //   district: data?.profile?.present_Address?.district || "",
+  //   sub_district: data?.profile?.present_Address?.district || "",
+  //   address: data?.profile?.present_Address?.address || "",
+  //   blood_group: data?.profile?.blood_group || "",
+  // };
 
   const editHandler: SubmitHandler<any> = async (value) => {
     //     value.present_Address.police_station = "No";
@@ -95,7 +75,7 @@ const EditProfile = () => {
       value.avatar = imageUrl as string;
     }
     if (cover) {
-      value.cover = cover;
+      value.cover = cover as string;
     }
 
     try {
@@ -110,15 +90,15 @@ const EditProfile = () => {
           first_name: value.first_name,
           last_name: value.last_name,
           phone: value.phone,
-          date_of_birth: value.date_of_birth,
+          date_of_birth: value.date_of_birth.$d,
           blood_group: value.blood_group,
-          cover: value.cover,
-          avatar: value.avatar,
+          cover: value?.cover,
+          avatar: value?.avatar,
         },
       };
       const res = await updateUserProfile(data).unwrap();
       console.log(res);
-      // @ts-ignore
+
       if (res) {
         successMessage({
           message: "profile update  Successfully",
@@ -137,8 +117,11 @@ const EditProfile = () => {
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
       <h3 className=" mt-5 text-2xl">Edit profile</h3>
-      <Form submitHandler={editHandler} defaultValues={defaultValues}>
-        <div className=" grid grid-cols-3 gap-5">
+      <Form
+        submitHandler={editHandler}
+        //  defaultValues={defaultValues}
+      >
+        <div className=" grid lg:grid-cols-3 grid-cols-1 gap-5">
           <div className=" mt-2 ">
             <FormInput
               name="first_name"
@@ -171,7 +154,7 @@ const EditProfile = () => {
             />
           </div>
         </div>
-        <div className="mt-3 grid grid-cols-3 gap-5">
+        <div className="mt-3 grid lg:grid-cols-3 grid-cols-1 gap-5">
           {/* <div className=" mt-8">
             <FormInput
               name="avatar"
@@ -187,7 +170,7 @@ const EditProfile = () => {
               options={SelectedBloodGroup}
             />
           </div>
-          <div className=" mt-2">
+          <div className=" mt-4">
             <SelectInput
               name="gender"
               label="Gender"
@@ -262,7 +245,7 @@ const EditProfile = () => {
             type="submit"
             className=" px-10 h-10 w-full rounded bg-[#d1001c] text-white font-medium "
           >
-            Create Now
+            Update Now
           </button>
         </div>
       </Form>

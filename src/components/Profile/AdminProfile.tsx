@@ -51,28 +51,28 @@ const ManageAdminProfile = () => {
 
   return (
     <div className="  pb-40 ">
-      <div className="flex gap-5">
-        <div className="h-full  border  p-5 rounded-3xl shadow-sm  w-full">
+      <div className="lg:flex gap-5 ">
+        <div className="h-full  lg:border  p-5 rounded-3xl lg:shadow-sm  lg:w-full w-80">
           <div className=" w-full h-[260px]  relative ">
             <Image
               width={550}
               height={550}
               src={data?.profile?.cover ? data?.profile?.cover : CoverPic}
-              className=" object-cover   h-[260px]  w-full rounded-b-3xl rounded-t-xl "
+              className=" object-cover  w-80  h-[260px]  lg:w-full rounded-b-3xl rounded-t-xl "
               alt="Cover pic"
             />
 
-            <div className=" h-36 lg:w-11/12 border border-[#30029010]  p-5 rounded-3xl shadow-sm lg:absolute  top-52   glass lg:left-12  flex gap-6 items-center">
-              <div className=" border-2xl h-full w-36 p-1">
+            <div className=" h-36 lg:w-11/12 lg:border border-[#30029010] py-4 lg:p-5 rounded-3xl shadow-sm lg:absolute  top-52   lg:glass lg:left-12  lg:flex gap-6 items-center">
+              <div className=" border-2xl h-full lg:w-36 w-28  p-1 border shadow-sm">
                 <Image
                   src={data?.profile?.avatar}
-                  className="  h-full  w-full rounded "
-                  width={50}
-                  height={50}
+                  className="  lg:h-full h-24  lg:w-full w-28 "
+                  width={150}
+                  height={150}
                   alt="Cover pic"
                 />
               </div>
-              <div className=" flex justify-between w-full items-end">
+              <div className=" lg:flex justify-between w-full items-end">
                 <div>
                   <h3 className="text-xl font-bold">
                     {data?.profile?.first_name} {data?.profile?.last_name}
@@ -80,7 +80,7 @@ const ManageAdminProfile = () => {
                   <p>Join {convertDate(data?.createdAt)}</p>
                   <p>{data?.email}</p>
                 </div>
-                <div className=" flex gap-3">
+                <div className=" lg:flex gap-3 lg:mt- mt-3">
                   {/* <span className="">
                     <AccountCircleIcon />
                   </span>
@@ -99,7 +99,7 @@ const ManageAdminProfile = () => {
                 </div>
               </div>
             </div>
-            <div className=" mt-28">
+            <div className=" lg:mt-28 mt-[120px]">
               <p className="text-xl font-medium">About Me</p>
               <p className="mt-1">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis,
@@ -108,7 +108,7 @@ const ManageAdminProfile = () => {
               </p>
             </div>
           </div>
-          <div className="mt-60    grid grid-cols-2">
+          <div className="lg:mt-60 mt-[420px]    grid lg:grid-cols-2 grid-cols-1 gap-5">
             <div className="">
               <h3 className=" text-xl">Present Address</h3>
               <div className=" flex     mt-2">
@@ -337,7 +337,7 @@ const ManageAdminProfile = () => {
           </div>
         </div> */}
       </div>
-      <div className="mt p-5">
+      <div className="mt p-5 ">
         <button
           onClick={() => setToggleButton(!toggleButton)}
           className=" font-medium text-red-500"
@@ -348,7 +348,7 @@ const ManageAdminProfile = () => {
       {toggleButton && (
         <Form submitHandler={changePasswordHandler}>
           <div className="  p-5 border">
-            <div className="grid grid-cols-3 gap-5  ">
+            <div className="grid lg:grid-cols-3 grid-cols-1 gap-5  ">
               <div className="pt">
                 <FormInput
                   name="email"
