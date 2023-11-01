@@ -1,7 +1,7 @@
 "use client";
 import MyStepper from "@/components/ui/MyStepper";
 import React, { useEffect, useState } from "react";
-import SuccessPayment from "@/assets/success.gif";
+import SuccessPayment from "@/assets/paymentDone.png";
 import Image from "next/image";
 import { IBookingInfo } from "../preview/page";
 import { ICreateBookAppointment } from "../appointmentForm/page";
@@ -81,8 +81,8 @@ const SuccessPage = () => {
       <div className="border h-[550px] lg:w-1/2   w-full rounded-2xl p-7 mt-10 mx-auto">
         <Image
           src={SuccessPayment}
-          width={100}
-          height={20}
+          width={500}
+          height={520}
           className="w-full h-96"
           alt="Pic"
         />

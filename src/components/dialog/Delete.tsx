@@ -41,7 +41,7 @@ export default function DeleteModal({
         <DialogContent>
           <div>
             <Image className=" w-80 h-60" src={DeletePic} alt="delete" />
-            <p className=" text-2xl font-bold text-center text-red-600 ">
+            <p className=" text-2xl font-bold text-center text-[#d1001c]  ">
               Delete?
             </p>
             <p className="  text-center text-gray-500 mt-2">
@@ -51,7 +51,7 @@ export default function DeleteModal({
 
           <div className=" flex justify-center  gap-5 mt-3">
             <button
-              className="px-4 py-2 rounded border-[#d1001c]  border text-red-500"
+              className="px-4 py-2 rounded border-[#d1001c]  border text-[#d1001c] "
               onClick={handleClose}
             >
               Cancel

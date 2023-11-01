@@ -6,7 +6,7 @@ import CheckoutForm from "@/components/Form/CheckoutForm";
 import MyStepper from "@/components/ui/MyStepper";
 import { usePaymentStripeQuery } from "@/redux/api/paymentApi";
 import LoadingSpinner from "@/utils/Loading";
-import PaymentPic from "@/assets/payment2.gif";
+import PaymentPic from "@/assets/paymentCard.png";
 import Image from "next/image";
 import Link from "next/link";
 import { IBookingInfo } from "../preview/page";
@@ -21,9 +21,8 @@ const ConformPage = () => {
   useEffect(() => {
     setPrice(JSON.parse(localStorage.getItem("BookingInfo") as string).price);
   }, []);
-  console.log(price);
+
   const { data, isLoading } = usePaymentStripeQuery(price);
-  console.log(data);
 
   const appearance = {
     theme: "stripe",
@@ -52,8 +51,8 @@ const ConformPage = () => {
         <div className=" lg:w-1/2  w-full border  p-7 rounded-3xl shadow-sm  h-[550px]  mt-10">
           <Image
             src={PaymentPic}
-            width={100}
-            height={20}
+            width={500}
+            height={520}
             className="w-full h-96"
             alt="Pic"
           />
