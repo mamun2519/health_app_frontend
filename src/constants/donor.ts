@@ -267,6 +267,22 @@ export const SelectedBloodGroup = [
   { value: "0+", label: "0+" },
   { value: "O-", label: "0-" },
 ];
+
+export const SelectDiscount = [
+  { value: "5", label: "5 %" },
+  { value: "10", label: "10 %" },
+  { value: "15", label: "15 % " },
+  { value: "20", label: "20 %" },
+  { value: "25", label: "25 %" },
+  { value: "40", label: "40 %" },
+  { value: "50", label: "50 %" },
+  { value: "60", label: "60 %" },
+  { value: "70", label: "70 %" },
+  { value: "80", label: "80 %" },
+  { value: "90", label: "90 %" },
+  { value: "95", label: "95 %" },
+  { value: "99", label: "99 %" },
+];
 export const SelectedGender = [
   { value: "Male", label: "Male" },
   { value: "Female", label: "Female" },
@@ -388,6 +404,14 @@ export const DonorRequestUpdatedStatus = [
   {
     value: "Cancel",
     label: "Cancel",
+  },
+];
+
+export const ServiceOfferUpdatedStatus = [
+  { value: "Active", label: "Active" },
+  {
+    value: "Expired",
+    label: "Expired",
   },
 ];
 

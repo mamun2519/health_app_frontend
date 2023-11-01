@@ -1,7 +1,10 @@
 import { getErrorMessageByPropertyName } from "@/utils/Schema-validaiton";
 import { TextField } from "@mui/material";
 import React from "react";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Controller, useFormContext } from "react-hook-form";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 interface IInput {
   name: string;
   type?: string;
@@ -33,15 +36,20 @@ const SelectDate = ({
       control={control}
       render={({ field }) => (
         <>
-          {label && <label>{label}</label>}
-          <input
-            type="date"
-            placeholder="Chose Date"
-            {...field}
-            id={id}
-            className=" w-full border-2 h-14 rounded px-4 outline-blue-500"
-          />
-          <p className="text-red-500">{errorMessage}</p>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            {/* Configure DatePicker with the DateFnsUtils date adapter */}
+            <>
+              <DatePicker
+                {...field}
+                label={label}
+                className="w-full"
+                // inputFormat="MM/dd/yyyy" // Customize the date format as needed
+                // placeholder={placeholder || "Choose Date"} // Use the provided placeholder or a default value
+                // renderInput={(params: any) => <input {...params} />}
+              />
+              <p className="text-red-500">{errorMessage}</p>
+            </>
+          </LocalizationProvider>
         </>
       )}
     />

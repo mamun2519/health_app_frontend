@@ -110,12 +110,14 @@ const doctorSideBar = [
     level: "My Service",
     icon: <InboxIcon></InboxIcon>,
   },
+
+  {
+    link: "/dashboard/Doctor/serviceOffer",
+    level: "Service Offer",
+    icon: <InboxIcon></InboxIcon>,
+  },
   // todo foture amplimention
-  // {
-  //   link: "/",
-  //   level: "Service Offer",
-  //   icon: <InboxIcon></InboxIcon>,
-  // },
+
   // {
   //   link: "/",
   //   level: "Service Review",

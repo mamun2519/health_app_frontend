@@ -32,7 +32,8 @@ const MenuItems = () => {
     <div className=" ">
       {sideBarItem?.map((sideBarItem: any, index: number) => (
         <div key={sideBarItem.level} className="py-1">
-          <div
+          <Link
+            href={sideBarItem?.link}
             className={`${
               pathName == sideBarItem.link ? "bg-[#d1001c] text-white" : ""
             } px-5 flex gap-5 cursor-pointer    h-12 rounded-r-3xl`}
@@ -41,9 +42,9 @@ const MenuItems = () => {
               {sideBarItem?.icon}
             </div>
             <div className="mt-3">
-              <Link href={sideBarItem?.link}>{sideBarItem?.level}</Link>
+              <span>{sideBarItem?.level}</span>
             </div>
-          </div>
+          </Link>
         </div>
       ))}
     </div>

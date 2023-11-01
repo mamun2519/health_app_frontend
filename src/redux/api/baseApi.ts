@@ -26,6 +26,7 @@ export const baseApi = createApi({
     "serviceReview",
     "notification",
     "cart",
+    "serviceOffer",
   ],
 });
 

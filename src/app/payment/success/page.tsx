@@ -8,76 +8,72 @@ import { ICreateBookAppointment } from "../appointmentForm/page";
 import { useCreatePaymentMutation } from "@/redux/api/paymentApi";
 import { useRouter } from "next/navigation";
 const SuccessPage = () => {
-  // const [price, SetPrice] = useState<IBookingInfo>({
-  //   bookingDate: "",
-  //   slatTime: "",
-  //   doctorId: "",
-  //   serviceId: "",
-  //   price: "",
-  // });
-  // const [patientInfo, SetPatientInfo] = useState<ICreateBookAppointment>({
-  //   gender: "",
-  //   age: 0,
-  //   weight: 0,
-  //   bloodGroup: "",
-  //   patientProblem: "",
-  //   address: "",
-  // });
-  const [counter, setCounter] = useState(0);
-  const price = JSON.parse(localStorage.getItem("BookingInfo") as string);
-  const patientInfo = JSON.parse(localStorage.getItem("PatientInfo") as string);
+  const [counter, setCounter] = useState(3);
+  // const price = JSON.parse(localStorage.getItem("BookingInfo") as string);
+  // const patientInfo = JSON.parse(localStorage.getItem("PatientInfo") as string);
 
   const [createPayment] = useCreatePaymentMutation();
-
-  // useEffect(() => {
-  //   // SetPrice(JSON.parse(localStorage.getItem("BookingInfo") as string));
-  //   // SetPatientInfo(JSON.parse(localStorage.getItem("PatientInfo") as string));
-  // }, []);
 
   const router = useRouter();
 
   useEffect(() => {
+    // Ensure that this code only runs on the client-side
+    // Accessing localStorage directly on the server-side can cause issues
+    if (typeof window !== "undefined") {
+      const bookingInfo = localStorage.getItem("BookingInfo");
+      const patientInfo = localStorage.getItem("PatientInfo");
+
+      // Check if the items are available in localStorage before parsing them
+      if (bookingInfo && patientInfo) {
+        const price = JSON.parse(bookingInfo);
+        const patient = JSON.parse(patientInfo);
+
+        // Now you can use 'price' and 'patient' data
+        // Rest of your code...
+        const appointment = {
+          bookingDate: price?.bookingDate,
+          doctorId: price?.doctorId,
+          gender: patient?.gender,
+          age: Number(patient?.age),
+          weight: Number(patient?.weight),
+          bloodGroup: patient?.bloodGroup,
+          slatTime: price?.slatTime,
+          patientProblem: patient?.patientProblem,
+          report: "no",
+          address: patient?.address,
+          serviceId: price?.serviceId,
+          price: price.price,
+        };
+
+        const payment = {
+          serviceId: price.serviceId,
+          price: Number(price.price),
+          doctorId: price.doctorId,
+          transactionId: "No",
+          discountedPrice: 0,
+          paymentType: "Stripe",
+        };
+
+        const paymentSuccess = async () => {
+          const res = await createPayment({ appointment, payment }).unwrap();
+          console.log(res);
+        };
+
+        paymentSuccess();
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     const interval = setInterval(() => {
-      if (counter < 3) {
-        setCounter(counter + 1);
+      if (counter > 0) {
+        setCounter(counter - 1);
       } else {
         clearInterval(interval); // Stop the interval when counter reaches 3
         router.push("/dashboard"); // Navigate to the dashboard route
       }
     }, 1000); // Increment every second (you can adjust the interval time)
-  }, [counter, history]);
-  useEffect(() => {
-    const appointment = {
-      bookingDate: price?.bookingDate,
-      doctorId: price?.doctorId,
-      gender: patientInfo?.gender,
-      age: Number(patientInfo?.age),
-      weight: Number(patientInfo?.weight),
-      bloodGroup: patientInfo?.bloodGroup,
-      slatTime: price?.slatTime,
-      patientProblem: patientInfo?.patientProblem,
-      report: "no",
-      address: patientInfo?.address,
-      serviceId: price?.serviceId,
-      price: price.price,
-    };
-
-    const payment = {
-      serviceId: price.serviceId,
-      price: Number(price.price),
-      doctorId: price.doctorId,
-      transactionId: "No",
-      discountedPrice: 0,
-      paymentType: "Stripe",
-    };
-
-    const paymentSuccess = async () => {
-      const res = await createPayment({ appointment, payment }).unwrap();
-      console.log(res);
-    };
-
-    paymentSuccess();
-  }, []);
+  }, [counter, router]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-10 pb-40">
