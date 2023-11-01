@@ -407,6 +407,23 @@ export const DonorRequestUpdatedStatus = [
   },
 ];
 
+export const SelectWithdrawMethod = [
+  { value: "Bank", label: "Bank" },
+  {
+    value: "Nogod",
+    label: "Nogod",
+  },
+  { value: "Bikash", label: "Bikash" },
+  {
+    value: "MasterCard",
+    label: "MasterCard",
+  },
+  {
+    value: "Paypal",
+    label: "Paypal",
+  },
+];
+
 export const ServiceOfferUpdatedStatus = [
   { value: "Active", label: "Active" },
   {

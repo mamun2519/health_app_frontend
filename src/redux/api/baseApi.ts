@@ -27,6 +27,7 @@ export const baseApi = createApi({
     "notification",
     "cart",
     "serviceOffer",
+    "withdraw",
   ],
 });
 

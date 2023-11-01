@@ -46,7 +46,9 @@ import {
   useDoctorServiceOfferQuery,
 } from "@/redux/api/serviceOfferApi";
 import { convertDate } from "@/helper/date";
-const DoctorServiceOfferPage = () => {
+import { useDoctorWithdrawQuery } from "@/redux/api/withdrawApi";
+import { useMyProfileQuery } from "@/redux/api/profileApi";
+const DoctorWithdrawPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
@@ -60,7 +62,10 @@ const DoctorServiceOfferPage = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const { data: profile } = useMyProfileQuery({
+    limit: 100,
+    page: 1,
+  });
   const query: Record<string, any> = {};
   query["page"] = currentPage;
   query["limit"] = pageLimit;
@@ -77,14 +82,14 @@ const DoctorServiceOfferPage = () => {
       color: "inherit",
     },
     {
-      link: "/dashboard/Doctor/serviceOffer",
-      level: "Service Offer",
+      link: "/dashboard/Doctor/withdraw",
+      level: "Withdraw",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "text.primary",
     },
   ];
-  const { data, isLoading } = useDoctorServiceOfferQuery({ ...query });
-
+  const { data, isLoading } = useDoctorWithdrawQuery({ ...query });
+  console.log(data);
   const [deleteServiceOffer] = useDeleteServiceOfferMutation();
   const deleteHandler = async () => {
     try {
@@ -114,10 +119,49 @@ const DoctorServiceOfferPage = () => {
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
-      <h3 className=" mt-5 text-2xl">Service Offer Information</h3>
+      <div className=" flex justify-end">
+        <div>
+          <Link
+            href="/dashboard/Doctor/withdraw/request"
+            className="  lg:w-32 w-20 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium  "
+          >
+            Withdraw Now
+          </Link>
+        </div>
+      </div>
 
-      <div className="mt-5">
-        <div className="lg:flex  justify-between items-center">
+      <div className=" grid lg:grid-cols-4 gap-5 grid-cols-2 mt-5">
+        <div className="h-28 w-full border rounded-lg shadow-sm flex justify-center  items-center bg-[#30029010]">
+          <div className="text-center">
+            <h3 className=" m text-xl ">Available Balance</h3>
+            <p className="text-2xl text-gray-800 font-bold  mt-1">
+              {" "}
+              {profile?.balance} BDT
+            </p>
+          </div>
+        </div>
+        <div className="h-28 w-full border rounded-lg shadow-sm flex justify-center  items-center bg-[#30029010]">
+          <div className="text-center">
+            <h3 className=" m text-xl">Last Withdraw</h3>
+            <p className="text-2xl text-gray-800 font-bold  mt-1">00 BDT</p>
+          </div>
+        </div>
+        <div className="h-28 w-full border rounded-lg shadow-sm bg-[#30029010] flex justify-center  items-center">
+          <div className="text-center">
+            <h3 className=" m text-xl">Complete Withdraw</h3>
+            <p className="text-2xl text-gray-800 font-bold  mt-1">10</p>
+          </div>
+        </div>
+        <div className="h-28 w-full border rounded-lg shadow-sm bg-[#30029010] flex justify-center  items-center">
+          <div className="text-center">
+            <h3 className=" m text-xl">Pending Withdraw</h3>
+            <p className="text-2xl text-gray-800 font-bold mt-1">2</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-10">
+        {/* <div className="lg:flex  justify-between items-center">
           <div>
             <input
               placeholder="Search"
@@ -148,7 +192,8 @@ const DoctorServiceOfferPage = () => {
               Create Offer
             </Link>
           </div>
-        </div>
+        </div> */}
+        <h3 className=" mt-5 text-2xl">Recent Withdraw</h3>
         <div className="mt-5 h-[500px]  hidden  lg:block md:block xl:block">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">
@@ -158,12 +203,12 @@ const DoctorServiceOfferPage = () => {
               >
                 <TableHead sx={{ backgroundColor: "#30029010 " }}>
                   <TableRow>
-                    <TableCell align="center">Service Name</TableCell>
-                    <TableCell align="center">Offer Title</TableCell>
-                    <TableCell align="center">Discount</TableCell>
-                    <TableCell align="center">Promo Code</TableCell>
-                    <TableCell align="center">Expire Date</TableCell>
+                    <TableCell align="center">Account No</TableCell>
+                    <TableCell align="center">Balance</TableCell>
+                    <TableCell align="center">Company Earn</TableCell>
+                    <TableCell align="center">Receive Type</TableCell>
                     <TableCell align="center">Status</TableCell>
+                    <TableCell align="center">manager Name</TableCell>
 
                     {/* <TableCell align="center">Joint Doctor</TableCell> */}
                     <TableCell align="center">Action</TableCell>
@@ -175,26 +220,21 @@ const DoctorServiceOfferPage = () => {
                       key={service?.id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
+                      <TableCell align="center">{service?.number}</TableCell>
+                      <TableCell align="center">{service?.amount}</TableCell>
                       <TableCell align="center">
-                        {service?.service?.title}
-                      </TableCell>
-                      <TableCell align="center">
-                        {service?.offerTitle}
-                      </TableCell>
-                      <TableCell align="center">{service?.discount}</TableCell>
-                      <TableCell align="center">
-                        {" "}
-                        {service?.promoCode}
+                        {service?.companyEarn}
                       </TableCell>
                       <TableCell align="center">
                         {" "}
-                        {convertDate(service?.expireDate)}
+                        {service?.paymentReciveType}
                       </TableCell>
+                      <TableCell align="center"> {service?.status}</TableCell>
                       <TableCell align="center"> {service?.status}</TableCell>
                       <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
                           <Link
-                            href={`/dashboard/Doctor/serviceOffer/edit/${service?.id}`}
+                            href={`/dashboard/Doctor/withdraw/edit/${service?.id}`}
                             className="text-blue-500 text-xl"
                           >
                             <BorderColorIcon />
@@ -242,7 +282,7 @@ const DoctorServiceOfferPage = () => {
                     <div className="w-2"></div>
                     <div className=" flex gap-4 justify-center items-center">
                       <Link
-                        href={`/dashboard/Doctor/serviceOffer/edit/${service?.id}`}
+                        href={`/dashboard/Doctor/withdraw/edit/${service?.id}`}
                         className="text-blue-500 text-xl"
                       >
                         <BorderColorIcon />
@@ -296,4 +336,4 @@ const DoctorServiceOfferPage = () => {
   );
 };
 
-export default DoctorServiceOfferPage;
+export default DoctorWithdrawPage;

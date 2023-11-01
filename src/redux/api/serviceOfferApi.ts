@@ -46,7 +46,7 @@ export const serviceOfferApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      providesTags: ["appointment"],
+      providesTags: ["serviceOffer"],
     }),
   }),
 });

@@ -144,11 +144,11 @@ const doctorSideBar = [
     level: "Payment",
     icon: <InboxIcon></InboxIcon>,
   },
-  // {
-  //   link: "/",
-  //   level: "Withdraw",
-  //   icon: <InboxIcon></InboxIcon>,
-  // },
+  {
+    link: "/dashboard/Doctor/withdraw",
+    level: "Withdraw",
+    icon: <InboxIcon></InboxIcon>,
+  },
   {
     link: "/",
     level: "History",

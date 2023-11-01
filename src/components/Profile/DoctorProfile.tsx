@@ -22,7 +22,7 @@ export type IResetPassword = {
 const DoctorProfiles = () => {
   const [toggleButton, setToggleButton] = useState(false);
   const { data, isLoading } = useMyProfileQuery({ limit: 100, page: 1 });
-  console.log(data);
+
   const [resetPassword] = useResetPasswordMutation();
   const changePasswordHandler: SubmitHandler<IResetPassword> = async (
     value
