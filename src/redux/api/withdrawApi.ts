@@ -49,9 +49,10 @@ export const withdrawApi = baseApi.injectEndpoints({
       providesTags: ["withdraw"],
     }),
     acceptedWithdraw: build.mutation({
-      query: (id) => ({
-        url: `/withdraw/accepted/${id}`,
+      query: (data) => ({
+        url: `/withdraw/accepted`,
         method: "POST",
+        data,
       }),
       invalidatesTags: ["withdraw"],
     }),

@@ -19,7 +19,7 @@ import {
   Typography,
 } from "@mui/material";
 import Select from "react-select";
-import { Days, Limit } from "@/constants/donor";
+import { Days, Limit, WithdrawStatus } from "@/constants/donor";
 import Link from "next/link";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import HomeIcon from "@mui/icons-material/Home";
@@ -47,17 +47,24 @@ import {
 } from "@/redux/api/serviceOfferApi";
 import { convertDate } from "@/helper/date";
 import {
+  useAcceptedWithdrawMutation,
   useAllWithdrawQuery,
   useDeleteWithdrawMutation,
   useDoctorWithdrawQuery,
 } from "@/redux/api/withdrawApi";
 import { useMyProfileQuery } from "@/redux/api/profileApi";
+import ModelSelectInput from "@/components/dialog/ModeSelectInput";
+import Form from "@/components/Form/FormProvider";
+import FormSelectInput from "@/components/Form/FormSelectInput";
+import SelectInput from "@/components/Form/SelectInput";
+import { SubmitHandler } from "react-hook-form";
 const ManageWithdrawPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
   const [deletedId, setDeleteId] = useState("");
-
+  const [OpenChangeStatus, SetOpenChangeStatus] = useState(false);
+  const [statusId, setStatusId] = useState("");
   const handleClickOpen = (id: string) => {
     setOpen(true);
     setDeleteId(id);
@@ -65,6 +72,14 @@ const ManageWithdrawPage = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleStatusChangeClickOpen = (id: string) => {
+    SetOpenChangeStatus(true);
+    setStatusId(id);
+  };
+
+  const handleStatusChangeClose = () => {
+    SetOpenChangeStatus(false);
   };
 
   const query: Record<string, any> = {};
@@ -90,7 +105,6 @@ const ManageWithdrawPage = () => {
     },
   ];
   const { data, isLoading } = useAllWithdrawQuery({ ...query });
-  console.log(data?.data);
 
   const [deleteWithdraw] = useDeleteWithdrawMutation();
   const deleteHandler = async () => {
@@ -112,6 +126,32 @@ const ManageWithdrawPage = () => {
       setOpen(false);
       console.log(error);
       errorMessage({ message: data?.error });
+    }
+  };
+
+  const [acceptedWithdraw] = useAcceptedWithdrawMutation();
+
+  const PaymentAcceptedHandler: SubmitHandler<{ status: string }> = async (
+    value
+  ) => {
+    const data = {
+      status: value.status,
+      id: statusId,
+    };
+    console.log(value);
+    try {
+      const res = await acceptedWithdraw({ data }).unwrap();
+      console.log(res);
+      if (res) {
+        successMessage({
+          header: "Thank You",
+          message: `Withdraw  ${value.status} Successfully!`,
+        });
+        SetOpenChangeStatus(false);
+      }
+    } catch (error: any) {
+      SetOpenChangeStatus(false);
+      errorMessage({ message: error?.data });
     }
   };
 
@@ -212,7 +252,12 @@ const ManageWithdrawPage = () => {
                       </TableCell>
                       <TableCell align="center"> {service?.status}</TableCell>
                       <TableCell align="center">
-                        <button className="px-4 py-1 rounded-xl bg-[#d1001c] text-white">
+                        <button
+                          onClick={() =>
+                            handleStatusChangeClickOpen(service?.id)
+                          }
+                          className="px-4 py-1 rounded-xl bg-[#d1001c] text-white"
+                        >
                           Accepted Now
                         </button>
                       </TableCell>
@@ -264,8 +309,8 @@ const ManageWithdrawPage = () => {
                   </div>
 
                   <div className="  flex gap-2  justify-between">
-                    <div className="w-2"></div>
-                    <div className=" flex gap-4 justify-center items-center">
+                    <div className="w-20"></div>
+                    <div className=" flex gap-4 justify-end items-center">
                       <button
                         onClick={() => handleClickOpen(service?.id)}
                         className="text-[#d1001c] text-xl  cursor-pointer"
@@ -310,8 +355,15 @@ const ManageWithdrawPage = () => {
                     style="w-36"
                   />
                   <AccordionRow
-                    rowName="Manager Name"
-                    data={`${service?.status}`}
+                    rowName="Conform"
+                    data={
+                      <button
+                        onClick={() => handleStatusChangeClickOpen(service?.id)}
+                        className="px-2 py-1 rounded-xl bg-[#d1001c] text-white"
+                      >
+                        Accepted Now
+                      </button>
+                    }
                     style="w-36"
                   />
                 </div>
@@ -319,6 +371,30 @@ const ManageWithdrawPage = () => {
             </Accordion>
           ))}
         </div>
+
+        {OpenChangeStatus && (
+          <ModelSelectInput
+            open={OpenChangeStatus}
+            handleClose={handleStatusChangeClose}
+            text="Withdraw Status"
+          >
+            <Form submitHandler={PaymentAcceptedHandler}>
+              <div className="w-96">
+                <SelectInput
+                  name="status"
+                  label="Status"
+                  options={WithdrawStatus}
+                />
+
+                <div className=" h-12 bg-red-500 text-white w-full flex justify-center items-center rounded-xl mt-4">
+                  <button className="w-full" type="submit">
+                    Conform Now
+                  </button>
+                </div>
+              </div>
+            </Form>
+          </ModelSelectInput>
+        )}
         {open && (
           <DeleteModal
             open={open}

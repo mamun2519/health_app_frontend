@@ -431,6 +431,13 @@ export const ServiceOfferUpdatedStatus = [
     label: "Expired",
   },
 ];
+export const WithdrawStatus = [
+  { value: "Cancel", label: "Cancel" },
+  {
+    value: "Complete",
+    label: "Complete",
+  },
+];
 
 export const MeetStatus = [
   { value: "Active", label: "Active" },
