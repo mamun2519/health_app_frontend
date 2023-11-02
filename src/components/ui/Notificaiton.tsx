@@ -24,6 +24,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Link from "next/link";
 import { setToCart } from "@/redux/Slice/cart";
 import { useMyCartQuery } from "@/redux/api/cartApi";
+import { formatTextWithLineBreaks } from "@/utils/formateText";
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -40,10 +41,6 @@ export default function Notification({
   handleClick,
   handleClose,
 }: any) {
-  const dispatch = useAppDispatch();
-
-  const { data: cart } = useMyCartQuery({ limit: 100, page: 1 });
-  console.log(cart);
   const { data } = useMyNotificationQuery({ limit: 100, page: 1 });
 
   return (
@@ -129,9 +126,9 @@ export default function Notification({
               }) => (
                 <MenuItem key={notification.id}>
                   {/* <Avatar /> Profile */}
-                  <div className="h-16 border-b px-4">
-                    <InputLabel id="demo-customized-select-label">
-                      {notification.message}
+                  <div className="h-16 border-b px-2 w-full">
+                    <InputLabel id="demo-customized-select-label ">
+                      {formatTextWithLineBreaks(notification?.message, 1)}
                     </InputLabel>
                     <div className="mt-2">
                       <InputLabel id="demo-customized-select-label">
@@ -145,6 +142,12 @@ export default function Notification({
               )
             )
           )}
+        </div>
+
+        <div className=" flex justify-end px-4 ">
+          <Link href="/notification" className="text-[#d1001c] cursor-pointer">
+            View All
+          </Link>
         </div>
       </Menu>
     </React.Fragment>
