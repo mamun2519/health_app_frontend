@@ -183,6 +183,14 @@ const ManageAdminProfile = () => {
               </div>
               <div className=" flex     mt-2">
                 <div className="w-36">
+                  <span>Date Of Birth</span>
+                </div>
+                <div>
+                  <span>: {convertDate(data?.profile?.date_of_birth)}</span>
+                </div>
+              </div>
+              <div className=" flex     mt-2">
+                <div className="w-36">
                   <span>blood_group</span>
                 </div>
                 <div>

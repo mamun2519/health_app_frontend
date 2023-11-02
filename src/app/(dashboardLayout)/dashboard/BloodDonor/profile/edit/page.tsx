@@ -83,7 +83,7 @@ const EditProfile = () => {
     first_name: data?.user?.profile?.first_name || "",
     last_name: data?.user?.profile?.last_name || "",
     phone: data?.user?.profile?.phone || "",
-    date_of_birth: data?.user?.profile?.date_of_birth || "",
+    // date_of_birth: data?.user?.profile?.date_of_birth || "",
     district: data?.user?.profile?.present_Address?.district || "",
     sub_district: data?.user?.profile?.present_Address?.district || "",
     address: data?.user?.profile?.present_Address?.address || "",
@@ -100,24 +100,45 @@ const EditProfile = () => {
     }
 
     try {
-      const data = {
-        address: {
-          address: value.address,
-          sub_district: value.sub_district,
-          district: value.district,
-        },
-        profile: {
-          gender: value.gender,
-          first_name: value.first_name,
-          last_name: value.last_name,
-          phone: value.phone,
-          date_of_birth: value.date_of_birth,
-          blood_group: value.blood_group,
-          cover: value.cover,
-          avatar: value.avatar,
-        },
-      };
-      const res = await updateUserProfile(data).unwrap();
+      let d;
+      if (value?.date_of_birth?.$d) {
+        d = {
+          address: {
+            address: value.address,
+            sub_district: value.sub_district,
+            district: value.district,
+          },
+          profile: {
+            gender: value.gender,
+            first_name: value.first_name,
+            last_name: value.last_name,
+            phone: value.phone,
+            date_of_birth: value.date_of_birth.$d,
+            blood_group: value.blood_group,
+            cover: value.cover,
+            avatar: value.avatar,
+          },
+        };
+      } else {
+        d = {
+          address: {
+            address: value.address,
+            sub_district: value.sub_district,
+            district: value.district,
+          },
+          profile: {
+            gender: value.gender,
+            first_name: value.first_name,
+            last_name: value.last_name,
+            phone: value.phone,
+
+            blood_group: value.blood_group,
+            cover: value.cover,
+            avatar: value.avatar,
+          },
+        };
+      }
+      const res = await updateUserProfile(d).unwrap();
       console.log(res);
       // @ts-ignore
       if (res) {

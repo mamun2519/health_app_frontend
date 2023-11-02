@@ -22,6 +22,7 @@ export type IResetPassword = {
 const DoctorProfiles = () => {
   const [toggleButton, setToggleButton] = useState(false);
   const { data, isLoading } = useMyProfileQuery({ limit: 100, page: 1 });
+  console.log(data);
 
   const [resetPassword] = useResetPasswordMutation();
   const changePasswordHandler: SubmitHandler<IResetPassword> = async (
@@ -188,6 +189,16 @@ const DoctorProfiles = () => {
                 </div>
                 <div>
                   <span>: {data?.user?.profile?.blood_group}</span>
+                </div>
+              </div>
+              <div className=" flex     mt-2">
+                <div className="w-36">
+                  <span>Date Of Birth</span>
+                </div>
+                <div>
+                  <span>
+                    : {convertDate(data?.user?.profile?.date_of_birth)}
+                  </span>
                 </div>
               </div>
               <div className=" flex     mt-2">

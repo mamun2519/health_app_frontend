@@ -193,6 +193,16 @@ const DonorProfiles = () => {
               </div>
               <div className=" flex     mt-2">
                 <div className="w-36">
+                  <span>Date Of Birth</span>
+                </div>
+                <div>
+                  <span>
+                    : {convertDate(data?.user?.profile?.date_of_birth)}
+                  </span>
+                </div>
+              </div>
+              <div className=" flex     mt-2">
+                <div className="w-36">
                   <span>blood_group</span>
                 </div>
                 <div>
@@ -221,14 +231,6 @@ const DonorProfiles = () => {
                 </div>
                 <div>
                   <span>: {data?.reward}</span>
-                </div>
-              </div>
-              <div className=" flex     mt-2">
-                <div className="w-36">
-                  <span>Last Donation Date</span>
-                </div>
-                <div>
-                  <span>: 100 BDT</span>
                 </div>
               </div>
             </div>

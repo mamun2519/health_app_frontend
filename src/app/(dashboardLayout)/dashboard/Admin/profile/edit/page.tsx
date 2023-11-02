@@ -57,17 +57,17 @@ const EditProfile = () => {
   console.log(data);
   const [updateUserProfile] = useUpdateUserProfileMutation();
 
-  // const defaultValues = {
-  //   gender: data?.profile?.gender || "",
-  //   first_name: data?.profile?.first_name || "",
-  //   last_name: data?.profile?.last_name || "",
-  //   phone: data?.profile?.phone || "",
-  //   date_of_birth: data?.profile?.date_of_birth || "",
-  //   district: data?.profile?.present_Address?.district || "",
-  //   sub_district: data?.profile?.present_Address?.district || "",
-  //   address: data?.profile?.present_Address?.address || "",
-  //   blood_group: data?.profile?.blood_group || "",
-  // };
+  const defaultValues = {
+    gender: data?.profile?.gender || "",
+    first_name: data?.profile?.first_name || "",
+    last_name: data?.profile?.last_name || "",
+    phone: data?.profile?.phone || "",
+    // date_of_birth: data?.profile?.date_of_birth || "",
+    district: data?.profile?.present_Address?.district || "",
+    sub_district: data?.profile?.present_Address?.district || "",
+    address: data?.profile?.present_Address?.address || "",
+    blood_group: data?.profile?.blood_group || "",
+  };
 
   const editHandler: SubmitHandler<any> = async (value) => {
     //     value.present_Address.police_station = "No";
@@ -79,24 +79,45 @@ const EditProfile = () => {
     }
 
     try {
-      const data = {
-        address: {
-          address: value.address,
-          sub_district: value.sub_district,
-          district: value.district,
-        },
-        profile: {
-          gender: value.gender,
-          first_name: value.first_name,
-          last_name: value.last_name,
-          phone: value.phone,
-          date_of_birth: value.date_of_birth.$d,
-          blood_group: value.blood_group,
-          cover: value?.cover,
-          avatar: value?.avatar,
-        },
-      };
-      const res = await updateUserProfile(data).unwrap();
+      let d;
+      if (value?.date_of_birth?.$d) {
+        d = {
+          address: {
+            address: value.address,
+            sub_district: value.sub_district,
+            district: value.district,
+          },
+          profile: {
+            gender: value.gender,
+            first_name: value.first_name,
+            last_name: value.last_name,
+            phone: value.phone,
+            date_of_birth: value.date_of_birth.$d,
+            blood_group: value.blood_group,
+            cover: value?.cover,
+            avatar: value?.avatar,
+          },
+        };
+      } else {
+        d = {
+          address: {
+            address: value.address,
+            sub_district: value.sub_district,
+            district: value.district,
+          },
+          profile: {
+            gender: value.gender,
+            first_name: value.first_name,
+            last_name: value.last_name,
+            phone: value.phone,
+
+            blood_group: value.blood_group,
+            cover: value?.cover,
+            avatar: value?.avatar,
+          },
+        };
+      }
+      const res = await updateUserProfile(d).unwrap();
       console.log(res);
 
       if (res) {
@@ -117,10 +138,7 @@ const EditProfile = () => {
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
       <h3 className=" mt-5 text-2xl">Edit profile</h3>
-      <Form
-        submitHandler={editHandler}
-        //  defaultValues={defaultValues}
-      >
+      <Form submitHandler={editHandler} defaultValues={defaultValues}>
         <div className=" grid lg:grid-cols-3 grid-cols-1 gap-5">
           <div className=" mt-2 ">
             <FormInput
@@ -178,7 +196,7 @@ const EditProfile = () => {
             />
           </div>
         </div>
-        <div className=" grid grid-cols-3 gap-5 mt-5">
+        <div className=" grid lg:grid-cols-3 grid-cols-1 gap-5 mt-5">
           <div className=" mt-2">
             <SelectDate
               name="date_of_birth"
@@ -190,7 +208,7 @@ const EditProfile = () => {
         </div>
         <div className="mt-5 ">
           <p>Address</p>
-          <div className="grid grid-cols-3 gap-5 mt-2">
+          <div className="grid lg:grid-cols-3 grid-cols-1 gap-5 mt-2">
             <div className="  ">
               {/* <FormSelectInput
                 name="service.category"
@@ -226,7 +244,7 @@ const EditProfile = () => {
 
         <div className="mt-5 ">
           <p>Authentication</p>
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid lg:grid-cols-3 grid-cols-1 gap-5">
             <div className=" mt-2 ">
               <div>
                 <span>Avatar</span>
