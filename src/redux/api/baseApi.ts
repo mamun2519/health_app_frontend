@@ -28,6 +28,7 @@ export const baseApi = createApi({
     "cart",
     "serviceOffer",
     "withdraw",
+    "activity",
   ],
 });
 

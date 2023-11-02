@@ -47,6 +47,11 @@ const userSideBar = [
     icon: <InboxIcon></InboxIcon>,
   },
   {
+    link: "/dashboard",
+    level: "My Activities",
+    icon: <MailIcon></MailIcon>,
+  },
+  {
     link: "/dashboard/User/history",
     level: "History",
     icon: <InboxIcon></InboxIcon>,
@@ -87,6 +92,11 @@ const bloodDonorSideBar = [
     link: "/dashboard/BloodDonor/payment",
     level: "Payment Details",
     icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/dashboard",
+    level: "My Activities",
+    icon: <MailIcon></MailIcon>,
   },
   {
     link: "/dashboard/BloodDonor/history",
@@ -150,6 +160,11 @@ const doctorSideBar = [
     icon: <InboxIcon></InboxIcon>,
   },
   {
+    link: "/dashboard",
+    level: "My Activities",
+    icon: <MailIcon></MailIcon>,
+  },
+  {
     link: "/",
     level: "History",
     icon: <InboxIcon></InboxIcon>,
@@ -201,6 +216,11 @@ const managerSideBar = [
     link: "/dashboard/Admin/donor",
     level: "Manage Donor",
     icon: <InboxIcon></InboxIcon>,
+  },
+  {
+    link: "/dashboard",
+    level: "Activities",
+    icon: <MailIcon></MailIcon>,
   },
 ];
 
