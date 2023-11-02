@@ -48,30 +48,30 @@ const DoctorProfiles = () => {
   }
   return (
     <div className="  pb-40 ">
-      <div className="flex gap-5">
-        <div className="h-full  border  p-5 rounded-3xl shadow-sm  w-full">
+      <div className="lg:flex gap-5">
+        <div className="h-full  lg:border  p-5 lg:rounded-3xl lg:shadow-sm  lg:w-full w-80">
           <div className=" w-full h-[260px]  relative ">
             <Image
               src={
                 data?.user?.profile?.cover ? data?.user?.profile?.cover : Cover
               }
-              width={50}
-              height={50}
-              className=" object-cover   h-[260px]  w-full rounded-b-3xl rounded-t-xl "
+              width={550}
+              height={550}
+              className=" object-cover  w-80  h-[260px]  lg:w-full rounded-b-3xl rounded-t-xl "
               alt="Cover pic"
             />
 
-            <div className=" h-36 lg:w-11/12 border border-[#30029010]  p-5 rounded-3xl shadow-sm lg:absolute  top-52   glass lg:left-12  flex gap-6 items-center">
-              <div className=" border-2xl h-full w-36 p-1">
+            <div className=" h-36 lg:w-11/12 lg:border border-[#30029010] px-4 lg:p-5 rounded-3xl shadow-sm lg:absolute  top-52   glass lg:left-12  lg:flex gap-6 items-center">
+              <div className="border-2xl h-full lg:w-36 w-28  p-1 border shadow-sm">
                 <Image
                   src={data?.user?.profile?.avatar}
-                  width={50}
-                  height={50}
-                  className="  h-full  w-full rounded "
+                  width={550}
+                  height={550}
+                  className="  lg:h-full h-24  lg:w-full w-28 "
                   alt="Cover pic"
                 />
               </div>
-              <div className=" flex justify-between w-full items-end">
+              <div className="  lg:flex justify-between w-full items-end">
                 <div>
                   <h3 className="text-xl font-bold">
                     {data?.user?.profile?.first_name}{" "}
@@ -80,7 +80,7 @@ const DoctorProfiles = () => {
                   <p>Join {convertDate(data?.createdAt)}</p>
                   <p>{data?.user?.email}</p>
                 </div>
-                <div className=" flex gap-3">
+                <div className="lg:flex gap-3 lg:mt-0 mt-3">
                   <Link
                     href="/dashboard/Doctor/profile/edit"
                     className="px-4 py-2 text-white rounded bg-red-500"
@@ -90,7 +90,7 @@ const DoctorProfiles = () => {
                 </div>
               </div>
             </div>
-            <div className=" mt-28">
+            <div className="  lg:mt-28 mt-[120px]">
               <p className="text-xl font-medium">About Me</p>
               <p className="mt-1">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis,
@@ -99,7 +99,7 @@ const DoctorProfiles = () => {
               </p>
             </div>
           </div>
-          <div className="mt-60    grid grid-cols-2">
+          <div className="lg:mt-60 mt-[420px]    grid lg:grid-cols-2 grid-cols-1 gap-5">
             <div className="">
               <h3 className=" text-xl">Present Address</h3>
               <div className=" flex     mt-2">
@@ -233,118 +233,6 @@ const DoctorProfiles = () => {
             </div>
           </div>
         </div>
-
-        {/* <div className="h-full  border  p-5 rounded-3xl shadow-sm  w-1/3">
-          <p className="text-xl font-medium">Education</p>
-          <div className="mt-3  border-b pb-4  ">
-            <p className="text">School</p>
-            <div className=" flex     mt-2">
-              <div className="w-24">
-                <span>Institute</span>
-              </div>
-              <div>
-                <span>: Railway Public High School</span>
-              </div>
-            </div>
-            <div className=" flex     mt-2">
-              <div className="w-24">
-                <span>Pass Year</span>
-              </div>
-              <div>
-                <span>: 2022</span>
-              </div>
-            </div>
-            <div className=" flex     mt-2">
-              <div className="w-24">
-                <span>GPA Year</span>
-              </div>
-              <div>
-                <span>: 4.01</span>
-              </div>
-            </div>
-          </div>
-          <div className="mt-3  border-b pb-4">
-            <p className="text">Collage</p>
-            <div className=" flex     mt-2">
-              <div className="w-24">
-                <span>Institute</span>
-              </div>
-              <div>
-                <span>: islamia Degree Collage</span>
-              </div>
-            </div>
-            <div className=" flex     mt-2">
-              <div className="w-24">
-                <span>Pass Year</span>
-              </div>
-              <div>
-                <span>: 2022</span>
-              </div>
-            </div>
-            <div className=" flex     mt-2">
-              <div className="w-24">
-                <span>GPA Year</span>
-              </div>
-              <div>
-                <span>: 4.01</span>
-              </div>
-            </div>
-          </div>
-          <div className="mt-3   pb-4  border-b">
-            <p className="text">Vercity</p>
-            <div className=" flex     mt-2">
-              <div className="w-24">
-                <span>Institute</span>
-              </div>
-              <div>
-                <span>: Chittagong Varcity</span>
-              </div>
-            </div>
-            <div className=" flex     mt-2">
-              <div className="w-24">
-                <span>Pass Year</span>
-              </div>
-              <div>
-                <span>: 2022</span>
-              </div>
-            </div>
-            <div className=" flex     mt-2">
-              <div className="w-24">
-                <span>GPA Year</span>
-              </div>
-              <div>
-                <span>: 4.01</span>
-              </div>
-            </div>
-          </div>
-          <div className="mt-3   pb-4  ">
-            <p className="text">Adittional Info</p>
-            <div className=" flex     mt-2">
-              <div className="w-24">
-                <span>Phone</span>
-              </div>
-              <div>
-                <span>: Chittagong Varcity</span>
-              </div>
-            </div>
-            <div className=" flex     mt-2">
-              <div className="w-24">
-                <span>gender</span>
-              </div>
-              <div>
-                <span>: 2022</span>
-              </div>
-            </div>
-            <div className=" flex     mt-2">
-              <div className="w-24">
-                <span>blood_group</span>
-              </div>
-              <div>
-                <span>: 4.01</span>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
       <div className="mt p-5">
         <button
@@ -357,7 +245,7 @@ const DoctorProfiles = () => {
       {toggleButton && (
         <Form submitHandler={changePasswordHandler}>
           <div className="  p-5 border">
-            <div className="grid grid-cols-3 gap-5  ">
+            <div className="grid lg:grid-cols-3 grid-cols-1 gap-5  ">
               <div className="pt">
                 <FormInput
                   name="email"

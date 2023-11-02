@@ -80,7 +80,7 @@ const ManageAdminProfile = () => {
                   <p>Join {convertDate(data?.createdAt)}</p>
                   <p>{data?.email}</p>
                 </div>
-                <div className=" lg:flex gap-3 lg:mt- mt-3">
+                <div className=" lg:flex gap-3 lg:mt-0 mt-3">
                   {/* <span className="">
                     <AccountCircleIcon />
                   </span>
