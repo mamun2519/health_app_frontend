@@ -1,7 +1,7 @@
 # Blood Donor & Doctor Service App
 
-Live Link https://healtappfront.vercel.app/
-Backend Repository Link https://github.com/mamun2519/health_app_backEnd
+- Live Link https://healtappfront.vercel.app/
+- Backend Repository Link https://github.com/mamun2519/health_app_backEnd
 
 # SRS (Software Requirement Specification)
 
