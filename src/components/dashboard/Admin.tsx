@@ -1,5 +1,6 @@
 "use client";
 import { useAdminActivityQuery } from "@/redux/api/activityApi";
+import { getTimeOfDayMessage } from "@/utils/DayMessage";
 import LoadingSpinner from "@/utils/Loading";
 import React from "react";
 
@@ -12,7 +13,7 @@ const AdminActivity = () => {
   return (
     <div className="pl-2">
       <h4 className="text-xl">Hello Mr {data?.name} </h4>
-      <p className="mt-1">Good Morning</p>
+      <p className="mt-1">{getTimeOfDayMessage()}</p>
 
       <div className=" grid lg:grid-cols-4 gap-5 grid-cols-2 mt-5 w-full">
         <div className="h-28 w-full border rounded-lg shadow-sm flex justify-center  items-center bg-[#30029010] px-2">

@@ -1,12 +1,28 @@
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { USER_ROLE } from "@/enums/user";
-
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import BreakfastDiningIcon from "@mui/icons-material/BreakfastDining";
+import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
+import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
+import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
+import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
+import PendingActionsIcon from "@mui/icons-material/PendingActions";
+import PaidIcon from "@mui/icons-material/Paid";
+import RestorePageIcon from "@mui/icons-material/RestorePage";
+import RecentActorsIcon from "@mui/icons-material/RecentActors";
+import BusinessIcon from "@mui/icons-material/Business";
+import JoinFullIcon from "@mui/icons-material/JoinFull";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 const defaultSideBar = [
   {
     link: "/dashboard/User/profile",
     level: "Profile",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <AccountBoxIcon></AccountBoxIcon>,
   },
   // {
   //   link: "/",
@@ -24,107 +40,107 @@ const userSideBar = [
   {
     link: "/dashboard/User/appointment",
     level: "Appointment",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <BreakfastDiningIcon></BreakfastDiningIcon>,
   },
   {
     link: "/dashboard/User/myDonorRequest",
     level: "Donor Request",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <RecordVoiceOverIcon></RecordVoiceOverIcon>,
   },
   {
     link: "/dashboard/User/joinDoctor",
     level: "Join Doctor",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <PersonPinCircleIcon></PersonPinCircleIcon>,
   },
   {
     link: "/dashboard/User/prescription",
     level: "Prescription",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <MedicalServicesIcon></MedicalServicesIcon>,
   },
   {
     link: "/dashboard/User/payment",
     level: "Payment Details",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <PaidIcon></PaidIcon>,
   },
   {
     link: "/dashboard",
     level: "My Activities",
-    icon: <MailIcon></MailIcon>,
+    icon: <PendingActionsIcon></PendingActionsIcon>,
   },
   {
     link: "/dashboard/User/history",
     level: "History",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <RestorePageIcon></RestorePageIcon>,
   },
 ];
 const bloodDonorSideBar = [
   {
     link: "/dashboard/BloodDonor/profile",
     level: "Profile",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <AccountBoxIcon></AccountBoxIcon>,
   },
   {
     link: "/dashboard/BloodDonor/myDonorRequest",
     level: "User Request",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <RecordVoiceOverIcon></RecordVoiceOverIcon>,
   },
   {
     link: "/dashboard/BloodDonor/myRequest",
     level: "My Request",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <RecentActorsIcon></RecentActorsIcon>,
   },
   {
     link: "/dashboard/BloodDonor/appointment",
     level: "Appointment",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <BreakfastDiningIcon></BreakfastDiningIcon>,
   },
   {
     link: "/dashboard/BloodDonor/joinDoctor",
     level: "Join Doctor",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <PersonPinCircleIcon></PersonPinCircleIcon>,
   },
   {
     link: "/dashboard/BloodDonor/prescription",
     level: "Prescription",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <MedicalServicesIcon></MedicalServicesIcon>,
   },
   {
     link: "/dashboard/BloodDonor/payment",
     level: "Payment Details",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <PaidIcon></PaidIcon>,
   },
   {
     link: "/dashboard",
     level: "My Activities",
-    icon: <MailIcon></MailIcon>,
+    icon: <PendingActionsIcon></PendingActionsIcon>,
   },
   {
     link: "/dashboard/BloodDonor/history",
     level: "History",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <RestorePageIcon></RestorePageIcon>,
   },
 ];
 const doctorSideBar = [
   {
     link: "/dashboard/Doctor/profile",
     level: "Profile",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <AccountBoxIcon></AccountBoxIcon>,
   },
   {
     link: "/dashboard/Doctor/appointment",
     level: "Booked Appointment",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <BreakfastDiningIcon></BreakfastDiningIcon>,
   },
   {
     link: "/dashboard/Doctor/myService",
     level: "My Service",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <MonitorHeartIcon></MonitorHeartIcon>,
   },
 
   {
     link: "/dashboard/Doctor/serviceOffer",
     level: "Service Offer",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <BusinessIcon></BusinessIcon>,
   },
   // todo foture amplimention
 
@@ -136,38 +152,38 @@ const doctorSideBar = [
   {
     link: "/dashboard/Doctor/prescription",
     level: "Prescription",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <MedicalServicesIcon></MedicalServicesIcon>,
   },
   {
     link: "/dashboard/Doctor/googleMeet",
     level: "Google Meet",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <JoinFullIcon></JoinFullIcon>,
   },
   {
     link: "/dashboard/Doctor/myDonorRequest",
     level: "Donor Request",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <RecordVoiceOverIcon></RecordVoiceOverIcon>,
   },
   // feture amplemention
   {
     link: "/dashboard/Doctor/payment",
     level: "Payment",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <PaidIcon></PaidIcon>,
   },
   {
     link: "/dashboard/Doctor/withdraw",
     level: "Withdraw",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <PublishedWithChangesIcon></PublishedWithChangesIcon>,
   },
   {
     link: "/dashboard",
     level: "My Activities",
-    icon: <MailIcon></MailIcon>,
+    icon: <PendingActionsIcon></PendingActionsIcon>,
   },
   {
     link: "/",
     level: "History",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <RestorePageIcon></RestorePageIcon>,
   },
   ,
 ];
@@ -175,52 +191,52 @@ const managerSideBar = [
   {
     link: "/dashboard/Admin/profile",
     level: "Profile",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <AccountBoxIcon></AccountBoxIcon>,
   },
   {
     link: "/dashboard/Admin/appointment",
     level: "Manage Appointment",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <BreakfastDiningIcon></BreakfastDiningIcon>,
   },
   {
     link: "/dashboard/Admin/doctorService",
     level: "Manage Service",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <MonitorHeartIcon></MonitorHeartIcon>,
   },
   {
     link: "/dashboard/Admin/donorRequest",
     level: "Manage Request",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <ManageAccountsIcon></ManageAccountsIcon>,
   },
   {
     link: "/dashboard/Admin/prescription",
     level: "Manage Prescription",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <MedicalServicesIcon></MedicalServicesIcon>,
   },
   {
     link: "/dashboard/Admin/payment",
     level: "Manage Payment",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <PaidIcon></PaidIcon>,
   },
   {
     link: "/dashboard/Admin/withdraw",
     level: "Manage Withdraw",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <PublishedWithChangesIcon></PublishedWithChangesIcon>,
   },
   {
     link: "/dashboard/Admin/doctor",
     level: "Manage Doctor",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <PeopleAltIcon></PeopleAltIcon>,
   },
   {
     link: "/dashboard/Admin/donor",
     level: "Manage Donor",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <AccountCircleIcon></AccountCircleIcon>,
   },
   {
     link: "/dashboard",
     level: "Activities",
-    icon: <MailIcon></MailIcon>,
+    icon: <PendingActionsIcon></PendingActionsIcon>,
   },
 ];
 
@@ -229,12 +245,12 @@ const superAdminSideBar = [
   {
     link: "/dashboard/Admin/manageAdmin",
     level: "Manage Admin",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <AdminPanelSettingsIcon></AdminPanelSettingsIcon>,
   },
   {
     link: "/dashboard/Admin/user",
     level: "Manage User",
-    icon: <InboxIcon></InboxIcon>,
+    icon: <AdminPanelSettingsIcon></AdminPanelSettingsIcon>,
   },
 ];
 

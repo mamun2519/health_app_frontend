@@ -60,22 +60,20 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a>Item 1</a>
+                <Link href="/bloodDonor/all">Blood Donor</Link>
               </li>
               <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
+                <Link href="/doctor">Doctor</Link>
               </li>
               <li>
-                <a>Item 3</a>
+                <Link href="/doctor/service">Service</Link>
               </li>
+
+              {user?.role && (
+                <li>
+                  <Link href="/dashboard">Dashboard</Link>
+                </li>
+              )}
             </ul>
           </div>
           <Link href="/" className="btn btn-ghost normal-case text-xl">
