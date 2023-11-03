@@ -22,7 +22,7 @@ import {
   Typography,
 } from "@mui/material";
 import Select from "react-select";
-import { Days, Limit } from "@/constants/donor";
+import { AppointmentSort, Days, Limit } from "@/constants/donor";
 import Link from "next/link";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import HomeIcon from "@mui/icons-material/Home";
@@ -47,6 +47,7 @@ const UserAppointmentPage = () => {
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
   const [deletedId, setDeleteId] = useState("");
+  const [sortBy, setSortBy] = useState("");
 
   const handleClickOpen = (id: string) => {
     setOpen(true);
@@ -60,6 +61,7 @@ const UserAppointmentPage = () => {
   const query: Record<string, any> = {};
   query["page"] = currentPage;
   query["limit"] = pageLimit;
+  query["sortBy"] = sortBy;
 
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
@@ -120,30 +122,32 @@ const UserAppointmentPage = () => {
   }
 
   return (
-    <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
-      <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
-      <h3 className=" mt-5 text-2xl">My Appointment Info</h3>
+    <div className="h-[600px  border lg:p-5 rounded-3xl shadow-sm ">
+      <div className="lg:p-0 p-5">
+        <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
+        <h3 className=" mt-5 text-2xl">My Appointment Info</h3>
+      </div>
 
-      <div className="mt-5">
-        <div className="lg:flex  justify-between items-center">
-          <div>
+      <div className="mt-5 ">
+        <div className="lg:flex  justify-end items-center">
+          {/* <div>
             <input
               placeholder="Search"
               className=" lg:w-80 w-full h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
-          </div>
+          </div> */}
 
-          <div className="lg:mt-0 mt-5 flex gap-3">
+          <div className="lg:mt-0 mt-5 flex gap-3 px-4 lg:px-0">
             <Select
               className="w-36 "
-              placeholder="filter"
-              // defaultValue={limit}
-              // onChange={(event: any) => setLimit(event?.value)}
-              options={Days}
+              placeholder="Sort By"
+              defaultValue={sortBy}
+              onChange={(event: any) => setSortBy(event?.value)}
+              options={AppointmentSort}
             />
             <Select
-              className="w-20"
+              className="w-28"
               placeholder="limit"
               defaultValue={pageLimit}
               onChange={(event: any) => setLimit(event?.value)}
@@ -157,7 +161,7 @@ const UserAppointmentPage = () => {
             </Link> */}
           </div>
         </div>
-        <div className="mt-5 h-[500px]  hidden  lg:block md:block xl:block">
+        <div className="mt-5 h-full  hidden  lg:block md:block xl:block">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">
               <Table
@@ -236,7 +240,7 @@ const UserAppointmentPage = () => {
           </TableContainer>
         </div>
 
-        <div className="  justify-center items-center h-12  bg-[#30029010] mt-2  hidden  lg:block md:block xl:block ">
+        <div className=" lg:flex justify-center items-center h-12  bg-[#30029010] mt-2  hidden   md:block xl:block ">
           <Pagination
             count={50}
             onChange={handlePageChange}
@@ -247,7 +251,7 @@ const UserAppointmentPage = () => {
           {/* <p>Selected Page: {currentPage}</p> */}
         </div>
 
-        <div className="mt-5  block lg:hidden sm:hidden  xl:hidden">
+        <div className="mt-5  block lg:hidden sm:hidden  xl:hidden px-2">
           {data?.data?.map((appointment: any) => (
             <Accordion key={appointment?.id}>
               <AccordionSummary
@@ -256,7 +260,7 @@ const UserAppointmentPage = () => {
                 id="panel1a-header"
               >
                 <div className=" flex gap-10">
-                  <div className="  w-28">
+                  <div className="  w-24">
                     <Typography>Appointment</Typography>
                   </div>
 

@@ -458,3 +458,15 @@ export const AppointmentChangeStatus = [
   { value: "Expired", label: "Expired" },
   { value: "Reject", label: "Reject" },
 ];
+
+export const AppointmentSort = [
+  { value: "bookingDate", label: "Booking Date" },
+  {
+    value: "slatTime",
+    label: "SlatTime",
+  },
+  {
+    value: "serialNo",
+    label: "Serial No",
+  },
+];

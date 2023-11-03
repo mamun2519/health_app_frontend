@@ -7,7 +7,15 @@ export const notificationApi = baseApi.injectEndpoints({
         url: "/user/my-notification",
         method: "GET",
       }),
-      providesTags: ["notification"],
+      providesTags: [
+        "notification",
+        "user",
+        "User",
+        "Doctor",
+        "donor",
+        "Admin",
+        "BloodDonor",
+      ],
     }),
 
     deleteNotification: build.mutation({
