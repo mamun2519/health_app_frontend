@@ -21,7 +21,6 @@ const ManagePaymentPage = () => {
       color: "text.primary",
     },
   ];
-  const user: any = getUserInfo();
 
   return (
     <div>

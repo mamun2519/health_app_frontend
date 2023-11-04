@@ -58,6 +58,7 @@ const DoctorServicePage = () => {
   query["page"] = currentPage;
   query["limit"] = pageLimit;
   query["sortBy"] = sortBy;
+
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
   };

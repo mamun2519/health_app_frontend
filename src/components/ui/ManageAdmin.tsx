@@ -18,7 +18,7 @@ import Paper from "@mui/material/Paper";
 
 import { Pagination, TextField, Typography } from "@mui/material";
 import Select from "react-select";
-import { Days, Limit } from "@/constants/donor";
+import { Days, Limit, UserSort } from "@/constants/donor";
 import Link from "next/link";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
@@ -36,6 +36,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionRow from "@/components/ui/AccordionRow";
 import LoadingSpinner from "@/utils/Loading";
+import RefreshIcon from "@mui/icons-material/Refresh";
 interface PaymentProps {
   bread: {
     link: string;
@@ -50,7 +51,8 @@ const ManageAdmin = ({ bread, role }: PaymentProps) => {
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
   const [deletedId, setDeleteId] = useState("");
-
+  const [sortBy, setSortBy] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const handleClickOpen = (id: string) => {
     setOpen(true);
     setDeleteId(id);
@@ -63,7 +65,7 @@ const ManageAdmin = ({ bread, role }: PaymentProps) => {
   const query: Record<string, any> = {};
   query["page"] = currentPage;
   query["limit"] = pageLimit;
-
+  query["sortBy"] = sortBy;
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
   };
@@ -107,20 +109,41 @@ const ManageAdmin = ({ bread, role }: PaymentProps) => {
           </div>
 
           <div className=" flex gap-3 mt-5 lg:mt-0">
+            <div>
+              {(sortBy || searchTerm) && (
+                <div
+                  onClick={() => setSortBy("")}
+                  className=" mt-  cursor-pointer text-[#d1001c] w-12 flex justify-center items-center h-full bg-white border  rounded-lg"
+                >
+                  {" "}
+                  <RefreshIcon />
+                </div>
+              )}
+            </div>
             <Select
-              className="lg:w-36 w-24 "
+              className="w-36 "
               placeholder="filter"
-              // defaultValue={limit}
-              // onChange={(event: any) => setLimit(event?.value)}
-              options={Days}
+              defaultValue={sortBy}
+              onChange={(event: any) => setSortBy(event?.value)}
+              options={UserSort}
             />
             <Select
-              className="w-20"
+              className="lg:w-20"
               placeholder="limit"
               defaultValue={pageLimit}
               onChange={(event: any) => setLimit(event?.value)}
               options={Limit}
             />
+            <div className="hidden lg:block xl:block  md:block">
+              <Link
+                href="/dashboard/Admin/manageAdmin/create"
+                className="  lg:w-32 py-1  h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium "
+              >
+                Create Admin
+              </Link>
+            </div>
+          </div>
+          <div className="block lg:hidden xl:hidden  md:hidden mt-5">
             <Link
               href="/dashboard/Admin/manageAdmin/create"
               className="  lg:w-32 py-1  h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium "

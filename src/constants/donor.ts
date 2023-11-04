@@ -577,3 +577,15 @@ export const WithdrawSort = [
     label: "status",
   },
 ];
+
+export const UserSort = [
+  {
+    value: "email",
+    label: "Email",
+  },
+  { value: "status", label: "Status" },
+  {
+    value: "createdAt",
+    label: "Create Date",
+  },
+];

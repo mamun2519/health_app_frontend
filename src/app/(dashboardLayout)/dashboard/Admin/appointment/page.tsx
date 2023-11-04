@@ -22,7 +22,7 @@ import {
   Typography,
 } from "@mui/material";
 import Select from "react-select";
-import { Days, Limit } from "@/constants/donor";
+import { AppointmentSort, Days, Limit } from "@/constants/donor";
 import Link from "next/link";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import HomeIcon from "@mui/icons-material/Home";
@@ -42,11 +42,15 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionRow from "@/components/ui/AccordionRow";
+import RefreshIcon from "@mui/icons-material/Refresh";
+
 const ManageAppointmentPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
   const [deletedId, setDeleteId] = useState("");
+  const [sortBy, setSortBy] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleClickOpen = (id: string) => {
     setOpen(true);
@@ -60,7 +64,8 @@ const ManageAppointmentPage = () => {
   const query: Record<string, any> = {};
   query["page"] = currentPage;
   query["limit"] = pageLimit;
-
+  query["sortBy"] = sortBy;
+  query["searchTerm"] = searchTerm;
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
   };
@@ -106,31 +111,47 @@ const ManageAppointmentPage = () => {
     return <LoadingSpinner />;
   }
 
+  const clearSearchAndSortHandler = () => {
+    setSearchTerm("");
+    setSortBy("");
+  };
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
       <h3 className=" mt-5 text-2xl">Manage Appointment </h3>
 
       <div className="mt-5">
-        <div className="lg:flex  justify-between items-center">
+        <div className="lg:flex   justify-between items-center">
           <div>
             <input
+              onChange={(e: any) => setSearchTerm(e.target.value)}
               placeholder="Search"
               className=" lg:w-80 w-full h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
           </div>
 
-          <div className=" flex gap-3 lg:mt-0 mt-5">
+          <div className="lg:mt-0 mt-5 flex gap-3 px-4 lg:px-0">
+            <div>
+              {(sortBy || searchTerm) && (
+                <div
+                  onClick={() => clearSearchAndSortHandler()}
+                  className=" mt-  cursor-pointer text-[#d1001c] w-12 flex justify-center "
+                >
+                  {" "}
+                  <RefreshIcon />
+                </div>
+              )}
+            </div>
             <Select
               className="w-36 "
-              placeholder="filter"
-              // defaultValue={limit}
-              // onChange={(event: any) => setLimit(event?.value)}
-              options={Days}
+              placeholder="Sort By"
+              defaultValue={sortBy}
+              onChange={(event: any) => setSortBy(event?.value)}
+              options={AppointmentSort}
             />
             <Select
-              className="w-20"
+              className="w-28"
               placeholder="limit"
               defaultValue={pageLimit}
               onChange={(event: any) => setLimit(event?.value)}

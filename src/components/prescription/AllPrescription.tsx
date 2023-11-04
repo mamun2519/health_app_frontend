@@ -16,7 +16,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import React, { useState } from "react";
 import Select from "react-select";
-import { Days, Limit } from "@/constants/donor";
+import { Days, Limit, PrescriptionSort } from "@/constants/donor";
 import Link from "next/link";
 import { Accordion, Pagination } from "@mui/material";
 import { convertDate } from "@/helper/date";
@@ -29,6 +29,8 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionRow from "@/components/ui/AccordionRow";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import { useDebounced } from "@/redux/hooks";
 interface PrescriptionProps {
   bread: {
     link: string;
@@ -43,7 +45,8 @@ const AllPrescription = ({ bread, role }: PrescriptionProps) => {
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
   const [deletedId, setDeleteId] = useState("");
-
+  const [sortBy, setSortBy] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const handleClickOpen = (id: string) => {
     setOpen(true);
     setDeleteId(id);
@@ -56,6 +59,14 @@ const AllPrescription = ({ bread, role }: PrescriptionProps) => {
   const query: Record<string, any> = {};
   query["page"] = currentPage;
   query["limit"] = pageLimit;
+  query["sortBy"] = sortBy;
+  const debouncedTerm = useDebounced({
+    searchQuery: searchTerm,
+    delay: 600,
+  });
+  if (!!debouncedTerm) {
+    query["searchTerm"] = debouncedTerm;
+  }
 
   const { data, isLoading } = useAllPrescriptionQuery({ ...query });
 
@@ -86,6 +97,10 @@ const AllPrescription = ({ bread, role }: PrescriptionProps) => {
   if (isLoading) {
     return <LoadingSpinner />;
   }
+  const clearSearchAndSortHandler = () => {
+    setSearchTerm("");
+    setSortBy("");
+  };
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
@@ -95,21 +110,34 @@ const AllPrescription = ({ bread, role }: PrescriptionProps) => {
           <div>
             <input
               placeholder="Search"
+              onChange={(e: any) => setSearchTerm(e.target.value)}
+              value={searchTerm}
               className=" lg:w-80 w-full h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
           </div>
 
-          <div className=" flex gap-3 mt-5 lg:mt-0">
+          <div className=" flex gap-3 lg:mt-0 mt-5">
+            <div>
+              {(sortBy || searchTerm) && (
+                <div
+                  onClick={() => clearSearchAndSortHandler()}
+                  className=" mt-  cursor-pointer text-[#d1001c] w-12 flex justify-center items-center h-full bg-white border  rounded-lg"
+                >
+                  {" "}
+                  <RefreshIcon />
+                </div>
+              )}
+            </div>
             <Select
               className="w-36 "
               placeholder="filter"
-              // defaultValue={limit}
-              // onChange={(event: any) => setLimit(event?.value)}
-              options={Days}
+              defaultValue={sortBy}
+              onChange={(event: any) => setSortBy(event?.value)}
+              options={PrescriptionSort}
             />
             <Select
-              className="w-20"
+              className="lg:w-20"
               placeholder="limit"
               defaultValue={pageLimit}
               onChange={(event: any) => setLimit(event?.value)}

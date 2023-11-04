@@ -10,16 +10,18 @@ export const profileApi = baseApi.injectEndpoints({
       providesTags: ["profile", "withdraw"],
     }),
     allUser: build.query({
-      query: () => ({
+      query: (arg: Record<string, any>) => ({
         url: "/user/all-user",
         method: "GET",
+        params: arg,
       }),
       providesTags: ["User"],
     }),
     AllAdmin: build.query({
-      query: () => ({
+      query: (arg: Record<string, any>) => ({
         url: "/user/all-admin",
         method: "GET",
+        params: arg,
       }),
       providesTags: ["Admin"],
     }),

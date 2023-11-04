@@ -23,7 +23,7 @@ import {
   Typography,
 } from "@mui/material";
 import Select from "react-select";
-import { Days, Limit } from "@/constants/donor";
+import { Days, DonorRequestSort, Limit } from "@/constants/donor";
 import Link from "next/link";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import HomeIcon from "@mui/icons-material/Home";
@@ -34,15 +34,17 @@ import successMessage from "@/components/shared/SuccessMassage";
 import errorMessage from "@/components/shared/ErrrorMessage";
 import LoadingSpinner from "@/utils/Loading";
 import AccordionDetails from "@mui/material/AccordionDetails";
-
+import RefreshIcon from "@mui/icons-material/Refresh";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionRow from "@/components/ui/AccordionRow";
+import { useDebounced } from "@/redux/hooks";
 const ManageDonorRequestPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
   const [deletedId, setDeleteId] = useState("");
-
+  const [sortBy, setSortBy] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const handleClickOpen = (id: string) => {
     setOpen(true);
     setDeleteId(id);
@@ -55,6 +57,14 @@ const ManageDonorRequestPage = () => {
   const query: Record<string, any> = {};
   query["page"] = currentPage;
   query["limit"] = pageLimit;
+  query["sortBy"] = sortBy;
+  const debouncedTerm = useDebounced({
+    searchQuery: searchTerm,
+    delay: 600,
+  });
+  if (!!debouncedTerm) {
+    query["searchTerm"] = debouncedTerm;
+  }
 
   const { data, isLoading } = useAllDonorRequestQuery({ ...query });
   const [deleteDonorRequest] = useDeleteDonorRequestMutation();
@@ -102,6 +112,10 @@ const ManageDonorRequestPage = () => {
   if (isLoading) {
     return <LoadingSpinner />;
   }
+  const clearSearchAndSortHandler = () => {
+    setSearchTerm("");
+    setSortBy("");
+  };
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
@@ -110,22 +124,35 @@ const ManageDonorRequestPage = () => {
         <div className="lg:flex  justify-between items-center">
           <div>
             <input
+              onChange={(e: any) => setSearchTerm(e.target.value)}
+              value={searchTerm}
               placeholder="Search"
               className=" lg:w-80 w-full h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
           </div>
 
-          <div className=" flex gap-3 mt-5 lg:mt-0">
+          <div className=" flex gap-3 lg:mt-0 mt-5">
+            <div>
+              {(sortBy || searchTerm) && (
+                <div
+                  onClick={() => clearSearchAndSortHandler()}
+                  className=" mt-  cursor-pointer text-[#d1001c] w-12 flex justify-center items-center h-full bg-white border  rounded-lg"
+                >
+                  {" "}
+                  <RefreshIcon />
+                </div>
+              )}
+            </div>
             <Select
               className="w-36 "
               placeholder="filter"
-              // defaultValue={limit}
-              // onChange={(event: any) => setLimit(event?.value)}
-              options={Days}
+              defaultValue={sortBy}
+              onChange={(event: any) => setSortBy(event?.value)}
+              options={DonorRequestSort}
             />
             <Select
-              className="w-20"
+              className="lg:w-20"
               placeholder="limit"
               defaultValue={pageLimit}
               onChange={(event: any) => setLimit(event?.value)}
