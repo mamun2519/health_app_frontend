@@ -51,7 +51,7 @@ const AllNotification = () => {
             <div key={notification.id}>
               {/* <Avatar /> Profile */}
               <div
-                className={`h-24  bg-[#30029010] w-full px-4 mt-1 flex  items-center  rounded-xl shadow-sm  justify-between   hover:bg-[#d1001c] hover:text-white`}
+                className={`lg:h-24 h-36  bg-[#30029010] w-full px-4 mt-2 flex  items-center  rounded-xl shadow-sm  justify-between   hover:bg-[#d1001c] hover:text-white`}
               >
                 <div className="">
                   <p id="demo-customized-select-label ">

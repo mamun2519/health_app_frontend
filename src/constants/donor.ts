@@ -517,3 +517,35 @@ export const PaymentSort = [
     label: "Payment Type",
   },
 ];
+
+export const DoctorServiceSort = [
+  {
+    value: "title",
+    label: "Title",
+  },
+  { value: "price", label: "Price" },
+  {
+    value: "category",
+    label: "Category",
+  },
+  {
+    value: "serviceType",
+    label: "Service Type",
+  },
+];
+
+export const OfferSort = [
+  {
+    value: "offerTitle",
+    label: "Offer Title",
+  },
+  { value: "promoCode", label: "Promo Code" },
+  {
+    value: "discount",
+    label: "Discount",
+  },
+  {
+    value: "expireDate",
+    label: "Expire Date",
+  },
+];

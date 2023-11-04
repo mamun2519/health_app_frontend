@@ -19,18 +19,15 @@ import {
   Typography,
 } from "@mui/material";
 import Select from "react-select";
-import { Days, Limit } from "@/constants/donor";
+import { Days, DoctorServiceSort, Limit } from "@/constants/donor";
 import Link from "next/link";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
-import HomeIcon from "@mui/icons-material/Home";
+
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import GrainIcon from "@mui/icons-material/Grain";
 import DeleteModal from "@/components/dialog/Delete";
 import successMessage from "@/components/shared/SuccessMassage";
-import {
-  useDeleteAppointmentMutation,
-  useUserAppointmentQuery,
-} from "@/redux/api/appointmentApi";
+
 import {
   useDeleteServiceMutation,
   useDoctorServiceQuery,
@@ -41,12 +38,13 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionRow from "@/components/ui/AccordionRow";
+import RefreshIcon from "@mui/icons-material/Refresh";
 const DoctorServicePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
   const [deletedId, setDeleteId] = useState("");
-
+  const [sortBy, setSortBy] = useState("");
   const handleClickOpen = (id: string) => {
     setOpen(true);
     setDeleteId(id);
@@ -59,7 +57,7 @@ const DoctorServicePage = () => {
   const query: Record<string, any> = {};
   query["page"] = currentPage;
   query["limit"] = pageLimit;
-
+  query["sortBy"] = sortBy;
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
   };
@@ -112,30 +110,51 @@ const DoctorServicePage = () => {
       <h3 className=" mt-5 text-2xl">My Service Info</h3>
 
       <div className="mt-5">
-        <div className="lg:flex  justify-between items-center">
-          <div>
+        <div className="lg:flex  justify-end items-center">
+          {/* <div>
             <input
               placeholder="Search"
               className=" lg:w-80 w-full h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
-          </div>
+          </div> */}
 
           <div className=" flex gap-3 mt-5 lg:mt-0">
+            <div>
+              {sortBy && (
+                <div
+                  onClick={() => setSortBy("")}
+                  className=" mt-1  cursor-pointer text-[#d1001c]"
+                >
+                  {" "}
+                  <RefreshIcon />
+                </div>
+              )}
+            </div>
             <Select
-              className="w-28 "
-              placeholder="filter"
-              // defaultValue={limit}
-              // onChange={(event: any) => setLimit(event?.value)}
-              options={Days}
+              className="w-36 "
+              placeholder="Sort By"
+              defaultValue={sortBy}
+              onChange={(event: any) => setSortBy(event?.value)}
+              options={DoctorServiceSort}
             />
             <Select
-              className="w-20"
+              className="w-28"
               placeholder="limit"
               defaultValue={pageLimit}
               onChange={(event: any) => setLimit(event?.value)}
               options={Limit}
             />
+            <div className="hidden lg:block xl:block  md:block">
+              <Link
+                href="/dashboard/Doctor/myService/create"
+                className="  lg:w-32 w-20 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium  "
+              >
+                Create
+              </Link>
+            </div>
+          </div>
+          <div className="block lg:hidden xl:hidden  md:hidden mt-4 ">
             <Link
               href="/dashboard/Doctor/myService/create"
               className="  lg:w-32 w-20 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium  "
@@ -201,7 +220,7 @@ const DoctorServicePage = () => {
                           </Link>
                           <button
                             onClick={() => handleClickOpen(service?.id)}
-                            className="text-red-500 text-xl  cursor-pointer"
+                            className="text-[#d1001c] text-xl  cursor-pointer"
                           >
                             <DeleteIcon />
                           </button>
@@ -255,7 +274,7 @@ const DoctorServicePage = () => {
                       </Link>
                       <button
                         onClick={() => handleClickOpen(service?.id)}
-                        className="text-red-500 text-xl  cursor-pointer"
+                        className="text-[#d1001c] text-xl  cursor-pointer"
                       >
                         <DeleteIcon />
                       </button>

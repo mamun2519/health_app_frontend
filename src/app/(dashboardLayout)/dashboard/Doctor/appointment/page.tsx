@@ -19,7 +19,7 @@ import {
   Typography,
 } from "@mui/material";
 import Select from "react-select";
-import { Days, Limit } from "@/constants/donor";
+import { AppointmentSort, Days, Limit } from "@/constants/donor";
 import Link from "next/link";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import HomeIcon from "@mui/icons-material/Home";
@@ -36,9 +36,10 @@ import AppointmentChangeStatusModel from "@/components/dialog/AppointmentStatusC
 import LoadingSpinner from "@/utils/Loading";
 
 import AccordionDetails from "@mui/material/AccordionDetails";
-
+import RefreshIcon from "@mui/icons-material/Refresh";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionRow from "@/components/ui/AccordionRow";
+import errorMessage from "@/components/shared/ErrrorMessage";
 const DoctorBookAppointment = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -46,7 +47,7 @@ const DoctorBookAppointment = () => {
   const [deletedId, setDeleteId] = useState("");
   const [OpenStatusChange, setOpenStatusChange] = useState(false);
   const [updatedId, setUpdateId] = useState("");
-
+  const [sortBy, setSortBy] = useState("");
   const handleClickOpen = (id: string) => {
     setOpen(true);
     setDeleteId(id);
@@ -68,7 +69,7 @@ const DoctorBookAppointment = () => {
   const query: Record<string, any> = {};
   query["page"] = currentPage;
   query["limit"] = pageLimit;
-
+  query["sortBy"] = sortBy;
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
   };
@@ -88,17 +89,21 @@ const DoctorBookAppointment = () => {
     },
   ];
   const { data, isLoading } = useDoctorAppointmentQuery({ ...query });
-  console.log(data);
+
   const [deleteAppointment] = useDeleteAppointmentMutation();
   const deleteHandler = async () => {
     try {
-      await deleteAppointment(deletedId);
-      // console.log(deletedId);
-      setOpen(false);
-      successMessage({
-        header: "Thank You",
-        message: "Appointment Delete Successfully",
-      });
+      const res = await deleteAppointment(deletedId).unwrap();
+      if (res) {
+        setOpen(false);
+        successMessage({
+          header: "Thank You",
+          message: "Appointment Delete Successfully",
+        });
+      } else {
+        setOpen(false);
+        errorMessage({ message: "Something Is wrong" });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -114,25 +119,36 @@ const DoctorBookAppointment = () => {
       <h3 className=" mt-5 text-2xl">My Appointment Info</h3>
 
       <div className="mt-5">
-        <div className="lg:flex  justify-between items-center">
-          <div>
+        <div className="lg:flex  justify-end items-center">
+          {/* <div>
             <input
               placeholder="Search"
               className=" lg:w-80 w-full h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
-          </div>
+          </div> */}
 
-          <div className=" flex gap-3 lg:mt-0 mt-5">
+          <div className="lg:mt-0 mt-5 flex gap-3 px-4 lg:px-0">
+            <div>
+              {sortBy && (
+                <div
+                  onClick={() => setSortBy("")}
+                  className=" mt-1  cursor-pointer text-[#d1001c]"
+                >
+                  {" "}
+                  <RefreshIcon />
+                </div>
+              )}
+            </div>
             <Select
               className="w-36 "
-              placeholder="filter"
-              // defaultValue={limit}
-              // onChange={(event: any) => setLimit(event?.value)}
-              options={Days}
+              placeholder="Sort By"
+              defaultValue={sortBy}
+              onChange={(event: any) => setSortBy(event?.value)}
+              options={AppointmentSort}
             />
             <Select
-              className="w-20"
+              className="w-28"
               placeholder="limit"
               defaultValue={pageLimit}
               onChange={(event: any) => setLimit(event?.value)}
@@ -190,7 +206,7 @@ const DoctorBookAppointment = () => {
                       <TableCell align="center">
                         <button
                           onClick={() => HandleOpenStatusModel(appointment?.id)}
-                          className="px-8 py-1 rounded-full bg-red-500 text-white"
+                          className="px-8 py-1 rounded-full bg-[#d1001c] text-white"
                         >
                           Confirm Now
                         </button>
@@ -220,7 +236,7 @@ const DoctorBookAppointment = () => {
                           </Link> */}
                           <button
                             onClick={() => handleClickOpen(appointment?.id)}
-                            className="text-red-500 text-xl  cursor-pointer"
+                            className="text-[#d1001c] text-xl  cursor-pointer"
                           >
                             <DeleteIcon />
                           </button>
@@ -274,7 +290,7 @@ const DoctorBookAppointment = () => {
                           </Link> */}
                       <button
                         onClick={() => handleClickOpen(appointment?.id)}
-                        className="text-red-500 text-xl  cursor-pointer"
+                        className="text-[#d1001c] text-xl  cursor-pointer"
                       >
                         <DeleteIcon />
                       </button>
@@ -315,7 +331,7 @@ const DoctorBookAppointment = () => {
                     data={
                       <button
                         onClick={() => HandleOpenStatusModel(appointment?.id)}
-                        className="px-3 py- rounded-full bg-red-500 text-white"
+                        className="px-3 py- rounded-full bg-[#d1001c] text-white"
                       >
                         Confirm Now
                       </button>
