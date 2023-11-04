@@ -10,10 +10,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import React, { useState } from "react";
-import {
-  useDeleteDonorRequestMutation,
-  useGetMyUserDonorDataQuery,
-} from "@/redux/api/donorApi";
+
 import {
   Accordion,
   AccordionSummary,
@@ -42,6 +39,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionRow from "@/components/ui/AccordionRow";
+import RefreshIcon from "@mui/icons-material/Refresh";
 const UserAppointmentPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -139,6 +137,17 @@ const UserAppointmentPage = () => {
           </div> */}
 
           <div className="lg:mt-0 mt-5 flex gap-3 px-4 lg:px-0">
+            <div>
+              {sortBy && (
+                <div
+                  onClick={() => setSortBy("")}
+                  className=" mt-1  cursor-pointer text-[#d1001c]"
+                >
+                  {" "}
+                  <RefreshIcon />
+                </div>
+              )}
+            </div>
             <Select
               className="w-36 "
               placeholder="Sort By"
@@ -205,7 +214,7 @@ const UserAppointmentPage = () => {
                       <TableCell align="center">
                         <button
                           onClick={() => changeStatusHandler(appointment?.id)}
-                          className="px-8 py-1 rounded-full bg-red-500 text-white"
+                          className="px-8 py-1 rounded-full bg-[#d1001c] text-white"
                         >
                           Cancel Now
                         </button>
@@ -226,7 +235,7 @@ const UserAppointmentPage = () => {
                           </Link>
                           <button
                             onClick={() => handleClickOpen(appointment?.id)}
-                            className="text-red-500 text-xl  cursor-pointer"
+                            className="text-[#d1001c] text-xl  cursor-pointer"
                           >
                             <DeleteIcon />
                           </button>
@@ -240,7 +249,7 @@ const UserAppointmentPage = () => {
           </TableContainer>
         </div>
 
-        <div className=" lg:flex justify-center items-center h-12  bg-[#30029010] mt-2  hidden   md:block xl:block ">
+        <div className=" lg:flex justify-center items-center h-12  bg-[#30029010] mt-2     md:block  ">
           <Pagination
             count={50}
             onChange={handlePageChange}
@@ -281,7 +290,7 @@ const UserAppointmentPage = () => {
                       </Link>
                       <button
                         onClick={() => handleClickOpen(appointment?.id)}
-                        className="text-red-500 text-xl  cursor-pointer"
+                        className="text-[#d1001c] text-xl  cursor-pointer"
                       >
                         <DeleteIcon />
                       </button>
@@ -321,7 +330,7 @@ const UserAppointmentPage = () => {
                     data={
                       <button
                         onClick={() => changeStatusHandler(appointment?.id)}
-                        className="px-8 py-1 rounded-full bg-red-500 text-white"
+                        className="px-8 py-1 rounded-full bg-[#d1001c] text-white"
                       >
                         Cancel Now
                       </button>

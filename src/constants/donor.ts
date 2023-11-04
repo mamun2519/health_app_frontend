@@ -470,3 +470,50 @@ export const AppointmentSort = [
     label: "Serial No",
   },
 ];
+export const DonorRequestSort = [
+  { value: "location", label: "Location" },
+  {
+    value: "phone",
+    label: "Phone",
+  },
+  {
+    value: "donnetDate",
+    label: "Date",
+  },
+  {
+    value: "quantity",
+    label: "Quantity",
+  },
+];
+
+export const PrescriptionSort = [
+  { value: "title", label: "Title" },
+  {
+    value: "submitDate",
+    label: "Submit Date",
+  },
+  {
+    value: "donnetDate",
+    label: "Date",
+  },
+  {
+    value: "status",
+    label: "Status",
+  },
+];
+
+export const PaymentSort = [
+  { value: "price", label: "Price" },
+  {
+    value: "transactionId",
+    label: "Transaction Id",
+  },
+  {
+    value: "discountedPrice",
+    label: "Discounted Price",
+  },
+  {
+    value: "paymentType",
+    label: "Payment Type",
+  },
+];

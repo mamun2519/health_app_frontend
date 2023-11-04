@@ -24,7 +24,7 @@ import {
   Typography,
 } from "@mui/material";
 import Select from "react-select";
-import { Days, Limit } from "@/constants/donor";
+import { Days, Limit, PaymentSort } from "@/constants/donor";
 import Link from "next/link";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
@@ -35,6 +35,7 @@ import errorMessage from "../shared/ErrrorMessage";
 import LoadingSpinner from "@/utils/Loading";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionRow from "../ui/AccordionRow";
+import RefreshIcon from "@mui/icons-material/Refresh";
 interface PaymentProps {
   bread: {
     link: string;
@@ -45,12 +46,11 @@ interface PaymentProps {
   role: string;
 }
 const UserPayment = ({ bread, role }: PaymentProps) => {
-  console.log(role);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
   const [deletedId, setDeleteId] = useState("");
-
+  const [sortBy, setSortBy] = useState("");
   const handleClickOpen = (id: string) => {
     setOpen(true);
     setDeleteId(id);
@@ -63,6 +63,7 @@ const UserPayment = ({ bread, role }: PaymentProps) => {
   const query: Record<string, any> = {};
   query["page"] = currentPage;
   query["limit"] = pageLimit;
+  query["sortBy"] = sortBy;
 
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
@@ -97,36 +98,47 @@ const UserPayment = ({ bread, role }: PaymentProps) => {
       <h3 className=" mt-5 lg:text-2xl text-xl">My Payment Info</h3>
 
       <div className="mt-5">
-        <div className="lg:flex  justify-between items-center">
-          <div>
+        <div className="lg:flex  justify-end items-center">
+          {/* <div>
             <input
               placeholder="Search"
               className=" lg:w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
-          </div>
+          </div> */}
 
-          <div className=" flex gap-3 lg:mt-0 mt-5">
+          <div className="lg:mt-0 mt-5 flex gap-3 px-4 lg:px-0">
+            <div>
+              {sortBy && (
+                <div
+                  onClick={() => setSortBy("")}
+                  className=" mt-1  cursor-pointer text-[#d1001c]"
+                >
+                  {" "}
+                  <RefreshIcon />
+                </div>
+              )}
+            </div>
             <Select
               className="w-36 "
-              placeholder="filter"
-              // defaultValue={limit}
-              // onChange={(event: any) => setLimit(event?.value)}
-              options={Days}
+              placeholder="Sort By"
+              defaultValue={sortBy}
+              onChange={(event: any) => setSortBy(event?.value)}
+              options={PaymentSort}
             />
             <Select
-              className="w-20"
+              className="w-28"
               placeholder="limit"
               defaultValue={pageLimit}
               onChange={(event: any) => setLimit(event?.value)}
               options={Limit}
             />
             {/* <Link
-          href="/doctor/find"
-          className="  w-32 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium "
-        >
-          Find Doctor
-        </Link> */}
+              href="/doctor/find"
+              className="  w-32 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium "
+            >
+              Find Doctor
+            </Link> */}
           </div>
         </div>
         <div className="mt-5 hidden  lg:block md:block xl:block">

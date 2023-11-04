@@ -35,7 +35,7 @@ import errorMessage from "@/components/shared/ErrrorMessage";
 import LoadingSpinner from "@/utils/Loading";
 
 import AccordionDetails from "@mui/material/AccordionDetails";
-
+import RefreshIcon from "@mui/icons-material/Refresh";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionRow from "@/components/ui/AccordionRow";
 const DonorAppointmentPage = () => {
@@ -101,8 +101,6 @@ const DonorAppointmentPage = () => {
     return <LoadingSpinner />;
   }
 
-  console.log(data);
-
   return (
     <div className="h-[600px  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
@@ -119,6 +117,17 @@ const DonorAppointmentPage = () => {
           </div> */}
 
           <div className="lg:mt-0 mt-5 flex gap-3 px-4 lg:px-0">
+            <div>
+              {sortBy && (
+                <div
+                  onClick={() => setSortBy("")}
+                  className=" mt-1  cursor-pointer text-[#d1001c]"
+                >
+                  {" "}
+                  <RefreshIcon />
+                </div>
+              )}
+            </div>
             <Select
               className="w-36 "
               placeholder="Sort By"
