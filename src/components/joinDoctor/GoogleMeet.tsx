@@ -16,7 +16,7 @@ import {
 } from "@/redux/api/donorApi";
 import { Pagination, TextField, Typography } from "@mui/material";
 import Select from "react-select";
-import { Days, DoctorServiceSort, Limit } from "@/constants/donor";
+import { Days, DoctorServiceSort, GoogleSort, Limit } from "@/constants/donor";
 import Link from "next/link";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import HomeIcon from "@mui/icons-material/Home";
@@ -132,7 +132,7 @@ const GoogleMeet = () => {
               placeholder="Sort By"
               defaultValue={sortBy}
               onChange={(event: any) => setSortBy(event?.value)}
-              options={DoctorServiceSort}
+              options={GoogleSort}
             />
             <Select
               className="w-28"

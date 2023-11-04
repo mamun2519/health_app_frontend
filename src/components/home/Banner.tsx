@@ -4,9 +4,9 @@ import Link from "next/link";
 const Banner = () => {
   return (
     <div className="  max-w-7xl mx-auto px-4 lg:px-0">
-      <div className=" grid lg:grid-cols-2 grid-cols-1 lg:gap-10 ">
+      <div className=" lg:grid flex  flex-col-reverse lg:grid-cols-2 grid-cols-1 lg:gap-10  ">
         <div className=" flex items-center">
-          <div className="mt-20 lg:mt-0">
+          <div className=" lg:mt-0 pb-20 lg:pb-0">
             <h3 className=" lg:text-5xl text-4xl text-gray-900">
               Your Blood Can Save Life
             </h3>

@@ -87,7 +87,6 @@ const ViewPatient = ({ params }: { params: string }) => {
     },
   ];
   const { data, isLoading } = useDitelesGoogleMeetQuery(params);
-  console.log(data);
 
   const [deleteGoogleMeet] = useDeleteGoogleMeetMutation();
   // const deleteHandler = async () => {
@@ -122,7 +121,7 @@ const ViewPatient = ({ params }: { params: string }) => {
       <h3 className=" mt-5 text-2xl">View Patient </h3>
 
       <div className="mt-5">
-        <div className="lg:flex  justify-between items-center">
+        {/* <div className="lg:flex  justify-between items-center">
           <div>
             <input
               placeholder="Search"
@@ -146,14 +145,8 @@ const ViewPatient = ({ params }: { params: string }) => {
               onChange={(event: any) => setLimit(event?.value)}
               options={Limit}
             />
-            {/* <Link
-              href="/dashboard/Doctor/googleMeet/create"
-              className="  w-32 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium "
-            >
-              Create
-            </Link> */}
           </div>
-        </div>
+        </div> */}
         <div className="mt-5 hidden  lg:block md:block xl:block">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">

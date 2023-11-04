@@ -516,6 +516,10 @@ export const PaymentSort = [
     value: "paymentType",
     label: "Payment Type",
   },
+  {
+    value: "status",
+    label: "Payment Status",
+  },
 ];
 
 export const DoctorServiceSort = [
@@ -547,5 +551,29 @@ export const OfferSort = [
   {
     value: "expireDate",
     label: "Expire Date",
+  },
+];
+
+export const GoogleSort = [
+  {
+    value: "meetLink",
+    label: "Meet Link",
+  },
+  { value: "status", label: "Status" },
+];
+
+export const WithdrawSort = [
+  {
+    value: "amount",
+    label: "Balance",
+  },
+  { value: "paymentReciveType", label: "Payment Type" },
+  {
+    value: "number",
+    label: "Account No",
+  },
+  {
+    value: "Status",
+    label: "status",
   },
 ];

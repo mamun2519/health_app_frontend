@@ -19,7 +19,7 @@ import {
   Typography,
 } from "@mui/material";
 import Select from "react-select";
-import { Days, Limit } from "@/constants/donor";
+import { Days, Limit, PaymentSort, WithdrawSort } from "@/constants/donor";
 import Link from "next/link";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import HomeIcon from "@mui/icons-material/Home";
@@ -51,12 +51,13 @@ import {
   useDoctorWithdrawQuery,
 } from "@/redux/api/withdrawApi";
 import { useMyProfileQuery } from "@/redux/api/profileApi";
+import RefreshIcon from "@mui/icons-material/Refresh";
 const DoctorWithdrawPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
   const [deletedId, setDeleteId] = useState("");
-
+  const [sortBy, setSortBy] = useState("");
   const handleClickOpen = (id: string) => {
     setOpen(true);
     setDeleteId(id);
@@ -72,7 +73,7 @@ const DoctorWithdrawPage = () => {
   const query: Record<string, any> = {};
   query["page"] = currentPage;
   query["limit"] = pageLimit;
-
+  query["sortBy"] = sortBy;
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
   };
@@ -211,7 +212,42 @@ const DoctorWithdrawPage = () => {
             </Link>
           </div>
         </div> */}
-        <h3 className=" mt-5 text-2xl">Recent Withdraw</h3>
+        <div className=" flex justify-between">
+          <h3 className=" mt-5 text-2xl">Recent Withdraw</h3>
+          <div className="lg:mt-0 mt-5 flex gap-3 px-4 lg:px-0">
+            <div>
+              {sortBy && (
+                <div
+                  onClick={() => setSortBy("")}
+                  className=" mt-1  cursor-pointer text-[#d1001c]"
+                >
+                  {" "}
+                  <RefreshIcon />
+                </div>
+              )}
+            </div>
+            <Select
+              className="w-36 "
+              placeholder="Sort By"
+              defaultValue={sortBy}
+              onChange={(event: any) => setSortBy(event?.value)}
+              options={WithdrawSort}
+            />
+            <Select
+              className="w-28"
+              placeholder="limit"
+              defaultValue={pageLimit}
+              onChange={(event: any) => setLimit(event?.value)}
+              options={Limit}
+            />
+            {/* <Link
+              href="/doctor/find"
+              className="  w-32 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium "
+            >
+              Find Doctor
+            </Link> */}
+          </div>
+        </div>
         <div className="mt-5 h-[500px]  hidden  lg:block md:block xl:block">
           <TableContainer component={Paper}>
             <div className="w-56  lg:w-full ">

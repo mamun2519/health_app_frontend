@@ -16,7 +16,7 @@ import {
 } from "@/redux/api/donorApi";
 import { Pagination, TextField } from "@mui/material";
 import Select from "react-select";
-import { Days, Limit } from "@/constants/donor";
+import { Days, DonorRequestSort, Limit } from "@/constants/donor";
 import Link from "next/link";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import HomeIcon from "@mui/icons-material/Home";
@@ -32,12 +32,13 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionRow from "@/components/ui/AccordionRow";
+import RefreshIcon from "@mui/icons-material/Refresh";
 const MyDonorRequest = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
   const [deletedId, setDeleteId] = useState("");
-
+  const [sortBy, setSortBy] = useState("");
   const handleClickOpen = (id: string) => {
     setOpen(true);
     setDeleteId(id);
@@ -50,7 +51,7 @@ const MyDonorRequest = () => {
   const query: Record<string, any> = {};
   query["page"] = currentPage;
   query["limit"] = pageLimit;
-
+  query["sortBy"] = sortBy;
   const { data, isLoading } = useGetMyUserDonorDataQuery({ ...query });
   const [deleteDonorRequest] = useDeleteDonorRequestMutation();
 
@@ -103,22 +104,33 @@ const MyDonorRequest = () => {
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
       <h3 className=" mt-5 lg:text-2xl text-xl">My Donor Requested Info</h3>
       <div className="mt-5">
-        <div className="lg:flex  justify-between items-center">
-          <div>
+        <div className="lg:flex  justify-end items-center">
+          {/* <div>
             <input
               placeholder="Search"
               className=" lg:w-80 h-12 border   p-5  rounded-full bg-[#30029010]  outline-none"
               type="text"
             />
-          </div>
+          </div> */}
 
           <div className=" flex gap-3 lg:mt-0 mt-5">
+            <div>
+              {sortBy && (
+                <div
+                  onClick={() => setSortBy("")}
+                  className=" mt-1  cursor-pointer text-[#d1001c]"
+                >
+                  {" "}
+                  <RefreshIcon />
+                </div>
+              )}
+            </div>
             <Select
               className="w-36 "
               placeholder="filter"
-              // defaultValue={limit}
-              // onChange={(event: any) => setLimit(event?.value)}
-              options={Days}
+              defaultValue={sortBy}
+              onChange={(event: any) => setSortBy(event?.value)}
+              options={DonorRequestSort}
             />
             <Select
               className="lg:w-20"
