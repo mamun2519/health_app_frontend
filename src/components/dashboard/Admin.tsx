@@ -16,12 +16,41 @@ import {
 import React from "react";
 import AccordionRow from "../ui/AccordionRow";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  CartesianGrid,
+} from "recharts";
+import MyBarChart from "../ui/BarChart";
 const AdminActivity = () => {
   const { data, isLoading } = useAdminActivityQuery({ limit: 100, page: 1 });
   console.log(data);
   if (isLoading) {
     return <LoadingSpinner />;
   }
+
+  const ChartData = data?.topService.map((chart: any, index: number) => {
+    return {
+      name: `Service ${index + 1}`,
+      Total_Amount: chart.price,
+    };
+  });
+  const DonorChartData = data?.topDonor.map((chart: any, index: number) => {
+    return {
+      name: `Donor ${index + 1}`,
+      Total_Donation: chart.totalBloodDonatedQuantity,
+    };
+  });
+  const WithdrawChart = data?.lastWithdraw.map((chart: any, index: number) => {
+    return {
+      name: `Withdraw ${index + 1}`,
+      Balance: chart.amount,
+    };
+  });
   return (
     <div className="pl-2">
       <h4 className="text-xl">Hello Mr {data?.name} </h4>
@@ -152,7 +181,17 @@ const AdminActivity = () => {
             ))}
           </div>
         </div>
-        <div></div>
+        <div className="w-full ">
+          <h3 className="text-xl"></h3>
+          <div className="border h-ful mt-12 flex  items-center py-10  px-3 rounded-2xl shadow">
+            <MyBarChart
+              width={530}
+              height={250}
+              data={ChartData}
+              keys="Total_Amount"
+            />
+          </div>
+        </div>
       </div>
 
       <div className=" grid lg:grid-cols-2  grid-cols-1 gap-5 mt-10">
@@ -222,7 +261,91 @@ const AdminActivity = () => {
             ))}
           </div>
         </div>
-        <div></div>
+        <div className="w-full ">
+          <h3 className="text-xl"></h3>
+          <div className="border h-ful mt-12 flex  items-center py-10  px-3 rounded-2xl shadow">
+            <MyBarChart
+              width={530}
+              height={250}
+              data={DonorChartData}
+              keys="Total_Donation"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className=" grid lg:grid-cols-2  grid-cols-1 gap-5 mt-10">
+        <div>
+          <h3 className="text-xl">Recent Withdraw</h3>
+          <div className="mt-5 border w-full hidden  lg:block md:block xl:block p-3 rounded-2xl">
+            <Table sx={{ overflow: "hidden" }} aria-label="simple table">
+              <TableHead sx={{ backgroundColor: "#30029010 " }}>
+                <TableRow>
+                  <TableCell>Doctor Name</TableCell>
+
+                  <TableCell>Amount</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data?.lastWithdraw?.map((donor: any, index: number) => (
+                  <TableRow
+                    key={index}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell>{donor?.name}</TableCell>
+                    <TableCell>{donor?.amount}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+          <div className="mt-5 block lg:hidden sm:hidden  xl:hidden px-2">
+            {data?.lastWithdraw?.map((donor: any, index: number) => (
+              <Accordion key={index}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <div className=" flex gap-10">
+                    <div className="  w-36">
+                      <Typography>Resent Withdraw</Typography>
+                    </div>
+
+                    <div className="  flex gap-2  justify-between">
+                      <div className="w-2"></div>
+                    </div>
+                  </div>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <div className=" h-full py-2  border-t">
+                    <AccordionRow
+                      rowName="Doctor Name	"
+                      data={donor?.name}
+                      style="w-36"
+                    />
+                    <AccordionRow
+                      rowName="Amount"
+                      data={donor?.amount}
+                      style="w-36"
+                    />
+                  </div>
+                </AccordionDetails>
+              </Accordion>
+            ))}
+          </div>
+        </div>
+        <div className="w-full ">
+          <h3 className="text-xl"></h3>
+          <div className="border h-ful mt-12 flex  items-center py-10  px-3 rounded-2xl shadow">
+            <MyBarChart
+              width={530}
+              height={250}
+              data={WithdrawChart}
+              keys="Balance"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
