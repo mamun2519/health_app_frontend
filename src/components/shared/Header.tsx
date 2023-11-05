@@ -25,6 +25,7 @@ import { setUser } from "@/redux/Slice/user";
 import { getFromLocalStorage } from "@/utils/local-storage";
 import Notification from "../ui/Notificaiton";
 import LogoutBtn from "../ui/LogoutBtn";
+import { USER_ROLE } from "@/enums/user";
 const pages = [
   {
     link: "/bloodDonor/all",
@@ -268,9 +269,20 @@ function Header() {
                 >
                   <MenuItem>
                     <div>
-                      <Link href={`/dashboard/${user?.role}/profile`}>
-                        <Typography>Profile</Typography>
-                      </Link>
+                      {user.role == USER_ROLE.USER ||
+                        user.role == USER_ROLE.DOCTOR ||
+                        (user.role == USER_ROLE.DOCTOR && (
+                          <Link href={`/dashboard/${user?.role}/profile`}>
+                            <Typography>Profile</Typography>
+                          </Link>
+                        ))}
+                      {user.role == USER_ROLE.ADMIN ||
+                        (user.role == USER_ROLE.SUPER_ADMIN && (
+                          <Link href={`/dashboard/${"Admin"}/profile`}>
+                            <Typography>Profile</Typography>
+                          </Link>
+                        ))}
+
                       <Link href="/dashboard">
                         <Typography className="mt-2" textAlign="center">
                           Dashboard

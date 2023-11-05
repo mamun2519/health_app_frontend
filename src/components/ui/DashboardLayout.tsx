@@ -109,7 +109,7 @@ export default function DashboardLayout({
       <CssBaseline />
       <AppBar position="fixed" open={open}></AppBar>
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
+        <DrawerHeader className=" bg-[#30029010] py-0">
           {open ? (
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "rtl" ? (
@@ -129,12 +129,12 @@ export default function DashboardLayout({
           <MenuItems />
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
+      <Box component="main" sx={{ flexGrow: 1 }}>
         {/* <DrawerHeader /> */}
         <div
           className={` ${
             open == false ? "mx-auto " : "lg:pl-20"
-          } lg:max-w-7xl  my-5 `}
+          } lg:max-w-7xl  my-28 `}
         >
           {children}{" "}
         </div>

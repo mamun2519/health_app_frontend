@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Doctor from "./Doctor";
+
 const Doctors = ({ doctors }: any) => {
   return (
     <div className="  max-w-7xl mx-auto px-4 lg:px-0 my-20">

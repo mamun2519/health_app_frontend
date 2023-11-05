@@ -36,7 +36,7 @@ const DoctorServicePage = () => {
       <div className="borde   rounded p-5  relative shdow  h-[540px] mt-5">
         <h3 className=" text-3xl font-bold">Doctor Service</h3>
         <div className="">
-          <div className="grid lg:grid-cols-3  grid-cols-1 gap-5 mt   ">
+          <div className="grid lg:grid-cols-3 grid-cols-1 gap-5 mt   ">
             {data?.data?.map((service: any) => (
               <DoctorService key={service?.id} service={service} />
             ))}

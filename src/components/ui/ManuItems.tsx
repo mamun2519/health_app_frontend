@@ -29,7 +29,7 @@ const MenuItems = () => {
   }, []);
 
   return (
-    <div className=" ">
+    <div className="  py-0">
       {sideBarItem?.map((sideBarItem: any, index: number) => (
         <div key={sideBarItem.level} className="py-1">
           <Link
