@@ -29,14 +29,14 @@ const LogoutBtn = () => {
   };
   return (
     <div>
-      {user.role ? (
-        <button
-          onClick={() => handleLogout()}
-          className=" bg-[#d1001c] text-white px-8 py-2 rounded-lg font-medium"
-        >
-          Logout
-        </button>
-      ) : (
+      {!user.role && (
+        //   <button
+        //     onClick={() => handleLogout()}
+        //     className=" bg-[#d1001c] text-white px-8 py-2 rounded-lg font-medium"
+        //   >
+        //     Logout
+        //   </button>
+        // ) : (
         <Link
           href="/login"
           className=" bg-[#d1001c] text-white px-8 py-2 rounded-lg font-medium"

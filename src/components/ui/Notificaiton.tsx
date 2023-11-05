@@ -18,7 +18,7 @@ import { InputLabel } from "@mui/material";
 import moment from "moment";
 import Badge, { BadgeProps } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
-
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Link from "next/link";
@@ -65,10 +65,10 @@ export default function Notification({
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
             >
-              <IconButton aria-label="cart">
-                <StyledBadge badgeContent={data?.length} color="info">
-                  <CircleNotificationsIcon className="text-[#d1001c]" />
-                </StyledBadge>
+              <IconButton size="large" aria-label="cart" color="inherit">
+                <Badge badgeContent={data?.length} color="error">
+                  <NotificationsIcon className="text-[#d1001c]" />
+                </Badge>
               </IconButton>
             </IconButton>
           </Tooltip>
