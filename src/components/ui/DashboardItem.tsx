@@ -44,7 +44,7 @@ const userSideBar = [
   },
   {
     link: "/dashboard/User/myDonorRequest",
-    level: "Donor Request",
+    level: "Blood Request",
     icon: <RecordVoiceOverIcon></RecordVoiceOverIcon>,
   },
   {
@@ -67,11 +67,11 @@ const userSideBar = [
     level: "My Activities",
     icon: <PendingActionsIcon></PendingActionsIcon>,
   },
-  {
-    link: "/dashboard/User/history",
-    level: "History",
-    icon: <RestorePageIcon></RestorePageIcon>,
-  },
+  // {
+  //   link: "/dashboard/User/history",
+  //   level: "History",
+  //   icon: <RestorePageIcon></RestorePageIcon>,
+  // },
 ];
 const bloodDonorSideBar = [
   {
@@ -86,7 +86,7 @@ const bloodDonorSideBar = [
   },
   {
     link: "/dashboard/BloodDonor/myRequest",
-    level: "My Request",
+    level: "My Blood Request",
     icon: <RecentActorsIcon></RecentActorsIcon>,
   },
   {
@@ -114,11 +114,11 @@ const bloodDonorSideBar = [
     level: "My Activities",
     icon: <PendingActionsIcon></PendingActionsIcon>,
   },
-  {
-    link: "/dashboard/BloodDonor/history",
-    level: "History",
-    icon: <RestorePageIcon></RestorePageIcon>,
-  },
+  // {
+  //   link: "/dashboard/BloodDonor/history",
+  //   level: "History",
+  //   icon: <RestorePageIcon></RestorePageIcon>,
+  // },
 ];
 const doctorSideBar = [
   {
@@ -180,11 +180,11 @@ const doctorSideBar = [
     level: "My Activities",
     icon: <PendingActionsIcon></PendingActionsIcon>,
   },
-  {
-    link: "/",
-    level: "History",
-    icon: <RestorePageIcon></RestorePageIcon>,
-  },
+  // {
+  //   link: "/",
+  //   level: "History",
+  //   icon: <RestorePageIcon></RestorePageIcon>,
+  // },
   ,
 ];
 const managerSideBar = [

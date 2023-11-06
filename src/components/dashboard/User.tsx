@@ -3,13 +3,34 @@ import { useUserActivityQuery } from "@/redux/api/activityApi";
 import { getTimeOfDayMessage } from "@/utils/DayMessage";
 import LoadingSpinner from "@/utils/Loading";
 import React from "react";
-
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
+import AccordionRow from "../ui/AccordionRow";
+import MyBarChart from "../ui/BarChart";
 const UserDashboard = () => {
   const { data, isLoading } = useUserActivityQuery({ limit: 100, page: 1 });
   console.log(data);
   if (isLoading) {
     return <LoadingSpinner />;
   }
+  const donationBerChart = data?.myDonarRequest.map(
+    (chart: any, index: number) => {
+      return {
+        name: `Donation ${index + 1}`,
+        Request: chart.total,
+      };
+    }
+  );
   return (
     <div className="pl-2">
       <h4 className="text-xl">Hello Mr {data?.name} </h4>
@@ -48,6 +69,86 @@ const UserDashboard = () => {
             <h3 className=" m lg:text-xl">Last Schedule</h3>
             <p className=" text-gray-800  mt-1">{data?.schedule?.date}</p>
             <p className=" text-gray-800  ">{data?.schedule?.schedule}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className=" grid lg:grid-cols-2  grid-cols-1 gap-5 mt-20">
+        <div>
+          <h3 className="text-xl">Resent My Blood Request</h3>
+          <div className="mt-5 border w-full h-full hidden  lg:block md:block xl:block  p-3 rounded-2xl">
+            <Table sx={{ overflow: "hidden" }} aria-label="simple table">
+              <TableHead sx={{ backgroundColor: "#30029010 " }}>
+                <TableRow>
+                  <TableCell>Donar Name</TableCell>
+                  <TableCell>Status</TableCell>
+                  <TableCell>Total Beg</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data?.myDonarRequest?.map((service: any, index: number) => (
+                  <TableRow
+                    key={index}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell>{service?.donarName}</TableCell>
+                    <TableCell>{service?.status}</TableCell>
+                    <TableCell> {service?.total} </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+          <div className="mt-5 block lg:hidden sm:hidden  xl:hidden px-2">
+            {data?.myDonarRequest?.map((service: any, index: number) => (
+              <Accordion key={index}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <div className=" flex gap-10">
+                    <div className="  w-36">
+                      <Typography>My blood Request</Typography>
+                    </div>
+
+                    <div className="  flex gap-2  justify-between">
+                      <div className="w-2"></div>
+                    </div>
+                  </div>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <div className=" h-full py-2  border-t">
+                    <AccordionRow
+                      rowName="Donar Name"
+                      data={service?.donarName}
+                      style="w-36"
+                    />
+                    <AccordionRow
+                      rowName="Status"
+                      data={service?.status}
+                      style="w-36"
+                    />
+                    <AccordionRow
+                      rowName="Total Beg"
+                      data={`${service?.total} `}
+                      style="w-36"
+                    />
+                  </div>
+                </AccordionDetails>
+              </Accordion>
+            ))}
+          </div>
+        </div>
+        <div className="w-full ">
+          <h3 className="text-xl"></h3>
+          <div className="border h-full mt-12 flex  items-center py-10  px-3 rounded-2xl shadow">
+            <MyBarChart
+              width={530}
+              height={250}
+              data={donationBerChart}
+              keys="Request"
+            />
           </div>
         </div>
       </div>

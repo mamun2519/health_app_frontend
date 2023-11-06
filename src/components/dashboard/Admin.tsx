@@ -117,7 +117,7 @@ const AdminActivity = () => {
       <div className=" grid lg:grid-cols-2  grid-cols-1 gap-5 mt-10">
         <div>
           <h3 className="text-xl">Top Five Selling Service</h3>
-          <div className="mt-5 border w-full hidden  lg:block md:block xl:block  p-3 rounded-2xl">
+          <div className="mt-5 border w-full h-full hidden  lg:block md:block xl:block  p-3 rounded-2xl">
             <Table sx={{ overflow: "hidden" }} aria-label="simple table">
               <TableHead sx={{ backgroundColor: "#30029010 " }}>
                 <TableRow>
@@ -183,7 +183,7 @@ const AdminActivity = () => {
         </div>
         <div className="w-full ">
           <h3 className="text-xl"></h3>
-          <div className="border h-ful mt-12 flex  items-center py-10  px-3 rounded-2xl shadow">
+          <div className="border h-full mt-12 flex  items-center py-10  px-3 rounded-2xl shadow">
             <MyBarChart
               width={530}
               height={250}
@@ -194,10 +194,10 @@ const AdminActivity = () => {
         </div>
       </div>
 
-      <div className=" grid lg:grid-cols-2  grid-cols-1 gap-5 mt-10">
+      <div className=" grid lg:grid-cols-2  grid-cols-1 gap-5 mt-20">
         <div>
           <h3 className="text-xl">Top Five Donor</h3>
-          <div className="mt-5 border w-full hidden  lg:block md:block xl:block p-3 rounded-2xl">
+          <div className="mt-5 border w-full h-full hidden  lg:block md:block xl:block p-3 rounded-2xl">
             <Table sx={{ overflow: "hidden" }} aria-label="simple table">
               <TableHead sx={{ backgroundColor: "#30029010 " }}>
                 <TableRow>
@@ -263,7 +263,7 @@ const AdminActivity = () => {
         </div>
         <div className="w-full ">
           <h3 className="text-xl"></h3>
-          <div className="border h-ful mt-12 flex  items-center py-10  px-3 rounded-2xl shadow">
+          <div className="border h-full mt-12 flex  items-center py-10  px-3 rounded-2xl shadow">
             <MyBarChart
               width={530}
               height={250}
@@ -274,10 +274,10 @@ const AdminActivity = () => {
         </div>
       </div>
 
-      <div className=" grid lg:grid-cols-2  grid-cols-1 gap-5 mt-10">
+      <div className=" grid lg:grid-cols-2  grid-cols-1 gap-5 mt-20">
         <div>
           <h3 className="text-xl">Recent Withdraw</h3>
-          <div className="mt-5 border w-full hidden  lg:block md:block xl:block p-3 rounded-2xl">
+          <div className="mt-5 border w-full hidden  lg:block md:block xl:block p-3 rounded-2xl h-full">
             <Table sx={{ overflow: "hidden" }} aria-label="simple table">
               <TableHead sx={{ backgroundColor: "#30029010 " }}>
                 <TableRow>
@@ -337,7 +337,7 @@ const AdminActivity = () => {
         </div>
         <div className="w-full ">
           <h3 className="text-xl"></h3>
-          <div className="border h-ful mt-12 flex  items-center py-10  px-3 rounded-2xl shadow">
+          <div className="border h-full mt-12 flex  items-center py-10  px-3 rounded-2xl shadow">
             <MyBarChart
               width={530}
               height={250}

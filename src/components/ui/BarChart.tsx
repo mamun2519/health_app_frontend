@@ -22,7 +22,7 @@ const MyBarChart = ({ data, width, height, keys }: IBarChartProps) => {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Bar dataKey={keys} fill="#EF4444" />
+      <Bar dataKey={keys} fill="#F87171" barSize={50} />
       {/* <Bar dataKey="uv" fill="#d1001c" /> */}
     </BarChart>
   );
