@@ -38,7 +38,7 @@ const CountService = () => {
           }) => (
             <div
               key={service.title}
-              className=" h-28 border rounded shadow bg-[#30029010] px-8"
+              className=" lg:h-28 h-36 border rounded shadow bg-[#30029010] px-8"
             >
               <div className="flex items-center justify-center h-full ">
                 <div className=" text-center">

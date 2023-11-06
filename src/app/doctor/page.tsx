@@ -24,7 +24,7 @@ const DoctorPage = () => {
   }
   return (
     <div>
-      <div className="max-w-7xl mx-auto px-4 lg:px-0 ">
+      <div className="max-w-7xl mx-auto px-4 lg:px-0  mt-28">
         {data?.length === 0 ? <NoData /> : <AllDoctor doctors={data} />}
       </div>
       <div className=" flex justify-center items-center h-12   mt-10">

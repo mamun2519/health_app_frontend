@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 const LoginPage = () => {
   return (
-    <div className=" mt-10  max-w-7xl mx-auto px-4 lg:px-0">
+    <div className=" mt-28  max-w-7xl mx-auto px-4 lg:px-0">
       <Login />
     </div>
   );

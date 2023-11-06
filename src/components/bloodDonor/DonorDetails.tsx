@@ -53,7 +53,7 @@ const DonorDetails = ({ id }: { id: string }) => {
     return <LoadingSpinner />;
   }
   return (
-    <div className="max-w-7xl mx-auto px-4 lg:px-0 py-10  psb-20">
+    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-28  psb-20">
       <div className="  lg:flex gap-5">
         <div className="w-full border lg:h-56  rounded  lg:flex gap-5 p-5  relative shadow bg-[#30029010] ">
           <div className="lg:h-44 border w-48 rounded border-[#d1001c] p-2">

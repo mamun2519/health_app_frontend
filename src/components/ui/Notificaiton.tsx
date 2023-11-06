@@ -45,7 +45,7 @@ export default function Notification({
 
   return (
     <React.Fragment>
-      <div className=" flex">
+      <div className=" ">
         {/* <Link href="/cart">
           <Box sx={{ margin: "4px" }}>
             <IconButton aria-label="cart">

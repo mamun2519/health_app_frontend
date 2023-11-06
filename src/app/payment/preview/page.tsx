@@ -50,7 +50,7 @@ const PreviewPage = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-10 pb-40">
+    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-28 pb-40">
       <MyStepper stepper={1} />
 
       <div className=" lg:flex  mt-10 gap-5">

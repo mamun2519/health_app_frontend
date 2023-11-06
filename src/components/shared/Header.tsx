@@ -94,137 +94,141 @@ function Header() {
     dispatch(setUser({ userId: null, email: null, role: null }));
   };
   return (
-    <AppBar
-      style={{ background: "#30029010", color: "#black" }}
-      // className=" shadow-md"
-    >
-      <Container className=" max-w-7xl mx-auto  px-0">
-        <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
-          <Link href="/">
-            <p className="text-xl  font-bold text-gray-900  hidden md:block lg:block ">
-              {" "}
-              He<span className="text-[#d1001c]">alth</span> Care
-            </p>
-          </Link>
-
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "flex", md: "none", justifyContent: "center" },
-            }}
-            color="black"
-          >
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page.level} onClick={handleCloseNavMenu}>
-                  <Typography justifyContent="center" className="text-gray-900">
-                    <Link
-                      href={page?.link}
-                      // className={` ${
-                      //   path == page.link ? "bg-red-500" : "text-[#2196f3]"
-                      // } font-bold mt-1`}
-                    >
-                      {" "}
-                      {page.level}
-                    </Link>
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
-          <Typography
-            // variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-            }}
-          >
+    <div>
+      <AppBar
+        style={{
+          // background: "#30029010",
+          color: "#black",
+          // transition: "background-color 0.3s ease",
+        }}
+        // position="fixed"
+        className=" bg-white z-30 shadow-none  border-b-2 "
+      >
+        <Container className=" max-w-7xl mx-auto  px-0   ">
+          <Toolbar disableGutters>
+            {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
             <Link href="/">
-              <p className="text-xl  font-bold text-gray-900   md:hidden lg:hidden ">
+              <p className="text-xl  font-bold text-gray-900  hidden md:block lg:block  ">
                 {" "}
                 He<span className="text-[#d1001c]">alth</span> Care
               </p>
             </Link>
-          </Typography>
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "none", md: "flex", justifyContent: "center" },
-            }}
-          >
-            {pages.map((page) => (
-              <Button
-                key={page.level}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  pr: 2,
-                  display: "flex",
-                  justifyContent: "center",
-                  color: "black",
-                }}
-                className={`  ${
-                  path == page.link
-                    ? "bg-[#d1001c] text-white  flex justify-center"
-                    : ""
-                }: hover:text-[#d1001c]`}
+
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "flex", md: "none", justifyContent: "center" },
+              }}
+              color="black"
+            >
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
               >
-                <Link className="pl-1" href={page?.link}>
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: "block", md: "none" },
+                }}
+              >
+                {pages.map((page) => (
+                  <MenuItem key={page.level} onClick={handleCloseNavMenu}>
+                    <Typography
+                      justifyContent="center"
+                      className="text-gray-900"
+                    >
+                      <Link
+                        href={page?.link}
+                        // className={` ${
+                        //   path == page.link ? "bg-red-500" : "text-[#2196f3]"
+                        // } font-bold mt-1`}
+                      >
+                        {" "}
+                        {page.level}
+                      </Link>
+                    </Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+            {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
+            <Typography
+              // variant="h5"
+              noWrap
+              component="a"
+              href="#app-bar-with-responsive-menu"
+            >
+              <Link href="/">
+                <p className="text-xl  font-bold text-gray-900   md:hidden lg:hidden ">
                   {" "}
-                  {page.level}
-                </Link>
-              </Button>
-            ))}
-          </Box>
+                  He<span className="text-[#d1001c]">alth</span> Care
+                </p>
+              </Link>
+            </Typography>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex", justifyContent: "center" },
+              }}
+            >
+              {pages.map((page) => (
+                <Button
+                  key={page.level}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    pr: 2,
+                    display: "flex",
+                    justifyContent: "center",
+                    color: "black",
+                  }}
+                  className={`  ${
+                    path == page.link
+                      ? "bg-[#d1001c] text-white  flex justify-center"
+                      : ""
+                  }: hover:text-[#d1001c]`}
+                >
+                  <Link className="pl-1" href={page?.link}>
+                    {" "}
+                    {page.level}
+                  </Link>
+                </Button>
+              ))}
+            </Box>
 
-          <Box sx={{ flexGrow: 0, display: "flex", gap: "15px" }}>
-            {user?.role && (
-              <>
-                <div className=" flex">
-                  <IconButton
-                    size="large"
-                    aria-label="show 4 new mails"
-                    color="inherit"
-                  >
-                    <Badge badgeContent={4} color="error">
-                      <MailIcon className="text-[#d1001c]" />
-                    </Badge>
-                  </IconButton>
+            <Box sx={{ flexGrow: 0, display: "flex" }}>
+              {user?.role && (
+                <>
+                  <div className=" flex w-full  ">
+                    <IconButton
+                      size="large"
+                      aria-label="show 4 new mails"
+                      color="inherit"
+                    >
+                      <Badge badgeContent={4} color="error">
+                        <MailIcon className="text-[#d1001c]" />
+                      </Badge>
+                    </IconButton>
 
-                  {/* <IconButton
+                    {/* <IconButton
                   size="large"
                   aria-label="show 17 new notifications"
                   color="inherit"
@@ -234,77 +238,78 @@ function Header() {
                   </Badge>
                 </IconButton> */}
 
-                  <Notification
-                    anchorEl={anchorEl}
-                    setAnchorEl={setAnchorEl}
-                    open={open}
-                    handleClick={handleClick}
-                    handleClose={handleClose}
-                  />
-                </div>
-
-                <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
+                    <Notification
+                      anchorEl={anchorEl}
+                      setAnchorEl={setAnchorEl}
+                      open={open}
+                      handleClick={handleClick}
+                      handleClose={handleClose}
                     />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: "55px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  <MenuItem>
-                    <div>
-                      {user.role == USER_ROLE.USER ||
-                        user.role == USER_ROLE.DOCTOR ||
-                        (user.role == USER_ROLE.DOCTOR && (
-                          <Link href={`/dashboard/${user?.role}/profile`}>
-                            <Typography>Profile</Typography>
-                          </Link>
-                        ))}
-                      {user.role == USER_ROLE.ADMIN ||
-                        (user.role == USER_ROLE.SUPER_ADMIN && (
-                          <Link href={`/dashboard/${"Admin"}/profile`}>
-                            <Typography>Profile</Typography>
-                          </Link>
-                        ))}
+                  </div>
 
-                      <Link href="/dashboard">
-                        <Typography className="mt-2" textAlign="center">
-                          Dashboard
-                        </Typography>
-                      </Link>
-                      <button onClick={() => handleLogout()}>
-                        <Typography className="mt-2" textAlign="center">
-                          Logout
-                        </Typography>
-                      </button>
-                    </div>
-                  </MenuItem>
-                </Menu>
-              </>
-            )}
-            <div className=" flex  items-center px-6 lg:px-0 xl:px-0 md:px-0">
-              <LogoutBtn />
-            </div>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+                  <Tooltip title="Open settings">
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="/static/images/avatar/2.jpg"
+                      />
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: "55px" }}
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    <MenuItem>
+                      <div>
+                        {user.role == USER_ROLE.USER ||
+                          user.role == USER_ROLE.DOCTOR ||
+                          (user.role == USER_ROLE.DOCTOR && (
+                            <Link href={`/dashboard/${user?.role}/profile`}>
+                              <Typography>Profile</Typography>
+                            </Link>
+                          ))}
+                        {user.role == USER_ROLE.ADMIN ||
+                          (user.role == USER_ROLE.SUPER_ADMIN && (
+                            <Link href={`/dashboard/${"Admin"}/profile`}>
+                              <Typography>Profile</Typography>
+                            </Link>
+                          ))}
+
+                        <Link href="/dashboard">
+                          <Typography className="mt-2" textAlign="center">
+                            Dashboard
+                          </Typography>
+                        </Link>
+                        <button onClick={() => handleLogout()}>
+                          <Typography className="mt-2" textAlign="center">
+                            Logout
+                          </Typography>
+                        </button>
+                      </div>
+                    </MenuItem>
+                  </Menu>
+                </>
+              )}
+              <div className=" flex  items-center px-6 lg:px-0 xl:px-0 md:px-0">
+                <LogoutBtn />
+              </div>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </div>
   );
 }
 export default Header;

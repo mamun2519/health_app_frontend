@@ -6,7 +6,7 @@ import Image from "next/image";
 import DoctorService from "../doctorService/DoctorService";
 const DoctorDetails = ({ doctor }: any) => {
   return (
-    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-10 pb-40">
+    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-28 pb-40">
       <div className="   gri gap-5">
         <div className="w-full border lg:h-56 h-[420px] rounded  lg:flex gap-5 p-5   shadow bg-[#30029010]">
           <div className="lg:h-44 border w-48 rounded border-[#d1001c] p-2">

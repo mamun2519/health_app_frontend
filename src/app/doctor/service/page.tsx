@@ -32,8 +32,8 @@ const DoctorServicePage = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-10 ">
-      <div className="borde   rounded p-5  relative shdow  h-[540px] mt-5">
+    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-28 ">
+      <div className="borde   rounded  relative   h-[540px] mt-5">
         <h3 className=" text-3xl font-bold">Doctor Service</h3>
         <div className="">
           <div className="grid lg:grid-cols-3 grid-cols-1 gap-5 mt   ">

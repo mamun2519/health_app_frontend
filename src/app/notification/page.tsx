@@ -4,7 +4,7 @@ import React from "react";
 const Notification = () => {
   return (
     <div className="px-4">
-      <div className=" max-w-4xl   lg:px-0 border  h-full mx-auto my-10">
+      <div className=" max-w-4xl   lg:px-0 border  h-full mx-auto my-28">
         <AllNotification />
       </div>
     </div>

@@ -85,7 +85,7 @@ const DoctorServiceDetails = ({ id }: any) => {
     return <LoadingSpinner />;
   }
   return (
-    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-10 pb-40">
+    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-28 pb-40">
       <div className="  lg:flex gap-5">
         <div className="lg:w-[40vw] w-full border lg:h-56 h-[420px] rounded  lg:flex gap-5 p-5  relative shadow bg-[#30029010]">
           <div className="lg:h-44 border w-48 rounded border-[#d1001c] p-2">

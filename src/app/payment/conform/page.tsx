@@ -36,7 +36,7 @@ const ConformPage = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-10 pb-40">
+    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-28 pb-40">
       <MyStepper stepper={2} />
       <div className="  lg:flex gap-5">
         <div className="border h-[550px] lg:w-1/2   w-full rounded-2xl p-7 mt-10">

@@ -24,7 +24,7 @@ const ServiceCategoryPage = ({
   };
   const { data } = useAllServiceQuery({ ...query });
   return (
-    <div className="max-w-7xl mx-auto lg:px-4  mt-10 ">
+    <div className="max-w-7xl mx-auto lg:px-4 mt-28 ">
       {data?.data?.length === 0 ? (
         <NoData />
       ) : (

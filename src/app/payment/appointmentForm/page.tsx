@@ -36,7 +36,7 @@ const AppointmentBookingForm = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-10 pb-40">
+    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-28 pb-40">
       <MyStepper stepper={0} />
 
       <div className=" border p-5 mt-5">

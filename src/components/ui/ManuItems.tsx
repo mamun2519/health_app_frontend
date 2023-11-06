@@ -18,7 +18,7 @@ const MenuItems = () => {
 
   const user: any = getUserInfo();
   const pathName = usePathname();
-  console.log(pathName);
+
   useEffect(() => {
     const fetchSideBarItem = async () => {
       const items = DashBoardItem(user?.role);

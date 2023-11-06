@@ -118,7 +118,7 @@ const DonorRegistrationForm = () => {
   };
 
   return (
-    <div className=" mt-10  max-w-7xl mx-auto px-4 lg:px-0 ">
+    <div className=" mt-28  max-w-7xl mx-auto px-4 lg:px-0 ">
       <div className=" lg:flex gap-5">
         <div className=" lg:w-[48vw] w-full  bg-[#30029010] p-5">
           <div className=" flex gap-3  items-center ">

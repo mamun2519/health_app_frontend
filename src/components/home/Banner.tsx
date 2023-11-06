@@ -3,7 +3,7 @@ import Banners from "../../assets/Blood donation-pana.png";
 import Link from "next/link";
 const Banner = () => {
   return (
-    <div className="  max-w-7xl mx-auto px-4 lg:px-0">
+    <div className="  max-w-7xl mx-auto px-4 lg:px-0 mt-20">
       <div className=" lg:grid flex  flex-col-reverse lg:grid-cols-2 grid-cols-1 lg:gap-10  ">
         <div className=" flex items-center">
           <div className=" lg:mt-0 pb-20 lg:pb-0">

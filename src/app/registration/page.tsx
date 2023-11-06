@@ -7,7 +7,10 @@ export const metadata: Metadata = {
 };
 const page = () => {
   return (
-    <div className=" mt-10  max-w-7xl mx-auto px-4 lg:px-0">
+    <div
+      className="
+     max-w-7xl mx-auto px-4 lg:px-0 mt-28"
+    >
       <Registration />
     </div>
   );

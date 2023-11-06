@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 const BloodDonorPage = () => {
   return (
-    <div className="">
+    <div className=" mt-28">
       <SearchDonor />
     </div>
   );

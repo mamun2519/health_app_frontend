@@ -63,7 +63,7 @@ const ServiceCategorys = () => {
             <Link
               href={`/doctor/service/category?name=${service.label}`}
               key={service.label}
-              className=" h-24 border flex justify-center items-center   rounded shadow bg-[#30029010]"
+              className=" lg:h-24 h-28 border flex justify-center items-center   rounded shadow bg-[#30029010]"
             >
               <div className=" text-center">
                 <div className="text-[#d1001c]">{service.icons},</div>
