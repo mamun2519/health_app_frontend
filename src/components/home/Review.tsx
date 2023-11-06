@@ -18,7 +18,7 @@ const Review = () => {
           {data?.slice(0, 3).map((user: any) => (
             <div
               key={user?.id}
-              className=" w-full h-36 border bg-white rounded-3xl  relative "
+              className=" w-full h-36 border bg-[#30029010] rounded-3xl  relative "
             >
               <div className=" pl-10 py-4 pr-3 ">
                 <Typography className="mt-2" component="legend">
@@ -41,7 +41,7 @@ const Review = () => {
                 </div>
               </div>
 
-              <div className=" absolute w-20 h-20 border-2 border-[#d1001c] rounded-full top-7 left-[-50px]">
+              <div className=" absolute w-20 bg-white h-20 border-2 border-[#d1001c] rounded-full top-7 left-[-50px]">
                 <Image
                   src={user?.user?.profile?.avatar}
                   className=" w-20 h-20 rounded-full p-2"

@@ -13,6 +13,7 @@ import ServiceCategory from "@/components/ui/Category";
 import ServiceCategorys from "@/components/ui/Category";
 import Review from "@/components/home/Review";
 import UpComingService from "@/components/home/UpComingService";
+import Sponsor from "@/components/home/Sponsor";
 
 export default async function Home() {
   const res = await fetch(`${URL}/blood-donor/all-donor`, {
@@ -37,7 +38,8 @@ export default async function Home() {
       <Doctors doctors={doctor.data.slice(0, 4)} />
       <Donors data={donor?.data.slice(0, 4)} />
       <Review />
-
+      <UpComingService />
+      <Sponsor />
       <ContactUs />
       <Footer />
     </div>

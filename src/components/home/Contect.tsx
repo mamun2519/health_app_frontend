@@ -5,6 +5,7 @@ import Image from "next/image";
 import FormInput from "../Form/FormInput";
 import Form from "../Form/FormProvider";
 const ContactUs = () => {
+  const handlerFunction = () => {};
   return (
     <div className="  max-w-7xl mx-auto px-4 lg:px-0 my-40 ">
       <h3 className=" text-center text-3xl  font-bold">Contact Us</h3>
@@ -16,10 +17,8 @@ const ContactUs = () => {
             className="lg:w-[30vw] w-full"
           />
         </div>
-        <Form submitHandler={() => {}}>
+        <Form submitHandler={handlerFunction}>
           <div className=" border w-full h-[430px] mt-20  p-5 bg-[#30029010]">
-            {/* <h3 className=" text-2xl">Need Doctor Account?</h3>
-          <p>Fil Up this Form</p> */}
             <div></div>
 
             <div className="   flex gap-5 w-full mt-5">
@@ -30,14 +29,14 @@ const ContactUs = () => {
                 type="text"
               /> */}
                 <FormInput
-                  name="Name"
+                  name="firstName"
                   label="First Name"
                   placeholder="Enter Your First Name"
                 />
               </div>
               <div className=" w-full bg-white">
                 <FormInput
-                  name="Name"
+                  name="lastName"
                   label="Last Name"
                   placeholder="Enter Your Last Name"
                 />
@@ -46,7 +45,7 @@ const ContactUs = () => {
 
             <div className=" w-full mt-5 bg-white">
               <FormInput
-                name="Name"
+                name="email"
                 label="Email"
                 placeholder="Enter Your Email"
               />
@@ -58,7 +57,10 @@ const ContactUs = () => {
               />
             </div>
             <div className=" flex justify-center">
-              <button className="  w-48 h-10 rounded border bg-[#d1001c] text-white font-bold    mt-2 ">
+              <button
+                type="submit"
+                className="  w-48 h-10 rounded border bg-[#d1001c] text-white font-bold    mt-2 "
+              >
                 Send Now
               </button>
             </div>

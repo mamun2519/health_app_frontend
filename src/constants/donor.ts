@@ -342,7 +342,10 @@ export const DoctorDegrees = [
 ];
 
 export const ServiceCategory = [
-  { value: "Primary Care Services", label: "Primary Care Services" },
+  {
+    value: "Primary Care Services",
+    label: "Primary Care Services",
+  },
   {
     value: "Specialty Medical Services",
     label: "Specialty Medical Services",
