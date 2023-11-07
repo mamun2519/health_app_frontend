@@ -175,7 +175,15 @@ const DoctorPayment = ({ bread, role }: PaymentProps) => {
                         {payment?.paymentType}
                       </TableCell>
 
-                      <TableCell align="center">{payment?.status}</TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        <span
+                          className="      text-[#00a152]  
+                      w-24 py-1 rounded-xl    font-bold"
+                        >
+                          {payment?.status}
+                        </span>
+                      </TableCell>
                       <TableCell align="center">
                         <div>
                           <Link
@@ -271,7 +279,14 @@ const DoctorPayment = ({ bread, role }: PaymentProps) => {
                   />
                   <AccordionRow
                     rowName="Payment Status	"
-                    data={payment?.status}
+                    data={
+                      <span
+                        className="      text-[#00a152]  
+                  w-24 py-1 rounded-xl    font-bold"
+                      >
+                        {payment?.status}
+                      </span>
+                    }
                     style="w-36"
                   />
                   <AccordionRow

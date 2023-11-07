@@ -93,7 +93,7 @@ const DoctorWithdrawPage = () => {
     },
   ];
   const { data, isLoading } = useDoctorWithdrawQuery({ ...query });
-
+  console.log(data);
   const [deleteWithdraw] = useDeleteWithdrawMutation();
   const deleteHandler = async () => {
     try {
@@ -262,7 +262,7 @@ const DoctorWithdrawPage = () => {
                     <TableCell align="center">Company Earn</TableCell>
                     <TableCell align="center">Receive Type</TableCell>
                     <TableCell align="center">Status</TableCell>
-                    <TableCell align="center">manager Name</TableCell>
+                    <TableCell align="center">Accepted By</TableCell>
 
                     {/* <TableCell align="center">Joint Doctor</TableCell> */}
                     <TableCell align="center">Action</TableCell>
@@ -285,8 +285,26 @@ const DoctorWithdrawPage = () => {
                         {" "}
                         {service?.paymentReciveType}
                       </TableCell>
-                      <TableCell align="center"> {service?.status}</TableCell>
-                      <TableCell align="center"> {service?.status}</TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        <span
+                          className={`${
+                            service?.status == "Cancel" && " text-[#2979ff]"
+                          }
+                      ${service?.status == "Pending" && "text-[#d1001c] "}
+                      ${
+                        service?.status == "Complete" && "text-[#00a152] "
+                      } py-1 rounded-xl   font-bold`}
+                        >
+                          {service?.status}
+                        </span>
+                      </TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        {service?.user?.profile?.first_name ??
+                          "Not Accepted"}{" "}
+                        {service?.user?.profile?.first_name}
+                      </TableCell>
                       <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
                           {/* <Link
@@ -377,12 +395,27 @@ const DoctorWithdrawPage = () => {
                   />
                   <AccordionRow
                     rowName="Status"
-                    data={`${service?.status}`}
+                    data={
+                      <span
+                        className={`${
+                          service?.status == "Cancel" && " text-[#2979ff]"
+                        }
+                    ${service?.status == "Pending" && "text-[#d1001c] "}
+                    ${
+                      service?.status == "Complete" && "text-[#00a152] "
+                    } py-1 rounded-xl   font-bold`}
+                      >
+                        {service?.status}
+                      </span>
+                    }
                     style="w-36"
                   />
                   <AccordionRow
-                    rowName="Manager Name"
-                    data={`${service?.status}`}
+                    rowName="Accepted By"
+                    data={`${
+                      service?.user?.profile?.first_name ?? "Not Accepted"
+                    }
+                    ${service?.user?.profile?.first_name}`}
                     style="w-36"
                   />
                 </div>
