@@ -183,7 +183,15 @@ const ManageBloodDonor = ({ bread, role }: PaymentProps) => {
                         {payment?.profile?.last_name}
                       </TableCell>
                       <TableCell align="center">{payment?.email}</TableCell>
-                      <TableCell align="center"> {payment?.status}</TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        <span
+                          className="      text-[#00a152]  
+                            w-24 py-1 rounded-xl    font-bold"
+                        >
+                          {payment?.status}
+                        </span>
+                      </TableCell>
 
                       <TableCell align="center">
                         {convertDate(payment?.createdAt)}
@@ -282,7 +290,14 @@ const ManageBloodDonor = ({ bread, role }: PaymentProps) => {
                   />
                   <AccordionRow
                     rowName="Status"
-                    data={payment?.status}
+                    data={
+                      <span
+                        className="      text-[#00a152]  
+                        w-24 py-1 rounded-xl    font-bold"
+                      >
+                        {payment?.status}
+                      </span>
+                    }
                     style="w-36"
                   />
                   <AccordionRow

@@ -199,7 +199,21 @@ const ManageDonorRequestPage = () => {
                       <TableCell align="center">{donor?.quantity}</TableCell>
 
                       <TableCell align="center">{donor?.donnetDate}</TableCell>
-                      <TableCell align="center">{donor?.status}</TableCell>
+                      <TableCell align="center">
+                        <div className="flex justify-center text-center">
+                          <span
+                            className={`${
+                              donor?.status == "Cancel" && " text-[#2979ff]"
+                            }
+                          ${donor?.status == "Pending" && "text-[#d1001c] "}
+                          ${
+                            donor?.status == "Completed" && "text-[#00a152] "
+                          } py-1 rounded-xl   font-bold`}
+                          >
+                            {donor?.status}
+                          </span>
+                        </div>
+                      </TableCell>
                       <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
                           <Link
@@ -216,7 +230,7 @@ const ManageDonorRequestPage = () => {
                           </Link>
                           <button
                             onClick={() => handleClickOpen(donor?.id)}
-                            className="text-red-500 text-xl  cursor-pointer"
+                            className="text-[#d1001c] text-xl  cursor-pointer"
                           >
                             <DeleteIcon />
                           </button>
@@ -269,7 +283,7 @@ const ManageDonorRequestPage = () => {
                       </Link>
                       <button
                         onClick={() => handleClickOpen(donor?.id)}
-                        className="text-red-500 text-xl  cursor-pointer"
+                        className="text-[#d1001c] text-xl  cursor-pointer"
                       >
                         <DeleteIcon />
                       </button>
@@ -302,7 +316,21 @@ const ManageDonorRequestPage = () => {
                   />
                   <AccordionRow
                     rowName="Status"
-                    data={donor?.status}
+                    data={
+                      <div className="flex justify-center text-center">
+                        <span
+                          className={`${
+                            donor?.status == "Cancel" && " text-[#2979ff]  "
+                          }
+                      ${donor?.status == "Pending" && "text-[#d1001c]"}
+                      ${
+                        donor?.status == "Completed" && "text-[#00a152] "
+                      } py-1 rounded-xl   font-bold`}
+                        >
+                          {donor?.status}
+                        </span>
+                      </div>
+                    }
                     style="w-36"
                   />
                 </div>

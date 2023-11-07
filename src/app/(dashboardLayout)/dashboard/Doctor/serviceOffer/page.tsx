@@ -213,7 +213,17 @@ const DoctorServiceOfferPage = () => {
                         {" "}
                         {convertDate(service?.expireDate)}
                       </TableCell>
-                      <TableCell align="center"> {service?.status}</TableCell>
+                      <TableCell align="center">
+                        <span
+                          className={`
+                          ${service?.status == "Expired" && "text-[#d1001c] "}
+                          ${
+                            service?.status == "Active" && "text-[#00a152] "
+                          } py-1 rounded-xl   font-bold`}
+                        >
+                          {service?.status}
+                        </span>{" "}
+                      </TableCell>
                       <TableCell align="center">
                         <div className=" flex gap-4 justify-center items-center">
                           <Link
@@ -300,6 +310,26 @@ const DoctorServiceOfferPage = () => {
                   <AccordionRow
                     rowName="Promo Code"
                     data={`${service?.promoCode}`}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Expire Date"
+                    data={convertDate(service?.expireDate)}
+                    style="w-36"
+                  />
+                  <AccordionRow
+                    rowName="Status"
+                    data={
+                      <span
+                        className={`
+                      ${service?.status == "Expired" && "text-[#d1001c] "}
+                      ${
+                        service?.status == "Active" && "text-[#00a152] "
+                      } py-1 rounded-xl   font-bold`}
+                      >
+                        {service?.status}
+                      </span>
+                    }
                     style="w-36"
                   />
                 </div>

@@ -202,7 +202,15 @@ const ManageAppointmentPage = () => {
                       </TableCell>
                       <TableCell align="center">
                         {" "}
-                        {appointment?.slatTime}
+                        <div className="">
+                          <span
+                            className={`
+                            text-[#00a152] 
+                            w-24 py-1 rounded-xl   font-bold`}
+                          >
+                            {appointment?.slatTime}
+                          </span>
+                        </div>
                       </TableCell>
                       <TableCell align="center">
                         {appointment?.serialNo}
@@ -232,7 +240,7 @@ const ManageAppointmentPage = () => {
                           </Link>
                           <button
                             onClick={() => handleClickOpen(appointment?.id)}
-                            className="text-red-500 text-xl  cursor-pointer"
+                            className="text-[#d1001c] text-xl  cursor-pointer"
                           >
                             <DeleteIcon />
                           </button>
@@ -286,7 +294,7 @@ const ManageAppointmentPage = () => {
                       </Link>
                       <button
                         onClick={() => handleClickOpen(appointment?.id)}
-                        className="text-red-500 text-xl  cursor-pointer"
+                        className="text-[#d1001c] text-xl  cursor-pointer"
                       >
                         <DeleteIcon />
                       </button>
@@ -315,7 +323,17 @@ const ManageAppointmentPage = () => {
                   />
                   <AccordionRow
                     rowName="Time"
-                    data={appointment?.slatTime}
+                    data={
+                      <div className="">
+                        <span
+                          className={`
+                      text-[#00a152] 
+                      w-24 py-1 rounded-xl   font-bold`}
+                        >
+                          {appointment?.slatTime}
+                        </span>
+                      </div>
+                    }
                     style="w-36"
                   />
                   <AccordionRow

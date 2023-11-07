@@ -216,7 +216,12 @@ const ManageDoctorServicePage = () => {
                       </TableCell>
                       <TableCell align="center">
                         {" "}
-                        {service?.serviceSalt.duration} Minutes
+                        <span
+                          className="      text-[#00a152]  
+                            w-24 py-1 rounded-xl    font-bold"
+                        >
+                          {service?.serviceSalt.duration} Minutes
+                        </span>
                       </TableCell>
 
                       {/* <TableCell align="center">
@@ -240,7 +245,7 @@ const ManageDoctorServicePage = () => {
                           </Link>
                           <button
                             onClick={() => handleClickOpen(service?.id)}
-                            className="text-red-500 text-xl  cursor-pointer"
+                            className="text-[#d1001c] text-xl  cursor-pointer"
                           >
                             <DeleteIcon />
                           </button>
@@ -294,7 +299,7 @@ const ManageDoctorServicePage = () => {
                       </Link>
                       <button
                         onClick={() => handleClickOpen(service?.id)}
-                        className="text-red-500 text-xl  cursor-pointer"
+                        className="text-[#d1001c] text-xl  cursor-pointer"
                       >
                         <DeleteIcon />
                       </button>
@@ -322,7 +327,14 @@ const ManageDoctorServicePage = () => {
                   />
                   <AccordionRow
                     rowName="Duration"
-                    data={`${service?.serviceSalt.duration} Minutes`}
+                    data={
+                      <span
+                        className="      text-[#00a152]  
+                      w-24 py-1 rounded-xl    font-bold"
+                      >
+                        {service?.serviceSalt.duration} Minutes
+                      </span>
+                    }
                     style="w-36"
                   />
                 </div>

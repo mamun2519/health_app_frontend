@@ -143,13 +143,25 @@ const BloodDonorActivity = () => {
         </div>
         <div className="w-full ">
           <h3 className="text-xl"></h3>
-          <div className="border h-full mt-12 flex  items-center py-10  px-3 rounded-2xl shadow">
-            <MyBarChart
-              width={530}
-              height={250}
-              data={donationBerChart}
-              keys="complete"
-            />
+          <div className="border h-full mt-12 lg:flex  items-center py-10  lg:px-3 rounded-2xl shadow">
+            <div className=" hidden lg:block md:block xl:block">
+              {" "}
+              <MyBarChart
+                width={530}
+                height={250}
+                data={donationBerChart}
+                keys="complete"
+              />
+            </div>
+            <div className=" block lg:hidden md:hidden xl:hidden">
+              {" "}
+              <MyBarChart
+                width={280}
+                height={250}
+                data={donationBerChart}
+                keys="complete"
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -187,7 +187,18 @@ const GoogleMeet = () => {
                         {appointment?.service.title}
                       </TableCell>
                       <TableCell align="center">
-                        {appointment?.status}
+                        <span
+                          className={`${
+                            appointment?.status == "Cancel" && " text-[#2979ff]"
+                          }
+                      ${appointment?.status == "Expired" && "text-[#d1001c] "}
+                      ${appointment?.status == "Complete" && " text-[#8a317a]"}
+                      ${
+                        appointment?.status == "Active" && " text-[#00a152]"
+                      }  py-1 rounded-xl   font-bold`}
+                        >
+                          {appointment?.status}
+                        </span>
                       </TableCell>
                       <TableCell align="center">
                         {convertDate(appointment?.createdAt)}
@@ -276,7 +287,20 @@ const GoogleMeet = () => {
                     />
                     <AccordionRow
                       rowName="Status"
-                      data={appointment?.status}
+                      data={
+                        <span
+                          className={`${
+                            appointment?.status == "Cancel" && " text-[#2979ff]"
+                          }
+                    ${appointment?.status == "Expired" && "text-[#d1001c] "}
+                    ${appointment?.status == "Complete" && " text-[#8a317a]"}
+                    ${
+                      appointment?.status == "Active" && " text-[#00a152]"
+                    }  py-1 rounded-xl   font-bold`}
+                        >
+                          {appointment?.status}
+                        </span>
+                      }
                       style="w-36"
                     />
                     <AccordionRow

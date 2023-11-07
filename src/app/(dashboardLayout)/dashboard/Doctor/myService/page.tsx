@@ -197,7 +197,12 @@ const DoctorServicePage = () => {
                       </TableCell>
                       <TableCell align="center">
                         {" "}
-                        {service?.serviceSalt.duration} Minutes
+                        <span
+                          className="      text-[#00a152]  
+                            w-24 py-1 rounded-xl    font-bold"
+                        >
+                          {service?.serviceSalt.duration} Minutes
+                        </span>
                       </TableCell>
 
                       {/* <TableCell align="center">
@@ -303,7 +308,14 @@ const DoctorServicePage = () => {
                   />
                   <AccordionRow
                     rowName="Duration"
-                    data={`${service?.serviceSalt.duration} Minutes`}
+                    data={
+                      <span
+                        className="      text-[#00a152]  
+                        w-24 py-1 rounded-xl    font-bold"
+                      >
+                        {service?.serviceSalt.duration} Minutes
+                      </span>
+                    }
                     style="w-36"
                   />
                 </div>

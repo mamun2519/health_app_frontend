@@ -183,13 +183,25 @@ const AdminActivity = () => {
         </div>
         <div className="w-full ">
           <h3 className="text-xl"></h3>
-          <div className="border h-full mt-12 flex  items-center py-10  px-3 rounded-2xl shadow">
-            <MyBarChart
-              width={530}
-              height={250}
-              data={ChartData}
-              keys="Total_Amount"
-            />
+          <div className="border h-full mt-12 lg:flex  items-center py-10  lg:px-3 rounded-2xl shadow w-full">
+            <div className=" hidden lg:block md:block xl:block">
+              {" "}
+              <MyBarChart
+                width={530}
+                height={250}
+                data={ChartData}
+                keys="Total_Amount"
+              />
+            </div>
+
+            <div className=" block lg:hidden md:hidden xl:hidden">
+              <MyBarChart
+                width={280}
+                height={250}
+                data={ChartData}
+                keys="Total_Amount"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -263,13 +275,23 @@ const AdminActivity = () => {
         </div>
         <div className="w-full ">
           <h3 className="text-xl"></h3>
-          <div className="border h-full mt-12 flex  items-center py-10  px-3 rounded-2xl shadow">
-            <MyBarChart
-              width={530}
-              height={250}
-              data={DonorChartData}
-              keys="Total_Donation"
-            />
+          <div className="border h-full mt-12 lg:flex   items-center py-10  lg:px-3 rounded-2xl shadow ">
+            <div className=" hidden lg:block md:block xl:block">
+              <MyBarChart
+                width={530}
+                height={250}
+                data={DonorChartData}
+                keys="Total_Donation"
+              />
+            </div>
+            <div className=" block lg:hidden md:hidden xl:hidden">
+              <MyBarChart
+                width={280}
+                height={250}
+                data={DonorChartData}
+                keys="Total_Donation"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -337,13 +359,25 @@ const AdminActivity = () => {
         </div>
         <div className="w-full ">
           <h3 className="text-xl"></h3>
-          <div className="border h-full mt-12 flex  items-center py-10  px-3 rounded-2xl shadow">
-            <MyBarChart
-              width={530}
-              height={250}
-              data={WithdrawChart}
-              keys="Balance"
-            />
+          <div className="border h-full mt-12 lg:flex  items-center py-10  lg:px-3 rounded-2xl shadow w-full">
+            <div className=" hidden lg:block md:block xl:block">
+              <MyBarChart
+                width={530}
+                height={250}
+                data={WithdrawChart}
+                keys="Balance"
+              />
+            </div>
+
+            <div className=" block lg:hidden md:hidden xl:hidden">
+              {" "}
+              <MyBarChart
+                width={280}
+                height={250}
+                data={WithdrawChart}
+                keys="Balance"
+              />
+            </div>
           </div>
         </div>
       </div>

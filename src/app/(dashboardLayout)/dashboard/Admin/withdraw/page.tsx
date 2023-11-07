@@ -211,9 +211,9 @@ const ManageWithdrawPage = () => {
       </div>
 
       <div className="mt-10">
-        <div className=" flex justify-between items-center">
-          <h3 className=" mt-5 text-2xl">Recent Withdraw Request</h3>
-          <div className=" flex gap-3 lg:mt-0 mt-5">
+        <div className=" lg:flex justify-between items-center">
+          <h3 className=" mt-5 lg:text-2xl text-xl">Recent Withdraw Request</h3>
+          <div className=" flex gap-3 lg:mt-0 mt-2">
             <div>
               {sortBy && (
                 <div
@@ -288,7 +288,19 @@ const ManageWithdrawPage = () => {
                         {" "}
                         {service?.paymentReciveType}
                       </TableCell>
-                      <TableCell align="center"> {service?.status}</TableCell>
+                      <TableCell align="center">
+                        <span
+                          className={`${
+                            service?.status == "Cancel" && " text-[#2979ff]"
+                          }
+                          ${service?.status == "Pending" && "text-[#d1001c] "}
+                          ${
+                            service?.status == "Complete" && "text-[#00a152] "
+                          } py-1 rounded-xl   font-bold`}
+                        >
+                          {service?.status}
+                        </span>
+                      </TableCell>
                       <TableCell align="center">
                         <button
                           onClick={() =>
@@ -389,7 +401,19 @@ const ManageWithdrawPage = () => {
                   />
                   <AccordionRow
                     rowName="Status"
-                    data={`${service?.status}`}
+                    data={
+                      <span
+                        className={`${
+                          service?.status == "Cancel" && " text-[#2979ff]"
+                        }
+                      ${service?.status == "Pending" && "text-[#d1001c] "}
+                      ${
+                        service?.status == "Complete" && "text-[#00a152] "
+                      } py-1 rounded-xl   font-bold`}
+                      >
+                        {service?.status}
+                      </span>
+                    }
                     style="w-36"
                   />
                   <AccordionRow
