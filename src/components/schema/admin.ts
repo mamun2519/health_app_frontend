@@ -16,3 +16,7 @@ export const adminCreateSchema = yup.object().shape({
     .required("Password is required"),
   //   role: yup.string().required("Role is required"),
 });
+
+export const promoCodeSchema = yup.object().shape({
+  promoCode: yup.string().required("Promo Code  is required"),
+});

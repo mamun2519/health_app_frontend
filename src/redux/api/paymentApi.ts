@@ -57,6 +57,14 @@ export const paymentApi = baseApi.injectEndpoints({
       }),
       // invalidatesTags: ["payment"],
     }),
+    applyPromoCode: build.mutation({
+      query: (data) => ({
+        url: `/payment/apply-promo-code`,
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: ["payment"],
+    }),
   }),
 });
 
@@ -68,4 +76,5 @@ export const {
   useAllPaymentQuery,
   useCreatePaymentMutation,
   usePaymentStripeQuery,
+  useApplyPromoCodeMutation,
 } = paymentApi;

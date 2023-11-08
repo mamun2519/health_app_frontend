@@ -8,28 +8,21 @@ import { ICreateBookAppointment } from "../appointmentForm/page";
 import { useCreatePaymentMutation } from "@/redux/api/paymentApi";
 import { useRouter } from "next/navigation";
 const SuccessPage = () => {
-  const [counter, setCounter] = useState(3);
-  // const price = JSON.parse(localStorage.getItem("BookingInfo") as string);
-  // const patientInfo = JSON.parse(localStorage.getItem("PatientInfo") as string);
+  const [counter, setCounter] = useState(4);
 
   const [createPayment] = useCreatePaymentMutation();
 
   const router = useRouter();
 
   useEffect(() => {
-    // Ensure that this code only runs on the client-side
-    // Accessing localStorage directly on the server-side can cause issues
     if (typeof window !== "undefined") {
       const bookingInfo = localStorage.getItem("BookingInfo");
       const patientInfo = localStorage.getItem("PatientInfo");
 
-      // Check if the items are available in localStorage before parsing them
       if (bookingInfo && patientInfo) {
         const price = JSON.parse(bookingInfo);
         const patient = JSON.parse(patientInfo);
 
-        // Now you can use 'price' and 'patient' data
-        // Rest of your code...
         const appointment = {
           bookingDate: price?.bookingDate,
           doctorId: price?.doctorId,
@@ -50,13 +43,16 @@ const SuccessPage = () => {
           price: Number(price.price),
           doctorId: price.doctorId,
           transactionId: "No",
-          discountedPrice: 0,
+          discountedPrice: Number(price.discount),
           paymentType: "Stripe",
         };
 
         const paymentSuccess = async () => {
           const res = await createPayment({ appointment, payment }).unwrap();
-          console.log(res);
+          if (res) {
+            localStorage.removeItem("BookingInfo");
+            localStorage.removeItem("PatientInfo");
+          }
         };
 
         paymentSuccess();
@@ -69,10 +65,10 @@ const SuccessPage = () => {
       if (counter > 0) {
         setCounter(counter - 1);
       } else {
-        clearInterval(interval); // Stop the interval when counter reaches 3
-        router.push("/dashboard"); // Navigate to the dashboard route
+        clearInterval(interval);
+        router.push("/dashboard");
       }
-    }, 1000); // Increment every second (you can adjust the interval time)
+    }, 1000);
   }, [counter, router]);
 
   return (

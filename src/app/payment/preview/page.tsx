@@ -1,28 +1,49 @@
 "use client";
 import MyStepper from "@/components/ui/MyStepper";
 import { useDoctorServiceDetailsQuery } from "@/redux/api/doctorServiceApi";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { ICreateBookAppointment } from "../appointmentForm/page";
 import Form from "@/components/Form/FormProvider";
 import FormInput from "@/components/Form/FormInput";
 import Link from "next/link";
 import LoadingSpinner from "@/utils/Loading";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { promoCodeSchema } from "@/components/schema/admin";
+import { SubmitHandler } from "react-hook-form";
+import { useApplyPromoCodeMutation } from "../../../redux/api/paymentApi";
+import errorMessage from "@/components/shared/ErrrorMessage";
+import successMessage from "@/components/shared/SuccessMassage";
 
 export interface IBookingInfo {
   bookingDate: string;
   slatTime: string;
   doctorId: string;
   serviceId: string;
-  price: string;
+  price: number;
+  discount: number;
 }
 const PreviewPage = () => {
   const [serviceId, SetServiceId] = useState<string>("");
+  const [discountParseint, setDiscountParseint] = useState(null);
+  const [apply, setApply] = useState(false);
+  const { data: service, isLoading } = useDoctorServiceDetailsQuery({
+    id: serviceId,
+    date: "",
+  });
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  useEffect(() => {
+    setTotalPrice(service?.price);
+  }, [service]);
+
+  console.log(totalPrice);
+  const [discountPrice, setDiscountPrice] = useState(0);
   const [BookingInfo, setBookingInfo] = useState<IBookingInfo>({
     bookingDate: "",
     slatTime: "",
     doctorId: "",
     serviceId: "",
-    price: "",
+    price: 0,
+    discount: 0,
   });
   const [patientInfo, SetPatientInfo] = useState<ICreateBookAppointment>({
     gender: "",
@@ -32,6 +53,7 @@ const PreviewPage = () => {
     patientProblem: "",
     address: "",
   });
+  const [applyPromoCode] = useApplyPromoCodeMutation();
   useEffect(() => {
     SetServiceId(
       JSON.parse(localStorage.getItem("BookingInfo") as string).serviceId
@@ -40,14 +62,46 @@ const PreviewPage = () => {
     SetPatientInfo(JSON.parse(localStorage.getItem("PatientInfo") as string));
   }, []);
 
-  const { data: service, isLoading } = useDoctorServiceDetailsQuery({
-    id: serviceId,
-    date: "",
-  });
-
   if (isLoading) {
     return <LoadingSpinner />;
   }
+
+  const applyPromoCodeHandler: SubmitHandler<{ promoCode: string }> = async (
+    data
+  ) => {
+    const d = {
+      id: service?.id,
+      promoCode: data.promoCode,
+    };
+    const res: any = await applyPromoCode(d);
+    console.log(res);
+    if (res.data) {
+      successMessage({
+        header: "congratulation",
+        message: "Apply Promo Code Successfully",
+      });
+      setApply(true);
+      setDiscountParseint(res.data.discount);
+      const discountAmount: number = Number(
+        (Number(service?.price) * res.data.discount) / 100
+      );
+      setDiscountPrice(discountAmount);
+
+      const currentPrice = Number(service?.price) - discountAmount;
+      setTotalPrice(Math.floor(Number(currentPrice)));
+
+      BookingInfo.price = Math.floor(currentPrice);
+      BookingInfo.discount = Math.floor(discountAmount);
+      localStorage.setItem("BookingInfo", JSON.stringify(BookingInfo));
+    } else {
+      errorMessage({ message: res?.error?.data });
+    }
+    try {
+    } catch (error: any) {
+      console.log(error);
+      errorMessage({ message: error?.data });
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-28 pb-40">
@@ -125,18 +179,21 @@ const PreviewPage = () => {
               <div className=" border  w-full mt-5"></div>
               <div className="mt-4  flex gap-4 justify-between">
                 <div className="">
-                  <span>Amount</span>
+                  <span>
+                    Discount{" "}
+                    {discountParseint && `(${discountParseint}% Offer)`}
+                  </span>
                 </div>
                 <div>
-                  <span>{service?.price} BDT</span>
+                  <span>{BookingInfo.discount} BDT</span>
                 </div>
               </div>
               <div className="mt-1  flex gap-4 justify-between">
                 <div className="">
-                  <span>Discount</span>
+                  <span>Amount</span>
                 </div>
                 <div>
-                  <span>00 BDT</span>
+                  <span>{BookingInfo.price} BDT</span>
                 </div>
               </div>
               <div className="mt-1  flex gap-4 justify-between">
@@ -159,7 +216,10 @@ const PreviewPage = () => {
               <div className="h- border w-full mt-5"></div>
 
               <div className="mt-5">
-                <Form submitHandler={() => {}}>
+                <Form
+                  submitHandler={applyPromoCodeHandler}
+                  resolver={yupResolver(promoCodeSchema)}
+                >
                   <div className="h-12 relative w-full">
                     <FormInput
                       name="promoCode"
@@ -167,8 +227,13 @@ const PreviewPage = () => {
                       placeholder="Enter Promo code"
                     />{" "}
                     <div className=" absolute  top-2  right-2">
-                      <button className="bg-[#d1001c] px-8 py-2 rounded text-white">
-                        Send
+                      <button
+                        disabled={apply}
+                        className={`${
+                          apply ? "bg-red-400 " : "bg-[#d1001c] "
+                        } px-8 py-2 rounded text-white`}
+                      >
+                        Apply
                       </button>
                     </div>
                   </div>
@@ -182,7 +247,7 @@ const PreviewPage = () => {
                 <span className="text-2xl">Total </span>
               </div>
               <div>
-                <span className="text-2xl"> BDT</span>
+                <span className="text-2xl">{BookingInfo.price} BDT</span>
               </div>
             </div>
             <div className="mt-5 w-full bg-[#d1001c] h-10 text-white rounded-2xl flex justify-center items-center  ">

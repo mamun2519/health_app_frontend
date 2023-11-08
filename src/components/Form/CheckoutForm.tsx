@@ -17,7 +17,8 @@ export default function CheckoutForm() {
     slatTime: "",
     doctorId: "",
     serviceId: "",
-    price: "",
+    price: 0,
+    discount: 0,
   });
   const [patientInfo, SetPatientInfo] = useState<ICreateBookAppointment>({
     gender: "",
@@ -90,45 +91,9 @@ export default function CheckoutForm() {
       },
     });
 
-    console.log(error.type);
-    // This point will only be reached if there is an immediate error when
-    // confirming the payment. Otherwise, your customer will be redirected to
-    // your `return_url`. For some payment methods like iDEAL, your customer will
-    // be redirected to an intermediate site first to authorize the payment, then
-
-    // redirected to the `return_url`.
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message as string);
     } else {
-      // const appointment = {
-      //   bookingDate: price?.bookingDate,
-      //   doctorId: price?.doctorId,
-      //   gender: patientInfo?.gender,
-      //   age: Number(patientInfo?.age),
-      //   weight: Number(patientInfo?.weight),
-      //   bloodGroup: patientInfo?.bloodGroup,
-      //   slatTime: price?.slatTime,
-      //   patientProblem: patientInfo?.patientProblem,
-      //   report: "no",
-      //   address: patientInfo?.address,
-      //   serviceId: price?.serviceId,
-      //   price: price.price,
-      // };
-
-      // const payment = {
-      //   serviceId: price.serviceId,
-      //   price: Number(price.price),
-      //   doctorId: price.doctorId,
-      //   transactionId: "No",
-      //   discountedPrice: 0,
-      //   paymentType: "Stripe",
-      // };
-      // try {
-      //   const res = await createPayment({ appointment, payment }).unwrap();
-      //   console.log(res);
-      // } catch (error) {
-      //   console.log(error);
-      // }
       setMessage("An unexpected error occurred.");
     }
 
@@ -156,11 +121,16 @@ export default function CheckoutForm() {
       >
         <span id="button-text">
           {isLoading ? (
-            <div className="spinner " id="spinner"></div>
+            <div
+              className="spinner bg-[#d1001c] h-10  text-white rounded-2xl flex justify-center items-center  "
+              id="spinner"
+            >
+              Loading............
+            </div>
           ) : (
             <div className="mt-5 w-full bg-[#d1001c] h-10  text-white rounded-2xl flex justify-center items-center  ">
               {" "}
-              Pay now {price?.price} BDT
+              Pay now {Math.floor(Number(price?.price))} BDT
             </div>
           )}
         </span>

@@ -59,7 +59,8 @@ const DoctorServiceDetails = ({ id }: any) => {
         slatTime: selectSlat.time,
         doctorId: service.doctorId,
         serviceId: service.id,
-        price: service.price,
+        price: Number(service.price),
+        discount: 0,
       };
       localStorage.setItem("BookingInfo", JSON.stringify(info));
       router.push("/payment/appointmentForm");

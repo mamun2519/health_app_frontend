@@ -17,13 +17,13 @@ const stripePromise = loadStripe(
   "pk_test_51L1nmNCGpaTt0RU8npNSNITrjLTAUDjwjX275RD6RDk5SGoYi1H1zLKxAis8OFp4C0PxQBT2L5c0L0VsTI9ewqGl00dT2UHEXy"
 );
 const ConformPage = () => {
-  const [price, setPrice] = useState<string | number>(0);
+  const [price, setPrice] = useState<number>(0);
   useEffect(() => {
     setPrice(JSON.parse(localStorage.getItem("BookingInfo") as string).price);
   }, []);
 
   const { data, isLoading } = usePaymentStripeQuery(price);
-
+  console.log(price);
   const appearance = {
     theme: "stripe",
   };
