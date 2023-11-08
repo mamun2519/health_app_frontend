@@ -212,7 +212,20 @@ const MyDonorRequest = () => {
                     ${donor?.user?.profile?.last_name}`}
                       </TableCell>
                       <TableCell align="center">{donor?.quantity}</TableCell>
-                      <TableCell align="center">{donor?.status}</TableCell>
+                      <TableCell align="center">
+                        {" "}
+                        <span
+                          className={`${
+                            donor?.status == "Cancel" && " text-[#2979ff]"
+                          }
+                  ${donor?.status == "Pending" && "text-[#d1001c] "}
+                  ${donor?.status == "Completed" && "text-[#00a152] "}
+                  ${donor?.status == "Accepted" && "text-[#8a317a]"} 
+                  py-1 rounded-xl   font-bold`}
+                        >
+                          {donor?.status}
+                        </span>
+                      </TableCell>
 
                       <TableCell align="center">{donor?.donnetDate}</TableCell>
                       <TableCell align="center">
@@ -317,7 +330,19 @@ const MyDonorRequest = () => {
                 />
                 <AccordionRow
                   rowName="Status"
-                  data={donor?.status}
+                  data={
+                    <span
+                      className={`${
+                        donor?.status == "Cancel" && " text-[#2979ff]"
+                      }
+                  ${donor?.status == "Pending" && "text-[#d1001c] "}
+                  ${donor?.status == "Completed" && "text-[#00a152] "}
+                  ${donor?.status == "Accepted" && "text-[#8a317a]"} 
+                  py-1 rounded-xl   font-bold`}
+                    >
+                      {donor?.status}
+                    </span>
+                  }
                   style="w-36"
                 />
                 <AccordionRow

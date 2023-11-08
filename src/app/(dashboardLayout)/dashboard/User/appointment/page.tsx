@@ -209,7 +209,18 @@ const UserAppointmentPage = () => {
                       </TableCell>
 
                       <TableCell align="center">
-                        {appointment?.status}
+                        <span
+                          className={`${
+                            appointment?.status == "Cancel" && " text-[#2979ff]"
+                          }
+                      ${appointment?.status == "Pending" && "text-[#d1001c] "}
+                      ${appointment?.status == "Complete" && "text-[#00a152] "}
+                      ${
+                        appointment?.status == "Accepted" && "text-[#8a317a]"
+                      }  py-1 rounded-xl   font-bold`}
+                        >
+                          {appointment?.status}
+                        </span>
                       </TableCell>
                       <TableCell align="center">
                         <button
@@ -322,7 +333,20 @@ const UserAppointmentPage = () => {
                   />
                   <AccordionRow
                     rowName="Status"
-                    data={appointment?.status}
+                    data={
+                      <span
+                        className={`${
+                          appointment?.status == "Cancel" && " text-[#2979ff]"
+                        }
+                  ${appointment?.status == "Pending" && "text-[#d1001c] "}
+                  ${appointment?.status == "Complete" && "text-[#00a152] "}
+                  ${
+                    appointment?.status == "Accepted" && "text-[#8a317a]"
+                  }  py-1 rounded-xl   font-bold`}
+                      >
+                        {appointment?.status}
+                      </span>
+                    }
                     style="w-36"
                   />
                   <AccordionRow

@@ -226,11 +226,13 @@ const JoinDoctor = () => {
                         <TableCell align="center">
                           {/* {appointment?.status} */}
                           {activeGoogleMeet ? (
-                            <span className=" text-[#d1001c]  font-bold">
+                            <span className=" text-[#00a152]   font-bold">
                               Online
                             </span>
                           ) : (
-                            "Offline"
+                            <span className=" text-[#d1001c]  font-bold">
+                              Offline
+                            </span>
                           )}
                         </TableCell>
                         <TableCell align="center">
