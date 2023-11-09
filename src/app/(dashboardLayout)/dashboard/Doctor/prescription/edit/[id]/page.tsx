@@ -1,13 +1,8 @@
 "use client";
 import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
-import DeleteModal from "@/components/dialog/Delete";
+
 import successMessage from "@/components/shared/SuccessMassage";
-import {
-  useAppointmentDetailsQuery,
-  useUpdateAppointmentMutation,
-} from "@/redux/api/appointmentApi";
+
 import { SubmitHandler } from "react-hook-form";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import FormInput from "@/components/Form/FormInput";
@@ -17,31 +12,33 @@ import {
   useUpdatePrescriptionMutation,
 } from "@/redux/api/prescriptionApi";
 import { ICreatePrescription } from "@/types";
+import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 const DoctorPrescriptionEditPage = ({ params }: { params: { id: string } }) => {
   const bread = [
     {
       link: "/dashboard",
       level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
       color: "inherit",
     },
     {
       link: "/dashboard/Doctor/prescription",
       level: "My Prescription",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <MedicalServicesIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/Doctor/prescription",
       level: "Prescription Edit",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <SettingsSuggestIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
-      color: "text.primary",
+      color: "#d1001c",
     },
   ];
   const { data } = usePrescriptionDetailsQuery(params.id);
-  console.log(data);
+
   const defaultValues = {
     "prescription.title": data?.title || "",
     "prescription.submitDate": data?.submitDate || "",

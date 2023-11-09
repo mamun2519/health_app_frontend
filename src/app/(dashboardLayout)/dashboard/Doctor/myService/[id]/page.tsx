@@ -1,14 +1,15 @@
 import DashboardDoctorServiceDetails from "@/components/doctorService/DashboardServiceDetails";
 
 import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
+
 import GrainIcon from "@mui/icons-material/Grain";
+import PreviewIcon from "@mui/icons-material/Preview";
 const DoctorServiceDetailsPage = ({ params }: { params: { id: string } }) => {
   const bread = [
     {
       link: "/dashboard",
       level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
       color: "inherit",
     },
@@ -21,9 +22,9 @@ const DoctorServiceDetailsPage = ({ params }: { params: { id: string } }) => {
     {
       link: "/dashboard/Doctor/myService",
       level: "Service Details",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <PreviewIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
-      color: "text.primary",
+      color: "#d1001c",
     },
   ];
   return (

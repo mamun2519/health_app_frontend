@@ -27,7 +27,10 @@ const ConformPage = () => {
   const appearance = {
     theme: "stripe",
   };
-  const options: any = {
+  const options: {
+    clientSecret: string;
+    appearance: any;
+  } = {
     clientSecret: data?.clientSecret,
     appearance,
   };

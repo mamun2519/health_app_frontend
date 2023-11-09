@@ -10,24 +10,21 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import React, { useState } from "react";
-
+import HomeIcon from "@mui/icons-material/Home";
 import {
   Accordion,
   AccordionSummary,
   Pagination,
-  TextField,
   Typography,
 } from "@mui/material";
 import Select from "react-select";
-import { Days, DoctorServiceSort, Limit } from "@/constants/donor";
+import { DoctorServiceSort, Limit } from "@/constants/donor";
 import Link from "next/link";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
 import DeleteModal from "@/components/dialog/Delete";
 import successMessage from "@/components/shared/SuccessMassage";
-
+import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import {
   useDeleteServiceMutation,
   useDoctorServiceQuery,
@@ -66,15 +63,15 @@ const DoctorServicePage = () => {
     {
       link: "/dashboard",
       level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
       color: "inherit",
     },
     {
       link: "/dashboard/Doctor/myService",
       level: "My Service",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <MonitorHeartIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
   const { data, isLoading } = useDoctorServiceQuery({ ...query });

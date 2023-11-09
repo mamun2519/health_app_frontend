@@ -100,7 +100,7 @@ export default function CheckoutForm() {
     setIsLoading(false);
   };
 
-  const paymentElementOptions: any = {
+  const paymentElementOptions: { layout: "tabs" } = {
     layout: "tabs",
   };
 

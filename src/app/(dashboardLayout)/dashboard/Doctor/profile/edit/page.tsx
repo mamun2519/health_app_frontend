@@ -48,6 +48,8 @@ import {
   useUpdateUserProfileMutation,
 } from "@/redux/api/profileApi";
 import { IProfileUpdate } from "../../../User/profile/edit/page";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 interface UserProfile {
   address: {
     address: string;
@@ -81,14 +83,14 @@ const EditProfile = () => {
     {
       link: "/dashboard/Doctor/profile",
       level: "Profile",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <AccountBoxIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/Doctor/profile",
       level: "Edit",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <SettingsSuggestIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
 

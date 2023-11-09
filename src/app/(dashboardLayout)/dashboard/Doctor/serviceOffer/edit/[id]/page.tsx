@@ -31,6 +31,8 @@ import {
 } from "@/redux/api/serviceOfferApi";
 import errorMessage from "@/components/shared/ErrrorMessage";
 import { IServiceOfferCrate } from "../../create/page";
+import BusinessIcon from "@mui/icons-material/Business";
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 interface IGoogleMeet {
   meetLink: string;
   status: {
@@ -46,22 +48,22 @@ const CreateDoctorServiceOfferEditPage = ({
     {
       link: "/dashboard",
       level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
       color: "inherit",
     },
     {
       link: "/dashboard/Doctor/serviceOffer",
       level: "ServiceOffer",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <BusinessIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/Doctor/serviceOffer",
       level: "Edit",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <SettingsSuggestIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
-      color: "text.primary",
+      color: "#d1001c",
     },
   ];
   const { data: offer } = useServiceOfferDetailsQuery(params.id);

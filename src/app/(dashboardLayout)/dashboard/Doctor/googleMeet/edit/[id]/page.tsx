@@ -1,24 +1,19 @@
 "use client";
-import HomeIcon from "@mui/icons-material/Home";
+
 import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
-import DeleteModal from "@/components/dialog/Delete";
 import successMessage from "@/components/shared/SuccessMassage";
-import {
-  useAppointmentDetailsQuery,
-  useUpdateAppointmentMutation,
-} from "@/redux/api/appointmentApi";
 import { SubmitHandler } from "react-hook-form";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import FormInput from "@/components/Form/FormInput";
 import Form from "@/components/Form/FormProvider";
 import FormSelectInput from "@/components/Form/FormSelectInput";
-import SelectInput from "@/components/Form/SelectInput";
 import { MeetStatus } from "@/constants/donor";
 import {
   useDitelesGoogleMeetQuery,
   useUpdateGoogleMetMutation,
 } from "@/redux/api/googleMeetApi";
+import JoinFullIcon from "@mui/icons-material/JoinFull";
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 interface IGoogleMeet {
   meetLink: string;
   status: {
@@ -41,15 +36,15 @@ const DoctorAppointmentUpdatePage = ({
     {
       link: "/dashboard/Doctor/googleMeet",
       level: "Google Meet",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <JoinFullIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/Doctor/googleMeet",
       level: " Edit",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <SettingsSuggestIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
-      color: "text.primary",
+      color: "#d1001c",
     },
   ];
   const { data } = useDitelesGoogleMeetQuery(params.id);

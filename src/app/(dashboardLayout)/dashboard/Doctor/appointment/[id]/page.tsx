@@ -8,27 +8,30 @@ import { useAppointmentDetailsQuery } from "@/redux/api/appointmentApi";
 import { convertDate } from "@/helper/date";
 import Image from "next/image";
 import dataPic from "../../../../../../assets/blood_donation_02.jpg";
+import BreakfastDiningIcon from "@mui/icons-material/BreakfastDining";
+import PreviewIcon from "@mui/icons-material/Preview";
+
 const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
   const bread = [
     {
       link: "/dashboard",
       level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
       color: "inherit",
     },
     {
       link: "/dashboard/Doctor/appointment",
       level: "My Booking Appointment",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <BreakfastDiningIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/Doctor/appointment",
       level: "Appointment Details",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <PreviewIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
-      color: "text.primary",
+      color: "#d1001c",
     },
   ];
   const { data } = useAppointmentDetailsQuery(params.id);

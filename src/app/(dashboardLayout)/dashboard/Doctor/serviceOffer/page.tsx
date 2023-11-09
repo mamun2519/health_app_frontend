@@ -1,5 +1,5 @@
 "use client";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Table from "@mui/material/Table";
@@ -15,26 +15,17 @@ import {
   Accordion,
   AccordionSummary,
   Pagination,
-  TextField,
   Typography,
 } from "@mui/material";
 import Select from "react-select";
-import { Days, Limit, OfferSort } from "@/constants/donor";
+import { Limit, OfferSort } from "@/constants/donor";
 import Link from "next/link";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
+
 import DeleteModal from "@/components/dialog/Delete";
 import successMessage from "@/components/shared/SuccessMassage";
-import {
-  useDeleteAppointmentMutation,
-  useUserAppointmentQuery,
-} from "@/redux/api/appointmentApi";
-import {
-  useDeleteServiceMutation,
-  useDoctorServiceQuery,
-} from "@/redux/api/doctorServiceApi";
+
 import errorMessage from "@/components/shared/ErrrorMessage";
 import LoadingSpinner from "@/utils/Loading";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -47,6 +38,7 @@ import {
 } from "@/redux/api/serviceOfferApi";
 import { convertDate } from "@/helper/date";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import BusinessIcon from "@mui/icons-material/Business";
 const DoctorServiceOfferPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -73,15 +65,15 @@ const DoctorServiceOfferPage = () => {
     {
       link: "/dashboard",
       level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
       color: "inherit",
     },
     {
       link: "/dashboard/Doctor/serviceOffer",
       level: "Service Offer",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <BusinessIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
   const { data, isLoading } = useDoctorServiceOfferQuery({ ...query });

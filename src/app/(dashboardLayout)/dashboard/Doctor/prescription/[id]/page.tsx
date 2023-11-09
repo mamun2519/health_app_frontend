@@ -3,8 +3,9 @@ import HomeIcon from "@mui/icons-material/Home";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import GrainIcon from "@mui/icons-material/Grain";
 import { getUserInfo } from "@/services/auth.Services";
-
+import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
 import PrescriptionDetails from "@/components/prescription/PrescriptionDetails";
+import PreviewIcon from "@mui/icons-material/Preview";
 const DoctorPrescriptionDetailsPage = ({
   params,
 }: {
@@ -21,14 +22,14 @@ const DoctorPrescriptionDetailsPage = ({
     {
       link: "/dashboard/Doctor/prescription",
       level: "My Prescription",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <MedicalServicesIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "inherit",
     },
     {
       link: "/dashboard/Doctor/prescription",
       level: "Details",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <PreviewIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
   return (

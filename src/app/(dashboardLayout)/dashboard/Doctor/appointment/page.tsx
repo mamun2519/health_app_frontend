@@ -30,16 +30,16 @@ import successMessage from "@/components/shared/SuccessMassage";
 import {
   useDeleteAppointmentMutation,
   useDoctorAppointmentQuery,
-  useUserAppointmentQuery,
 } from "@/redux/api/appointmentApi";
 import AppointmentChangeStatusModel from "@/components/dialog/AppointmentStatusChangeModel";
 import LoadingSpinner from "@/utils/Loading";
-
 import AccordionDetails from "@mui/material/AccordionDetails";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionRow from "@/components/ui/AccordionRow";
 import errorMessage from "@/components/shared/ErrrorMessage";
+import BreakfastDiningIcon from "@mui/icons-material/BreakfastDining";
+
 const DoctorBookAppointment = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -84,8 +84,8 @@ const DoctorBookAppointment = () => {
     {
       link: "/dashboard/Doctor/appointment",
       level: "My Booking Appointment",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <BreakfastDiningIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
   const { data, isLoading } = useDoctorAppointmentQuery({ ...query });
