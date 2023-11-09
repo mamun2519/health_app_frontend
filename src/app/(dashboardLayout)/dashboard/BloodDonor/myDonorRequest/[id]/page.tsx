@@ -2,28 +2,16 @@
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import React, { useState } from "react";
 import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
 
-import dataPic from "../../../../../../assets/blood_donation_02.jpg";
-import Image from "next/image";
 import { convertDate } from "@/helper/date";
 import { useGetDonorRequestDetailsQuery } from "@/redux/api/donorApi";
-import Toast from "@/components/ui/Toast";
+
 import LoadingSpinner from "@/utils/Loading";
+import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
+import PreviewIcon from "@mui/icons-material/Preview";
 const UserDonorDetailsPage = ({ params }: { params: { id: string } }) => {
   const [open, setOpen] = useState(true);
 
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
   const boread = [
     {
       link: "/",
@@ -35,18 +23,17 @@ const UserDonorDetailsPage = ({ params }: { params: { id: string } }) => {
     {
       link: "/dashboard/BloodDonor/myDonorRequest",
       level: "User Request",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <RecordVoiceOverIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/Dashboard",
       level: "Details",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <PreviewIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
   const { data, isLoading } = useGetDonorRequestDetailsQuery(params.id);
-  console.log(data);
 
   if (isLoading) {
     return <LoadingSpinner />;

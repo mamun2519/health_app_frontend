@@ -33,6 +33,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionRow from "@/components/ui/AccordionRow";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
 const MyDonorRequest = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -69,8 +70,8 @@ const MyDonorRequest = () => {
     {
       link: "/dashboard/User/myDonorRequest",
       level: "Donor Request",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <RecordVoiceOverIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
 

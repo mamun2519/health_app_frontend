@@ -19,6 +19,7 @@ import {
   Typography,
 } from "@mui/material";
 import Select from "react-select";
+import BreakfastDiningIcon from "@mui/icons-material/BreakfastDining";
 import { AppointmentSort, Days, Limit } from "@/constants/donor";
 import Link from "next/link";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
@@ -68,15 +69,15 @@ const UserAppointmentPage = () => {
     {
       link: "/dashboard",
       level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
       color: "inherit",
     },
     {
       link: "/dashboard/User/appointment",
       level: "My Appointment",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <BreakfastDiningIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
   const { data, isLoading } = useUserAppointmentQuery({ ...query });

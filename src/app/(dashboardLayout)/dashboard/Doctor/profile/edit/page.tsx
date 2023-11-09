@@ -47,6 +47,7 @@ import {
   useMyProfileQuery,
   useUpdateUserProfileMutation,
 } from "@/redux/api/profileApi";
+import { IProfileUpdate } from "../../../User/profile/edit/page";
 interface UserProfile {
   address: {
     address: string;
@@ -68,8 +69,7 @@ interface UserProfile {
 const EditProfile = () => {
   const [imageUrl, setImageUrl] = useState<string | undefined>();
   const [cover, setCover] = useState<string | undefined>();
-  const [error, setErrorMessage] = useState("");
-  const [updateDoctorService] = useUpdateDoctorServiceMutation();
+
   const boread = [
     {
       link: "/",
@@ -108,7 +108,7 @@ const EditProfile = () => {
     blood_group: data?.user?.profile?.blood_group,
   };
 
-  const editHandler: SubmitHandler<any> = async (value) => {
+  const editHandler: SubmitHandler<IProfileUpdate> = async (value) => {
     //     value.present_Address.police_station = "No";
     if (imageUrl) {
       value.avatar = imageUrl as string;
@@ -237,7 +237,7 @@ const EditProfile = () => {
           </div>
         </div>
         <div className=" grid lg:grid-cols-3  grid-cols-1 gap-5 mt-5">
-          <div className=" mt-2">
+          <div className=" mt-4">
             <SelectDate
               name="date_of_birth"
               size="lg:w-96 w-72"
@@ -303,7 +303,7 @@ const EditProfile = () => {
             type="submit"
             className=" px-10 h-10 w-full rounded bg-[#d1001c] text-white font-medium "
           >
-            Update Now
+            Edit Now
           </button>
         </div>
       </Form>

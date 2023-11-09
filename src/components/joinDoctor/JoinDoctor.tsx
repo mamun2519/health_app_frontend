@@ -39,6 +39,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionRow from "@/components/ui/AccordionRow";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 const JoinDoctor = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -95,8 +96,8 @@ const JoinDoctor = () => {
     {
       link: "/dashboard/User/joinDoctor",
       level: "Doctor Join",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <PersonPinCircleIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
   const { data, isLoading } = useUserAppointmentQuery({ ...query });

@@ -92,7 +92,7 @@ const ManageAdminProfile = () => {
                   </span> */}
                   <Link
                     href="/dashboard/Admin/profile/edit"
-                    className="px-4 py-2 text-white rounded bg-red-500"
+                    className="px-4 py-2 text-white rounded bg-[#d1001c]"
                   >
                     Update Profile
                   </Link>
@@ -348,7 +348,7 @@ const ManageAdminProfile = () => {
       <div className="mt p-5 ">
         <button
           onClick={() => setToggleButton(!toggleButton)}
-          className=" font-medium text-red-500"
+          className=" font-medium text-[#d1001c]"
         >
           Do You Need Change Password?
         </button>
@@ -383,7 +383,7 @@ const ManageAdminProfile = () => {
               </div>
             </div>
             <div className="mt-5">
-              <button className="px-8 rounded-lg bg-red-500 text-white py-2">
+              <button className="px-8 rounded-lg bg-[#d1001c] text-white py-2">
                 Change Password
               </button>
             </div>

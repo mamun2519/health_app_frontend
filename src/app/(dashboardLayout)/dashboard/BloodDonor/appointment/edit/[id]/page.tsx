@@ -1,8 +1,7 @@
 "use client";
-import HomeIcon from "@mui/icons-material/Home";
+
 import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
-import DeleteModal from "@/components/dialog/Delete";
+
 import successMessage from "@/components/shared/SuccessMassage";
 import {
   useAppointmentDetailsQuery,
@@ -13,6 +12,8 @@ import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import FormInput from "@/components/Form/FormInput";
 import Form from "@/components/Form/FormProvider";
 import errorMessage from "@/components/shared/ErrrorMessage";
+import BreakfastDiningIcon from "@mui/icons-material/BreakfastDining";
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 
 interface IUpdateAppointment {
   gender: string;
@@ -35,15 +36,15 @@ const AppointmentUpdatePage = ({ params }: { params: { id: string } }) => {
     {
       link: "/dashboard/BloodDonor/appointment",
       level: "My Appointment",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <BreakfastDiningIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/BloodDonor/appointment",
       level: "Appointment Edit",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <SettingsSuggestIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
-      color: "text.primary",
+      color: "#d1001c",
     },
   ];
   const { data } = useAppointmentDetailsQuery(params.id);

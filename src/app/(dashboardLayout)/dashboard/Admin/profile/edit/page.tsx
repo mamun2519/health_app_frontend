@@ -6,27 +6,22 @@ import GrainIcon from "@mui/icons-material/Grain";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import Form from "@/components/Form/FormProvider";
 import FormInput from "@/components/Form/FormInput";
-
 import { SubmitHandler } from "react-hook-form";
-
 import successMessage from "@/components/shared/SuccessMassage";
-import { useUpdateDoctorServiceMutation } from "@/redux/api/doctorServiceApi";
-
 import {
   SelectedBloodGroup,
   SelectedDivisions,
   SelectedGender,
 } from "@/constants/donor";
 import SelectInput from "@/components/Form/SelectInput";
-
 import SelectDate from "@/components/Form/SelectDate";
-
 import { ImageUpload } from "@/components/Form/ImageUplaod";
 import errorMessage from "@/components/shared/ErrrorMessage";
 import {
   useMyProfileQuery,
   useUpdateUserProfileMutation,
 } from "@/redux/api/profileApi";
+import { IProfileUpdate } from "../../../User/profile/edit/page";
 const EditProfile = () => {
   const [imageUrl, setImageUrl] = useState<string | undefined>();
   const [cover, setCover] = useState<string | undefined>();
@@ -69,7 +64,7 @@ const EditProfile = () => {
     blood_group: data?.profile?.blood_group || "",
   };
 
-  const editHandler: SubmitHandler<any> = async (value) => {
+  const editHandler: SubmitHandler<IProfileUpdate> = async (value) => {
     //     value.present_Address.police_station = "No";
     if (imageUrl) {
       value.avatar = imageUrl as string;

@@ -130,7 +130,7 @@ const Profile = () => {
                   <span>Police Station</span>
                 </div>
                 <div>
-                  <span>: {data?.profile?.present_Address?.ad}</span>
+                  <span>: {data?.profile?.present_Address?.address}</span>
                 </div>
               </div>
               {/* <div className=" mt-5">

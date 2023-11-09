@@ -14,6 +14,8 @@ import { SubmitHandler } from "react-hook-form";
 import { IDonorRequest } from "@/components/dialog/AddDonorRequest";
 import successMessage from "@/components/shared/SuccessMassage";
 import errorMessage from "@/components/shared/ErrrorMessage";
+import RecentActorsIcon from "@mui/icons-material/RecentActors";
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 const DonorRequestEditPage = ({ params }: { params: { id: string } }) => {
   const boread = [
     {
@@ -26,14 +28,14 @@ const DonorRequestEditPage = ({ params }: { params: { id: string } }) => {
     {
       link: "/dashboard/BloodDonor/myRequest",
       level: "Donor Request",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <RecentActorsIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/BloodDonor/myRequest",
       level: "Edit",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <SettingsSuggestIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
   const { data } = useGetDonorRequestDetailsQuery(params.id);

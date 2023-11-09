@@ -6,52 +6,33 @@ import GrainIcon from "@mui/icons-material/Grain";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import Form from "@/components/Form/FormProvider";
 import FormInput from "@/components/Form/FormInput";
-import {
-  useGetDonorRequestDetailsQuery,
-  useUpdateDonorRequestMutation,
-} from "@/redux/api/donorApi";
+
 import { SubmitHandler } from "react-hook-form";
-import { IDonorRequest } from "@/components/dialog/AddDonorRequest";
+
 import successMessage from "@/components/shared/SuccessMassage";
+
 import {
-  useCreateDoctorServiceMutation,
-  useDoctorServiceDetailsQuery,
-  useUpdateDoctorServiceMutation,
-} from "@/redux/api/doctorServiceApi";
-import FormSelectInput from "@/components/Form/FormSelectInput";
-import {
-  Days,
-  DoctorDegrees,
-  DoctorSpecialists,
-  Duration,
   SelectedBloodGroup,
   SelectedDivisions,
-  SelectedExperience,
   SelectedGender,
-  ServiceCategory,
-  bloodGroups,
 } from "@/constants/donor";
 import SelectInput from "@/components/Form/SelectInput";
-import { DatePicker } from "@mui/x-date-pickers";
-import FromTimePicker from "@/components/Form/FromTimePicker";
-import { convertToAmPm } from "@/utils/timeConvater";
-import FormMultipleSelect from "@/components/Form/FomMultipleSelect";
+
 import SelectDate from "@/components/Form/SelectDate";
-import { useCreateDoctorMutation } from "@/redux/api/authApi";
-import { ICreateDoctor } from "@/types";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { createDoctorSchema } from "@/components/schema/doctor";
+
 import { ImageUpload } from "@/components/Form/ImageUplaod";
 import errorMessage from "@/components/shared/ErrrorMessage";
 import {
   useMyProfileQuery,
   useUpdateUserProfileMutation,
 } from "@/redux/api/profileApi";
+import { IProfileUpdate } from "../../../User/profile/edit/page";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 const EditProfile = () => {
   const [imageUrl, setImageUrl] = useState<string | undefined>();
   const [cover, setCover] = useState<string | undefined>();
-  const [error, setErrorMessage] = useState("");
-  const [updateDoctorService] = useUpdateDoctorServiceMutation();
+
   const boread = [
     {
       link: "/",
@@ -63,14 +44,14 @@ const EditProfile = () => {
     {
       link: "/dashboard/BloodDonor/profile",
       level: "Profile",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <AccountBoxIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/BloodDonor/profile",
       level: "Edit",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <SettingsSuggestIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
 
@@ -90,7 +71,7 @@ const EditProfile = () => {
     blood_group: data?.user?.profile?.blood_group,
   };
 
-  const editHandler: SubmitHandler<any> = async (value) => {
+  const editHandler: SubmitHandler<IProfileUpdate> = async (value) => {
     //     value.present_Address.police_station = "No";
     if (imageUrl) {
       value.avatar = imageUrl as string;
@@ -160,7 +141,7 @@ const EditProfile = () => {
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
       <h3 className=" mt-5 text-2xl">Edit profile</h3>
       <Form submitHandler={editHandler} defaultValues={defaultValues}>
-        <div className=" grid grid-cols-3 gap-5">
+        <div className=" grid grid-cols-3 gap-5 mt-5">
           <div className=" mt-2 ">
             <FormInput
               name="first_name"
@@ -209,7 +190,7 @@ const EditProfile = () => {
               options={SelectedBloodGroup}
             />
           </div>
-          <div className=" mt-2">
+          <div className=" mt-4">
             <SelectInput
               name="gender"
               label="Gender"
@@ -284,7 +265,7 @@ const EditProfile = () => {
             type="submit"
             className=" px-10 h-10 w-full rounded bg-[#d1001c] text-white font-medium "
           >
-            Create Now
+            Edit now
           </button>
         </div>
       </Form>

@@ -13,6 +13,8 @@ import MeetRequestModel from "@/components/dialog/MeetRequestModel";
 import OfflineModel from "@/components/dialog/OfflineModel";
 import DoctorReviewModel from "@/components/dialog/DoctorReviewMoodel";
 import LoadingSpinner from "@/utils/Loading";
+import BreakfastDiningIcon from "@mui/icons-material/BreakfastDining";
+import PreviewIcon from "@mui/icons-material/Preview";
 const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
   const [appointmentId, setAppointmentId] = useState("");
   const [open, setOpen] = useState(false);
@@ -45,15 +47,15 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
     {
       link: "/dashboard/BloodDonor/appointment",
       level: "My Appointment",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <BreakfastDiningIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/BloodDonor/appointment",
       level: "Appointment Details",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <PreviewIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
-      color: "text.primary",
+      color: "#d1001c",
     },
   ];
   const { data, isLoading } = useAppointmentDetailsQuery(params.id);

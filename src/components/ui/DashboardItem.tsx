@@ -1,5 +1,3 @@
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import { USER_ROLE } from "@/enums/user";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import BreakfastDiningIcon from "@mui/icons-material/BreakfastDining";

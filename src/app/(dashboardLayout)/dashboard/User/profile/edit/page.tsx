@@ -47,6 +47,23 @@ import {
   useMyProfileQuery,
   useUpdateUserProfileMutation,
 } from "@/redux/api/profileApi";
+
+export type IProfileUpdate = {
+  address: string;
+  sub_district: string;
+  district: string;
+
+  gender: string;
+  first_name: string;
+  last_name: string;
+  phone: string;
+  date_of_birth: {
+    $d: string;
+  };
+  blood_group: string;
+  cover: string;
+  avatar: string;
+};
 const EditProfile = () => {
   const [imageUrl, setImageUrl] = useState<string | undefined>();
   const [cover, setCover] = useState<string | undefined>();
@@ -88,19 +105,19 @@ const EditProfile = () => {
     blood_group: data?.profile?.blood_group,
   };
 
-  const editHandler: SubmitHandler<any> = async (value) => {
+  const editHandler: SubmitHandler<IProfileUpdate> = async (value) => {
     //     value.present_Address.police_station = "No";
+    console.log(value);
     if (imageUrl) {
       value.avatar = imageUrl as string;
     }
     if (cover) {
       value.cover = cover;
     }
-
+    let BakingData;
     try {
-      let d;
       if (value?.date_of_birth?.$d) {
-        d = {
+        BakingData = {
           address: {
             address: value.address,
             sub_district: value.sub_district,
@@ -118,7 +135,7 @@ const EditProfile = () => {
           },
         };
       } else {
-        d = {
+        BakingData = {
           address: {
             address: value.address,
             sub_district: value.sub_district,
@@ -135,7 +152,7 @@ const EditProfile = () => {
           },
         };
       }
-      const res = await updateUserProfile(data).unwrap();
+      const res = await updateUserProfile(BakingData).unwrap();
       console.log(res);
       // @ts-ignore
       if (res) {
@@ -157,7 +174,7 @@ const EditProfile = () => {
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>
       <h3 className=" mt-5 text-2xl">Edit profile</h3>
       <Form submitHandler={editHandler} defaultValues={defaultValues}>
-        <div className=" grid lg:grid-cols-3 grid-cols-1 gap-5">
+        <div className=" grid lg:grid-cols-3 grid-cols-1 gap-5 mt-5">
           <div className=" mt-2 ">
             <FormInput
               name="first_name"
@@ -206,7 +223,7 @@ const EditProfile = () => {
               options={SelectedBloodGroup}
             />
           </div>
-          <div className=" mt-2">
+          <div className=" mt-4">
             <SelectInput
               name="gender"
               label="Gender"
@@ -281,7 +298,7 @@ const EditProfile = () => {
             type="submit"
             className=" px-10 h-10 w-full rounded bg-[#d1001c] text-white font-medium "
           >
-            Create Now
+            Edit Now
           </button>
         </div>
       </Form>
