@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
 import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
+
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import Form from "@/components/Form/FormProvider";
 import FormInput from "@/components/Form/FormInput";
@@ -14,6 +13,8 @@ import { SubmitHandler } from "react-hook-form";
 import { IDonorRequest } from "@/components/dialog/AddDonorRequest";
 import successMessage from "@/components/shared/SuccessMassage";
 import errorMessage from "@/components/shared/ErrrorMessage";
+import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 const DonorRequestEditPage = ({ params }: { params: { id: string } }) => {
   const boread = [
     {
@@ -26,14 +27,14 @@ const DonorRequestEditPage = ({ params }: { params: { id: string } }) => {
     {
       link: "/dashboard/Doctor/myDonorRequest",
       level: "Donor Request",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <RecordVoiceOverIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/Doctor/myDonorRequest",
       level: "Edit",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <SettingsSuggestIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
   const { data } = useGetDonorRequestDetailsQuery(params.id);

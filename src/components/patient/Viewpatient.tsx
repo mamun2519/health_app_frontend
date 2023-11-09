@@ -1,7 +1,5 @@
 "use client";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
-import DeleteIcon from "@mui/icons-material/Delete";
+
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -10,31 +8,15 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import React, { useState } from "react";
-import {
-  useDeleteDonorRequestMutation,
-  useGetMyUserDonorDataQuery,
-} from "@/redux/api/donorApi";
-import { Pagination, TextField, Typography } from "@mui/material";
-import Select from "react-select";
-import { Days, Limit } from "@/constants/donor";
+
+import { Pagination, Typography } from "@mui/material";
+
 import Link from "next/link";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
-import DeleteModal from "@/components/dialog/Delete";
-import successMessage from "@/components/shared/SuccessMassage";
-import {
-  useDeleteAppointmentMutation,
-  useUserAppointmentQuery,
-} from "@/redux/api/appointmentApi";
-import {
-  useDeleteGoogleMeetMutation,
-  useDitelesGoogleMeetQuery,
-  useMyGoogleMeetQuery,
-} from "@/redux/api/googleMeetApi";
-import { convertDate } from "@/helper/date";
-import errorMessage from "../shared/ErrrorMessage";
+
+import { useDitelesGoogleMeetQuery } from "@/redux/api/googleMeetApi";
+
 import LoadingSpinner from "@/utils/Loading";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -42,21 +24,13 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionRow from "@/components/ui/AccordionRow";
-
+import JoinFullIcon from "@mui/icons-material/JoinFull";
+import FeaturedPlayListIcon from "@mui/icons-material/FeaturedPlayList";
 const ViewPatient = ({ params }: { params: string }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
   const [deletedId, setDeleteId] = useState("");
-
-  const handleClickOpen = (id: string) => {
-    setOpen(true);
-    setDeleteId(id);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const query: Record<string, any> = {};
   query["page"] = currentPage;
@@ -69,26 +43,25 @@ const ViewPatient = ({ params }: { params: string }) => {
     {
       link: "/dashboard",
       level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
       color: "inherit",
     },
     {
       link: "/dashboard/Doctor/googleMeet",
       level: "Google Meet",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <JoinFullIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "inherit",
     },
     {
       link: "/dashboard/Doctor/googleMeet",
       level: "View Patient",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <FeaturedPlayListIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
   const { data, isLoading } = useDitelesGoogleMeetQuery(params);
 
-  const [deleteGoogleMeet] = useDeleteGoogleMeetMutation();
   // const deleteHandler = async () => {
   //   try {
   //     const res = await deleteGoogleMeet(deletedId).unwrap();

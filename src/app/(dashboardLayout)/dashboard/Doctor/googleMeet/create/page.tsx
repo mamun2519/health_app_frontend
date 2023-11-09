@@ -1,39 +1,23 @@
 "use client";
 import React from "react";
 import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
+
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import Form from "@/components/Form/FormProvider";
 import FormInput from "@/components/Form/FormInput";
-import {
-  useGetDonorRequestDetailsQuery,
-  useUpdateDonorRequestMutation,
-} from "@/redux/api/donorApi";
+
 import { SubmitHandler } from "react-hook-form";
-import { IDonorRequest } from "@/components/dialog/AddDonorRequest";
+
 import successMessage from "@/components/shared/SuccessMassage";
-import {
-  useCreateDoctorServiceMutation,
-  useDoctorServiceDetailsQuery,
-  useDoctorServiceQuery,
-  useUpdateDoctorServiceMutation,
-} from "@/redux/api/doctorServiceApi";
+import { useDoctorServiceQuery } from "@/redux/api/doctorServiceApi";
 import FormSelectInput from "@/components/Form/FormSelectInput";
-import { Days, Duration, ServiceCategory } from "@/constants/donor";
-import SelectInput from "@/components/Form/SelectInput";
-import { DatePicker } from "@mui/x-date-pickers";
-import FromTimePicker from "@/components/Form/FromTimePicker";
-import { convertToAmPm } from "@/utils/timeConvater";
-import FormMultipleSelect from "@/components/Form/FomMultipleSelect";
-import {
-  useCreateGoogleMeetMutation,
-  useMyGoogleMeetQuery,
-} from "@/redux/api/googleMeetApi";
+
+import { useCreateGoogleMeetMutation } from "@/redux/api/googleMeetApi";
 import errorMessage from "@/components/shared/ErrrorMessage";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { GoogleMeetCreateSchema } from "@/components/schema/googleMeet";
-
+import CreateIcon from "@mui/icons-material/Create";
+import JoinFullIcon from "@mui/icons-material/JoinFull";
 interface ICreateMeet {
   serviceId: {
     value: string;
@@ -52,14 +36,14 @@ const CreateGoogleMeetPage = () => {
     {
       link: "/dashboard/Doctor/googleMeet",
       level: "Google Meet",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <JoinFullIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/Doctor/googleMeet",
       level: "Create",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <CreateIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
 

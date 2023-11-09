@@ -7,21 +7,21 @@ import GrainIcon from "@mui/icons-material/Grain";
 import { getUserInfo } from "@/services/auth.Services";
 import DoctorPrescription from "@/components/prescription/DoctorPrescription";
 import AllPrescription from "@/components/prescription/AllPrescription";
-
+import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
 const ManagePrescription = () => {
   const bread = [
     {
       link: "/dashboard",
       level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
       color: "inherit",
     },
     {
       link: "/dashboard/Admin/prescription",
       level: "Manage Prescription",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <MedicalServicesIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
 

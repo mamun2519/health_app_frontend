@@ -14,6 +14,7 @@ import {
 } from "@/redux/api/googleMeetApi";
 import JoinFullIcon from "@mui/icons-material/JoinFull";
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
+import HomeIcon from "@mui/icons-material/Home";
 interface IGoogleMeet {
   meetLink: string;
   status: {
@@ -29,7 +30,7 @@ const DoctorAppointmentUpdatePage = ({
     {
       link: "/dashboard",
       level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
       color: "inherit",
     },

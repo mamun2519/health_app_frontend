@@ -38,6 +38,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionRow from "@/components/ui/AccordionRow";
 import { useDebounced } from "@/redux/hooks";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 const ManageDonorRequestPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -83,8 +84,8 @@ const ManageDonorRequestPage = () => {
     {
       link: "/dashboard/Admin/donorRequest",
       level: "Manage Donor Request",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <ManageAccountsIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
 

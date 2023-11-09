@@ -7,7 +7,8 @@ import GrainIcon from "@mui/icons-material/Grain";
 import DeleteModal from "@/components/dialog/Delete";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import { useUserDetailsQuery } from "@/redux/api/authApi";
-
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import HomeIcon from "@mui/icons-material/Home";
 const ManageDoctorDetailsPage = async ({
   params,
 }: {
@@ -24,15 +25,15 @@ const ManageDoctorDetailsPage = async ({
     {
       link: "/dashboard",
       level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
       color: "inherit",
     },
     {
       link: "/dashboard/Admin/doctor",
       level: "Manage Doctor",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <PeopleAltIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
   return (

@@ -44,6 +44,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionRow from "@/components/ui/AccordionRow";
 import { useDebounced } from "@/redux/hooks";
+import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 const ManageDoctorServicePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLimit, setLimit] = useState(10);
@@ -80,15 +81,15 @@ const ManageDoctorServicePage = () => {
     {
       link: "/dashboard",
       level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
       color: "inherit",
     },
     {
       link: "/dashboard/Admin/doctorService",
       level: "Manage Service",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <MonitorHeartIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
   const { data, isLoading } = useAllServiceQuery({ ...query });
@@ -165,23 +166,23 @@ const ManageDoctorServicePage = () => {
               onChange={(event: any) => setLimit(event?.value)}
               options={Limit}
             />
-            <div className="hidden lg:block xl:block  md:block">
+            {/* <div className="hidden lg:block xl:block  md:block">
               <Link
                 href="/dashboard/Doctor/myService/create"
                 className="  lg:w-32 w-20 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium  "
               >
                 Create
               </Link>
-            </div>
+            </div> */}
           </div>
-          <div className="block lg:hidden xl:hidden  md:hidden mt-5">
+          {/* <div className="block lg:hidden xl:hidden  md:hidden mt-5">
             <Link
               href="/dashboard/Doctor/myService/create"
               className="  lg:w-32 w-36 h-10 rounded-2xl border flex justify-center items-center bg-[#d1001c] text-white font-medium  "
             >
               Create service
             </Link>
-          </div>
+          </div> */}
         </div>
         <div className="mt-5 hidden  lg:block md:block xl:block">
           <TableContainer component={Paper}>

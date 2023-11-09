@@ -1,57 +1,36 @@
 "use client";
 import React, { useState } from "react";
 import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
+
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import Form from "@/components/Form/FormProvider";
 import FormInput from "@/components/Form/FormInput";
-import {
-  useGetDonorRequestDetailsQuery,
-  useUpdateDonorRequestMutation,
-} from "@/redux/api/donorApi";
+
 import { SubmitHandler } from "react-hook-form";
-import { IDonorRequest } from "@/components/dialog/AddDonorRequest";
+
 import successMessage from "@/components/shared/SuccessMassage";
+
 import {
-  useCreateDoctorServiceMutation,
-  useDoctorServiceDetailsQuery,
-  useUpdateDoctorServiceMutation,
-} from "@/redux/api/doctorServiceApi";
-import FormSelectInput from "@/components/Form/FormSelectInput";
-import {
-  Days,
-  DoctorDegrees,
-  DoctorSpecialists,
-  Duration,
   SelectedBloodGroup,
   SelectedDivisions,
-  SelectedExperience,
   SelectedGender,
-  ServiceCategory,
-  bloodGroups,
 } from "@/constants/donor";
 import SelectInput from "@/components/Form/SelectInput";
-import { DatePicker } from "@mui/x-date-pickers";
-import FromTimePicker from "@/components/Form/FromTimePicker";
-import { convertToAmPm } from "@/utils/timeConvater";
-import FormMultipleSelect from "@/components/Form/FomMultipleSelect";
+
 import SelectDate from "@/components/Form/SelectDate";
-import {
-  useCreateDoctorMutation,
-  useCreateDonorMutation,
-} from "@/redux/api/authApi";
-import { ICreateDoctor, ICreateDonor } from "@/types";
+import { useCreateDonorMutation } from "@/redux/api/authApi";
+import { ICreateDonor } from "@/types";
 import errorMessage from "@/components/shared/ErrrorMessage";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createDonorSchema } from "@/components/schema/donor";
 import { ImageUpload } from "@/components/Form/ImageUplaod";
-
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CreateIcon from "@mui/icons-material/Create";
 const CreateDoctorPage = () => {
   const [imageUrl, setImageUrl] = useState<string | undefined>();
 
   const [error, setErrorMessage] = useState("");
-  const [updateDoctorService] = useUpdateDoctorServiceMutation();
+
   const boread = [
     {
       link: "/",
@@ -63,14 +42,14 @@ const CreateDoctorPage = () => {
     {
       link: "/dashboard/Admin/donor",
       level: "Manage Blood Donor",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <AccountCircleIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/Admin/donor",
       level: "Create",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <CreateIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
 

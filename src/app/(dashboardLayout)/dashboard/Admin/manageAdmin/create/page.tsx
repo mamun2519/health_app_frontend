@@ -1,53 +1,22 @@
 "use client";
 import React, { useState } from "react";
 import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
+
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import Form from "@/components/Form/FormProvider";
 import FormInput from "@/components/Form/FormInput";
-import {
-  useGetDonorRequestDetailsQuery,
-  useUpdateDonorRequestMutation,
-} from "@/redux/api/donorApi";
+
 import { SubmitHandler } from "react-hook-form";
-import { IDonorRequest } from "@/components/dialog/AddDonorRequest";
+
 import successMessage from "@/components/shared/SuccessMassage";
-import {
-  useCreateDoctorServiceMutation,
-  useDoctorServiceDetailsQuery,
-  useUpdateDoctorServiceMutation,
-} from "@/redux/api/doctorServiceApi";
-import FormSelectInput from "@/components/Form/FormSelectInput";
-import {
-  Days,
-  DoctorDegrees,
-  DoctorSpecialists,
-  Duration,
-  SelectedBloodGroup,
-  SelectedDivisions,
-  SelectedExperience,
-  SelectedGender,
-  ServiceCategory,
-  bloodGroups,
-} from "@/constants/donor";
-import SelectInput from "@/components/Form/SelectInput";
-import { DatePicker } from "@mui/x-date-pickers";
-import FromTimePicker from "@/components/Form/FromTimePicker";
-import { convertToAmPm } from "@/utils/timeConvater";
-import FormMultipleSelect from "@/components/Form/FomMultipleSelect";
-import SelectDate from "@/components/Form/SelectDate";
-import {
-  useCreateDoctorMutation,
-  useCreateDonorMutation,
-  useRegisterUserMutation,
-  useUserLoginMutation,
-} from "@/redux/api/authApi";
-import { IAdminCrate, ICreateDoctor, ICreateDonor } from "@/types";
+
+import { useRegisterUserMutation } from "@/redux/api/authApi";
+import { IAdminCrate } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { adminCreateSchema } from "@/components/schema/admin";
 import { ImageUpload } from "@/components/Form/ImageUplaod";
-
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import CreateIcon from "@mui/icons-material/Create";
 interface IServiceCrate {
   service: {
     title: string;
@@ -67,7 +36,7 @@ const ManageAdminPage = () => {
   const [imageUrl, setImageUrl] = useState<string | undefined>();
 
   const [error, setErrorMessage] = useState("");
-  const [updateDoctorService] = useUpdateDoctorServiceMutation();
+
   const boread = [
     {
       link: "/",
@@ -79,14 +48,14 @@ const ManageAdminPage = () => {
     {
       link: "/dashboard/Admin/manageAdmin",
       level: "Manage Admin",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <AdminPanelSettingsIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/Admin/manageAdmin",
       level: "Create",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <CreateIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
 

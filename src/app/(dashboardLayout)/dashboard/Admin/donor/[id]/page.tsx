@@ -1,15 +1,10 @@
-import DoctorDetails from "@/components/doctor/DoctorDetails";
-import { URL } from "@/constants/common";
-import { Metadata } from "next";
 import React from "react";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
-import DeleteModal from "@/components/dialog/Delete";
-import IconBreadcrumbs from "@/components/ui/Breadcrumb";
-import { useUserDetailsQuery } from "@/redux/api/authApi";
-import DonorDetails from "@/components/bloodDonor/DonorDetails";
-import ManageBloodDonorDetails from "@/components/bloodDonor/ManageDonorDetails";
 
+import IconBreadcrumbs from "@/components/ui/Breadcrumb";
+
+import ManageBloodDonorDetails from "@/components/bloodDonor/ManageDonorDetails";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import HomeIcon from "@mui/icons-material/Home";
 const ManageDoctorDetailsPage = async ({
   params,
 }: {
@@ -20,15 +15,15 @@ const ManageDoctorDetailsPage = async ({
     {
       link: "/dashboard",
       level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
       color: "inherit",
     },
     {
       link: "/dashboard/Admin/donor",
-      level: "Manage Doctor",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      level: "Manage Donor Details",
+      icons: <AccountCircleIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
   return (

@@ -30,7 +30,7 @@ import { useCreatePrescriptionMutation } from "@/redux/api/prescriptionApi";
 import { yupResolver } from "@hookform/resolvers/yup";
 import prescriptionCrateSchema from "../schema/prescription";
 import ICreatePrescriptionSchema from "../schema/prescription";
-
+import JoinFullIcon from "@mui/icons-material/JoinFull";
 interface IServiceCrate {
   service: {
     title: string;
@@ -47,7 +47,6 @@ interface IServiceCrate {
   };
 }
 const CreatePrescription = ({ appointmentId }: { appointmentId: string }) => {
-  const [updateDoctorService] = useUpdateDoctorServiceMutation();
   const boread = [
     {
       link: "/",
@@ -59,7 +58,7 @@ const CreatePrescription = ({ appointmentId }: { appointmentId: string }) => {
     {
       link: "/dashboard/Doctor/googleMeet",
       level: "Google Meet",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <JoinFullIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
 
@@ -67,7 +66,7 @@ const CreatePrescription = ({ appointmentId }: { appointmentId: string }) => {
       link: "/dashboard/Doctor/googleMeet",
       level: " Create Prescription",
       icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      color: "#d1001c",
     },
   ];
 

@@ -1,8 +1,6 @@
 "use client";
 import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
-import DeleteModal from "@/components/dialog/Delete";
+
 import successMessage from "@/components/shared/SuccessMassage";
 import {
   useAppointmentDetailsQuery,

@@ -1,17 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import HomeIcon from "@mui/icons-material/Home";
+
 import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
+
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import { useAppointmentDetailsQuery } from "@/redux/api/appointmentApi";
-import { convertDate } from "@/helper/date";
+
 import Image from "next/image";
 import dataPic from "../../../../../../assets/blood_donation_02.jpg";
 import MeetRequestModel from "@/components/dialog/MeetRequestModel";
 import OfflineModel from "@/components/dialog/OfflineModel";
 import { useActiveGoogleMeetQuery } from "@/redux/api/googleMeetApi";
 import LoadingSpinner from "@/utils/Loading";
+import BreakfastDiningIcon from "@mui/icons-material/BreakfastDining";
+import PreviewIcon from "@mui/icons-material/Preview";
 const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
   const [appointmentId, setAppointmentId] = useState("");
   const [open, setOpen] = useState(false);
@@ -33,16 +35,16 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
     },
     {
       link: "/dashboard/Admin/appointment",
-      level: "My Appointment",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      level: "Manage Appointment",
+      icons: <BreakfastDiningIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/Admin/appointment",
       level: "Appointment Details",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <PreviewIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
-      color: "text.primary",
+      color: "#d1001c",
     },
   ];
   const { data, isLoading } = useAppointmentDetailsQuery(params.id);

@@ -2,8 +2,6 @@
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import React, { useState } from "react";
 import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
 
 import dataPic from "../../../../../../assets/blood_donation_02.jpg";
 import Image from "next/image";
@@ -12,10 +10,12 @@ import {
   useGetDonorRequestDetailsQuery,
   useUpdateDonorRequestMutation,
 } from "@/redux/api/donorApi";
-import Toast from "@/components/ui/Toast";
+
 import successMessage from "@/components/shared/SuccessMassage";
 import DonorReviewModel from "@/components/dialog/DonorReviewModel";
 import LoadingSpinner from "@/utils/Loading";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import PreviewIcon from "@mui/icons-material/Preview";
 const ManageDonorDetailsPage = ({ params }: { params: { id: string } }) => {
   const [open, setOpen] = useState(true);
   const [reviewOpen, setReviewOpen] = React.useState(false);
@@ -50,14 +50,14 @@ const ManageDonorDetailsPage = ({ params }: { params: { id: string } }) => {
     {
       link: "/dashboard/Admin/donorRequest",
       level: "Manage Donor Request",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <ManageAccountsIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/Admin/donorRequest",
       level: "Details",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <PreviewIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
   const { data, isLoading } = useGetDonorRequestDetailsQuery(params.id);

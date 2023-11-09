@@ -14,6 +14,8 @@ import { SubmitHandler } from "react-hook-form";
 import { IDonorRequest } from "@/components/dialog/AddDonorRequest";
 import successMessage from "@/components/shared/SuccessMassage";
 import errorMessage from "@/components/shared/ErrrorMessage";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 const ManageDonorRequestEditPage = ({ params }: { params: { id: string } }) => {
   const boread = [
     {
@@ -26,14 +28,14 @@ const ManageDonorRequestEditPage = ({ params }: { params: { id: string } }) => {
     {
       link: "/dashboard/Admin/donorRequest",
       level: "Manage Donor Request",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <ManageAccountsIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/Admin/donorRequest",
       level: "Edit",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <SettingsSuggestIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
   const { data } = useGetDonorRequestDetailsQuery(params.id);

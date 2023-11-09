@@ -14,25 +14,27 @@ import FormInput from "@/components/Form/FormInput";
 import Form from "@/components/Form/FormProvider";
 import { IUpdateAppointment } from "@/app/(dashboardLayout)/dashboard/User/appointment/edit/[id]/page";
 import errorMessage from "@/components/shared/ErrrorMessage";
+import BreakfastDiningIcon from "@mui/icons-material/BreakfastDining";
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 const AppointmentUpdatePage = ({ params }: { params: { id: string } }) => {
   const bread = [
     {
       link: "/dashboard",
       level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
       color: "inherit",
     },
     {
       link: "/dashboard/Admin/appointment",
       level: "My Appointment",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <BreakfastDiningIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/Admin/appointment",
       level: "Appointment Edit",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <SettingsSuggestIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
       color: "text.primary",
     },

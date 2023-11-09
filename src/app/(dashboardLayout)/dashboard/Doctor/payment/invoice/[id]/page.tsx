@@ -1,32 +1,29 @@
 "use client";
-
 import PaymentInvoice from "@/components/payment/PaymentInvoice";
 import { usePaymentDetailsQuery } from "@/redux/api/paymentApi";
 import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
+import PaidIcon from "@mui/icons-material/Paid";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
 const DoctorInvoicePage = ({ params }: { params: { id: string } }) => {
   const { data } = usePaymentDetailsQuery(params.id);
   const bread = [
     {
       link: "/dashboard",
       level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-
+      icons: <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/Doctor/payment",
       level: "Payment",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <PaidIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "inherit",
     },
     {
       link: "/dashboard/Doctor/payment",
       level: "Invoice",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-
-      color: "text.primary",
+      icons: <FileCopyIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
   return (

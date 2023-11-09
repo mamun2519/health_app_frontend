@@ -1,10 +1,9 @@
 import React from "react";
 import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
-import { getUserInfo } from "@/services/auth.Services";
 
+import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
 import PrescriptionDetails from "@/components/prescription/PrescriptionDetails";
+import PreviewIcon from "@mui/icons-material/Preview";
 const ManagePrescriptionPageDetails = ({
   params,
 }: {
@@ -14,21 +13,21 @@ const ManagePrescriptionPageDetails = ({
     {
       link: "/dashboard",
       level: "Dashboard",
-      icons: <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
 
       color: "inherit",
     },
     {
       link: "/dashboard/Admin/prescription",
       level: "Manage Prescription",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      icons: <MedicalServicesIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
       color: "text.primary",
     },
     {
       link: "/dashboard/Admin/prescription",
       level: "Details",
-      icons: <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
-      color: "text.primary",
+      icons: <PreviewIcon sx={{ mr: 0.5 }} fontSize="inherit" />,
+      color: "#d1001c",
     },
   ];
   return (
