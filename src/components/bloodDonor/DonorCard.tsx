@@ -1,3 +1,4 @@
+import { convertDate } from "@/helper/date";
 import DoctorImage from "../../assets/dr-dk-gupta.jpg";
 import Image from "next/image";
 import Link from "next/link";
@@ -44,7 +45,7 @@ const DonorCard = ({ donor }: { donor: any }) => {
           <div className=" flex mt-1">
             <span className=" w-52">Date of birth:</span>
             <span className=" text-gray-700 font-medium w-full ">
-              : {donor.profile?.date_of_birth}
+              : {convertDate(donor.profile?.date_of_birth)}
             </span>
           </div>
           <div className=" flex mt-1">

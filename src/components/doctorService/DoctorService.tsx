@@ -1,82 +1,45 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import serviceImage from "../../assets/dr-dk-gupta.jpg";
 import Link from "next/link";
-const serviceService = ({ service }: any) => {
+const ServiceService = ({ service }: any) => {
+  // const [offer, setOffer] = useState(null);
+
+  console.log(service?.serviceOffers);
+  // setOffer(
+  //   service?.serviceOffers.find((offer: any) => offer.status == "Active")
+  // );
   return (
-    //
-    // <Link
-    //   href={`/service/service/${service?.id}`}
-    //   className=" w-full h-52  flex gap-5  border shadow  rounded bg-[#30029010] mt-5"
-    // >
-    //   <div className="w-[230px]  flex justify-center      border-r-4 border-[#d1001c]">
-    //     <div className="w-full h-full  ">
-    //       <Image
-    //         src={service?.avatar}
-    //         width={250}
-    //         height={50}
-    //         className="h-full lg:w-full   p-2"
-    //         alt="service Image"
-    //       />
-    //     </div>
-    //   </div>
-    //   <div className=" ">
-    //     {/* <div className=" w-full  border-2 border-[#d1001c] mt-1"></div> */}
-    //     <div className=" w-full  py-2 mt-3">
-    //       <div className=" flex  ">
-    //         <span className=" w-56">Service Name:</span>
-    //         <span className=" text-gray-700 font-medium w-full ">
-    //           : {service?.title}
-    //         </span>
-    //       </div>
-    //       <div className=" flex mt-1">
-    //         <span className=" w-56"> Service category</span>
-    //         <span className=" text-gray-700 font-medium w-full ">
-    //           : {service?.category}
-    //         </span>
-    //       </div>
-    //       <div className=" flex mt-1">
-    //         <span className=" w-56">Days:</span>
-    //         <span className=" text-gray-700 font-medium w-full ">
-    //           : {service?.serviceDay.map((data: any) => data)}
-    //         </span>
-    //       </div>
-    //       <div className=" flex mt-1">
-    //         <span className=" w-56">Start Time</span>
-    //         <span className=" text-gray-700 font-medium w-full ">
-    //           : {service?.serviceSalt?.startTime}
-    //         </span>
-    //       </div>
-    //       <div className=" flex mt-1">
-    //         <span className=" w-56">Start Time</span>
-    //         <span className=" text-gray-700 font-medium w-full ">
-    //           : {service?.serviceSalt?.endTime}
-    //         </span>
-    //       </div>
-    //       <div className=" flex mt-1">
-    //         <span className=" w-56">Visited Free</span>
-    //         <span className=" text-gray-700 font-medium w-full ">
-    //           : {service?.price} BDT
-    //         </span>
-    //       </div>
-
-    //     </div>
-    //   </div>
-    // </Link>
-
     <div
       key={service.id}
-      className=" w-full h-[440px] border shadow  rounded bg-[#30029010] mt-5"
+      className=" w-full lg:w-96 h-[440px] border shadow  rounded bg-[#30029010] mt-5"
     >
       <div className=" ">
-        <div className="w-full h-48   rounded  m border-2">
+        <div className="w-full h-48   rounded  m border-2 relative">
           <Image
             src={service?.avatar}
             width={550}
             height={550}
-            className="w-full h-48   p-2"
+            className="w-full h-48   rounded"
             alt="service Image"
           />
+          {service?.serviceOffers?.map(
+            (offer: {
+              id: string;
+              status: string;
+              discount: number;
+              promoCode: string;
+            }) =>
+              offer.status == "Active" && (
+                <div key={offer?.id} className=" absolute top-6">
+                  <div className="h-full w-48 bg-[#d1001c] text-white  rounded-r-2xl py-2 pl-4 glass font-bold">
+                    <p className="text-sm">{offer.discount}% Discount</p>
+                    <p className="text-sm mt-">VOUCHER- {offer.promoCode}</p>
+                  </div>
+                </div>
+              )
+          )}
         </div>
       </div>
       <div className=" mt-1">
@@ -93,12 +56,12 @@ const serviceService = ({ service }: any) => {
             </span>
           </div>
           <div className=" flex mt-1">
-            <span className=" w-40"> category</span>
+            <span className=" w-40"> Category</span>
             <span className=" text-gray-700 font-medium w-full ">
               : {service?.category}
             </span>
           </div>
-          <div className=" flex mt-1">
+          <div className=" flex mt-1 ">
             <span className=" w-40">Days</span>
             <span className=" text-gray-700 font-medium w-full ">
               : {service?.serviceDay.map((data: any) => data)}
@@ -136,4 +99,4 @@ const serviceService = ({ service }: any) => {
   );
 };
 
-export default serviceService;
+export default ServiceService;

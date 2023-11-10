@@ -10,29 +10,16 @@ import Link from "next/link";
 import { useDoctorServiceDetailsQuery } from "@/redux/api/doctorServiceApi";
 import { formatDateToYYYYMMDD } from "@/utils/DateConvater";
 import errorMessage from "../shared/ErrrorMessage";
-import Form from "../Form/FormProvider";
-import FormInput from "../Form/FormInput";
-import { SubmitHandler } from "react-hook-form";
-import { da } from "date-fns/locale";
-import {
-  getFromLocalStorage,
-  setIntoLocalStorage,
-} from "@/utils/local-storage";
-import { useDispatch } from "react-redux";
 
-import successMessage from "../shared/SuccessMassage";
-import uniqid from "uniqid";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { CreateBookAppointmentSchema } from "../schema/appointment";
 import { useServiceReviewByIdQuery } from "@/redux/api/serviceReview";
-import { useAddToCartMutation } from "@/redux/api/cartApi";
+
 import LoadingSpinner from "@/utils/Loading";
 import { useRouter } from "next/navigation";
 
 const DoctorServiceDetails = ({ id }: any) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [viewAll, setVewAll] = useState(false);
-  console.log(selectedDate);
+
   const [selectSlat, setSelectSlat] = useState<any>(null);
   // const [Appointment, setAppointment] = useState([]);
 
@@ -48,7 +35,7 @@ const DoctorServiceDetails = ({ id }: any) => {
     date: selectedDate,
   });
 
-  // console.log(service);
+  console.log(service?.serviceOffers);
   const router = useRouter();
   const { data: review } = useServiceReviewByIdQuery(id);
 
@@ -80,7 +67,6 @@ const DoctorServiceDetails = ({ id }: any) => {
       console.log(data);
     }
   };
-  const [addToCart] = useAddToCartMutation();
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -110,7 +96,7 @@ const DoctorServiceDetails = ({ id }: any) => {
               Specialist Of {service?.doctor?.specialist}
               {/* {service?.user?.email} */}
             </p>
-            <p className=" mt-1 text-gray-800">
+            <p className=" mt- text-gray-800">
               <Rating
                 name="simple-controlled"
                 value={4}
@@ -121,11 +107,10 @@ const DoctorServiceDetails = ({ id }: any) => {
               />
             </p>
             <p className=" mt-1 text-gray-800">{service?.doctor?.degree}</p>
-            <p className=" mt-1 text-gray-800">
-              patient Services day{" "}
-              {service?.serviceDay.map((text: string) => text)}
+            <p className=" mt- text-gray-800">
+              Services day {service?.serviceDay.map((text: string) => text)}
             </p>
-            <div className=" mt-2 h-8  bg-[#d1001c] w-48 flex justify-center items-center  rounded text-white  font-medium ">
+            <div className=" mt- h-8  bg-[#d1001c] w-48 flex justify-center items-center  rounded text-white  font-medium ">
               <Link href={`/doctor/${service?.doctor?.user_id}`}>
                 <span className="px-6  ">Details Doctor</span>
               </Link>
@@ -164,7 +149,7 @@ const DoctorServiceDetails = ({ id }: any) => {
       </div>
 
       <div className="  gap-5 mt-5  lg:w-[40vw]     lg:absolute top-[335px] ">
-        <div className="h-[65v-h] border  lg:w-[40vw] w-full rounded p-5  relative shadow bg-[#30029010]">
+        <div className="h-full border  lg:w-[40vw] w-full rounded p-5  relative shadow bg-[#30029010]">
           <div className=" ">
             <div className="mt-2">
               <h3 className=" text-xl font-bold">About Services</h3>
@@ -186,12 +171,42 @@ const DoctorServiceDetails = ({ id }: any) => {
               </div>
               <div className=" grid  grid-cols-2 border-b pb-2 mt-3">
                 <span>End Time</span>
-                <span>{service?.serviceSalt.endTime}</span>
+                <span>
+                  {service?.serviceSalt.endTime}
+                  {/* {service?.doctor?.user?.email} */}
+                </span>
               </div>
               <div className=" grid  grid-cols-2 border-b pb-2 mt-3">
                 <span>Visited Free</span>
                 <span>{service?.price} BDT</span>
               </div>
+
+              {service?.serviceOffers?.map(
+                (offer: {
+                  id: string;
+                  status: string;
+                  discount: number;
+                  promoCode: string;
+                  offerTitle: string;
+                }) =>
+                  offer.status == "Active" && (
+                    <div key={offer.id} className="mt-4">
+                      <h3 className=" text-xl font-bold">Offer Details</h3>
+                      <div className=" grid  grid-cols-2 border-b pb-2 mt-3">
+                        <span>Offer Title</span>
+                        <span>{offer?.offerTitle}</span>
+                      </div>
+                      <div className=" grid  grid-cols-2 border-b pb-2 mt-3">
+                        <span>Discount</span>
+                        <span>{offer?.discount} %</span>
+                      </div>
+                      <div className=" grid  grid-cols-2 border-b pb-2 mt-3">
+                        <span>Use Promo Code</span>
+                        <span>{offer?.promoCode} BDT</span>
+                      </div>
+                    </div>
+                  )
+              )}
             </div>
           </div>
         </div>

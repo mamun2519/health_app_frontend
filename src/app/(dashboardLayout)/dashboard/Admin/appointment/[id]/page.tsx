@@ -198,6 +198,8 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
                       open={open}
                       appointment={meet}
                       appointmentId={appointmentId}
+                      name={`${data?.doctor?.user?.profile?.first_name} ${data?.doctor?.user?.profile?.last_name}`}
+                      avatar={data?.doctor?.user?.profile?.avatar}
                     />
                   ) : (
                     <OfflineModel handleClose={handleClose} open={open} />
