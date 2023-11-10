@@ -1,12 +1,13 @@
 "use client";
-import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
+
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import { usePrescriptionDetailsQuery } from "@/redux/api/prescriptionApi";
 import { IMedicine, IReport } from "@/types";
 import { convertDate } from "@/helper/date";
 import LoadingSpinner from "@/utils/Loading";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+
 interface PrescriptionProps {
   bread: {
     link: string;
@@ -21,17 +22,46 @@ const PrescriptionDetails = ({ bread, id }: PrescriptionProps) => {
   if (isLoading) {
     return <LoadingSpinner />;
   }
-  console.log(data);
+  const downloadIPrescription = () => {
+    const invoiceContent = document.getElementById("prescription");
+
+    if (invoiceContent) {
+      html2canvas(invoiceContent).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+
+        // Create a new jsPDF instance
+        const pdf = new jsPDF({
+          orientation: "portrait",
+          unit: "mm",
+          format: "a4",
+        });
+
+        // Add the image (the HTML content converted to an image) to the PDF
+        pdf.addImage(imgData, "PNG", 0, 0, 210, 297); // A4 size: 210mm x 297mm
+
+        // Save the PDF with a specific name (e.g., "invoice.pdf")
+        pdf.save("invoice.pdf");
+      });
+    } else {
+      console.error("Element with ID 'invoiceContent' not found.");
+    }
+  };
   return (
     <div>
       <div className="h-full lg:w-full w-80  border  p-5 rounded-3xl shadow-sm  mt-3 lg:flex justify-between items-center">
         <IconBreadcrumbs boreadcrumbs={bread}></IconBreadcrumbs>
-        <button className="text-white bg-[#d1001c] px-6 py-2 rounded-full mt-2 lg:mt-0">
+        <button
+          onClick={() => downloadIPrescription()}
+          className="text-white bg-[#d1001c] px-6 py-2 rounded-full mt-2 lg:mt-0"
+        >
           Download Prescription
         </button>
       </div>
 
-      <div className=" h-full lg:w-full w-80 m-auto border mt-5 mb-20 shadow rounded">
+      <div
+        id="prescription"
+        className=" h-full lg:w-full w-80 m-auto border mt-5 mb-20 shadow rounded"
+      >
         <div className="lg:h-40 h-48 bg-red-400 text-white ">
           <div className=" lg:flex  justify-end items-center lg:mt-0 p-10">
             <div>
