@@ -95,7 +95,9 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
                 <div className="lg:h-44 border w-48 rounded border-[#d1001c] p-2">
                   <div className=" h-full  lg:block flex w-full justify-center">
                     <Image
-                      src={dataPic}
+                      src={data?.doctor?.user?.profile?.avatar}
+                      width={500}
+                      height={500}
                       className=" h-full  "
                       alt="Donor Pic"
                     />
@@ -238,6 +240,8 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
                       open={open}
                       appointment={meet}
                       appointmentId={appointmentId}
+                      name={` ${data?.doctor?.user?.profile?.first_name} ${data?.doctor?.user?.profile?.last_name}`}
+                      avatar={data?.doctor?.user?.profile?.avatar}
                     />
                   ) : (
                     <OfflineModel handleClose={handleClose} open={open} />

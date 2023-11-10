@@ -49,10 +49,15 @@ const JoinDoctor = () => {
   const [googleMeet, setGoogleMeet] = useState({});
   const [deletedId, setDeleteId] = useState("");
   const [openDelete, setOpenDelete] = useState(false);
+  const [doctorName, setDoctorName] = useState("");
+  const [avatar, setAvatar] = useState("");
   const [sortBy, setSortBy] = useState("");
   const handleClickOpen = (id: string, appointment: any) => {
     setOpen(true);
     setAppointmentId(id);
+    setDoctorName(`${appointment?.doctor?.user?.profile?.first_name}
+    ${appointment?.doctor?.user?.profile?.last_name}`);
+    setAvatar(appointment?.doctor?.user?.profile?.avatar);
     const activeGoogleMeet = appointment?.service.GoogleMeet.find(
       (meet: any) => meet.status === "Active"
     );
@@ -241,7 +246,7 @@ const JoinDoctor = () => {
                             onClick={() =>
                               handleClickOpen(appointment.id, appointment)
                             }
-                            className="px-6 py-1 rounded-full bg-red-500 text-white"
+                            className="px-6 py-1 rounded-full bg-[#d1001c] text-white"
                           >
                             Meet Now
                           </button>
@@ -252,21 +257,11 @@ const JoinDoctor = () => {
                             onClick={() =>
                               handleDeleteClickOpen(appointment?.id)
                             }
-                            className="text-red-500 text-xl  cursor-pointer"
+                            className="text-[#d1001c] text-xl  cursor-pointer"
                           >
                             <DeleteIcon />
                           </button>
                         </TableCell>
-                        {doctorOnline ? (
-                          <MeetRequestModel
-                            handleClose={handleClose}
-                            open={open}
-                            appointment={googleMeet}
-                            appointmentId={appointmentId}
-                          />
-                        ) : (
-                          <OfflineModel handleClose={handleClose} open={open} />
-                        )}
                       </TableRow>
                     );
                   })}
@@ -306,7 +301,7 @@ const JoinDoctor = () => {
                       <div className="w-2"></div>
                       <button
                         onClick={() => handleDeleteClickOpen(appointment?.id)}
-                        className="text-red-500 text-xl  cursor-pointer"
+                        className="text-[#d1001c] text-xl  cursor-pointer"
                       >
                         <DeleteIcon />
                       </button>
@@ -356,7 +351,7 @@ const JoinDoctor = () => {
                           onClick={() =>
                             handleClickOpen(appointment.id, appointment)
                           }
-                          className="px-6 py-1 rounded-full bg-red-500 text-white"
+                          className="px-6 py-1 rounded-full bg-[#d1001c] text-white"
                         >
                           Meet Now
                         </button>
@@ -375,6 +370,18 @@ const JoinDoctor = () => {
             deleteHandler={deleteHandler}
             handleClose={handleDeleteClose}
           />
+        )}
+        {doctorOnline ? (
+          <MeetRequestModel
+            handleClose={handleClose}
+            open={open}
+            appointment={googleMeet}
+            appointmentId={appointmentId}
+            name={doctorName}
+            avatar={avatar}
+          />
+        ) : (
+          <OfflineModel handleClose={handleClose} open={open} />
         )}
       </div>
     </div>

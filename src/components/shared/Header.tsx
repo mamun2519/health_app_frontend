@@ -218,7 +218,8 @@ function Header() {
               {user?.role && (
                 <>
                   <div className=" flex w-full  ">
-                    <IconButton
+                    {/* Mail  */}
+                    {/* <IconButton
                       size="large"
                       aria-label="show 4 new mails"
                       color="inherit"
@@ -226,7 +227,7 @@ function Header() {
                       <Badge badgeContent={4} color="error">
                         <MailIcon className="text-[#d1001c]" />
                       </Badge>
-                    </IconButton>
+                    </IconButton> */}
 
                     {/* <IconButton
                   size="large"
