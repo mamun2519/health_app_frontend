@@ -1,11 +1,13 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { DashBoardItem } from "./DashboardItem";
 
-import { getUserInfo } from "@/services/auth.Services";
-
+import { getUserInfo, logOut } from "@/services/auth.Services";
+import LogoutIcon from "@mui/icons-material/Logout";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAppDispatch } from "@/redux/hooks";
+import { setUser } from "@/redux/Slice/user";
 
 interface IUser {
   role: string;
@@ -17,11 +19,9 @@ export interface SidebarItem {
 }
 
 const MenuItems = () => {
-  const [sideBarItem, setSideBarItem] = useState<SidebarItem[]>([]);
-
   const user: any = getUserInfo();
   const pathName = usePathname();
-
+  const dispatch = useAppDispatch();
   // useEffect(() => {
   //   const fetchSideBarItem = async () => {
   //     const items = user && DashBoardItem(user?.role as string);
@@ -30,7 +30,10 @@ const MenuItems = () => {
 
   //   fetchSideBarItem();
   // }, [user]);
-
+  const handleLogout = () => {
+    logOut();
+    dispatch(setUser({ userId: null, email: null, role: null }));
+  };
   return (
     <div className="  py-0">
       {DashBoardItem(user?.role as string)?.map(
@@ -52,6 +55,17 @@ const MenuItems = () => {
           </div>
         )
       )}
+      <button
+        onClick={() => handleLogout()}
+        className="px-5 flex gap-5 cursor-pointer    h-12 rounded-r-3xl"
+      >
+        <div className="mt-3 sideBarItem-gray-500 ">
+          <LogoutIcon />
+        </div>
+        <div className="mt-4">
+          <span>LogOut</span>
+        </div>
+      </button>
     </div>
   );
 };

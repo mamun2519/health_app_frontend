@@ -14,7 +14,6 @@ const DonorDetails = ({ id }: { id: string }) => {
   const { data, isLoading } = useBloodDonorDetailsQuery(id);
 
   const { data: review } = useSpecificReviewQuery(data?.bloodDonor?.id);
-  console.log(review);
 
   const [open, setOpen] = React.useState(false);
 
@@ -53,7 +52,7 @@ const DonorDetails = ({ id }: { id: string }) => {
     return <LoadingSpinner />;
   }
   return (
-    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-28  psb-20">
+    <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-28  pb-20 ">
       <div className="  lg:flex gap-5">
         <div className="w-full border lg:h-56  rounded  lg:flex gap-5 p-5  relative shadow bg-[#30029010] ">
           <div className="lg:h-44 border w-48 rounded border-[#d1001c] p-2">
@@ -88,14 +87,14 @@ const DonorDetails = ({ id }: { id: string }) => {
             </p>
             <p className=" mt-1 text-gray-800">Status {data?.status}</p>
           </div>
-          <div className=" flex gap-2    text-end items-end  lg:mt-0 mt-2">
-            <button className=" px-8 lg:px-10 h-10 rounded bg-[#d1001c] text-white font-medium ">
+          <div className=" flex gap-2    text-end items-end  justify-end lg:mt-0 mt-2">
+            {/* <button className=" px-8 lg:px-10 h-10 rounded bg-[#d1001c] text-white font-medium ">
               Message{" "}
-            </button>
-
+            </button> */}
+            <div className="w-36"></div>
             <button
               onClick={handleClickOpen}
-              className=" px-4 h-10 rounded border border-[#d1001c] bg-white font-medium "
+              className=" px-4 h-10 rounded border border-[#d1001c]  text-white bg-[#d1001c] font-medium "
             >
               Request Donor
             </button>

@@ -44,6 +44,20 @@ const pages = [
     level: "Dashboard",
   },
 ];
+const notUser = [
+  {
+    link: "/bloodDonor/all",
+    level: "Blood Donor",
+  },
+  {
+    link: "/doctor",
+    level: "Doctor",
+  },
+  {
+    link: "/doctor/service",
+    level: "Service",
+  },
+];
 
 function Header() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -149,24 +163,43 @@ function Header() {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem key={page.level} onClick={handleCloseNavMenu}>
-                    <Typography
-                      justifyContent="center"
-                      className="text-gray-900"
-                    >
-                      <Link
-                        href={page?.link}
-                        // className={` ${
-                        //   path == page.link ? "bg-red-500" : "text-[#2196f3]"
-                        // } font-bold mt-1`}
-                      >
-                        {" "}
-                        {page.level}
-                      </Link>
-                    </Typography>
-                  </MenuItem>
-                ))}
+                {user?.role
+                  ? pages.map((page) => (
+                      <MenuItem key={page.level} onClick={handleCloseNavMenu}>
+                        <Typography
+                          justifyContent="center"
+                          className="text-gray-900"
+                        >
+                          <Link
+                            href={page?.link}
+                            // className={` ${
+                            //   path == page.link ? "bg-red-500" : "text-[#2196f3]"
+                            // } font-bold mt-1`}
+                          >
+                            {" "}
+                            {page.level}
+                          </Link>
+                        </Typography>
+                      </MenuItem>
+                    ))
+                  : notUser.map((page) => (
+                      <MenuItem key={page.level} onClick={handleCloseNavMenu}>
+                        <Typography
+                          justifyContent="center"
+                          className="text-gray-900"
+                        >
+                          <Link
+                            href={page?.link}
+                            // className={` ${
+                            //   path == page.link ? "bg-red-500" : "text-[#2196f3]"
+                            // } font-bold mt-1`}
+                          >
+                            {" "}
+                            {page.level}
+                          </Link>
+                        </Typography>
+                      </MenuItem>
+                    ))}
               </Menu>
             </Box>
             {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
@@ -189,29 +222,53 @@ function Header() {
                 display: { xs: "none", md: "flex", justifyContent: "center" },
               }}
             >
-              {pages.map((page) => (
-                <Button
-                  key={page.level}
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 2,
-                    pr: 2,
-                    display: "flex",
-                    justifyContent: "center",
-                    color: "black",
-                  }}
-                  className={`  ${
-                    path == page.link
-                      ? "bg-[#d1001c] text-white  flex justify-center"
-                      : ""
-                  }: hover:text-[#d1001c]`}
-                >
-                  <Link className="pl-1" href={page?.link}>
-                    {" "}
-                    {page.level}
-                  </Link>
-                </Button>
-              ))}
+              {user?.role
+                ? pages.map((page) => (
+                    <Button
+                      key={page.level}
+                      onClick={handleCloseNavMenu}
+                      sx={{
+                        my: 2,
+                        pr: 2,
+                        display: "flex",
+                        justifyContent: "center",
+                        color: "black",
+                      }}
+                      className={`  ${
+                        path == page.link
+                          ? "bg-[#d1001c] text-white  flex justify-center"
+                          : ""
+                      }: hover:text-[#d1001c]`}
+                    >
+                      <Link className="pl-1" href={page?.link}>
+                        {" "}
+                        {page.level}
+                      </Link>
+                    </Button>
+                  ))
+                : notUser.map((page) => (
+                    <Button
+                      key={page.level}
+                      onClick={handleCloseNavMenu}
+                      sx={{
+                        my: 2,
+                        pr: 2,
+                        display: "flex",
+                        justifyContent: "center",
+                        color: "black",
+                      }}
+                      className={`  ${
+                        path == page.link
+                          ? "bg-[#d1001c] text-white  flex justify-center"
+                          : ""
+                      }: hover:text-[#d1001c]`}
+                    >
+                      <Link className="pl-1" href={page?.link}>
+                        {" "}
+                        {page.level}
+                      </Link>
+                    </Button>
+                  ))}
             </Box>
 
             <Box sx={{ flexGrow: 0, display: "flex" }}>
@@ -274,20 +331,6 @@ function Header() {
                   >
                     <MenuItem>
                       <div>
-                        {user.role == USER_ROLE.USER ||
-                          user.role == USER_ROLE.DOCTOR ||
-                          (user.role == USER_ROLE.DOCTOR && (
-                            <Link href={`/dashboard/${user?.role}/profile`}>
-                              <Typography>Profile</Typography>
-                            </Link>
-                          ))}
-                        {user.role == USER_ROLE.ADMIN ||
-                          (user.role == USER_ROLE.SUPER_ADMIN && (
-                            <Link href={`/dashboard/${"Admin"}/profile`}>
-                              <Typography>Profile</Typography>
-                            </Link>
-                          ))}
-
                         <Link href="/dashboard">
                           <Typography className="mt-2" textAlign="center">
                             Dashboard

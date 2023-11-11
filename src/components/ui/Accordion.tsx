@@ -5,22 +5,23 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-export default function BasicAccordion() {
+type IAccordingProps = {
+  name: string;
+  message: string;
+};
+export default function BasicAccordion({ name, message }: IAccordingProps) {
   return (
-    <div>
+    <div className="pt-1">
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>Accordion 1</Typography>
+          <Typography>{name}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          <Typography>{message}</Typography>
         </AccordionDetails>
       </Accordion>
     </div>
