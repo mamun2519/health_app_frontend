@@ -10,6 +10,7 @@ import { useBloodDonorDetailsQuery } from "@/redux/api/bloodDonorApi";
 import { IDonorReview } from "@/types";
 import LoadingSpinner from "@/utils/Loading";
 import { useSpecificReviewQuery } from "@/redux/api/donerReviewApi";
+import { Rating } from "@mui/material";
 const DonorDetails = ({ id }: { id: string }) => {
   const { data, isLoading } = useBloodDonorDetailsQuery(id);
 
@@ -178,8 +179,18 @@ const DonorDetails = ({ id }: { id: string }) => {
                   className=" w-60 h-28 border bg-white rounded-3xl  relative mt-2  "
                 >
                   <div className=" pl-10 py-4 pr-3">
-                    <h3>{`${review?.user?.profile.first_name} ${review?.use?.profile?.last_name}`}</h3>
+                    <h3>{`${review?.user?.profile?.first_name} ${review?.user?.profile?.last_name}`}</h3>
                     <p>{review?.comment}</p>
+                    <p className=" mt- text-gray-800">
+                      <Rating
+                        name="simple-controlled"
+                        value={review?.rating}
+                        readOnly
+                        // onChange={(event, newValue) => {
+                        //   setValue(newValue);
+                        // }}
+                      />
+                    </p>
                   </div>
 
                   <div className=" absolute w-20 h-20 border-2 border-[#d1001c] rounded-full top-3 left-[-50px]">

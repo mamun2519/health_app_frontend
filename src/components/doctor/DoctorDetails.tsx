@@ -4,6 +4,7 @@ import DonorPic from "../../assets/dr-dk-gupta.jpg";
 import Image from "next/image";
 
 import DoctorService from "../doctorService/DoctorService";
+import { Rating } from "@mui/material";
 const DoctorDetails = ({ doctor }: any) => {
   return (
     <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-28 pb-40">
@@ -34,7 +35,16 @@ const DoctorDetails = ({ doctor }: any) => {
               {doctor?.doctor?.experience} Year Experiences
               {/* {doctor?.email} */}
             </p>
-            <p className=" mt-1 text-gray-800">Rating 4</p>
+            <p className=" mt-1 text-gray-800">
+              <Rating
+                name="simple-controlled"
+                value={3}
+                readOnly
+                // onChange={(event, newValue) => {
+                //   setValue(newValue);
+                // }}
+              />
+            </p>
           </div>
         </div>
       </div>
