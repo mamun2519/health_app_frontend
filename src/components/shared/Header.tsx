@@ -26,6 +26,7 @@ import { getFromLocalStorage } from "@/utils/local-storage";
 import Notification from "../ui/Notificaiton";
 import LogoutBtn from "../ui/LogoutBtn";
 import { USER_ROLE } from "@/enums/user";
+import AuthModel from "../dialog/AuthModel";
 const pages = [
   {
     link: "/bloodDonor/all",
@@ -60,6 +61,15 @@ const notUser = [
 ];
 
 function Header() {
+  const [authModelOpen, setAuthModelOpen] = React.useState(false);
+
+  const handleAuthModelClickOpen = () => {
+    setAuthModelOpen(true);
+  };
+
+  const handleAuthModelClose = () => {
+    setAuthModelOpen(false);
+  };
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const path = usePathname();
@@ -107,6 +117,15 @@ function Header() {
     logOut();
     dispatch(setUser({ userId: null, email: null, role: null }));
   };
+  // model open handle
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setAuthModelOpen(true);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div>
       <AppBar
@@ -353,6 +372,10 @@ function Header() {
           </Toolbar>
         </Container>
       </AppBar>
+
+      {authModelOpen && !user.role && (
+        <AuthModel open={authModelOpen} handleClose={handleAuthModelClose} />
+      )}
     </div>
   );
 }

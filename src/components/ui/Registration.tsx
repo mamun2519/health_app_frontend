@@ -86,7 +86,10 @@ const Registration = () => {
             <h3 className=" lg:text-3xl text-2xl uppercase">Create Account</h3>
             <div className="h-1 bg-red-500 lg:w-52 w-20 "></div>
           </div>
-          <p>Welcome To Halt App</p>
+          <p>
+            Welcome To He
+            <span className="text-[#d1001c] font-bold">alth</span> Care App
+          </p>
           {errorMessage && (
             <div className="bg-red-500 h-12 rounded mt-2 flex  items-center px-4">
               <p className="text-white">{errorMessage}</p>
