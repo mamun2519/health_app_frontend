@@ -22,7 +22,7 @@ const FindServicePage = async ({
   // console.log(data);
 
   return (
-    <div className=" max-w-7xl mx-auto lg:px-4  mt-28">
+    <div className=" max-w-7xl mx-auto lg:px-0 px-4  mt-28">
       {data?.data?.length === 0 ? (
         <NoData />
       ) : (

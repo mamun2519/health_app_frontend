@@ -3,7 +3,7 @@ import React from "react";
 
 const loading = () => {
   return (
-    <div>
+    <div className="mt-24">
       <LoadingSkeleton />
     </div>
   );
