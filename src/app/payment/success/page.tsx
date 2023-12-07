@@ -35,8 +35,9 @@ const SuccessPage = () => {
           report: "no",
           address: patient?.address,
           serviceId: price?.serviceId,
-          price: price.price,
+          price: String(price.price),
         };
+        console.log(appointment);
 
         const payment = {
           serviceId: price.serviceId,
@@ -49,6 +50,7 @@ const SuccessPage = () => {
 
         const paymentSuccess = async () => {
           const res = await createPayment({ appointment, payment }).unwrap();
+
           if (res) {
             localStorage.removeItem("BookingInfo");
             localStorage.removeItem("PatientInfo");
