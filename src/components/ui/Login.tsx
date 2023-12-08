@@ -18,16 +18,23 @@ import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/Slice/user";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import ForgetModel from "../dialog/ForgetModel";
 type formValue = {
   email: string;
   password: string;
 };
 
 const Login = () => {
+  const [openPassResetModel, setPassResetModel] = React.useState(false);
+
+  const handlePasswordResetModelOpen = () => {
+    setPassResetModel(true);
+  };
   const [save, setSave] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [saveInfo, setSaveInfo] = useState<{ email: string; password: string }>(
-    JSON.parse(localStorage.getItem("UserAuth") as string)
+    typeof window !== "undefined" &&
+      JSON.parse(localStorage.getItem("UserAuth") as string)
   );
 
   const [userLogin] = useUserLoginMutation();
@@ -140,7 +147,12 @@ const Login = () => {
                   <Typography> Remember Me</Typography>
                 </div>
 
-                <p className=" text-blue-700 ">Forgat Password?</p>
+                <p
+                  onClick={() => handlePasswordResetModelOpen()}
+                  className=" text-blue-700  cursor-pointer"
+                >
+                  Forgat Password?
+                </p>
               </div>
               <div className=" mt-5 w-full">
                 <button className=" w-full h-10 rounded bg-[#d1001c] text-white font-medium ">
@@ -160,6 +172,13 @@ const Login = () => {
           </div>
         </div>
       </div>
+
+      {openPassResetModel && (
+        <ForgetModel
+          open={openPassResetModel}
+          handleClose={handlePasswordResetModelOpen}
+        />
+      )}
     </div>
   );
 };

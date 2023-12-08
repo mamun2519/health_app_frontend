@@ -22,7 +22,8 @@ const LoginTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
   const [save, setSave] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [saveInfo, setSaveInfo] = useState<{ email: string; password: string }>(
-    JSON.parse(localStorage.getItem("UserAuth") as string)
+    typeof window !== "undefined" &&
+      JSON.parse(localStorage.getItem("UserAuth") as string)
   );
 
   const [userLogin] = useUserLoginMutation();
