@@ -11,6 +11,7 @@ interface IInput {
   placeholder?: string;
   validation?: object;
   label?: string;
+  showPassword?: string;
 }
 const FormInput = ({
   name,
@@ -20,6 +21,7 @@ const FormInput = ({
   id,
   placeholder,
   validation,
+  showPassword,
   label,
 }: IInput) => {
   const {
@@ -53,6 +55,7 @@ const FormInput = ({
               //     variant="outlined"
               // color="secondary"
               placeholder={placeholder}
+              type={showPassword === "password" ? "password" : "text"}
               autoFocus={true}
               className={`lg:w-full w-full outline-none ${size}`}
             />

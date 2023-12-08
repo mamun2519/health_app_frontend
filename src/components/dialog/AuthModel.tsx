@@ -34,7 +34,7 @@ export default function AuthModel({ open, handleClose }: OpenModel) {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <div className="w-full flex  justify-end pt-4 px-5">
+        <div className="w-full flex  justify-end pt-3 px-5">
           <button
             onClick={() => handleClose(false)}
             className=" border p-1  rounded-full  hover:bg-[#d1001c]  hover:text-white"

@@ -10,12 +10,21 @@ import Form from "../Form/FormProvider";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../schema/login";
 import FormInput from "../Form/FormInput";
+import { Typography } from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 type formValue = {
   email: string;
   password: string;
 };
 
 const LoginTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
+  const [save, setSave] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
+  const [saveInfo, setSaveInfo] = useState<{ email: string; password: string }>(
+    JSON.parse(localStorage.getItem("UserAuth") as string)
+  );
+
   const [userLogin] = useUserLoginMutation();
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
@@ -35,6 +44,15 @@ const LoginTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
             role: res?.user?.role,
           })
         );
+        if (save) {
+          localStorage.setItem(
+            "UserAuth",
+            JSON.stringify({
+              email: data.email,
+              password: data.password,
+            })
+          );
+        }
       }
 
       storeUserInfo({ accessToken: res?.token.accessToken });
@@ -44,6 +62,11 @@ const LoginTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
       console.log(err);
     }
   };
+  const defaultValues = {
+    email: saveInfo?.email || "",
+    password: saveInfo?.password || "",
+  };
+
   return (
     <div>
       <div>
@@ -56,6 +79,7 @@ const LoginTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
           <Form
             submitHandler={submitHandler}
             resolver={yupResolver(loginSchema)}
+            defaultValues={defaultValues}
           >
             <div className="mt-5">
               <FormInput
@@ -64,17 +88,36 @@ const LoginTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
                 size="w-full"
                 name="email"
               ></FormInput>
-              <div className="mt-3">
+              <div className="mt-3 relative">
                 <FormInput
                   label="password"
                   placeholder="Enter password"
                   size="w-full"
                   name="password"
+                  showPassword={showPassword ? "text" : "password"}
                 ></FormInput>
+                <div
+                  onClick={() => setShowPassword(!showPassword)}
+                  className=" absolute top-4  right-4 text-gray-600  cursor-pointer"
+                >
+                  {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                </div>
               </div>
             </div>
             <div className="mt-2 flex justify-between">
-              <h3>Remember Me</h3>
+              <div className="flex gap-2">
+                {" "}
+                <input
+                  checked={save}
+                  onChange={(e) => setSave(!save)}
+                  className="checked:bg-[#d1001c]"
+                  size={20}
+                  type="checkbox"
+                  name=""
+                  id=""
+                />
+                <Typography> Remember Me</Typography>
+              </div>
               <p className=" text-blue-700 ">Forgat Password?</p>
             </div>
             <div className=" mt-5 w-full">
