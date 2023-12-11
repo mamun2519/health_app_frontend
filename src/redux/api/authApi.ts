@@ -55,6 +55,28 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["BloodDonor"],
     }),
+    forgetRequest: build.mutation({
+      query: (data) => ({
+        url: "/auth/forget-request",
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: ["Doctor"],
+    }),
+    checkResetCode: build.mutation({
+      query: (data) => ({
+        url: "/auth/check-reset-code",
+        method: "POST",
+        data,
+      }),
+    }),
+    forgetPasswordWithCode: build.mutation({
+      query: (data) => ({
+        url: "/auth/forget-code",
+        method: "POST",
+        data,
+      }),
+    }),
   }),
 });
 
@@ -66,4 +88,7 @@ export const {
   useUserDetailsQuery,
   useCreateDoctorMutation,
   useCreateDonorMutation,
+  useForgetPasswordWithCodeMutation,
+  useCheckResetCodeMutation,
+  useForgetRequestMutation,
 } = authApi;

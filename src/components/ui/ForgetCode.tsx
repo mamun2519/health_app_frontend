@@ -5,7 +5,8 @@ import FormInput from "../Form/FormInput";
 import { Typography } from "@mui/material";
 import HttpsIcon from "@mui/icons-material/Https";
 import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
-const ForgetPasswordCode = () => {
+import { maskEmail } from "@/utils/formetEmail";
+const ForgetPasswordCode = ({ email }: { email: string }) => {
   const submitHandler: SubmitHandler<{ email: string }> = async (data) => {};
   return (
     <div className="p-8">
@@ -23,7 +24,7 @@ const ForgetPasswordCode = () => {
         <div className="pt-1">
           {" "}
           <Typography className=" text-center">
-            Please enter the code 4 digit code we sent to m***94@.gmail.com
+            Please enter the code 4 digit code we sent to {maskEmail(email)}
           </Typography>
         </div>
         <div className=" ">

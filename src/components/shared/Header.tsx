@@ -61,7 +61,7 @@ const notUser = [
 ];
 
 function Header() {
-  const [authModelOpen, setAuthModelOpen] = React.useState(true);
+  const [authModelOpen, setAuthModelOpen] = React.useState(false);
 
   const handleAuthModelClickOpen = () => {
     setAuthModelOpen(true);

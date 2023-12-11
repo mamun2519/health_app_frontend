@@ -4,3 +4,7 @@ export const loginSchema = yup.object().shape({
   email: yup.string().required(),
   password: yup.string().min(4).max(32).required(),
 });
+
+export const ForgetEmailValidation = yup.object().shape({
+  email: yup.string().required(),
+});
