@@ -13,7 +13,7 @@ import Toast from "../ui/Toast";
 import errorMessage from "../shared/ErrrorMessage";
 import { useForgetRequestMutation } from "@/redux/api/authApi";
 import { maskEmail } from "@/utils/formetEmail";
-
+import ClearIcon from "@mui/icons-material/Clear";
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -24,7 +24,7 @@ const Transition = React.forwardRef(function Transition(
 });
 interface OpenModel {
   open: boolean;
-  handleClose: (op: any) => any;
+  handleClose: () => void;
 }
 
 export default function ForgetModel({ open, handleClose }: OpenModel) {
@@ -59,6 +59,14 @@ export default function ForgetModel({ open, handleClose }: OpenModel) {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
+        <div className="w-full flex  justify-end pt-3 px-5">
+          <button
+            onClick={() => handleClose()}
+            className=" border p-1  rounded-full  hover:bg-[#d1001c]  hover:text-white"
+          >
+            <ClearIcon />
+          </button>
+        </div>
         <div className="w-[430px] h-full">
           {step === 1 && (
             <ForgetPasswordEmail
@@ -66,9 +74,11 @@ export default function ForgetModel({ open, handleClose }: OpenModel) {
               loading={loading}
             />
           )}
-          {step === 2 && <ForgetPasswordCode email={email} />}
-          {step === 3 && <NewPassword />}
-          {step === 4 && <PasswordResetSuccessMessage />}
+          {step === 2 && <ForgetPasswordCode email={email} setStep={setStep} />}
+          {step === 3 && <NewPassword email={email} setStep={setStep} />}
+          {step === 4 && (
+            <PasswordResetSuccessMessage handleClose={handleClose} />
+          )}
         </div>
       </Dialog>
     </React.Fragment>

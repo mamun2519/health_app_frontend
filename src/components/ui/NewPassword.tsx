@@ -1,11 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import Form from "../Form/FormProvider";
 import { SubmitHandler } from "react-hook-form";
 import FormInput from "../Form/FormInput";
 import { Typography } from "@mui/material";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
-const NewPassword = () => {
-  const submitHandler: SubmitHandler<{ email: string }> = async (data) => {};
+import { yupResolver } from "@hookform/resolvers/yup";
+import { forgetPasswordSchema } from "../schema/login";
+import { useForgetPasswordWithCodeMutation } from "@/redux/api/authApi";
+const NewPassword = ({
+  email,
+  setStep,
+}: {
+  email: string;
+  setStep: (number: number) => void;
+}) => {
+  const [loading, setLoading] = React.useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [forgetPasswordWithCode] = useForgetPasswordWithCodeMutation();
+  const submitHandler: SubmitHandler<{
+    password: string;
+    newPassword: string;
+  }> = async (data) => {
+    try {
+      if (data.password === data.newPassword) {
+        setLoading(false);
+        const res = await forgetPasswordWithCode({
+          email,
+          password: data.password,
+        }).unwrap();
+        console.log(res);
+        if (res) {
+          setStep(4);
+        }
+      } else {
+        setErrorMessage("Password don't match");
+      }
+      setLoading(true);
+    } catch (error) {
+      setLoading(true);
+      console.log(error);
+    }
+  };
   return (
     <div className="p-8">
       <div className=" flex justify-center">
@@ -28,14 +63,14 @@ const NewPassword = () => {
         <div className=" ">
           <Form
             submitHandler={submitHandler}
-            // resolver={yupResolver(loginSchema)}
+            resolver={yupResolver(forgetPasswordSchema)}
           >
             <div className="mt-5">
               <FormInput
                 label="password"
                 placeholder="Enter Email"
                 size="w-full"
-                name="email"
+                name="password"
               ></FormInput>
             </div>
             <div className="mt-4">
@@ -43,13 +78,13 @@ const NewPassword = () => {
                 label="Confirm Password"
                 placeholder="Enter Email"
                 size="w-full"
-                name="email"
+                name="newPassword"
               ></FormInput>
             </div>
 
             <div className=" mt-5 w-full">
               <button className=" w-full h-12  bg-[#d1001c] text-white font-medium  rounded-2xl">
-                Change Password
+                {loading ? "    Change Password" : "Loading...."}
               </button>
             </div>
           </Form>

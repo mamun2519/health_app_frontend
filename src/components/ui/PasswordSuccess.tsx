@@ -4,8 +4,7 @@ import { SubmitHandler } from "react-hook-form";
 import FormInput from "../Form/FormInput";
 import { Typography } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
-const PasswordResetSuccessMessage = () => {
-  const submitHandler: SubmitHandler<{ email: string }> = async (data) => {};
+const PasswordResetSuccessMessage = ({ handleClose }: { handleClose: any }) => {
   return (
     <div className="p-8">
       <div className=" flex justify-center">
@@ -28,7 +27,10 @@ const PasswordResetSuccessMessage = () => {
         </div>
         <div className=" ">
           <div className=" mt-5 w-full">
-            <button className=" w-full h-12  bg-[#d1001c] text-white font-medium  rounded-2xl">
+            <button
+              onClick={() => handleClose()}
+              className=" w-full h-12  bg-[#d1001c] text-white font-medium  rounded-2xl"
+            >
               Close Continue
             </button>
           </div>

@@ -30,6 +30,10 @@ const Login = () => {
   const handlePasswordResetModelOpen = () => {
     setPassResetModel(true);
   };
+  const handlePasswordResetModelClose = () => {
+    setPassResetModel(false);
+  };
+
   const [save, setSave] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [saveInfo, setSaveInfo] = useState<{ email: string; password: string }>(
@@ -176,7 +180,7 @@ const Login = () => {
       {openPassResetModel && (
         <ForgetModel
           open={openPassResetModel}
-          handleClose={handlePasswordResetModelOpen}
+          handleClose={handlePasswordResetModelClose}
         />
       )}
     </div>

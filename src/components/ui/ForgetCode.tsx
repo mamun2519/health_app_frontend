@@ -1,13 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import Form from "../Form/FormProvider";
-import { SubmitHandler } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import FormInput from "../Form/FormInput";
-import { Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import HttpsIcon from "@mui/icons-material/Https";
 import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
 import { maskEmail } from "@/utils/formetEmail";
-const ForgetPasswordCode = ({ email }: { email: string }) => {
-  const submitHandler: SubmitHandler<{ email: string }> = async (data) => {};
+import { yupResolver } from "@hookform/resolvers/yup";
+import { CodeSchema } from "../schema/login";
+import { useCheckResetCodeMutation } from "@/redux/api/authApi";
+const ForgetPasswordCode = ({
+  email,
+  setStep,
+}: {
+  email: string;
+  setStep: (number: number) => void;
+}) => {
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = React.useState(true);
+  const [checkResetCode] = useCheckResetCodeMutation();
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(CodeSchema),
+  });
+  const onSubmit: SubmitHandler<{
+    codeBox1: string;
+    codeBox2: string;
+    codeBox3: string;
+    codeBox4: string;
+  }> = async (data) => {
+    setLoading(false);
+    const { codeBox1, codeBox2, codeBox3, codeBox4 } = data;
+    const resetCode = `${codeBox1}${codeBox2}${codeBox3}${codeBox4}`;
+    console.log(resetCode);
+    try {
+      const res = await checkResetCode({
+        code: Number(resetCode),
+        email,
+      }).unwrap();
+      console.log(res);
+      if (res) {
+        setStep(3);
+      }
+      setLoading(true);
+    } catch (error: any) {
+      setErrorMessage(error.data);
+      console.log(error);
+      setLoading(true);
+    }
+
+    console.log(resetCode);
+  };
   return (
     <div className="p-8">
       <div className=" flex justify-center">
@@ -28,8 +74,8 @@ const ForgetPasswordCode = ({ email }: { email: string }) => {
           </Typography>
         </div>
         <div className=" ">
-          <Form
-            submitHandler={submitHandler}
+          <form
+            onSubmit={handleSubmit(onSubmit)}
             // resolver={yupResolver(loginSchema)}
           >
             <div className="mt-5 flex gap-5 justify-center">
@@ -39,30 +85,79 @@ const ForgetPasswordCode = ({ email }: { email: string }) => {
                 size="w-full"
                 name="email"
               ></FormInput> */}
-              <input
-                type="text"
-                className="w-16 h-14 border p-3  rounded-2xl text-center text-3xl  outline-0"
-              />
-              <input
-                type="text"
-                className="w-16 h-14 border p-3  rounded-2xl text-center text-3xl outline-0"
-              />
-              <input
-                type="text"
-                className="w-16 h-14 border p-3  rounded-2xl text-center text-3xl outline-0"
-              />
-              <input
-                type="text"
-                className="w-16 h-14 border p-3  rounded-2xl text-center text-3xl outline-0"
-              />
+              <div className="w-16">
+                <Controller
+                  name="codeBox1"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      fullWidth
+                      // label="Password"
+                      placeholder="0"
+                      className="text-3xl"
+                      error={!!errors.codeBox1}
+                      {...field}
+                    />
+                  )}
+                />
+              </div>
+              <div className="w-16">
+                <Controller
+                  name="codeBox2"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      fullWidth
+                      // label="Password"
+                      placeholder="0"
+                      className="text-3xl"
+                      error={!!errors.codeBox2}
+                      {...field}
+                    />
+                  )}
+                />
+              </div>
+              <div className="w-16">
+                <Controller
+                  name="codeBox3"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      fullWidth
+                      // label="Password"
+                      placeholder="0"
+                      className="text-3xl"
+                      error={!!errors.codeBox3}
+                      {...field}
+                    />
+                  )}
+                />
+              </div>
+              <div className="w-16">
+                <Controller
+                  name="codeBox4"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      fullWidth
+                      // label="Password"
+                      placeholder="0"
+                      className="text-3xl"
+                      error={!!errors.codeBox4}
+                      {...field}
+                    />
+                  )}
+                />
+              </div>{" "}
             </div>
 
             <div className=" mt-5 w-full">
               <button className=" w-full h-12  bg-[#d1001c] text-white font-medium  rounded-2xl">
-                Submit Code
+                {loading ? "Submit Code" : "Loading...."}
               </button>
+              <p className="text-center text-red-500">{errorMessage} </p>
             </div>
-          </Form>
+          </form>
         </div>
       </div>
     </div>
