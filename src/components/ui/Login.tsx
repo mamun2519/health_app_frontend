@@ -49,7 +49,7 @@ const Login = () => {
     console.log(data);
     try {
       const res = await userLogin(data).unwrap();
-      console.log(res);
+      console.log(res.user);
       if (res?.token) {
         router.push("/");
         // TODO USE TOST HERE

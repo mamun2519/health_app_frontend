@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev -p 3000",
     "start": "next start",
+    "build": "next build",
     "lint": "next lint"
   },
   "dependencies": {
@@ -35,6 +35,7 @@
     "react-redux": "^8.1.3",
     "react-select": "^5.7.7",
     "recharts": "^2.9.2",
+    "socket.io-client": "^4.7.2",
     "stripe": "^14.2.0",
     "sweetalert2": "^11.7.32",
     "uniqid": "^5.4.0",

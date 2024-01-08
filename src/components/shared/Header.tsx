@@ -75,6 +75,7 @@ function Header() {
   const path = usePathname();
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.user);
+
   const userData: any = getFromLocalStorage(authKey);
 
   if (userData) {
