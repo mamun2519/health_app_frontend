@@ -208,7 +208,7 @@ const DonorRegistrationForm = () => {
                       size="full"
                       name="present_Address.sub_district"
                     ></FormInput> */}
-                    <FormControl className="w-full" variant="standard">
+                    <FormControl className="w-full">
                       <InputLabel id="demo-customized-select-label">
                         Division
                       </InputLabel>
@@ -219,7 +219,7 @@ const DonorRegistrationForm = () => {
                         id="demo-customized-select"
                         value={division}
                         onChange={(e) => setDivision(e.target.value)}
-                        input={<BootstrapInput />}
+                        // input={<BootstrapInput />}
                       >
                         {SelectedDivisions?.map((op, i) => (
                           <MenuItem key={i} value={op.value}>

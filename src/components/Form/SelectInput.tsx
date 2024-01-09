@@ -76,13 +76,14 @@ export default function SelectInput({
   } = useFormContext();
 
   const errorMessage = getErrorMessageByPropertyName(errors, name);
+
   return (
     <div>
       <Controller
         name={name}
         control={control}
         render={({ field: { value, onChange } }) => (
-          <FormControl className="w-full" variant="standard">
+          <FormControl className="w-full">
             <InputLabel id="demo-customized-select-label">{label}</InputLabel>
             <Select
               placeholder={placeholder}
@@ -91,7 +92,6 @@ export default function SelectInput({
               id="demo-customized-select"
               value={value}
               onChange={onChange}
-              input={<BootstrapInput />}
             >
               {options?.map((op, i) => (
                 <MenuItem key={i} value={op.value}>
