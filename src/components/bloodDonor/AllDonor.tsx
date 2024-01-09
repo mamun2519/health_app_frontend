@@ -18,10 +18,12 @@ import Select from "react-select";
 const AllDonor = () => {
   const [pageLimit, setLimit] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
-  const [filterOption, setFilterOption] = useState("");
+  const [filterBloodGroup, setFilterOption] = useState("");
+  console.log(filterBloodGroup);
   const query: Record<string, any> = {};
   query["page"] = currentPage;
   query["limit"] = pageLimit;
+  query["blood_group"] = filterBloodGroup;
 
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
@@ -42,7 +44,7 @@ const AllDonor = () => {
             <div className="flex gap-2 items-center">
               <Select
                 className="lg:w-56 w-full"
-                defaultValue={filterOption}
+                defaultValue={filterBloodGroup}
                 placeholder="Filter By Blood Group"
                 onChange={(event: any) => setFilterOption(event?.value)}
                 options={filterDonar}
