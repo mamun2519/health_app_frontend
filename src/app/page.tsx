@@ -32,7 +32,7 @@ export default async function Home() {
   return (
     <div>
       <Banner />
-      <Chat userId="64ddefc800e406140bd0993d" />
+
       <CountService />
       <DonorReg />
       <ServiceCategorys />
