@@ -24,6 +24,41 @@ export const bloodGroups = [
     title: "0-",
   },
 ];
+
+export const filterDonar = [
+  {
+    value: "A+",
+    label: "A+",
+  },
+  {
+    value: "A-",
+    label: "A-",
+  },
+  {
+    value: "AB+",
+    label: "AB+",
+  },
+  {
+    value: "AB-",
+    label: "AB-",
+  },
+  {
+    value: "B+",
+    label: "B+",
+  },
+  {
+    value: "B-",
+    label: "B-",
+  },
+  {
+    value: "0+",
+    label: "0+",
+  },
+  {
+    value: "0-",
+    label: "0-",
+  },
+];
 export const divisions = [
   {
     title: "Khulna",
