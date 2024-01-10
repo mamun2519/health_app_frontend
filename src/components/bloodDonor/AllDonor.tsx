@@ -3,18 +3,12 @@ import NoData from "@/components/ui/NoData";
 import { useAllBloodDonorQuery } from "@/redux/api/bloodDonorApi";
 import React, { useState } from "react";
 import DonorComponents from "@/components/bloodDonor/DonorsComponents";
-import { MenuItem, Pagination } from "@mui/material";
-import {
-  DoctorSpecialists,
-  Limit,
-  SelectedBloodGroup,
-  ServiceCategory,
-  bloodGroups,
-  filterDonar,
-} from "@/constants/donor";
+import { Pagination } from "@mui/material";
+import { filterDonar } from "@/constants/donor";
 import LoadingSpinner from "@/utils/Loading";
-import Form from "../Form/FormProvider";
+
 import Select from "react-select";
+import RefreshIcon from "@mui/icons-material/Refresh";
 const AllDonor = () => {
   const [pageLimit, setLimit] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,7 +17,9 @@ const AllDonor = () => {
   const query: Record<string, any> = {};
   query["page"] = currentPage;
   query["limit"] = pageLimit;
-  query["blood_group"] = filterBloodGroup;
+  if (filterBloodGroup) {
+    query["blood_group"] = filterBloodGroup;
+  }
 
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
@@ -42,6 +38,16 @@ const AllDonor = () => {
               <h3 className="text-2xl">Our Blood Donors</h3>
             </div>
             <div className="flex gap-2 items-center">
+              {filterBloodGroup && (
+                <button
+                  onClick={() => {
+                    setFilterOption("");
+                  }}
+                  className="w-10 bg-base-200 h-full rounded flex  justify-center items-center "
+                >
+                  <RefreshIcon />
+                </button>
+              )}
               <Select
                 className="lg:w-56 w-full"
                 defaultValue={filterBloodGroup}
@@ -75,7 +81,7 @@ const AllDonor = () => {
       <DonorComponents donors={data} />
 
       <div>
-        <div className=" flex justify-center items-center h-12   mt-10">
+        <div className=" flex justify-center items-center h-12   mt-8">
           <Pagination
             count={15}
             onChange={handlePageChange}
