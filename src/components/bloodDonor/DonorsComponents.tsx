@@ -3,7 +3,7 @@ import React from "react";
 import DonorCard from "./DonorCard";
 const DonorComponents = ({ donors }: any) => {
   return (
-    <div className=" grid lg:grid-cols-4  grid-cols-1 mt-10 gap-5">
+    <div className=" grid lg:grid-cols-4  grid-cols-1 mt-6 gap-5">
       {donors?.map((donor: any) => (
         <DonorCard key={donor?.id} donor={donor}></DonorCard>
       ))}

@@ -4,7 +4,7 @@ import { useAllBloodDonorQuery } from "@/redux/api/bloodDonorApi";
 import React, { useState } from "react";
 import DonorComponents from "@/components/bloodDonor/DonorsComponents";
 import { Pagination } from "@mui/material";
-import { filterDonar } from "@/constants/donor";
+import { Limit, filterDonar } from "@/constants/donor";
 import LoadingSpinner from "@/utils/Loading";
 
 import Select from "react-select";
@@ -33,7 +33,7 @@ const AllDonor = () => {
       {data?.length === 0 && <NoData />}
       <div className=" flex justify-between items-center">
         {data?.length !== 0 && (
-          <div className=" flex justify-between w-full">
+          <div className=" lg:flex justify-between w-full">
             <div>
               <h3 className="text-2xl">Our Blood Donors</h3>
             </div>
@@ -42,6 +42,7 @@ const AllDonor = () => {
                 <button
                   onClick={() => {
                     setFilterOption("");
+                    setLimit(10);
                   }}
                   className="w-10 bg-base-200 h-full rounded flex  justify-center items-center "
                 >
@@ -49,11 +50,18 @@ const AllDonor = () => {
                 </button>
               )}
               <Select
-                className="lg:w-56 w-full"
+                className="lg:w-56 w-full mt-2 lg:mt-0"
                 defaultValue={filterBloodGroup}
                 placeholder="Filter By Blood Group"
                 onChange={(event: any) => setFilterOption(event?.value)}
                 options={filterDonar}
+              />
+              <Select
+                className="w-28 mt-2 lg:mt-0"
+                placeholder="limit"
+                defaultValue={pageLimit}
+                onChange={(event: any) => setLimit(event?.value)}
+                options={Limit}
               />
             </div>
           </div>
