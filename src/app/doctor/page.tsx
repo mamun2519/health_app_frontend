@@ -11,9 +11,13 @@ const DoctorPage = () => {
   const [pageLimit, setLimit] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [filterOption, setFilterOption] = useState("");
+  const [specialist, setSpecialist] = useState(null);
   const query: Record<string, any> = {};
   query["page"] = currentPage;
   query["limit"] = pageLimit;
+  if (specialist) {
+    query["specialist"] = specialist;
+  }
 
   const handlePageChange = (event: any, page: any) => {
     setCurrentPage(page);
@@ -24,17 +28,29 @@ const DoctorPage = () => {
   }
   return (
     <div>
-      <div className="max-w-7xl mx-auto px-4 lg:px-0  mt-28">
-        {data?.length === 0 ? <NoData /> : <AllDoctor doctors={data} />}
+      <div className="max-w-7xl mx-auto px-4 lg:px-0  ">
+        {data?.length === 0 ? (
+          <NoData />
+        ) : (
+          <AllDoctor
+            doctors={data}
+            specialist={specialist}
+            setSpecialist={setSpecialist}
+            setLimit={setLimit}
+            pageLimit={pageLimit}
+          />
+        )}
       </div>
-      <div className=" flex justify-center items-center h-12   mt-10">
-        <Pagination
-          count={15}
-          onChange={handlePageChange}
-          page={currentPage}
-          variant="outlined"
-          shape="rounded"
-        />
+      <div className=" flex justify-center items-center h-12   ">
+        <div>
+          <Pagination
+            count={15}
+            onChange={handlePageChange}
+            page={currentPage}
+            variant="outlined"
+            shape="rounded"
+          />
+        </div>
         {/* <p>Selected Page: {currentPage}</p> */}
       </div>
     </div>
