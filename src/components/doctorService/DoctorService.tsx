@@ -7,7 +7,7 @@ const ServiceService = ({ service }: any) => {
   return (
     <div
       key={service.id}
-      className=" w-full lg:w-full h-[440px] border shadow  rounded bg-[#30029010] mt-5"
+      className=" w-full lg:w-[413px] h-[440px] border shadow  rounded bg-[#30029010] mt-5"
     >
       <div className=" ">
         <div className="w-full h-48   rounded  m border-2 relative">

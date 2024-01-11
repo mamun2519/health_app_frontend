@@ -14,7 +14,6 @@ import ServiceCategorys from "@/components/ui/Category";
 import Review from "@/components/home/Review";
 import UpComingService from "@/components/home/UpComingService";
 import Sponsor from "@/components/home/Sponsor";
-import Chat from "@/components/ui/Chat";
 
 export default async function Home() {
   const res = await fetch(`${URL}/blood-donor/all-donor`, {

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const DonorCard = ({ donor }: { donor: any }) => {
+  console.log(donor);
   return (
     <div
       key={donor.id}
@@ -64,7 +65,7 @@ const DonorCard = ({ donor }: { donor: any }) => {
         <div className=" flex justify-center px-4 mt-5">
           <Link
             className=" w-full h-8 rounded bg-[#d1001c] flex justify-center items-center text-white font-bold"
-            href={`/bloodDonor/${donor.id}`}
+            href={`/bloodDonor/${donor.profile.user_id}`}
           >
             More Details
           </Link>
