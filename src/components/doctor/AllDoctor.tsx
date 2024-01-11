@@ -14,18 +14,18 @@ const AllDoctor = ({
       <div className=" lg:flex justify-between gap-2">
         <h3 className=" text-cent text-3xl font-bold ">Meet Our Doctor</h3>
         <div>
-          {specialist && (
-            <button
-              onClick={() => {
-                setSpecialist(null);
-                setLimit(10);
-              }}
-              className="w-10 bg-base-200 h-full rounded flex  justify-center items-center "
-            >
-              <RefreshIcon />
-            </button>
-          )}
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center h-full">
+            {specialist && (
+              <button
+                onClick={() => {
+                  setSpecialist(null);
+                  setLimit(10);
+                }}
+                className="w-10 bg-base-200 h-full rounded flex  justify-center items-center "
+              >
+                <RefreshIcon />
+              </button>
+            )}
             <Select
               className="lg:w-60 w-full mt-2 lg:mt-0"
               defaultValue={specialist}

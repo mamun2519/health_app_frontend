@@ -41,7 +41,7 @@ const DoctorPage = () => {
           />
         )}
       </div>
-      <div className=" flex justify-center items-center h-12   ">
+      <div className=" flex justify-center items-center h-12  pb-20  ">
         <div>
           <Pagination
             count={15}
