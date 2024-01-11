@@ -122,7 +122,7 @@ function Header() {
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setAuthModelOpen(true);
-    }, 10000);
+    }, 20000);
 
     return () => clearTimeout(timer);
   }, []);
