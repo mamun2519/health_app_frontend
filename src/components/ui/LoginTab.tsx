@@ -76,7 +76,7 @@ const LoginTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
             <p className="text-white">{errorMessage}</p>
           </div>
         )}
-        <div className=" ">
+        <div className="lg:w-full w-[280px]  ">
           <Form
             submitHandler={submitHandler}
             resolver={yupResolver(loginSchema)}
@@ -86,26 +86,26 @@ const LoginTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
               <FormInput
                 label="email"
                 placeholder="Enter Email"
-                size="w-full"
+                size="lg:w-full  pr-6 lg:pr-0"
                 name="email"
               ></FormInput>
               <div className="mt-3 relative">
                 <FormInput
                   label="password"
                   placeholder="Enter password"
-                  size="w-full"
+                  size="w-full pr-6 lg:pr-0"
                   name="password"
                   showPassword={showPassword ? "text" : "password"}
                 ></FormInput>
                 <div
                   onClick={() => setShowPassword(!showPassword)}
-                  className=" absolute top-4  right-4 text-gray-600  cursor-pointer"
+                  className=" absolute top-4  right-8 text-gray-600  cursor-pointer"
                 >
                   {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                 </div>
               </div>
             </div>
-            <div className="mt-2 flex justify-between">
+            <div className="mt-2 flex lg:justify-between gap-2">
               <div className="flex gap-2">
                 {" "}
                 <input
@@ -121,7 +121,7 @@ const LoginTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
               </div>
               <p className=" text-blue-700 ">Forgat Password?</p>
             </div>
-            <div className=" mt-5 w-full">
+            <div className=" mt-5 lg:w-full w-64">
               <button className=" w-full h-10 rounded bg-[#d1001c] text-white font-medium ">
                 Log In
               </button>

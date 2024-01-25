@@ -42,7 +42,7 @@ export default function AuthModel({ open, handleClose }: OpenModel) {
             <ClearIcon />
           </button>
         </div>
-        <div className="w-[430px] h-full px-5 pb-8">
+        <div className="lg:w-[430px] w-full h-full px-4 pb-8">
           <div>
             <div className=" flex gap-3  items-center justify-center  pt-6  ">
               <h3 className=" lg:text-3xl text-2xl uppercase">
@@ -57,8 +57,8 @@ export default function AuthModel({ open, handleClose }: OpenModel) {
               </p>
             </div>
           </div>
-          <div className="w-full flex  border h-12 rounded mt-3">
-            <div className="w-full h-full p-1 ">
+          <div className="lg:w-full  flex  border h-12 rounded mt-3">
+            <div className="lg:w-full w-full h-full p-1 ">
               <button
                 onClick={() => setTab(!tab)}
                 className={`${
@@ -69,7 +69,7 @@ export default function AuthModel({ open, handleClose }: OpenModel) {
                 login
               </button>
             </div>{" "}
-            <div className="w-full h-full p-1 ">
+            <div className="lg:w-full  w-full h-full p-1 ">
               <button
                 onClick={() => setTab(!tab)}
                 className={`${

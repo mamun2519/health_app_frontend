@@ -62,13 +62,13 @@ const RegTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
           submitHandler={submitHandler}
           resolver={yupResolver(singUpSchema)}
         >
-          <div className="mt-5 ">
+          <div className="mt-5 lg:w-full w-[280px]">
             <div className=" grid lg:grid-cols-2 gap-5 mt-4">
               <div>
                 <FormInput
                   label="firstName"
                   placeholder="Enter First Name"
-                  size="w-full"
+                  size="w-full pr-6 lg:pr-0"
                   name="name.first_name"
                 ></FormInput>
               </div>
@@ -77,7 +77,7 @@ const RegTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
                 <FormInput
                   label="lastName"
                   placeholder="Enter Last name"
-                  size="w-full"
+                  size="w-full pr-6 lg:pr-0"
                   name="name.last_name"
                 ></FormInput>
               </div>
@@ -87,7 +87,7 @@ const RegTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
               <FormInput
                 label="email"
                 placeholder="Enter email"
-                size="w-full"
+                size="w-full pr-6 lg:pr-0"
                 name="email"
               ></FormInput>
             </div>
@@ -95,7 +95,7 @@ const RegTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
               <FormInput
                 label="password"
                 placeholder="Enter password"
-                size="w-full"
+                size="w-full pr-6 lg:pr-0"
                 name="password"
               ></FormInput>
             </div>
@@ -105,7 +105,7 @@ const RegTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
               By Registration Agree With <span>Terms & Policy</span>
             </h3>
           </div>
-          <div className=" mt-5  w-full">
+          <div className=" mt-5 lg:w-full w-64">
             <button className=" lg:w-full w-full h-10 rounded bg-[#d1001c] text-white font-medium ">
               Register
             </button>

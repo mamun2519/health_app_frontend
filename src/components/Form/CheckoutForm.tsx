@@ -7,9 +7,10 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import Link from "next/link";
-import { ICreateBookAppointment } from "@/app/payment/appointmentForm/page";
-import { IBookingInfo } from "@/app/payment/preview/page";
+
 import { useCreatePaymentMutation } from "@/redux/api/paymentApi";
+import { IBookingInfo } from "../payment/PreviewPageComponent";
+import { ICreateBookAppointment } from "../payment/PaymentPageComponent";
 
 export default function CheckoutForm() {
   const [price, SetPrice] = useState<IBookingInfo>({
