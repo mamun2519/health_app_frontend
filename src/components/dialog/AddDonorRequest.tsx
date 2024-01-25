@@ -63,7 +63,7 @@ export default function AddDonorRequestForm({
         <DialogTitle id="alert-dialog-title">
           {"Please Fil up this form"}
         </DialogTitle>
-        <div className="px-5 lg:w-[400px]">
+        <div className="px-5 lg:w-[400px] ">
           <DialogContentText id="alert-dialog-description">
             <Form
               submitHandler={submitHundler}
@@ -73,14 +73,14 @@ export default function AddDonorRequestForm({
                 <FormInput
                   name="phone"
                   label="Phone"
-                  size="lg:w-96 w-72"
+                  size="lg:w-96 w-full pr-6 lg:pr-0"
                   placeholder="Enter Your Phone Number"
                 />
               </div>
               <div className=" mt-4 ">
                 <FormInput
                   name="location"
-                  size="lg:w-96 w-72"
+                  size="lg:w-96 w-72 pr-6 lg:pr-0"
                   label="Location"
                   placeholder="Enter Your  Location"
                 />
@@ -89,7 +89,7 @@ export default function AddDonorRequestForm({
               <div className=" mt-4 ">
                 <FormInput
                   name="pratienCondition"
-                  size="lg:w-96 w-72"
+                  size="lg:w-96 w-72 pr-6 lg:pr-0"
                   label="Patient condition"
                   placeholder="Enter Patient condition"
                 />
@@ -98,14 +98,14 @@ export default function AddDonorRequestForm({
                 <FormInput
                   name="quantity"
                   label="Quantity"
-                  size="lg:w-96 w-72"
+                  size="lg:w-96 w-72 pr-6 lg:pr-0"
                   placeholder="Blood quantity"
                 />
               </div>
               <div className=" mt-2  ">
                 <FormInput
                   name="donnetDate"
-                  size="lg:w-96 w-72"
+                  size="lg:w-96 w-72 pr-6 lg:pr-0"
                   label="Donned Date"
                   placeholder="Enter Date"
                 />

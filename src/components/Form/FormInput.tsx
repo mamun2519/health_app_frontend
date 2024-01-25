@@ -42,7 +42,7 @@ const FormInput = ({
               placeholder="Chose Date"
               {...field}
               id={id}
-              className=" w-full border-2 h-14 rounded px-4 outline-blue-500"
+              className={` lg:w-full w-full border-2 h-14 rounded px-4 outline-blue-500 ${size}  `}
             />
             <p className="text-red-500">{errorMessage}</p>
           </>
