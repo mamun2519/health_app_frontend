@@ -12,7 +12,7 @@ import { SubmitHandler } from "react-hook-form";
 import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import FormInput from "@/components/Form/FormInput";
 import Form from "@/components/Form/FormProvider";
-import { IUpdateAppointment } from "@/app/(dashboardLayout)/dashboard/User/appointment/edit/[id]/page";
+import { IUpdateAppointment } from "@/app/(rootLayout)/(dashboardLayout)/dashboard/User/appointment/edit/[id]/page";
 import errorMessage from "@/components/shared/ErrrorMessage";
 import BreakfastDiningIcon from "@mui/icons-material/BreakfastDining";
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";

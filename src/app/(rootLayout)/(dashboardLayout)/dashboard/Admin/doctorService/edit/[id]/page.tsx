@@ -11,7 +11,7 @@ import {
   useDoctorServiceDetailsQuery,
   useUpdateDoctorServiceMutation,
 } from "@/redux/api/doctorServiceApi";
-import { IUpdateService } from "@/app/(dashboardLayout)/dashboard/Doctor/myService/edit/[id]/page";
+import { IUpdateService } from "@/app/(rootLayout)/(dashboardLayout)/dashboard/Doctor/myService/edit/[id]/page";
 import errorMessage from "@/components/shared/ErrrorMessage";
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 const AdminServiceUpdatePage = ({ params }: { params: { id: string } }) => {

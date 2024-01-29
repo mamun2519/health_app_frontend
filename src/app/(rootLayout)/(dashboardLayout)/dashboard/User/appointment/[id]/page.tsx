@@ -11,7 +11,7 @@ import dataPic from "../../../../../../assets/blood_donation_02.jpg";
 import { useActiveGoogleMeetQuery } from "@/redux/api/googleMeetApi";
 import MeetRequestModel from "@/components/dialog/MeetRequestModel";
 import OfflineModel from "@/components/dialog/OfflineModel";
-import DoctorReviewModel from "../../../../../../components/dialog/DoctorReviewMoodel";
+import DoctorReviewModel from "../../../../../../../components/dialog/DoctorReviewMoodel";
 import LoadingSpinner from "@/utils/Loading";
 import BreakfastDiningIcon from "@mui/icons-material/BreakfastDining";
 import PreviewIcon from "@mui/icons-material/Preview";

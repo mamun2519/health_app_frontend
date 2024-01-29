@@ -51,7 +51,7 @@ const Login = () => {
       const res = await userLogin(data).unwrap();
       console.log(res.user);
       if (res?.token) {
-        router.push("/");
+        router.push("/home");
         // TODO USE TOST HERE
         dispatch(
           setUser({

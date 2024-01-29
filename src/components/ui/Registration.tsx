@@ -55,7 +55,7 @@ const Registration = () => {
       }).unwrap();
       console.log(res);
       if (res.userToken) {
-        router.push("/");
+        router.push("/home");
         // TODO USE TOST HERE
         dispatch(
           setUser({

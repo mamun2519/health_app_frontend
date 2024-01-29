@@ -133,15 +133,17 @@ function Header() {
         style={{
           // background: "#30029010",
           color: "#black",
+          background: "#ffff",
+
           // transition: "background-color 0.3s ease",
         }}
         // position="fixed"
-        className=" bg-white z-30 shadow-none  border-b-2 "
+        className="  z-30 shadow-none  border-b-2 "
       >
         <Container className=" max-w-7xl mx-auto  px-0   ">
           <Toolbar disableGutters>
             {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
-            <Link href="/">
+            <Link href="/home">
               <p className="text-xl  font-bold text-gray-900  hidden md:block lg:block  ">
                 {" "}
                 He<span className="text-[#d1001c]">alth</span> Care
@@ -229,7 +231,7 @@ function Header() {
               component="a"
               href="#app-bar-with-responsive-menu"
             >
-              <Link href="/">
+              <Link href="/home">
                 <p className="text-xl  font-bold text-gray-900   md:hidden lg:hidden ">
                   {" "}
                   He<span className="text-[#d1001c]">alth</span> Care

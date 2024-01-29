@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { cartClear, deleteToCart } from "@/redux/Slice/cart";
 import successMessage from "@/components/shared/SuccessMassage";
-import { useCreatePaymentMutation } from "../../redux/api/paymentApi";
+import { useCreatePaymentMutation } from "../../../redux/api/paymentApi";
 import errorMessage from "@/components/shared/ErrrorMessage";
 import { useMyCartQuery, useRemoveCartMutation } from "@/redux/api/cartApi";
 import NoData from "@/components/ui/NoData";
