@@ -44,6 +44,10 @@ const pages = [
     link: "/dashboard",
     level: "Dashboard",
   },
+  {
+    link: "/bloodMedia",
+    level: "Go Blood Media",
+  },
 ];
 const notUser = [
   {
@@ -258,9 +262,9 @@ function Header() {
                       }}
                       className={`  ${
                         path == page.link
-                          ? "bg-[#d1001c] text-white  flex justify-center"
+                          ? "bg-[#d1001c] text-white  flex justify-center "
                           : ""
-                      }: hover:text-[#d1001c]`}
+                      }: hover:text-[#d1001c] rounded-full`}
                     >
                       <Link className="pl-1" href={page?.link}>
                         {" "}
@@ -291,12 +295,20 @@ function Header() {
                       </Link>
                     </Button>
                   ))}
+              {/* <div className=" flex items-center">
+                <Link
+                  href="/bloodMedia"
+                  className=" w-36 h-8 flex justify-center items-center rounded-full  text-black uppercase font-medium "
+                >
+                  Go Blood Media
+                </Link>
+              </div> */}
             </Box>
 
             <Box sx={{ flexGrow: 0, display: "flex" }}>
               {user?.role && (
                 <>
-                  <div className=" flex w-full  ">
+                  <div className=" flex w-full  items-center ">
                     {/* Mail  */}
                     {/* <IconButton
                       size="large"
@@ -318,13 +330,16 @@ function Header() {
                   </Badge>
                 </IconButton> */}
 
-                    <Notification
-                      anchorEl={anchorEl}
-                      setAnchorEl={setAnchorEl}
-                      open={open}
-                      handleClick={handleClick}
-                      handleClose={handleClose}
-                    />
+                    <div>
+                      {" "}
+                      <Notification
+                        anchorEl={anchorEl}
+                        setAnchorEl={setAnchorEl}
+                        open={open}
+                        handleClick={handleClick}
+                        handleClose={handleClose}
+                      />
+                    </div>
                   </div>
 
                   <Tooltip title="Open settings">
