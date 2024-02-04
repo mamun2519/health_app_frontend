@@ -44,10 +44,10 @@ const pages = [
     link: "/dashboard",
     level: "Dashboard",
   },
-  {
-    link: "/bloodMedia",
-    level: "Go Blood Media",
-  },
+  // {
+  //   link: "/bloodMedia",
+  //   level: "Go Blood Media",
+  // },
 ];
 const notUser = [
   {
@@ -287,7 +287,7 @@ function Header() {
                         path == page.link
                           ? "bg-[#d1001c] text-white  flex justify-center"
                           : ""
-                      }: hover:text-[#d1001c]`}
+                      }: hover:text-[#d1001c] rounded-2xl`}
                     >
                       <Link className="pl-1" href={page?.link}>
                         {" "}

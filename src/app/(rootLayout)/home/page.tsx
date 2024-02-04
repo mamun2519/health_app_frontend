@@ -33,8 +33,8 @@ export default async function HomePage() {
       <CountService />
       <DonorReg />
       <ServiceCategorys />
-      <Doctors doctors={doctor.data.slice(0, 4)} />
-      <Donors data={donor?.data.slice(0, 4)} />
+      <Doctors doctors={doctor?.data?.slice(0, 4)} />
+      <Donors data={donor?.data?.slice(0, 4)} />
       <Review />
       <UpComingService />
       <Sponsor />

@@ -80,7 +80,7 @@ const LoginTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
           <Form
             submitHandler={submitHandler}
             resolver={yupResolver(loginSchema)}
-            defaultValues={defaultValues}
+            // defaultValues={defaultValues}
           >
             <div className="mt-5">
               <FormInput

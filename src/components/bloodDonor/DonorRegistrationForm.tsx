@@ -88,7 +88,7 @@ const DonorRegistrationForm = () => {
             header: "Thank you",
           });
           if (res?.userToken) {
-            router.push("/");
+            router.push("/home");
             logOut();
             dispatch(
               setUser({
