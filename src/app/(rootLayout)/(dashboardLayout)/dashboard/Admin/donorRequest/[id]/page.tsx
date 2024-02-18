@@ -3,7 +3,7 @@ import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import React, { useState } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 
-import dataPic from "../../../../../../assets/blood_donation_02.jpg";
+import dataPic from "@/assets/blood_donation_02.jpg";
 import Image from "next/image";
 import { convertDate } from "@/helper/date";
 import {

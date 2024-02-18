@@ -7,7 +7,7 @@ import IconBreadcrumbs from "@/components/ui/Breadcrumb";
 import { useAppointmentDetailsQuery } from "@/redux/api/appointmentApi";
 
 import Image from "next/image";
-import dataPic from "../../../../../../assets/blood_donation_02.jpg";
+import dataPic from "@/assets/blood_donation_02.jpg";
 import MeetRequestModel from "@/components/dialog/MeetRequestModel";
 import OfflineModel from "@/components/dialog/OfflineModel";
 import { useActiveGoogleMeetQuery } from "@/redux/api/googleMeetApi";

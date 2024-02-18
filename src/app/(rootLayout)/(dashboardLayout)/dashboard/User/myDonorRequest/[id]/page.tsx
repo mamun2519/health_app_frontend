@@ -5,7 +5,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import GrainIcon from "@mui/icons-material/Grain";
 
-import dataPic from "../../../../../../assets/blood_donation_02.jpg";
+import dataPic from "@/assets/blood_donation_02.jpg";
 import Image from "next/image";
 import { convertDate } from "@/helper/date";
 import {
