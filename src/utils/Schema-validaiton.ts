@@ -4,7 +4,7 @@ export const getErrorMessageByPropertyName = (
 ) => {
   // let obj = errors
   // let propertyPath = "admin.name.firstName"
-  // let propertyPath = "admin.name.lastName"
+  // let propertyPath = "admin.name.lastName"/
 
   const properties = propertyPath.split(".");
   // ["admin","name","firstName"]
