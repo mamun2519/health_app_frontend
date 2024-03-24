@@ -9,7 +9,7 @@ interface IDebounced {
   searchQuery: string;
   delay: number;
 }
-
+// hooks
 export const useDebounced = ({ searchQuery, delay }: IDebounced) => {
   const [debouncedValue, setDebouncedValue] = useState<string>(searchQuery);
 
