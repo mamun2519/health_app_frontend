@@ -295,14 +295,14 @@ function Header() {
                       </Link>
                     </Button>
                   ))}
-              {/* <div className=" flex items-center">
+              <div className=" flex items-center">
                 <Link
                   href="/bloodMedia"
                   className=" w-36 h-8 flex justify-center items-center rounded-full  text-black uppercase font-medium "
                 >
                   Go Blood Media
                 </Link>
-              </div> */}
+              </div>
             </Box>
 
             <Box sx={{ flexGrow: 0, display: "flex" }}>
