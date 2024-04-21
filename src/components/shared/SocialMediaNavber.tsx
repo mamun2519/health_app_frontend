@@ -247,6 +247,7 @@ function SocialMediaNavbar() {
               sx={{
                 flexGrow: 1,
                 display: { xs: "none", md: "flex", justifyContent: "center" },
+                padding: "10px 0px",
               }}
             >
               {user?.role
@@ -272,10 +273,32 @@ function SocialMediaNavbar() {
                     //       {page.level}
                     //     </Link>
                     //   </Button>
-                    <div  key={page.level}>
-                        <button >
-                      <HomeIcon />
-                    </button>
+                    <div key={page.level} className="flex gap-5">
+                      <div className="w-14 h-14 bg-base-200 text-red-500  flex justify-center items-center rounded-full text-2xl ">
+                        <button>
+                          <HomeIcon className="text-4xl" />
+                        </button>
+                      </div>
+                      <div className="w-14 h-14 bg-base-200 text-red-500  flex justify-center items-center rounded-full text-2xl ">
+                        <button>
+                          <HomeIcon className="text-4xl" />
+                        </button>
+                      </div>
+                      <div className="w-14 h-14 bg-base-200 text-red-500  flex justify-center items-center rounded-full text-2xl ">
+                        <button>
+                          <HomeIcon className="text-4xl" />
+                        </button>
+                      </div>
+                      <div className="w-14 h-14 bg-base-200 text-red-500  flex justify-center items-center rounded-full text-2xl ">
+                        <button>
+                          <HomeIcon className="text-4xl" />
+                        </button>
+                      </div>
+                      <div className="w-14 h-14 bg-base-200 text-red-500  flex justify-center items-center rounded-full text-2xl ">
+                        <button>
+                          <HomeIcon className="text-4xl" />
+                        </button>
+                      </div>
                     </div>
                   ))
                 : notUser.map((page) => (
