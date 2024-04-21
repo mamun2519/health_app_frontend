@@ -3,9 +3,10 @@ import { Inter } from "next/font/google";
 import Providers from "@/lib/Providers";
 
 import Header from "@/components/shared/Header";
-import Navbar from "@/components/shared/Navbar";
+
 import Footer from "@/components/shared/Footer";
 import DashboardLayout from "../(rootLayout)/(dashboardLayout)/layout";
+import SocialMediaNavbar from "@/components/shared/SocialMediaNavber";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,9 +22,8 @@ export default function MediaLayout({
 }) {
   return (
     <div>
-      {/* <Header /> */}
-      {/* <Navbar /> */}
-      <p>Hello</p>
+      <SocialMediaNavbar />
+
       {children}
     </div>
   );

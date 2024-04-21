@@ -26,24 +26,25 @@ import { getFromLocalStorage } from "@/utils/local-storage";
 import Notification from "../ui/Notificaiton";
 import LogoutBtn from "../ui/LogoutBtn";
 import { USER_ROLE } from "@/enums/user";
+import HomeIcon from "@mui/icons-material/Home";
 import AuthModel from "../dialog/AuthModel";
 const pages = [
   {
     link: "/bloodDonor/all",
     level: "Blood Donor",
   },
-  {
-    link: "/doctor",
-    level: "Doctor",
-  },
-  {
-    link: "/doctor/service",
-    level: "Service",
-  },
-  {
-    link: "/dashboard",
-    level: "Dashboard",
-  },
+  //   {
+  //     link: "/doctor",
+  //     level: "Doctor",
+  //   },
+  //   {
+  //     link: "/doctor/service",
+  //     level: "Service",
+  //   },
+  //   {
+  //     link: "/dashboard",
+  //     level: "Dashboard",
+  //   },
   // {
   //   link: "/bloodMedia",
   //   level: "Go Blood Media",
@@ -142,7 +143,7 @@ function SocialMediaNavbar() {
           // transition: "background-color 0.3s ease",
         }}
         // position="fixed"
-        className="  z-30 shadow-none  border-b-2 "
+        className="  z-30 shadow-none  border-b-2  "
       >
         <Container className=" max-w-7xl mx-auto  px-0   ">
           <Toolbar disableGutters>
@@ -250,27 +251,32 @@ function SocialMediaNavbar() {
             >
               {user?.role
                 ? pages.map((page) => (
-                    <Button
-                      key={page.level}
-                      onClick={handleCloseNavMenu}
-                      sx={{
-                        my: 2,
-                        pr: 2,
-                        display: "flex",
-                        justifyContent: "center",
-                        color: "black",
-                      }}
-                      className={`  ${
-                        path == page.link
-                          ? "bg-[#d1001c] text-white  flex justify-center "
-                          : ""
-                      }: hover:text-[#d1001c] rounded-full`}
-                    >
-                      <Link className="pl-1" href={page?.link}>
-                        {" "}
-                        {page.level}
-                      </Link>
-                    </Button>
+                    //   <Button
+                    //     key={page.level}
+                    //     onClick={handleCloseNavMenu}
+                    //     sx={{
+                    //       my: 2,
+                    //       pr: 2,
+                    //       display: "flex",
+                    //       justifyContent: "center",
+                    //       color: "black",
+                    //     }}
+                    //     className={`  ${
+                    //       path == page.link
+                    //         ? "bg-[#d1001c] text-white  flex justify-center "
+                    //         : ""
+                    //     }: hover:text-[#d1001c] rounded-full`}
+                    //   >
+                    //     <Link className="pl-1" href={page?.link}>
+                    //       {" "}
+                    //       {page.level}
+                    //     </Link>
+                    //   </Button>
+                    <div  key={page.level}>
+                        <button >
+                      <HomeIcon />
+                    </button>
+                    </div>
                   ))
                 : notUser.map((page) => (
                     <Button
@@ -297,10 +303,10 @@ function SocialMediaNavbar() {
                   ))}
               <div className=" flex items-center">
                 <Link
-                  href="/bloodMedia"
+                  href="/home"
                   className=" w-36 h-8 flex justify-center items-center rounded-full  text-black uppercase font-medium "
                 >
-                  Go Blood Media
+                  Go App
                 </Link>
               </div>
             </Box>
@@ -309,27 +315,6 @@ function SocialMediaNavbar() {
               {user?.role && (
                 <>
                   <div className=" flex w-full  items-center ">
-                    {/* Mail  */}
-                    {/* <IconButton
-                      size="large"
-                      aria-label="show 4 new mails"
-                      color="inherit"
-                    >
-                      <Badge badgeContent={4} color="error">
-                        <MailIcon className="text-[#d1001c]" />
-                      </Badge>
-                    </IconButton> */}
-
-                    {/* <IconButton
-                  size="large"
-                  aria-label="show 17 new notifications"
-                  color="inherit"
-                >
-                  <Badge badgeContent={17} color="error">
-                    <NotificationsIcon className="text-[#d1001c]" />
-                  </Badge>
-                </IconButton> */}
-
                     <div>
                       {" "}
                       <Notification
