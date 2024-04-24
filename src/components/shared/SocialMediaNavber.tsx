@@ -41,10 +41,7 @@ const pages = [
   //     link: "/doctor/service",
   //     level: "Service",
   //   },
-  //   {
-  //     link: "/dashboard",
-  //     level: "Dashboard",
-  //   },
+  //
   // {
   //   link: "/bloodMedia",
   //   level: "Go Blood Media",
