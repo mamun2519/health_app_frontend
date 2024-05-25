@@ -83,7 +83,7 @@ const ManageAppointmentPage = () => {
   const deleteHandler = async () => {
     try {
       const res = await deleteAppointment(deletedId).unwrap();
-      console.log(res);
+
       if (res) {
         setOpen(false);
         successMessage({
@@ -97,7 +97,6 @@ const ManageAppointmentPage = () => {
     } catch (error: any) {
       setOpen(false);
       errorMessage({ message: error?.data });
-      console.log(error);
     }
   };
 

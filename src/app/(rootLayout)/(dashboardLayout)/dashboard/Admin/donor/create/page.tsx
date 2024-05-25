@@ -61,7 +61,7 @@ const CreateDoctorPage = () => {
     try {
       if (imageUrl) {
         const res = await createDonor(value).unwrap();
-        console.log(res);
+
         // @ts-ignore
         if (res) {
           successMessage({
@@ -76,7 +76,6 @@ const CreateDoctorPage = () => {
       }
     } catch (error: any) {
       errorMessage({ message: error?.data });
-      console.log(error);
     }
     // console.log(value.startTime);
     // const time = convertToAmPm(value.salt.startTime);

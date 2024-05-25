@@ -111,7 +111,7 @@ const ManageDoctorServicePage = () => {
       }
     } catch (error) {
       setOpen(false);
-      console.log(error);
+
       errorMessage({ message: "Something is wrong" });
     }
   };

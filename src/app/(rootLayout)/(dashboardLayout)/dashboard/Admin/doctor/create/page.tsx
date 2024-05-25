@@ -81,7 +81,7 @@ const CreateDoctorPage = () => {
     try {
       if (imageUrl) {
         const res = await createDoctor(value).unwrap();
-        console.log(res);
+
         // @ts-ignore
         if (res) {
           successMessage({
@@ -93,7 +93,6 @@ const CreateDoctorPage = () => {
         setErrorMessage("Image Is Required");
       }
     } catch (error: any) {
-      console.log(error);
       errorMessage({ message: error?.data });
     }
     // console.log(value.startTime);
