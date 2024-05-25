@@ -250,7 +250,7 @@ function SocialMediaNavbar() {
                 padding: "10px 0px",
               }}
             >
-              <div className=" flex  items-center pr-6 justify-center">
+              <div className=" flex  items-center px-8 justify-center">
                 <input
                   className="h-10 border  outline-none px-2 rounded-2xl w-80 text-black bg-base-200"
                   placeholder="Search Friend..."
@@ -332,14 +332,15 @@ function SocialMediaNavbar() {
                       </Link>
                     </Button>
                   ))}
-              <div className=" flex items-center">
+
+              {/* <div className=" flex items-center">
                 <Link
                   href="/home"
                   className=" w-36 h-8 flex justify-center items-center rounded-full  text-black uppercase font-medium "
                 >
                   Go App
                 </Link>
-              </div>
+              </div> */}
             </Box>
 
             <Box sx={{ flexGrow: 0, display: "flex" }}>
