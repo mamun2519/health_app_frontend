@@ -72,19 +72,16 @@ const ManageDonorDetailsPage = ({ params }: { params: { id: string } }) => {
         id: params.id,
         body: { status: "Completed" },
       }).unwrap();
-      console.log(res);
+
       if (res) {
         successMessage({
           header: "Thank Your",
           message: "Donation Complete Successfully",
         });
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
-  console.log(data);
   return (
     <div className="h-full  border  p-5 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>

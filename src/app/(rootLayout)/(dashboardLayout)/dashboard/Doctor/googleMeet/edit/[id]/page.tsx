@@ -68,7 +68,6 @@ const DoctorAppointmentUpdatePage = ({
         message: "Google Meet Link Update Successfully",
         header: "Thank you",
       });
-      console.log(value);
     } catch (error) {
       console.log(error);
     }

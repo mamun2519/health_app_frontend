@@ -50,7 +50,6 @@ const CreateGoogleMeetPage = () => {
   const [createGoogleMeet] = useCreateGoogleMeetMutation();
   // const { data } = useMyGoogleMeetQuery({ limit: 1000, page: 1 });
   const { data } = useDoctorServiceQuery({ limit: 100, page: 1 });
-  console.log(data);
 
   const meetLinkOption = data?.map((meet: any) => {
     return {
@@ -66,7 +65,7 @@ const CreateGoogleMeetPage = () => {
     };
     try {
       const res = await createGoogleMeet(data);
-      console.log(res);
+
       // @ts-ignore
       if (res.data) {
         successMessage({
@@ -76,7 +75,6 @@ const CreateGoogleMeetPage = () => {
       } else {
         errorMessage({ message: "Your Meet Link already active." });
       }
-      console.log(value);
     } catch (error) {
       console.log(error);
     }

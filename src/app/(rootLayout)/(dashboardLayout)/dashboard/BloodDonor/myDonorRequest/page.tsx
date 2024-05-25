@@ -137,7 +137,6 @@ const MyDonorRequest = () => {
         setSelectStatus("");
         handleStatusChangeClose();
       }
-      console.log(res);
     } catch (error) {
       console.log(error);
     }

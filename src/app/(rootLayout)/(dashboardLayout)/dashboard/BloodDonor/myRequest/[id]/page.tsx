@@ -69,7 +69,7 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
         id: params.id,
         body: { status: "Completed" },
       }).unwrap();
-      console.log(res);
+
       if (res) {
         successMessage({
           header: "Thank Your",

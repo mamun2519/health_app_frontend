@@ -106,7 +106,7 @@ const ManageDonorRequestPage = () => {
     } catch (error: any) {
       setOpen(false);
       errorMessage({ message: "Something is wrong" });
-      console.log(error);
+    
     }
   };
 

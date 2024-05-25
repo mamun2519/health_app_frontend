@@ -60,7 +60,6 @@ const DoctorAppointmentUpdatePage = ({
         message: "Appointment Update Successfully",
         header: "Thank you",
       });
-      console.log(value);
     } catch (error) {}
   };
   return (

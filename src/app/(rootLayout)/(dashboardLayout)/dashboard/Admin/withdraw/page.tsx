@@ -99,8 +99,7 @@ const ManageWithdrawPage = () => {
   const deleteHandler = async () => {
     try {
       const res = await deleteWithdraw(deletedId).unwrap();
-      // console.log(deletedId);
-      console.log(res);
+
       if (res) {
         setOpen(false);
         successMessage({
@@ -113,7 +112,7 @@ const ManageWithdrawPage = () => {
       }
     } catch (error) {
       setOpen(false);
-      console.log(error);
+
       errorMessage({ message: data?.error });
     }
   };
@@ -127,10 +126,10 @@ const ManageWithdrawPage = () => {
       status: value.status,
       id: statusId,
     };
-    console.log(value);
+
     try {
       const res = await acceptedWithdraw({ data }).unwrap();
-      console.log(res);
+
       if (res) {
         successMessage({
           header: "Thank You",

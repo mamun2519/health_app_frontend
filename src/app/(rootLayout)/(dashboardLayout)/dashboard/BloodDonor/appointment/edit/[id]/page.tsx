@@ -75,7 +75,6 @@ const AppointmentUpdatePage = ({ params }: { params: { id: string } }) => {
       } else {
         errorMessage({ message: "Something is wrong" });
       }
-      console.log(value);
     } catch (error: any) {
       errorMessage({ message: error?.data });
     }

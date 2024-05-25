@@ -67,7 +67,7 @@ const ManageAdminPage = () => {
     try {
       if (imageUrl) {
         const res = await registerUser(value).unwrap();
-        console.log(res);
+
         // @ts-ignore
         if (res?.data) {
           successMessage({
