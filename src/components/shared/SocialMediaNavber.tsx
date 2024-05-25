@@ -28,6 +28,9 @@ import LogoutBtn from "../ui/LogoutBtn";
 import { USER_ROLE } from "@/enums/user";
 import HomeIcon from "@mui/icons-material/Home";
 import AuthModel from "../dialog/AuthModel";
+import Person2Icon from "@mui/icons-material/Person2";
+import Diversity3Icon from "@mui/icons-material/Diversity3";
+import EmailIcon from "@mui/icons-material/Email";
 const pages = [
   {
     link: "/bloodDonor/all",
@@ -270,28 +273,29 @@ function SocialMediaNavbar() {
                     //       {page.level}
                     //     </Link>
                     //   </Button>
-                    <div key={page.level} className="flex gap-5">
+
+                    <div key={page.level} className="flex gap-7">
                       <div className="w-14 h-14 bg-base-200 text-red-500  flex justify-center items-center rounded-full text-2xl ">
                         <button>
                           <HomeIcon className="text-4xl" />
                         </button>
                       </div>
-                      <div className="w-14 h-14 bg-base-200 text-red-500  flex justify-center items-center rounded-full text-2xl ">
+                      <div className="w-14 h-14 bg-base-200 text-red-400  flex justify-center items-center rounded-full text-2xl ">
                         <button>
-                          <HomeIcon className="text-4xl" />
+                          <Person2Icon className="text-4xl" />
                         </button>
                       </div>
-                      <div className="w-14 h-14 bg-base-200 text-red-500  flex justify-center items-center rounded-full text-2xl ">
+                      <div className="w-14 h-14 bg-base-200 text-red-400  flex justify-center items-center rounded-full text-2xl ">
                         <button>
-                          <HomeIcon className="text-4xl" />
+                          <Diversity3Icon className="text-4xl" />
                         </button>
                       </div>
-                      <div className="w-14 h-14 bg-base-200 text-red-500  flex justify-center items-center rounded-full text-2xl ">
+                      <div className="w-14 h-14 bg-base-200 text-red-400  flex justify-center items-center rounded-full text-2xl ">
                         <button>
-                          <HomeIcon className="text-4xl" />
+                          <EmailIcon className="text-4xl" />
                         </button>
                       </div>
-                      <div className="w-14 h-14 bg-base-200 text-red-500  flex justify-center items-center rounded-full text-2xl ">
+                      <div className="w-14 h-14 bg-base-200 text-red-400  flex justify-center items-center rounded-full text-2xl ">
                         <button>
                           <HomeIcon className="text-4xl" />
                         </button>
