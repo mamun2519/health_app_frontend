@@ -28,7 +28,7 @@ import {
 import MyBarChart from "../ui/BarChart";
 const AdminActivity = () => {
   const { data, isLoading } = useAdminActivityQuery({ limit: 100, page: 1 });
-  console.log(data);
+
   if (isLoading) {
     return <LoadingSpinner />;
   }

@@ -74,7 +74,7 @@ const ManageBloodDonor = ({ bread, role }: PaymentProps) => {
   const deleteHandler = async () => {
     try {
       const res = await deleteUser(deletedId);
-      console.log(res);
+
       // @ts-ignore
       if (res?.data) {
         setOpen(false);

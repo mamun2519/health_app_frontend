@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const DonorCard = ({ donor }: { donor: any }) => {
-  console.log(donor);
   return (
     <div
       key={donor.id}

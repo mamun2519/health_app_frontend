@@ -74,10 +74,10 @@ const CreateDoctorServiceOfferPage = () => {
     value.expireDate = value.expireDate.$d;
 
     value.discount = Number(value.discount);
-    console.log(typeof value.discount);
+
     try {
       const res = await createOffer({ body: value }).unwrap();
-      console.log(res);
+
       if (res) {
         successMessage({
           message: "Service Create Successfully",
@@ -88,7 +88,6 @@ const CreateDoctorServiceOfferPage = () => {
       }
     } catch (error: any) {
       errorMessage({ message: error?.data });
-      console.log(error);
     }
   };
 

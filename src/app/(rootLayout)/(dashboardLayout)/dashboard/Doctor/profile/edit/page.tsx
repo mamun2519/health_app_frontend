@@ -95,7 +95,7 @@ const EditProfile = () => {
   ];
 
   const { data } = useMyProfileQuery({ limit: 100, page: 1 });
-  console.log(data);
+
   const [updateUserProfile] = useUpdateUserProfileMutation();
 
   const defaultValues = {
@@ -160,7 +160,7 @@ const EditProfile = () => {
         };
       }
       const res = await updateUserProfile(d).unwrap();
-      console.log(res);
+
       // @ts-ignore
       if (res) {
         successMessage({
@@ -169,7 +169,6 @@ const EditProfile = () => {
         });
       }
     } catch (error: any) {
-      console.log(error);
       errorMessage({ message: error?.data });
     }
     // console.log(value.startTime);

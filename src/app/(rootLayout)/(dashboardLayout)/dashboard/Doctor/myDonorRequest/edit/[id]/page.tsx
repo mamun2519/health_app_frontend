@@ -54,7 +54,7 @@ const DonorRequestEditPage = ({ params }: { params: { id: string } }) => {
         id: params.id,
         body: value,
       }).unwrap();
-      console.log(res);
+
       if (res) {
         successMessage({
           message: "Request Update Successfully",
@@ -63,7 +63,6 @@ const DonorRequestEditPage = ({ params }: { params: { id: string } }) => {
       } else {
         errorMessage({ message: "Something is wrong" });
       }
-      console.log(value);
     } catch (error) {
       console.log(error);
     }

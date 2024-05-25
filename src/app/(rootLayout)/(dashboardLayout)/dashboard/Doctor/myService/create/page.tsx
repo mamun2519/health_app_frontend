@@ -93,7 +93,7 @@ const CreateDoctorServicePage = () => {
     try {
       if (imageUrl) {
         const res = await createDoctorService({ body: value }).unwrap();
-        console.log(res);
+
         if (res) {
           successMessage({
             message: "Service Create Successfully",
@@ -110,7 +110,6 @@ const CreateDoctorServicePage = () => {
       }
     } catch (error) {
       errorMessage({ message: "something is wrong" });
-      console.log(error);
     }
     // console.log(value.startTime);
     // const time = convertToAmPm(value.salt.startTime);

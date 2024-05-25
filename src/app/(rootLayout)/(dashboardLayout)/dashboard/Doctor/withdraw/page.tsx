@@ -86,7 +86,7 @@ const DoctorWithdrawPage = () => {
     try {
       const res = await deleteWithdraw(deletedId).unwrap();
       // console.log(deletedId);
-      console.log(res);
+
       if (res) {
         setOpen(false);
         successMessage({
@@ -99,7 +99,7 @@ const DoctorWithdrawPage = () => {
       }
     } catch (error) {
       setOpen(false);
-      console.log(error);
+
       errorMessage({ message: data?.error });
     }
   };

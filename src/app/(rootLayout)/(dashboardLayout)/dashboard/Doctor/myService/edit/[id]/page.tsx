@@ -63,7 +63,7 @@ const DoctorServiceUpdatePage = ({ params }: { params: { id: string } }) => {
         id: params.id,
         body: { service: value },
       }).unwrap();
-      console.log(res);
+
       if (res) {
         successMessage({
           message: "Service Update Successfully",
@@ -72,8 +72,6 @@ const DoctorServiceUpdatePage = ({ params }: { params: { id: string } }) => {
       } else {
         errorMessage({ message: "Something is wrong" });
       }
-
-      console.log(value);
     } catch (error) {
       errorMessage({ message: "Something is wrong" });
     }

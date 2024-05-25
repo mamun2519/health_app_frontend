@@ -173,7 +173,6 @@ const DonorDetails = ({ id }: { id: string }) => {
           <h3 className=" tex text-xl font-bold">Donor Reviews</h3>
           <div className=" pl-10">
             {review?.map((review: any) => {
-              console.log("donor-", review);
               return (
                 <div
                   key={review?.id}

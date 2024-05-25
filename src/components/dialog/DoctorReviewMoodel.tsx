@@ -42,7 +42,6 @@ export default function DoctorReviewModel({
   const [serviceReview] = useServiceReviewMutation();
   const [errrorMessage, setErrorMessage] = React.useState("");
   const reviewHandler = async () => {
-    console.log(serviceId);
     const data = {
       comment: reviewText,
       rating: value,
@@ -51,7 +50,7 @@ export default function DoctorReviewModel({
     try {
       if (reviewText) {
         const res = await serviceReview(data).unwrap();
-        console.log(res);
+
         if (res) {
           setErrorMessage("");
           handleClose(open);

@@ -107,7 +107,7 @@ const EditProfile = () => {
 
   const editHandler: SubmitHandler<IProfileUpdate> = async (value) => {
     //     value.present_Address.police_station = "No";
-    console.log(value);
+
     if (imageUrl) {
       value.avatar = imageUrl as string;
     }
@@ -153,7 +153,7 @@ const EditProfile = () => {
         };
       }
       const res = await updateUserProfile(BakingData).unwrap();
-      console.log(res);
+
       // @ts-ignore
       if (res) {
         successMessage({
@@ -162,7 +162,6 @@ const EditProfile = () => {
         });
       }
     } catch (error: any) {
-      console.log(error);
       errorMessage({ message: error?.data });
     }
     // console.log(value.startTime);

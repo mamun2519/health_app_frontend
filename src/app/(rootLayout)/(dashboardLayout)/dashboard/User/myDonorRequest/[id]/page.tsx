@@ -71,7 +71,7 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
         id: params.id,
         body: { status: "Completed" },
       }).unwrap();
-      console.log(res);
+
       if (res) {
         successMessage({
           header: "Thank Your",
@@ -80,16 +80,13 @@ const DonorDetailsPage = ({ params }: { params: { id: string } }) => {
       } else {
         errorMessage({ message: "Something is wrong" });
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
-  console.log(data);
   return (
     <div className="h-full  border  lg:p-5 p-2 rounded-3xl shadow-sm ">
       <IconBreadcrumbs boreadcrumbs={boread}></IconBreadcrumbs>

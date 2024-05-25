@@ -72,11 +72,9 @@ const WithdrawRequestPage = () => {
       number: value.number,
     };
 
-    console.log(data);
-    console.log(value);
     try {
       const res = await withdrawRequest({ body: data }).unwrap();
-      console.log(res);
+
       if (res) {
         successMessage({
           message: "Withdraw Request Successfully",
@@ -87,7 +85,6 @@ const WithdrawRequestPage = () => {
       }
     } catch (error: any) {
       errorMessage({ message: error?.data });
-      console.log(error);
     }
   };
 

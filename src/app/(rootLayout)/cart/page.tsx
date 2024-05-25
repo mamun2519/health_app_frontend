@@ -23,7 +23,6 @@ const CartPage = () => {
   // const cart = useAppSelector((state) => state.cart.cart);
 
   const { data: cart } = useMyCartQuery({ limit: 100, page: 1 });
-  console.log(cart);
 
   // const cartItemRemoveHandler = (id: string) => {
   //   disPatch(deleteToCart(id));
@@ -69,7 +68,7 @@ const CartPage = () => {
       });
 
       const res = await createPayment({ appointment, payment }).unwrap();
-      console.log(res);
+
       // @ts-ignore
       if (res) {
         successMessage({
@@ -81,7 +80,6 @@ const CartPage = () => {
         errorMessage({ message: "Something is wrong!" });
       }
     } catch (error: any) {
-      console.log(error);
       errorMessage({ message: error?.data });
     }
   };

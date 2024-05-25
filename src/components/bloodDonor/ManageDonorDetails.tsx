@@ -12,7 +12,6 @@ import LoadingSpinner from "@/utils/Loading";
 const ManageBloodDonorDetails = ({ id }: { id: string }) => {
   const { data, isLoading } = useBloodDonorDetailsQuery(id);
 
-  console.log(data?.bloodDonor?.donorReviews);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {

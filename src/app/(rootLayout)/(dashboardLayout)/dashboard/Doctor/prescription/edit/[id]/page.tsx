@@ -64,8 +64,6 @@ const DoctorPrescriptionEditPage = ({ params }: { params: { id: string } }) => {
           header: "Thank you",
         });
       }
-
-      console.log(value);
     } catch (error) {}
   };
   return (

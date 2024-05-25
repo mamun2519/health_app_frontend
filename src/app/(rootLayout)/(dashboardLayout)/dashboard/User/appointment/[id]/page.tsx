@@ -60,7 +60,6 @@ const AppointmentDetailsPage = ({ params }: { params: { id: string } }) => {
   ];
   const { data, isLoading } = useAppointmentDetailsQuery(params.id);
 
-  console.log(data);
   const { data: meet } = useActiveGoogleMeetQuery(data?.service?.id);
 
   if (isLoading) {

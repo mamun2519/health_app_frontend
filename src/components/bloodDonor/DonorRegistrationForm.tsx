@@ -76,11 +76,10 @@ const DonorRegistrationForm = () => {
     value.present_Address.police_station = "No";
     value.avatar = imageUrl as string;
     value.present_Address.district = division as string;
-    console.log(value);
+
     try {
       if (imageUrl && division) {
         const res = await createDonor(value).unwrap();
-        console.log(res);
 
         if (res) {
           successMessage({
@@ -110,7 +109,6 @@ const DonorRegistrationForm = () => {
       }
     } catch (error: any) {
       errorMessage({ message: error?.data });
-      console.log(error);
     }
     // console.log(value.startTime);
     // const time = convertToAmPm(value.salt.startTime);
