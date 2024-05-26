@@ -68,7 +68,7 @@ const DoctorPrescription = ({ bread, role }: PrescriptionProps) => {
   const deleteHandler = async () => {
     try {
       const res = await deletePrescription(deletedId);
-      console.log(res);
+
       if (res) {
         setOpen(false);
         successMessage({

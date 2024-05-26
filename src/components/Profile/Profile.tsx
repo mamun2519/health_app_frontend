@@ -28,7 +28,7 @@ const Profile = () => {
   ) => {
     try {
       const res = await resetPassword(value).unwrap();
-      console.log(res);
+
       if (res) {
         successMessage({
           header: "Thank You",
@@ -38,7 +38,6 @@ const Profile = () => {
         errorMessage({ message: "Something is wrong" });
       }
     } catch (error: any) {
-      console.log(error);
       errorMessage({ message: error?.data });
     }
   };

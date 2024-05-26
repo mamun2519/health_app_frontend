@@ -22,7 +22,6 @@ export type IResetPassword = {
 const DoctorProfiles = () => {
   const [toggleButton, setToggleButton] = useState(false);
   const { data, isLoading } = useMyProfileQuery({ limit: 100, page: 1 });
-  console.log(data);
 
   const [resetPassword] = useResetPasswordMutation();
   const changePasswordHandler: SubmitHandler<IResetPassword> = async (
@@ -30,7 +29,7 @@ const DoctorProfiles = () => {
   ) => {
     try {
       const res = await resetPassword(value).unwrap();
-      console.log(res);
+
       if (res) {
         successMessage({
           header: "Thank You",
@@ -40,7 +39,6 @@ const DoctorProfiles = () => {
         errorMessage({ message: "Something is wrong" });
       }
     } catch (error: any) {
-      console.log(error);
       errorMessage({ message: error?.data });
     }
   };

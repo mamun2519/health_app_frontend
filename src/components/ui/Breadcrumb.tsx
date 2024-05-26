@@ -8,8 +8,6 @@ import NextLink from "next/link"; // Import Next.js Link component
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
-  console.log(event.target);
-  console.info("You clicked a breadcrumb.");
 }
 interface IBoard {
   link: string;

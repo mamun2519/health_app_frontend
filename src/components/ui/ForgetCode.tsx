@@ -35,13 +35,13 @@ const ForgetPasswordCode = ({
     setLoading(false);
     const { codeBox1, codeBox2, codeBox3, codeBox4 } = data;
     const resetCode = `${codeBox1}${codeBox2}${codeBox3}${codeBox4}`;
-    console.log(resetCode);
+
     try {
       const res = await checkResetCode({
         code: Number(resetCode),
         email,
       }).unwrap();
-      console.log(res);
+
       if (res) {
         setStep(3);
       }
