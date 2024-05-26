@@ -35,7 +35,6 @@ const DoctorServiceDetails = ({ id }: any) => {
     date: selectedDate,
   });
 
-  console.log(service?.serviceOffers);
   const router = useRouter();
   const { data: review } = useServiceReviewByIdQuery(id);
 
@@ -64,7 +63,7 @@ const DoctorServiceDetails = ({ id }: any) => {
       errorMessage({ message: `Sorry This ${data.time} Slat Already Booked.` });
     } else {
       setSelectSlat(data);
-      console.log(data);
+      c;
     }
   };
 

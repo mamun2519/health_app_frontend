@@ -106,7 +106,7 @@ const JoinDoctor = () => {
     },
   ];
   const { data, isLoading } = useUserAppointmentQuery({ ...query });
-  console.log(data);
+
   const [deleteAppointment] = useDeleteAppointmentMutation();
   const deleteHandler = async () => {
     try {

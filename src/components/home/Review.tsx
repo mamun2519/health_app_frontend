@@ -8,7 +8,7 @@ import DonorPic from "../../assets/dr-dk-gupta.jpg";
 import moment from "moment";
 const Review = () => {
   const { data } = useAllReviewQuery({ limit: 100, page: 1 });
-  console.log(data);
+
   return (
     <div className=" max-w-7xl mx-auto px-4 lg:px-0 my-20">
       <h3 className=" text-3xl font-bold text-center">Our Client Review </h3>

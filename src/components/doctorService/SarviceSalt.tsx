@@ -12,7 +12,6 @@ const ServiceSalt = ({
   selectSlat: ISalt | null;
   SlatBookingHandler: any;
 }) => {
-  console.log(salt);
   return (
     <div
       onClick={() => SlatBookingHandler(salt)}
