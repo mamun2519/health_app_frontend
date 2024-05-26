@@ -23,7 +23,7 @@ const ConformPageComponent = () => {
   }, []);
 
   const { data, isLoading } = usePaymentStripeQuery(price);
-  console.log(price);
+
   const appearance = {
     theme: "stripe",
   };

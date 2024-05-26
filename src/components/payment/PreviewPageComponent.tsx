@@ -76,7 +76,7 @@ const PreviewPageComponent = () => {
       promoCode: data.promoCode,
     };
     const res: any = await applyPromoCode(d);
-    console.log(res);
+
     if (res.data) {
       successMessage({
         header: "congratulation",
@@ -100,7 +100,6 @@ const PreviewPageComponent = () => {
     }
     try {
     } catch (error: any) {
-      console.log(error);
       errorMessage({ message: error?.data });
     }
   };

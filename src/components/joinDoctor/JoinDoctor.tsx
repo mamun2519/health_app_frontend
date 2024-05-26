@@ -111,7 +111,7 @@ const JoinDoctor = () => {
   const deleteHandler = async () => {
     try {
       const res = await deleteAppointment(deletedId).unwrap();
-      console.log(res);
+
       if (res) {
         setOpenDelete(false);
         successMessage({

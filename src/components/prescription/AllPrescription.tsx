@@ -89,7 +89,6 @@ const AllPrescription = ({ bread, role }: PrescriptionProps) => {
       }
       // console.log(deletedId);
     } catch (error: any) {
-      console.log(error);
       setOpen(false);
       errorMessage({ message: error?.data });
     }

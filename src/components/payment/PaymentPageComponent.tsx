@@ -27,7 +27,6 @@ const PaymentPageComponent = () => {
   const StoreLocalStorageHandler: SubmitHandler<
     ICreateBookAppointment
   > = async (data) => {
-    console.log(data);
     data.age = Number(data.age);
     data.weight = Number(data.weight);
     //

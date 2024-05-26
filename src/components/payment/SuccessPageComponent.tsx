@@ -36,7 +36,6 @@ const SuccessPageComponent = () => {
           serviceId: price?.serviceId,
           price: String(price.price),
         };
-        console.log(appointment);
 
         const payment = {
           serviceId: price.serviceId,

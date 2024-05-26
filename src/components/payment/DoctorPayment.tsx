@@ -74,8 +74,6 @@ const DoctorPayment = ({ bread, role }: PaymentProps) => {
   const [deletePayment] = useDeletePaymentMutation();
   const deleteHandler = async () => {
     try {
-      const res = await deletePayment(deletedId);
-      console.log(res);
       if (res) {
         setOpen(false);
         successMessage({
