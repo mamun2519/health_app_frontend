@@ -104,11 +104,7 @@ const CreatePrescription = ({ appointmentId }: { appointmentId: string }) => {
           header: "Thank you",
         });
       }
-      console.log(value);
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
     // console.log(value.startTime);
     // const time = convertToAmPm(value.salt.startTime);
     // console.log(time);

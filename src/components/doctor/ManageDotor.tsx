@@ -83,7 +83,7 @@ const ManageDoctor = ({ bread, role }: PaymentProps) => {
   const deleteHandler = async () => {
     try {
       const res = await deleteUser(deletedId).unwrap();
-      console.log(res);
+
       // @ts-ignore
       if (res) {
         setOpen(false);

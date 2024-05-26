@@ -74,7 +74,6 @@ OpenModel) {
 
     try {
       const res: any = await JoinDoctor(data);
-      console.log(res);
 
       if (res?.data) {
         toast({
@@ -84,7 +83,7 @@ OpenModel) {
         handleClose(open);
         // setAppointmentId("");
         const validUrl = url.match(/^(https?:\/\/)/) ? url : `https://${url}`;
-        console.log(validUrl);
+
         // Open the URL in a new tab
         window.open(validUrl, "_blank");
       } else {
@@ -92,9 +91,7 @@ OpenModel) {
         // setAppointmentId("");
         errorMessage({ message: "Something is wrong!" });
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (

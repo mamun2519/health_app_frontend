@@ -41,11 +41,10 @@ export default function ForgetModel({ open, handleClose }: OpenModel) {
       if (res) {
         setStep(res.stepNo);
       }
-      console.log(res);
+
       setEmail(data.email);
       setLoading(true);
     } catch (error) {
-      console.log(error);
       // errorMessage({ message: "Something is wrong" });
       setLoading(true);
     }
