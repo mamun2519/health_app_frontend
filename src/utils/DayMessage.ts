@@ -27,4 +27,3 @@ export function getTimeOfDayMessage() {
 
 // Call the function to get the message
 const greeting = getTimeOfDayMessage();
-console.log(greeting);

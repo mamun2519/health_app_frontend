@@ -31,7 +31,7 @@ const RegTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
         avatar: "https://i.ibb.co/Sc1vBYH/profile.png",
         cover: "https://i.ibb.co/N9SnX2C/Default.jpg",
       }).unwrap();
-      console.log(res);
+
       if (res.userToken) {
         handleClose(false);
         // TODO USE TOST HERE

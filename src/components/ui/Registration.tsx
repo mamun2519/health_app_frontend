@@ -31,7 +31,7 @@ const VisuallyHiddenInput = styled("input")({
   whiteSpace: "nowrap",
   width: 1,
 });
-console.log(VisuallyHiddenInput);
+
 type UserReg = {
   name: {
     first_name: string;
@@ -53,7 +53,7 @@ const Registration = () => {
         avatar: "https://i.ibb.co/Sc1vBYH/profile.png",
         cover: "https://i.ibb.co/N9SnX2C/Default.jpg",
       }).unwrap();
-      console.log(res);
+
       if (res.userToken) {
         router.push("/home");
         // TODO USE TOST HERE
