@@ -73,7 +73,7 @@ const ManageUser = ({ bread, role }: PaymentProps) => {
   const deleteHandler = async () => {
     try {
       const res = await deleteUser(deletedId);
-      console.log(res);
+
       // @ts-ignore
       if (res?.data) {
         setOpen(false);
@@ -82,9 +82,7 @@ const ManageUser = ({ bread, role }: PaymentProps) => {
           message: "User  Delete Successfully",
         });
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const { data, isLoading } = useAllUserQuery({ ...query });

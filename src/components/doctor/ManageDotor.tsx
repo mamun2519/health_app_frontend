@@ -97,7 +97,6 @@ const ManageDoctor = ({ bread, role }: PaymentProps) => {
       }
     } catch (error) {
       setOpen(false);
-      console.log(error);
     }
   };
 
