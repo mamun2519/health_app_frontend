@@ -13,7 +13,6 @@ import { useSpecificReviewQuery } from "@/redux/api/donerReviewApi";
 import { Rating } from "@mui/material";
 const DonorDetails = ({ id }: { id: string }) => {
   const { data, isLoading } = useBloodDonorDetailsQuery(id);
-  console.log(data);
 
   const { data: review } = useSpecificReviewQuery(data?.bloodDonor?.id);
 

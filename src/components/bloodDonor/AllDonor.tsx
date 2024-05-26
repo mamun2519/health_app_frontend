@@ -13,7 +13,7 @@ const AllDonor = () => {
   const [pageLimit, setLimit] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [filterBloodGroup, setFilterOption] = useState("");
-  console.log(filterBloodGroup);
+
   const query: Record<string, any> = {};
   query["page"] = currentPage;
   query["limit"] = pageLimit;
