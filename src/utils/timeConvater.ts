@@ -1,7 +1,7 @@
 export function convertToAmPm(timeStr: string) {
   try {
     // Parse the input time string
-    console.log(timeStr);
+
     const [hours, minutes] = timeStr.split(":");
     const parsedHours = parseInt(hours, 10);
     const parsedMinutes = parseInt(minutes, 10);
@@ -27,4 +27,4 @@ export function convertToAmPm(timeStr: string) {
 // Example usage:
 const inputTime = "19:45";
 const convertedTime = convertToAmPm(inputTime);
-console.log(convertedTime); // Output: "7:45 PM"
+// Output: "7:45 PM"

@@ -18,4 +18,3 @@ const inputText =
 const wordsPerLine = 10;
 
 const formattedText = formatTextWithLineBreaks(inputText, wordsPerLine);
-console.log(formattedText);
