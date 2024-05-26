@@ -31,10 +31,9 @@ const LoginTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const submitHandler: SubmitHandler<formValue> = async (data) => {
-    console.log(data);
     try {
       const res = await userLogin(data).unwrap();
-      console.log(res);
+
       if (res?.token) {
         handleClose(false);
         // TODO USE TOST HERE
@@ -60,7 +59,6 @@ const LoginTab = ({ handleClose }: { handleClose: (op: any) => any }) => {
       // console.log(res);
     } catch (err: any) {
       setErrorMessage(err?.data);
-      console.log(err);
     }
   };
   const defaultValues = {

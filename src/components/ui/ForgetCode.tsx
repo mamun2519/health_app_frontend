@@ -48,11 +48,9 @@ const ForgetPasswordCode = ({
       setLoading(true);
     } catch (error: any) {
       setErrorMessage(error.data);
-      console.log(error);
+
       setLoading(true);
     }
-
-    console.log(resetCode);
   };
   return (
     <div className="p-8">

@@ -46,10 +46,9 @@ const Login = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const submitHandler: SubmitHandler<formValue> = async (data) => {
-    console.log(data);
     try {
       const res = await userLogin(data).unwrap();
-      console.log(res.user);
+
       if (res?.token) {
         router.push("/home");
         // TODO USE TOST HERE
@@ -83,7 +82,6 @@ const Login = () => {
     password: saveInfo?.password || "",
   };
 
-  console.log(save);
   return (
     <div className="  grid  lg:grid-cols-2 grid-cols-1 gap-5 pb-20">
       <div className="border bg-[#30029010] rounded shadow">

@@ -28,7 +28,7 @@ const NewPassword = ({
           email,
           password: data.password,
         }).unwrap();
-        console.log(res);
+
         if (res) {
           setStep(4);
         }
