@@ -245,7 +245,7 @@ function SocialMediaNavbar() {
             </Typography>
             <div className=" flex  items-center  px-4 justify-center">
               <input
-                className="h-10 border  outline-none px-2 rounded-xl w-80 text-black bg-base-200"
+                className="h-12 border  outline-none  px-2 rounded-xl w-[400px] text-black bg-red-100"
                 placeholder="Search Friend..."
                 type="text"
               />
