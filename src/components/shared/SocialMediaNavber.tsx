@@ -243,6 +243,13 @@ function SocialMediaNavbar() {
                 </p>
               </Link>
             </Typography>
+            <div className=" flex  items-center  px-4 justify-center">
+              <input
+                className="h-10 border  outline-none px-2 rounded-xl w-80 text-black bg-base-200"
+                placeholder="Search Friend..."
+                type="text"
+              />
+            </div>
             <Box
               sx={{
                 flexGrow: 1,
@@ -250,13 +257,6 @@ function SocialMediaNavbar() {
                 padding: "10px 0px",
               }}
             >
-              <div className=" flex  items-center px-8 justify-center">
-                <input
-                  className="h-10 border  outline-none px-2 rounded-2xl w-80 text-black bg-base-200"
-                  placeholder="Search Friend..."
-                  type="text"
-                />
-              </div>
               {user?.role
                 ? pages.map((page) => (
                     //   <Button
