@@ -19,6 +19,7 @@ export default async function HomePage() {
     next: { revalidate: 500 },
     cache: "force-cache",
   });
+  //* doner
   const donor = await res.json();
   // console.log(data);
   const doctorRes = await fetch(`${URL}/doctor-service/all-doctor`, {
