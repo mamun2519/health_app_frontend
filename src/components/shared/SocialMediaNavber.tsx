@@ -281,7 +281,7 @@ function SocialMediaNavbar() {
                     //     </Link>
                     //   </Button>
 
-                    <div key={page.level} className="flex gap-5">
+                    <div key={page.level} className="flex gap-4">
                       <div className="w-14 h-14 bg-base-200 text-red-500  flex justify-center items-center rounded-full text-2xl ">
                         <button>
                           <HomeIcon className="text-4xl" />
