@@ -26,7 +26,8 @@ const FindingDonorPage = async ({
     }
   );
   const data = await res.json();
-
+  console.log("data", data);
+  console.log("bloodGroup", searchParams.bloodGroup);
   return (
     <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-28">
       {data?.data?.length === 0 && <NoData />}
