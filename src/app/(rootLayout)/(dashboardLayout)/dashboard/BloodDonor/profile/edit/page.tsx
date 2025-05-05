@@ -129,7 +129,6 @@ const EditProfile = () => {
         });
       }
     } catch (error: any) {
-      c;
       errorMessage({ message: error?.data });
     }
     // console.log(value.startTime);
