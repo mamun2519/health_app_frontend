@@ -63,7 +63,6 @@ const DoctorServiceDetails = ({ id }: any) => {
       errorMessage({ message: `Sorry This ${data.time} Slat Already Booked.` });
     } else {
       setSelectSlat(data);
-      c;
     }
   };
 

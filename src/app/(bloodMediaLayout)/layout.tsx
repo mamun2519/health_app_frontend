@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Providers from "@/lib/Providers";
 
-import Header from "@/components/shared/Header";
+// import Header from "@/components/shared/Header";
 
-import Footer from "@/components/shared/Footer";
-import DashboardLayout from "../(rootLayout)/(dashboardLayout)/layout";
+// import Footer from "@/components/shared/Footer";
+// import DashboardLayout from "../(rootLayout)/(dashboardLayout)/layout";
 import SocialMediaNavbar from "@/components/shared/SocialMediaNavber";
 
 const inter = Inter({ subsets: ["latin"] });
